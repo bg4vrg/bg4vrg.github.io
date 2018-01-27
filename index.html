@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="bg4vrg.github.io"></form>
@@ -68,10 +68,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-更换新主题，持续测试修改中" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/01/26/hello-world/" class="article-date">
-  <time datetime="2018-01-26T11:29:12.733Z" itemprop="datePublished">2018-01-26</time>
+    <a href="/2016/11/02/更换新主题，持续测试修改中/" class="article-date">
+  <time datetime="2016-11-02T11:50:54.000Z" itemprop="datePublished">2016-11-02</time>
 </a>
     
   </div>
@@ -82,7 +82,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/26/hello-world/">Hello World</a>
+      <a class="article-title" href="/2016/11/02/更换新主题，持续测试修改中/">更换新主题，持续测试修改中</a>
     </h1>
   
 
@@ -90,91 +90,368 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://portablehexo.bitmoe.cn/hexopp/hexop.png" alt=""></p>
-<blockquote>
-<p><strong>本版本仅适用于Win环境</strong><br>本文关键字： <strong>Hexo绿色版</strong>，<strong>Hexo便携版</strong>，<strong>Hexo配置</strong>，<strong>Hexo</strong>，<strong>U盘</strong></p>
-</blockquote>
-<p><a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>是一个快速、简洁且高效的博客框架，支持 GitHub Flavored Markdown 的所有功能；具有超快生成速度，让上百个页面在几秒内瞬间完成渲染；还拥有各式各样的插件等等。</p>
-<p>但是就像很多教程里面写的那样，搭建 Hexo 本地环境，需要安装 Node.js、Git 以及使用 npm 进行安装和配置。这对于毫无经验的新手来说，是一个很大的挑战。同时，由于这些环境的存在，导致如果需要更换计算机的时候，重新安装配置一个新的Hexo环境，又得花费一些功夫。</p>
-<p>所以呢，锵锵，我们整合了一个 Hexo 便携版，来简化本地环境的部署。</p>
-<p>####<strong>版本介绍</strong><br>那么所谓的便携版到底是什么？便携版就是将 Hexo 本地环境所需要的各种依赖环境的整合到一起，做成的不需要安装的版本。</p>
-<p>本便携版（Release 1.0.0）所包含的软件如下：</p>
-<blockquote>
-<ul>
-<li>Git: 2.7.4</li>
-<li>Nodejs: 6.10.1</li>
-<li>Npm: 4.4.1</li>
-<li>Hexo: 3.2.2</li>
-</ul>
-</blockquote>
-<p>为了便携的需要，不能配置固定的环境变量，所以除此之外还有相应的批处理文件，下文将详细介绍。</p>
-<p>####<strong>从零开始，1分钟搭建Hexo写作环境</strong><br>说了这么多，我们这就开始教你如何在1分钟内，从零开始搭建Hexo写作环境！</p>
-<p>#####1 注册一个Github帐号</p>
-<p>1.1 进入<a href="https://github.com" target="_blank" rel="external">Github</a>，并在右边的3个框框中分别填写 用户名、邮箱地址、账户密码，并点击 <strong><code>Sign up for Github</code></strong>;</p>
-<p><img src="https://portablehexo.bitmoe.cn/hexopp/hexop2.png" alt="图1.1.1"></p>
-<p>1.2 进入欢迎页面后，点击<strong><code>Finish sign up</code></strong>;</p>
-<p><img src="https://portablehexo.bitmoe.cn/hexopp/hexop3.png" alt="图1.2.1"></p>
-<p>1.3 进入到这一步之后（<strong>图1.3.1</strong>），先别记着点任何东西，查看你的邮箱，应该会收到如下的邮件（<strong>图1.3.2</strong>），确认你的邮件。否则，你会看到错误页面（<strong>图1.3.3</strong>）。query完毕之后在<strong>图1.3.1</strong>所示的页面，点击<strong><code>+ New repository</code></strong>;</p>
-<p><img src="https://portablehexo.bitmoe.cn/hexopp/hexop5.png" alt="图1.3.1"></p>
-<p><img src="https://portablehexo.bitmoe.cn/hexopp/hexop6.png" alt="图1.3.2"></p>
-<p><img src="https://portablehexo.bitmoe.cn/hexopp/hexop7.png" alt="图1.3.3"></p>
-<p>1.4 请在红框中的 <strong><code>Repository name</code></strong> 里面输入 <strong><code>用户名.github.io</code></strong> ( <strong>用户名</strong> 就是你刚刚 <strong>步骤1.1</strong> 中注册的用户名)，然后点击 <strong><code>Create repository</code></strong>;</p>
-<p><img src="https://portablehexo.bitmoe.cn/hexopp/hexop8.png" alt="图1.4.1"></p>
-<p>1.5 至此，Github网页注册的部分完毕</p>
-<p>####2 下载HEXO Portable</p>
-<p>2.1 访问我们的 <a href="https://project.bitmoe.cn/PortableHexo/" target="_blank" rel="external">HEXO Portable</a> 页面，或者 <a href="https://github.com/Bitmoe/PortableHexo" target="_blank" rel="external">Github仓库</a> 下载最新的便携版；</p>
-<p>2.2 双击得到的自解压文件，解压到你需要安装博客的地方，可以选择硬盘或者U盘；</p>
-<p>####3 配置你的环境</p>
-<p>3.1 在你的博客的文件夹，你会发现很多批处理文件，我先介绍下各个文件的用途：</p>
-<blockquote>
-<ul>
-<li>配置基本信息 &gt;&gt; 配置博客的基本环境</li>
-<li>配置Github部署 &gt;&gt; 配置博客的部署</li>
-<li>启动命令行 &gt;&gt; 启动带环境变量的Git-Bash，否则无法使用node、npm、git等命令</li>
-<li>新建文章 &gt;&gt; 新建一篇文章</li>
-<li>渲染并本地测试 &gt;&gt; 生成并本地预览</li>
-<li>渲染并部署 &gt;&gt; 生成并部署到GitHub</li>
-<li>重置配置文件 &gt;&gt; 重置_config.yml</li>
-</ul>
-</blockquote>
-<p>3.2 我们继续进行环境配置，双击<strong><code>配置基本信息</code></strong>并按顺序输入以下信息：</p>
-<blockquote>
-<ul>
-<li>主标题：顾名思义</li>
-<li>副标题：顾名思义</li>
-<li>描述：顾名思义</li>
-<li>作者：顾名思义</li>
-<li>网站地址：填写 <strong>用户名.github.io</strong> （此处的用户名为<strong>步骤1.1</strong>中填写的用户名）<br><strong>如果您已经购买了域名，可以参看相关的文章！</strong></li>
-</ul>
-</blockquote>
-<p>3.3 双击<strong><code>配置Github部署</code></strong>并按顺序输入以下信息：</p>
-<blockquote>
-<ul>
-<li>Github的用户名：此处的用户名为<strong>步骤1.1</strong>中填写的用户名</li>
-<li>Github注册邮箱：此处的注册邮箱为<strong>步骤1.1</strong>中填写的注册邮箱</li>
-</ul>
-</blockquote>
-<p>3.4 输入完毕之后，会进行测试部署，等待屏幕提示<strong>下面将进行部署测试，稍后将有一个openssh的对话框出现，请输入你的github用户密码。</strong>的时候，按回车继续；（此处的用户密码为<strong>步骤1.1</strong>中填写的用户密码）</p>
-<p>3.5 然后继续等待，此时屏幕会出现n多行，耐心等待即可；</p>
-<p>3.6 等待屏幕提示<strong>请访问 <a href="https://用户名.github.io" target="_blank" rel="external">https://用户名.github.io</a> 查看是否部署成功！</strong>的时候，在浏览器中输入<strong><a href="https://用户名.github.io" target="_blank" rel="external">https://用户名.github.io</a> </strong>，理论上可以看到你的Hexo站点！（此处的用户名为<strong>步骤1.1</strong>中填写的用户名）</p>
-<p>3.7 至此，你的Hexo环境就配置完成了，这样你的这个Hexo博客文件夹无论移动到哪一台电脑，都能通过<strong>启动命令行</strong>出现的bash命令行，或者其余便捷的批处理文件比如<strong>新建文章</strong>、<strong>渲染并本地测试</strong>、<strong>渲染并部署</strong>进行相应的操作。</p>
-<p>3.8 如果你在配置中出错，可以运行<strong>重置配置文件</strong>后，再重复<strong>3.1~3.6步骤</strong></p>
-<p>####4 开始享受纯粹的Hexo写作吧！</p>
-<p>####5 备注</p>
-<blockquote>
-<ul>
-<li>本便携版以及本文均使用 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="external">CC BY-NC-SA 4.0</a>协议；</li>
-<li>本文所有权归 <a href="http://qistchan.com" target="_blank" rel="external">QistChan</a> &amp; <a href="https://wwww.bitmoe.com" target="_blank" rel="external">Bitmoe Inc.</a> 所有；</li>
-<li>本便携版由 <a href="https://www.bitmoe.com" target="_blank" rel="external">Bitmoe Inc.</a> 维护并提供技术支持；</li>
-<li>需要技术支持可以在<a href="https://github.com/Bitmoe/PortableHexo" target="_blank" rel="external">Github仓库</a> 提交<strong><code>Issues</code></strong>；</li>
-<li>Written with <a href="https://stackedit.io/" target="_blank" rel="external">StackEdit</a>.</li>
-</ul>
-</blockquote>
+        <p>###de BG4VRG</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="bg4vrg.github.io/2018/01/26/hello-world/" data-id="cjcvyzkok0000e0uyxsx465oz" class="article-share-link">Share</a>
+      <a data-url="bg4vrg.github.io/2016/11/02/更换新主题，持续测试修改中/" data-id="cjcwoa6ax000nh8uyhgauu8je" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-追卡，全部给了sae，看看能回" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/17/追卡，全部给了sae，看看能回/" class="article-date">
+  <time datetime="2016-08-17T03:34:36.000Z" itemprop="datePublished">2016-08-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/17/追卡，全部给了sae，看看能回/">追卡，全部给了sae，看看能回...</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://bg4vrg.lofter.com/post/1db58382_c0a0869" target="_blank" rel="external"><img src="http://imglf.nosdn.127.net/img/WFphbUdlUmNpL0VhQmxPK29BejVZazJwSDlIZS81Z2l6eEpvc3NhR0l1WjZ6czJKZFQ0d1l3PT0.jpg?imageView&amp;thumbnail=500x10000&amp;quality=96&amp;stripmeta=0&amp;type=jpg%7Cwatermark&amp;type=1&amp;dx=0&amp;gravity=southwest&amp;dissolve=100&amp;image=aW1nL3N5cy9zZWxlY3Rpb24tcnNzLXdhdGVybWFyay5wbmc=" alt=""></a><br><br><a href="http://bg4vrg.lofter.com/post/1db58382_c0a0869" target="_blank" rel="external"><img src="http://imglf0.nosdn.127.net/img/WFphbUdlUmNpL0VhQmxPK29BejVZaytaMm9lRGl2THEzcXFOWjA1YlBlQk5mNk9UWUhwSFJ3PT0.jpg?imageView&amp;thumbnail=500x10000&amp;quality=96&amp;stripmeta=0&amp;type=jpg%7Cwatermark&amp;type=1&amp;dx=0&amp;gravity=southwest&amp;dissolve=100&amp;image=aW1nL3N5cy9zZWxlY3Rpb24tcnNzLXdhdGVybWFyay5wbmc=" alt=""></a><br><br><a href="http://bg4vrg.lofter.com/post/1db58382_c0a0869" target="_blank" rel="external"><img src="http://imglf0.nosdn.127.net/img/WFphbUdlUmNpL0VhQmxPK29BejVZaGVqaG5SU3FiUGhKNjdQaHpzaGZlU21oZ3JTQ1FjalJBPT0.jpg?imageView&amp;thumbnail=500x10000&amp;quality=96&amp;stripmeta=0&amp;type=jpg%7Cwatermark&amp;type=1&amp;dx=0&amp;gravity=southwest&amp;dissolve=100&amp;image=aW1nL3N5cy9zZWxlY3Rpb24tcnNzLXdhdGVybWFyay5wbmc=" alt=""></a><br></p>
+
+<p>追卡，全部给了sae，看看能回来几张<br><br>BG6SVM VIA BG6RUD BG6SVJ BG8NPI BG6TTL BG6RI BG7YQM BG8OHQ BD9XE BG6SWA BD7YK&nbsp; BD6RN<br><br></p>
+
+<p><a href="http://bg4vrg.lofter.com" target="_blank" rel="external">LOFTER：BG4VRG的DXCC 100</a>&nbsp;&nbsp;&nbsp;<a href="http://bg4vrg.lofter.com/post/1db58382_c0a0869" target="_blank" rel="external">http://bg4vrg.lofter.com/post/1db58382_c0a0869</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="bg4vrg.github.io/2016/08/17/追卡，全部给了sae，看看能回/" data-id="cjcwoa6b3000rh8uytii6lw0k" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-aprs是个坑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/12/aprs是个坑/" class="article-date">
+  <time datetime="2016-04-12T01:56:28.000Z" itemprop="datePublished">2016-04-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/12/aprs是个坑/">aprs是个坑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>this is a post
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;昨天换上4米棒子，下班时让老婆打开电台从20公里外开始往家赶。眼巴巴的盯着地图20分钟，一直到距离igate5公里时才收到信号。<br><br>咨询BI7NOR得到如下回复：<br><br>&gt; V6】BI7NOR<br>&gt;<br>&gt; 小飞侠，T7想要接收很弱的信号，这个不现实，因为T7内置的V模块，性能和宝丰5R差不多。因为APRS信号，一般要49信号以上才能解码，所以直频接收距离并不远的<br>&gt;<br>&gt; 【V6】BI7NOR 2016/4/11 21:42:19<br>&gt;<br>&gt; 如果想接收很弱的信号，可以外接GM300<br>&gt;<br>&gt; 【V6】BI7NOR 2016/4/11 21:42:36<br>&gt;<br>&gt; 这些专业接收机，手台是没法相比的<br>&gt;<br>&gt; 2016/4/11 21:44:58<br>&gt;<br>&gt; 【V6】BI7NOR 2016/4/11 21:44:58<br>&gt;<br>&gt; 另外，T7内置接收的效果，和外接电源有很大的关系。很多电源本身辐射超标，对V接收模块本身就是一个很强的干扰，造成接收效果很差<br>&gt;<br>&gt; 【V6】BI7NOR 2016/4/11 21:45:16<br>&gt;<br>&gt; 尽量用线性电源供电，接收效果会好很多<br>&gt;<br>&gt; 【V6】BI7NOR 2016/4/11 21:45:53<br>&gt;<br>&gt; 我所知道的，华为路由，网件路由配送的开关电源，t 7接收效果很好<br>&gt;<br>&gt; 2016/4/11 21:47:43<br>&gt;<br>&gt; 【V6】BI7NOR 2016/4/11 21:47:43<br>&gt;<br>&gt; 曾用过一个没品牌开关电源接收T7上，就在楼下200米外，T7都收不到信标，后来拆解电源，发现没有抗干扰电路的，就一个电阻串联加四个二极管，吓死大众<br><br>看来，igate收的远我还有很多工作要做，可能即使全做了也不一定有多大效果提升，这里记录下提醒自己和其他同好。<br><br>一、更换质量更好的avrt7电源（DC7-12V），目前用的是杂牌监控电源<br><br>二、更换GM300车台<br><br>三、馈线从-3换到-5或者-7（只有6米长，可能不会有多少变化）<br></p>
+
+<p><a href="http://bg4vrg.lofter.com" target="_blank" rel="external">LOFTER：BG4VRG的DXCC 100</a>&nbsp;&nbsp;&nbsp;<a href="http://bg4vrg.lofter.com/post/1db58382_a9778cb" target="_blank" rel="external">http://bg4vrg.lofter.com/post/1db58382_a9778cb</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="bg4vrg.github.io/2016/04/12/aprs是个坑/" data-id="cjcwoa6a5000bh8uymlz7thjt" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-韩国的《暗杀》拍的很好看" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/11/韩国的《暗杀》拍的很好看/" class="article-date">
+  <time datetime="2016-04-11T06:06:01.000Z" itemprop="datePublished">2016-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/11/韩国的《暗杀》拍的很好看/">韩国的《暗杀》拍的很好看</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.le.com/ptv/vplay/24087511.html" target="_blank" rel="external">http://www.le.com/ptv/vplay/24087511.html</a><br><br><a target="_blank" rel="nofollow">暗杀</a><br><br>导演：&nbsp;<a href="http://so.le.com/s?wd=%E5%B4%94%E4%B8%9C%E5%8B%8B&amp;from=list" target="_blank" rel="external">崔东勋</a><br><br>主演：&nbsp;<a href="http://so.le.com/s?wd=%E5%85%A8%E6%99%BA%E8%B4%A4&amp;from=list" target="_blank" rel="external">全智贤</a>&nbsp;<a href="http://so.le.com/s?wd=%E6%9D%8E%E6%94%BF%E5%AE%B0&amp;from=list" target="_blank" rel="external">李政宰</a>&nbsp;<a href="http://so.le.com/s?wd=%E6%B2%B3%E6%AD%A3%E5%AE%87&amp;from=list" target="_blank" rel="external">河正宇</a>&nbsp;<a href="http://so.le.com/s?wd=%E5%90%B4%E8%BE%BE%E6%B4%99&amp;from=list" target="_blank" rel="external">吴达洙</a>&nbsp;<a href="http://so.le.com/s?wd=%E8%B5%B5%E9%95%87%E9%9B%84&amp;from=list" target="_blank" rel="external">赵镇雄</a>&nbsp;<a href="http://so.le.com/s?wd=%E6%9D%8E%E7%92%9F%E8%8D%A3&amp;from=list" target="_blank" rel="external">李璟荣</a>&nbsp;<a href="http://so.le.com/s?wd=%E5%B4%94%E5%BE%B7%E9%97%A8&amp;from=list" target="_blank" rel="external">崔德门</a><br><br>时长： 139分钟<br><br>地区：&nbsp;<a href="http://list.le.com/listn/c1_t-1_a50040_y-1_s1_lg-1_ph-1_md_o17_d1_p.html" target="_blank" rel="external">日韩地区</a><br><br>类型：&nbsp;<a href="http://list.le.com/listn/c1_t30153_a-1_y-1_s1_lg-1_ph-1_md_o17_d1_p.html" target="_blank" rel="external">历史</a>&nbsp;<a href="http://list.le.com/listn/c1_t30010_a-1_y-1_s1_lg-1_ph-1_md_o17_d1_p.html" target="_blank" rel="external">动作</a><br><br>年代：<a href="http://list.le.com/listn/c1_t-1_a-1_y2015_s1_lg-1_ph-1_md_o17_d1_p.html" target="_blank" rel="external">2015</a><br><br>剧情介绍：<br><br>上世纪初，韩国笼罩在日本统治的阴影下，与此同时，很多韩国抵抗活动以中国为据点以躲避日本当局。1933年的上海，一个暗杀日本指挥官的秘密命令交由安玉允（全智贤&nbsp;饰）执行，她是个已经被判处死刑的一流狙击手。为了这个任务，为临时政府工作的特工廉锡镇（李政宰&nbsp;饰）从监狱里解救了安玉允和她的同伴。但&nbsp;与此同时这个重大计划被一个内部间谍和职业杀手泄露给了日本当局，夏威夷&middot;皮斯托（河正宇&nbsp;饰）因此被雇佣去除掉安玉允。而暗杀小组抵达韩国时对职业杀手的追击毫不知情。安玉允有可能完成这个不可能做到的任务吗?<br><br></p>
+
+<p><a href="http://bg4vrg.lofter.com" target="_blank" rel="external">LOFTER：BG4VRG的DXCC 100</a>&nbsp;&nbsp;&nbsp;<a href="http://bg4vrg.lofter.com/post/1db58382_a94eab1" target="_blank" rel="external">http://bg4vrg.lofter.com/post/1db58382_a94eab1</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="bg4vrg.github.io/2016/04/11/韩国的《暗杀》拍的很好看/" data-id="cjcwoa6b1000qh8uymkrdriaf" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-BG4VRG-10升级天馈系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/11/BG4VRG-10升级天馈系统/" class="article-date">
+  <time datetime="2016-04-11T05:50:13.000Z" itemprop="datePublished">2016-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/11/BG4VRG-10升级天馈系统/">BG4VRG-10升级天馈系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><br>设备：avrt7，原装10厘米的橡胶天线。<br><br><img src="http://imglf0.ph.126.net/R5zB_JRUY7pjbwTnu43qdw==/4918775218119202671.jpg" alt=""><br><br>去年11月安装后一直很稳定，覆盖范围也很稳定，不到1公里。<br><br>除了天线不给力，还有一个重要原因就是avrt7是放在铁箱子里的。。。。。<br><br>这次更换的是4米任丘棒子，定制频点144640<br><br>昨天八哥买的6米-3馈线到宿迁，今天联系bg4vzc正好上午没事，果断开工。底座是膨胀螺丝固定的，本来是移动基站的天线底座。<br><br>棒子和底座之间用1米5钢管，铅条固定纹丝不动。<br><br><img src="http://imglf0.ph.126.net/Xdz4fJaElGcA3O3evKkYPg==/6598179173950105122.jpg" alt=""><br><br>城区v段覆盖越来越差，附近的高楼都是最近几年才建的。<br><br>下图是BG4VZC在开工。<br><br><img src="http://imglf1.ph.126.net/s4JINW7aFWB-wvP1gYagUw==/1994813160049421311.jpg" alt=""><br><br></p>
+
+<p><a href="http://bg4vrg.lofter.com" target="_blank" rel="external">LOFTER：BG4VRG的DXCC 100</a>&nbsp;&nbsp;&nbsp;<a href="http://bg4vrg.lofter.com/post/1db58382_a94ea67" target="_blank" rel="external">http://bg4vrg.lofter.com/post/1db58382_a94ea67</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="bg4vrg.github.io/2016/04/11/BG4VRG-10升级天馈系统/" data-id="cjcwoa69s0004h8uyw02mxfqx" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-dxcc75-保加利亚LZ9W" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/10/dxcc75-保加利亚LZ9W/" class="article-date">
+  <time datetime="2016-04-10T02:16:04.000Z" itemprop="datePublished">2016-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/10/dxcc75-保加利亚LZ9W/">dxcc75-保加利亚LZ9W</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>是cq wpx ssb搞的。<br><br>保加利亚好想有奇怪的东西<br><br><strong>BG4VRG LZ9W 2016-03-26 06:03:43&nbsp; 15M SSB&nbsp; 21.24410 BULGARIA</strong><br><br></p>
+
+<p><a href="http://bg4vrg.lofter.com" target="_blank" rel="external">LOFTER：BG4VRG的DXCC 100</a>&nbsp;&nbsp;&nbsp;<a href="http://bg4vrg.lofter.com/post/1db58382_a91744e" target="_blank" rel="external">http://bg4vrg.lofter.com/post/1db58382_a91744e</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="bg4vrg.github.io/2016/04/10/dxcc75-保加利亚LZ9W/" data-id="cjcwoa6af000ih8uytc7cyhn4" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-dxcc74-4L0A-格鲁吉亚" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/02/dxcc74-4L0A-格鲁吉亚/" class="article-date">
+  <time datetime="2016-04-02T00:56:18.000Z" itemprop="datePublished">2016-04-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/02/dxcc74-4L0A-格鲁吉亚/">dxcc74 4L0A 格鲁吉亚</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://imglf2.ph.126.net/NTzth2g6JVdVM3Hj-UEaVQ==/4930315692164534672.png" alt=""><br><img src="http://imglf2.ph.126.net/chNIhMrSBIHoUJgb_WJKhQ==/4843339924361092790.png" alt=""><br><br></p>
+
+<p><a href="http://bg4vrg.lofter.com" target="_blank" rel="external">LOFTER：BG4VRG的DXCC 100</a>&nbsp;&nbsp;&nbsp;<a href="http://bg4vrg.lofter.com/post/1db58382_a7aa6a7" target="_blank" rel="external">http://bg4vrg.lofter.com/post/1db58382_a7aa6a7</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="bg4vrg.github.io/2016/04/02/dxcc74-4L0A-格鲁吉亚/" data-id="cjcwoa6at000kh8uyskutoaj8" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-DXCC-72-73-4月" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/01/DXCC-72-73-4月/" class="article-date">
+  <time datetime="2016-04-01T03:32:12.000Z" itemprop="datePublished">2016-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/01/DXCC-72-73-4月/">DXCC 72-73   4月...</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://bg4vrg.lofter.com/post/1db58382_a7807fc" target="_blank" rel="external"><img src="http://imglf1.nosdn.127.net/img/WFphbUdlUmNpL0ZDR2RoWE5wU2xiN1Fwam0zcVRQZDFlK2QweGNJZ0Z3b0NkRzFtVG1PWWVRPT0.jpg?imageView&amp;thumbnail=500x10000&amp;quality=96&amp;stripmeta=0&amp;type=jpg%7Cwatermark&amp;type=1&amp;dx=0&amp;gravity=southwest&amp;dissolve=100&amp;image=aW1nL3N5cy9zZWxlY3Rpb24tcnNzLXdhdGVybWFyay5wbmc=" alt=""></a><br><br><a href="http://bg4vrg.lofter.com/post/1db58382_a7807fc" target="_blank" rel="external"><img src="http://imglf0.nosdn.127.net/img/WFphbUdlUmNpL0ZDR2RoWE5wU2xiMW12TnAwUmlQd3FZckVpUWlGQlBYK3Z0Nm5XZDgzQnpBPT0.jpg?imageView&amp;thumbnail=500x10000&amp;quality=96&amp;stripmeta=0&amp;type=jpg%7Cwatermark&amp;type=1&amp;dx=0&amp;gravity=southwest&amp;dissolve=100&amp;image=aW1nL3N5cy9zZWxlY3Rpb24tcnNzLXdhdGVybWFyay5wbmc=" alt=""></a><br><br><a href="http://bg4vrg.lofter.com/post/1db58382_a7807fc" target="_blank" rel="external"><img src="http://imglf.nosdn.127.net/img/WFphbUdlUmNpL0ZDR2RoWE5wU2xiekZ3bmphQXVrbnArckloUHNTbkFsbmNVb1hzaTVFUEZ3PT0.jpg?imageView&amp;thumbnail=500x10000&amp;quality=96&amp;stripmeta=0&amp;type=jpg%7Cwatermark&amp;type=1&amp;dx=0&amp;gravity=southwest&amp;dissolve=100&amp;image=aW1nL3N5cy9zZWxlY3Rpb24tcnNzLXdhdGVybWFyay5wbmc=" alt=""></a><br></p>
+
+<p>DXCC 72-73<br><br>4月1日愚人节开心！<br><br>马其顿是昨天群里bg9gxm提醒通上的<br><br>罗马尼亚是cq wpx rtty搞的，现在才确认：）<br></p>
+
+<p><a href="http://bg4vrg.lofter.com" target="_blank" rel="external">LOFTER：BG4VRG的DXCC 100</a>&nbsp;&nbsp;&nbsp;<a href="http://bg4vrg.lofter.com/post/1db58382_a7807fc" target="_blank" rel="external">http://bg4vrg.lofter.com/post/1db58382_a7807fc</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="bg4vrg.github.io/2016/04/01/DXCC-72-73-4月/" data-id="cjcwoa69v0005h8uyfg7u9jbf" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-dxcc71-a71ae-卡塔尔" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/18/dxcc71-a71ae-卡塔尔/" class="article-date">
+  <time datetime="2016-03-18T04:39:29.000Z" itemprop="datePublished">2016-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/18/dxcc71-a71ae-卡塔尔/">dxcc71 a71ae 卡塔尔</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>A71AE 2016-03-13 10:42:00&nbsp; 15M PSK63 &nbsp; 21.07158&nbsp; QATAR<br><br><img src="http://imglf1.ph.126.net/j0ZI2F8n4b0uaH2-jUa-7w==/6598067023763706538.jpg" alt=""><br><br></p>
+
+<p><a href="http://bg4vrg.lofter.com" target="_blank" rel="external">LOFTER：BG4VRG的DXCC 100</a>&nbsp;&nbsp;&nbsp;<a href="http://bg4vrg.lofter.com/post/1db58382_a50f2cb" target="_blank" rel="external">http://bg4vrg.lofter.com/post/1db58382_a50f2cb</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="bg4vrg.github.io/2016/03/18/dxcc71-a71ae-卡塔尔/" data-id="cjcwoa6ae000hh8uyr1twl1d6" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-dxcc68-阿拉伯联合酋长国-A61DJ" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/22/dxcc68-阿拉伯联合酋长国-A61DJ/" class="article-date">
+  <time datetime="2016-02-22T01:17:57.000Z" itemprop="datePublished">2016-02-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/22/dxcc68-阿拉伯联合酋长国-A61DJ/">dxcc68 阿拉伯联合酋长国 A61DJ</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>土豪豪豪豪豪豪豪豪豪豪豪<br></p>
+
+<p><a href="http://bg4vrg.lofter.com" target="_blank" rel="external">LOFTER：BG4VRG的DXCC 100</a>&nbsp;&nbsp;&nbsp;<a href="http://bg4vrg.lofter.com/post/1db58382_a07f28d" target="_blank" rel="external">http://bg4vrg.lofter.com/post/1db58382_a07f28d</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="bg4vrg.github.io/2016/02/22/dxcc68-阿拉伯联合酋长国-A61DJ/" data-id="cjcwoa6a7000dh8uyk45abgk6" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -185,6 +462,10 @@
 
   
 
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -201,7 +482,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li></ul>
     </div>
   </div>
 
@@ -209,12 +490,28 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2018/01/26/hello-world/">Hello World</a>
+            <a href="/2016/11/02/更换新主题，持续测试修改中/">更换新主题，持续测试修改中</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/17/追卡，全部给了sae，看看能回/">追卡，全部给了sae，看看能回...</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/aprs是个坑/">aprs是个坑</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/11/韩国的《暗杀》拍的很好看/">韩国的《暗杀》拍的很好看</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/11/BG4VRG-10升级天馈系统/">BG4VRG-10升级天馈系统</a>
           </li>
         
       </ul>
@@ -230,7 +527,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 Liu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
