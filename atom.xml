@@ -183,4 +183,82 @@
     
   </entry>
   
+  <entry>
+    <title>预备10月12-10月13参加郑州C类考试</title>
+    <link href="https://bg4vrg.com/2018/09/22/%E9%A2%84%E5%A4%8710%E6%9C%8812-10%E6%9C%8813%E5%8F%82%E5%8A%A0%E9%83%91%E5%B7%9EC%E7%B1%BB%E8%80%83%E8%AF%95/"/>
+    <id>https://bg4vrg.com/2018/09/22/%E9%A2%84%E5%A4%8710%E6%9C%8812-10%E6%9C%8813%E5%8F%82%E5%8A%A0%E9%83%91%E5%B7%9EC%E7%B1%BB%E8%80%83%E8%AF%95/</id>
+    <published>2018-09-21T16:00:00.000Z</published>
+    <updated>2024-02-18T14:32:32.849Z</updated>
+    
+    <content type="html"><![CDATA[<p>1061道题目已经一刷。</p><p>从开始报名到现在，笔记做了近200页，自己做了几次模拟测试，都能保证在90分以上。</p><p>希望能继续保持下去，以后每天继续看题库。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;1061道题目已经一刷。&lt;/p&gt;
+&lt;p&gt;从开始报名到现在，笔记做了近200页，自己做了几次模拟测试，都能保证在90分以上。&lt;/p&gt;
+&lt;p&gt;希望能继续保持下去，以后每天继续看题库。&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="ham" scheme="https://bg4vrg.com/categories/ham/"/>
+    
+    
+    <category term="无线电" scheme="https://bg4vrg.com/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>今天LOTW达成150DXCC</title>
+    <link href="https://bg4vrg.com/2018/09/06/%E4%BB%8A%E5%A4%A9LOTW%E8%BE%BE%E6%88%90150DXCC/"/>
+    <id>https://bg4vrg.com/2018/09/06/%E4%BB%8A%E5%A4%A9LOTW%E8%BE%BE%E6%88%90150DXCC/</id>
+    <published>2018-09-05T16:00:00.000Z</published>
+    <updated>2024-02-18T14:35:00.189Z</updated>
+    
+    <content type="html"><![CDATA[<p>2018年9月6日晚</p><p>做dx大概是2015年5月开始的，历时3年半。天线三波段倒v-长线-gp都用过了。</p><p><img src="/pic/2018-9-6-lotw.png" alt="img"><br><img src="/pic/2018-9-6-150dxcc.png" alt="img"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;2018年9月6日晚&lt;/p&gt;
+&lt;p&gt;做dx大概是2015年5月开始的，历时3年半。天线三波段倒v-长线-gp都用过了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pic/2018-9-6-lotw.png&quot; alt=&quot;img&quot;&gt;&lt;br&gt;&lt;img src=&quot;/pic/2018-9-</summary>
+      
+    
+    
+    
+    <category term="ham" scheme="https://bg4vrg.com/categories/ham/"/>
+    
+    
+    <category term="无线电" scheme="https://bg4vrg.com/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>博客可以外网访问啦～～</title>
+    <link href="https://bg4vrg.com/2018/08/18/%E5%8D%9A%E5%AE%A2%E5%8F%AF%E4%BB%A5%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E5%95%A6%EF%BD%9E%EF%BD%9E/"/>
+    <id>https://bg4vrg.com/2018/08/18/%E5%8D%9A%E5%AE%A2%E5%8F%AF%E4%BB%A5%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E5%95%A6%EF%BD%9E%EF%BD%9E/</id>
+    <published>2018-08-17T16:00:00.000Z</published>
+    <updated>2024-02-18T14:38:38.575Z</updated>
+    
+    <content type="html"><![CDATA[<p>现在内网穿透好厉害，可以绕过备案了。<br>使用软件：frpc0.16.1<br>免费vps跳板：chuantou.org<br>下载地址frp_0.16.1_linux_amd64.tar（2024-2-18注：网站迁移原因已失效）</p><p>网站服务器添加代码让frpc后台运行<br>vim &#x2F;etc&#x2F;rc.local</p><p><code>nohup /usr/local/frp_0.16.1/frpc -c /usr/local/frp_0.16.1/frpc.ini &gt; /dev/null 2&gt;&amp;1 &amp;</code></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;现在内网穿透好厉害，可以绕过备案了。&lt;br&gt;使用软件：frpc0.16.1&lt;br&gt;免费vps跳板：chuantou.org&lt;br&gt;下载地址frp_0.16.1_linux_amd64.tar（2024-2-18注：网站迁移原因已失效）&lt;/p&gt;
+&lt;p&gt;网站服务器添加代码让fr</summary>
+      
+    
+    
+    
+    <category term="network" scheme="https://bg4vrg.com/categories/network/"/>
+    
+    
+    <category term="网站" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%AB%99/"/>
+    
+  </entry>
+  
 </feed>
