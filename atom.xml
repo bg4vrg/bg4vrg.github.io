@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>BG4VRG的无线电之旅</title>
+  
+  <subtitle>探索业余无线电的奥秘，分享linux和网络的知识</subtitle>
+  <link href="https://bg4vrg.com/atom.xml" rel="self"/>
+  
+  <link href="https://bg4vrg.com/"/>
+  <updated>2024-02-18T03:59:09.206Z</updated>
+  <id>https://bg4vrg.com/</id>
+  
+  <author>
+    <name>fei</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>github pages部署hexo 折腾小结</title>
+    <link href="https://bg4vrg.com/2024/02/17/github-pages%E9%83%A8%E7%BD%B2hexo-%E6%8A%98%E8%85%BE%E5%B0%8F%E7%BB%93/"/>
+    <id>https://bg4vrg.com/2024/02/17/github-pages%E9%83%A8%E7%BD%B2hexo-%E6%8A%98%E8%85%BE%E5%B0%8F%E7%BB%93/</id>
+    <published>2024-02-17T08:22:00.000Z</published>
+    <updated>2024-02-18T03:59:09.206Z</updated>
+    
+    <content type="html"><![CDATA[<p>首次更发布于：2024-02-17，陆续更新中</p><h1 id="一、域名"><a href="#一、域名" class="headerlink" title="一、域名"></a>一、域名</h1><h2 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h2><p>cloudflare控制面板中在dns中创建cname记录，把bg4vrg.git.io的二级域名指向bg4vrg.com<br><img src="/pic/20240217customdomain.png" alt="img"></p><h2 id="1-2"><a href="#1-2" class="headerlink" title="1.2"></a>1.2</h2><p>在github pages设置里绑定bg4vrg.com，注意这里修改后无法强制启用https，需要第三步</p><h2 id="1-3"><a href="#1-3" class="headerlink" title="1.3"></a>1.3</h2><p>在cloudflare 规则页面创建一条页面规则，用于将<a href="http://bg4vrg.com/">http://bg4vrg.com/</a>* 的网址启用https规则<br><img src="/pic/20240217cloudflarerules.png" alt="img"></p><h1 id="二、本地git环境"><a href="#二、本地git环境" class="headerlink" title="二、本地git环境"></a>二、本地git环境</h1><h2 id="2-1"><a href="#2-1" class="headerlink" title="2.1"></a>2.1</h2><p>icarus下载主题，第一条命令网络不通使用npm安装</p><p><del>git clone <a href="https://github.com/ppoffice/hexo-theme-icarus.git">https://github.com/ppoffice/hexo-theme-icarus.git</a> themes&#x2F;icarus</del></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-icarus</span><br><span class="line">hexo config theme icarus</span><br></pre></td></tr></table></figure><h2 id="2-2"><a href="#2-2" class="headerlink" title="2.2"></a>2.2</h2><p>安装发布部署组件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><h2 id="2-3-初始化git环境"><a href="#2-3-初始化git环境" class="headerlink" title="2.3 初始化git环境"></a>2.3 初始化git环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure><h2 id="2-4-测试通讯"><a href="#2-4-测试通讯" class="headerlink" title="2.4 测试通讯"></a>2.4 测试通讯</h2><p>测试本地推送到github是否正常，注意要提前在本地生成密钥并部署到github上，因为用户名密码模式已不支持</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull git@github.com:bg4vrg/bg4vrg.github.io.git master</span><br></pre></td></tr></table></figure><h2 id="2-5-安装hexo"><a href="#2-5-安装hexo" class="headerlink" title="2.5 安装hexo"></a>2.5 安装hexo</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><h2 id="2-6-设置本地部署的博客目录"><a href="#2-6-设置本地部署的博客目录" class="headerlink" title="2.6 设置本地部署的博客目录"></a>2.6 设置本地部署的博客目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init /blog/</span><br></pre></td></tr></table></figure><h2 id="2-7-发布文章"><a href="#2-7-发布文章" class="headerlink" title="2.7 发布文章"></a>2.7 发布文章</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;我的第一篇博客文章&quot;</span><br></pre></td></tr></table></figure><h2 id="2-8-卸载hexo"><a href="#2-8-卸载hexo" class="headerlink" title="2.8 卸载hexo"></a>2.8 卸载hexo</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-cli -g</span><br></pre></td></tr></table></figure><h2 id="2-9-git回滚"><a href="#2-9-git回滚" class="headerlink" title="2.9 git回滚"></a>2.9 git回滚</h2><p>第二条命令后面的数字为上一条命令结果中显示的某一个节点数值</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline</span><br><span class="line">git reset 9ef9173</span><br></pre></td></tr></table></figure><h1 id="三、发布"><a href="#三、发布" class="headerlink" title="三、发布"></a>三、发布</h1><p>以下三条为常用命令，g为本地生成静态网站页面，s为开启本地服务方便测试（<a href="http://localhost:4000）,d为发布">http://localhost:4000）,d为发布</a></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s </span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;首次更发布于：2024-02-17，陆续更新中&lt;/p&gt;
+&lt;h1 id=&quot;一、域名&quot;&gt;&lt;a href=&quot;#一、域名&quot; class=&quot;headerlink&quot; title=&quot;一、域名&quot;&gt;&lt;/a&gt;一、域名&lt;/h1&gt;&lt;h2 id=&quot;1-1&quot;&gt;&lt;a href=&quot;#1-1&quot; class=</summary>
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="网站" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%AB%99/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我的第一篇博客文章</title>
+    <link href="https://bg4vrg.com/2024/02/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/"/>
+    <id>https://bg4vrg.com/2024/02/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</id>
+    <published>2024-02-17T01:49:41.000Z</published>
+    <updated>2024-02-17T02:13:24.899Z</updated>
+    
+    <content type="html"><![CDATA[<p> 这是我的第一篇文章，测试效果如何。</p><p>muhhaha</p><p><img src="/pic/test1.png" alt="img"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt; 这是我的第一篇文章，测试效果如何。&lt;/p&gt;
+&lt;p&gt;muhhaha&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pic/test1.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+    <category term="日常" scheme="https://bg4vrg.com/tags/%E6%97%A5%E5%B8%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://bg4vrg.com/2024/02/17/hello-world/"/>
+    <id>https://bg4vrg.com/2024/02/17/hello-world/</id>
+    <published>2024-02-17T01:45:44.449Z</published>
+    <updated>2024-02-17T01:43:31.988Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一篇新的小文，庆祝升级1.2.0的成功</title>
+    <link href="https://bg4vrg.com/2023/03/06/%E4%B8%80%E7%AF%87%E6%96%B0%E7%9A%84%E5%B0%8F%E6%96%87%EF%BC%8C%E5%BA%86%E7%A5%9D%E5%8D%87%E7%BA%A71.2.0%E7%9A%84%E6%88%90%E5%8A%9F/"/>
+    <id>https://bg4vrg.com/2023/03/06/%E4%B8%80%E7%AF%87%E6%96%B0%E7%9A%84%E5%B0%8F%E6%96%87%EF%BC%8C%E5%BA%86%E7%A5%9D%E5%8D%87%E7%BA%A71.2.0%E7%9A%84%E6%88%90%E5%8A%9F/</id>
+    <published>2023-03-05T16:00:00.000Z</published>
+    <updated>2024-02-17T06:58:28.893Z</updated>
+    
+    <content type="html"><![CDATA[<p> 导航小站截图</p><p><img src="/pic/1022801238.png" alt="img"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt; 导航小站截图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pic/1022801238.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+    <category term="日常" scheme="https://bg4vrg.com/tags/%E6%97%A5%E5%B8%B8/"/>
+    
+  </entry>
+  
+</feed>
