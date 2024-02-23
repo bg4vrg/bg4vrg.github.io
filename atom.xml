@@ -321,6 +321,29 @@
   </entry>
   
   <entry>
+    <title>WSJT-X、Ham Radio Deluxe控制电台玩FT8</title>
+    <link href="https://bg4vrg.com/2017/09/21/WSJT-X%E3%80%81Ham-Radio-Deluxe%E6%8E%A7%E5%88%B6%E7%94%B5%E5%8F%B0%E7%8E%A9FT8/"/>
+    <id>https://bg4vrg.com/2017/09/21/WSJT-X%E3%80%81Ham-Radio-Deluxe%E6%8E%A7%E5%88%B6%E7%94%B5%E5%8F%B0%E7%8E%A9FT8/</id>
+    <published>2017-09-21T08:09:36.000Z</published>
+    <updated>2024-02-23T08:20:51.824Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="电台连接电脑"><a href="#电台连接电脑" class="headerlink" title="电台连接电脑"></a>电台连接电脑</h1><p>比较新的电台比如ICOM 7100选择可以用一根usb线直连电脑了，一些老电台不支持usb直连，就需要通过控制盒了，市面上能买到的国产盒子有bh4tdv无锡马工的51tnc、深圳bd7jad的easy link系列，bh2ro 制作的lite link接口板。</p><p>下边以ICOM 706MKIIG+bh4tdv 控制盒为例，简单介绍ft8的操作步骤。</p><h1 id="一、安装HamRadio-Deluxe控制电台"><a href="#一、安装HamRadio-Deluxe控制电台" class="headerlink" title="一、安装HamRadio Deluxe控制电台"></a>一、安装HamRadio Deluxe控制电台</h1><h2 id="1-1、控制盒接到电脑后安装提供的驱动，找到设备管理器确定分配到的端口号（我的是com5）"><a href="#1-1、控制盒接到电脑后安装提供的驱动，找到设备管理器确定分配到的端口号（我的是com5）" class="headerlink" title="1.1、控制盒接到电脑后安装提供的驱动，找到设备管理器确定分配到的端口号（我的是com5）"></a>1.1、控制盒接到电脑后安装提供的驱动，找到设备管理器确定分配到的端口号（我的是com5）</h2><p>依次选择电台型号、com端口号、波特率、ci-v地址，注意这里每个电台的参数不一定相同，一定不要照搬。</p><span id="more"></span><p><img src="/pic/2017-09-21i.jpg" alt="图片"></p><h2 id="1-2、点“连接”，成功后软件如下图显示。"><a href="#1-2、点“连接”，成功后软件如下图显示。" class="headerlink" title="1.2、点“连接”，成功后软件如下图显示。"></a>1.2、点“连接”，成功后软件如下图显示。</h2><p><img src="/pic/2017-09-21j.jpg" alt="图片"></p><p>点“连接”</p><p>Ham Radio Deluxe的具体使用办法见我的另一篇文章（<a href="http://cq.hfdx59.com/forum.php?mod=viewthread&tid=984%EF%BC%89%EF%BC%8C%E8%BF%99%E9%87%8C%E4%B8%8D%E8%B5%98%E8%BF%B0%E3%80%82">http://cq.hfdx59.com/forum.php?mod=viewthread&amp;tid=984），这里不赘述。</a></p><h1 id="二、安装WSJT-X"><a href="#二、安装WSJT-X" class="headerlink" title="二、安装WSJT-X"></a>二、安装WSJT-X</h1><p>WSJT-X目前支持JT4, JT9, JT65, QRA64, ISCAT, MSK144, and WSPR多种模式。</p><p>*<strong>WSJT-X*</strong> <strong>Version 1.8.0-rc2</strong></p><p><a href="http://physics.princeton.edu/pulsar/K1JT/wsjtx-1.8.0-rc2-win32.exe">http://physics.princeton.edu/pulsar/K1JT/wsjtx-1.8.0-rc2-win32.exe</a></p><p>或者进QQ群下载</p><p>中国DX数据通讯群212880693</p><p>安装完成后，点FILE-SETTING依次如图设置</p><h2 id="2-1、依次填入你的呼号、grid地址，并如下图依次勾选"><a href="#2-1、依次填入你的呼号、grid地址，并如下图依次勾选" class="headerlink" title="2.1、依次填入你的呼号、grid地址，并如下图依次勾选"></a>2.1、依次填入你的呼号、grid地址，并如下图依次勾选</h2><p><img src="/pic/2017=09-21a.jpg" alt="图片"></p><p>需要注意的是：Enable VHF&#x2F;UFHMicrowave features选项仅限VU段FT8只用，如果你喜欢用wsjt-x在短波频率上操作JT65模式，请一定不要勾选，切记！</p><h2 id="2-2、点击Radio页面，设置电台连接参数"><a href="#2-2、点击Radio页面，设置电台连接参数" class="headerlink" title="2.2、点击Radio页面，设置电台连接参数"></a>2.2、点击Radio页面，设置电台连接参数</h2><ul><li><p>我们这篇文章是通过HRD软件控制电台，所以在Rig里选择电台类型为Ham Radio Deluxe,右侧ptt选项依次勾选（一般不需要勾选）。</p></li><li><p>事实上新版wsjt-x已经支持大多数电台cat连接，如果你不喜欢HRD这个软件，你也可以在这里选择DX Lab Suite Commander,Hamlib NET rigctl, or OmniRig等其他方式。具体请参照WSJT-X UserGuide。</p></li></ul><p><img src="/pic/2017-09-21b.jpg" alt="图片"></p><h2 id="2-3、设置Audio，选择正确的声卡。"><a href="#2-3、设置Audio，选择正确的声卡。" class="headerlink" title="2.3、设置Audio，选择正确的声卡。"></a>2.3、设置Audio，选择正确的声卡。</h2><p><img src="/pic/2017-09-21c.jpg" alt="图片"></p><h2 id="2-4、Tx-Macros-设置自定义发射内容，一般不超过13个字符，略"><a href="#2-4、Tx-Macros-设置自定义发射内容，一般不超过13个字符，略" class="headerlink" title="2.4、Tx Macros 设置自定义发射内容，一般不超过13个字符，略"></a>2.4、Tx Macros 设置自定义发射内容，一般不超过13个字符，略</h2><h2 id="2-5、设置Reporting"><a href="#2-5、设置Reporting" class="headerlink" title="2.5、设置Reporting"></a>2.5、设置Reporting</h2><p>这里比较重要。</p><p>勾选Prompt me to log QSO，确保每次通联后自动弹出记录log窗口；</p><p>勾选Enable PSK Reporter spotting，将接收到的信号报告上传到pskreport网络</p><p>Networking Services全部勾选</p><p><img src="/pic/2017-09-21d.jpg" alt="图片"></p><h2 id="2-6、设置Frequencies"><a href="#2-6、设置Frequencies" class="headerlink" title="2.6、设置Frequencies"></a>2.6、设置Frequencies</h2><p>因为默认没有2米FT8频点，所以我们手动新增一个频点144,118</p><p><img src="/pic/2017-09-21e.jpg" alt="图片"></p><h2 id="2-7、基本操作"><a href="#2-7、基本操作" class="headerlink" title="2.7、基本操作"></a>2.7、基本操作</h2><p>​    菜单Mode 选择FT8模式</p><p>​    频率左侧下拉菜单选择波段</p><p>​    注意选择波段下方的竖条为接收信号db值，确保为绿色</p><p>​    主动呼叫的时候，先点击CQ按钮，然后点击ENBALE TX按钮</p><p>想回复其他人的呼叫，只要鼠标双击那一行即可</p><p><img src="/pic/2017-09-21f.jpg" alt="图片"></p><p>如果选中CALL 1ST那么在接收到别人回复后会自动下一步动作，直到双方73后自动弹出log qso窗口。</p><p><img src="/pic/2017-09-21g.jpg" alt="图片"></p><p>注意与你相关的信息会以红色背景显示。</p><p><img src="/pic/2017-09-21h.jpg" alt="图片"></p><p>WSJT-X的日志记录和告警不太完美，如果需要语音告警，你还需要安装JTALERT软件，具体使用教程可以找《cq现代通信》上BG9GXM的文章学习。</p><p>软件下载：hamapps.com</p><h1 id="三、系统要求"><a href="#三、系统要求" class="headerlink" title="三、系统要求"></a>三、系统要求</h1><p>•支持SSB模式的电台和天线</p><p>•Windows（XP或更高版本），Linux或OS X操作系统</p><p>•最低1.5 GHz CPU、200MB以上的可用内存;</p><p>•至少1024 x 780分辨率</p><p>•使用com口或USB-com设备控制电台进行发射&#x2F;接收切换，CAT控制、VOX控制</p><p>•计算机的声卡，配置为采样率48000 Hz，16位</p><p>•将计算机时钟同步在UTC标准时间±1秒内</p><p>请尽量选择精度高的时间服务器或者GPS时钟源，否则时间误差超过2秒以上可能会导致无法解码。</p><p>仓促成文，肯定有错漏的地方，欢迎大家指正。</p><p>注：本篇为2017年江苏省无线电和定向运动协会举办的“苏皖V&#x2F;U通信日”活动约稿。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;电台连接电脑&quot;&gt;&lt;a href=&quot;#电台连接电脑&quot; class=&quot;headerlink&quot; title=&quot;电台连接电脑&quot;&gt;&lt;/a&gt;电台连接电脑&lt;/h1&gt;&lt;p&gt;比较新的电台比如ICOM 7100选择可以用一根usb线直连电脑了，一些老电台不支持usb直连，就需要通过控制盒了，市面上能买到的国产盒子有bh4tdv无锡马工的51tnc、深圳bd7jad的easy link系列，bh2ro 制作的lite link接口板。&lt;/p&gt;
+&lt;p&gt;下边以ICOM 706MKIIG+bh4tdv 控制盒为例，简单介绍ft8的操作步骤。&lt;/p&gt;
+&lt;h1 id=&quot;一、安装HamRadio-Deluxe控制电台&quot;&gt;&lt;a href=&quot;#一、安装HamRadio-Deluxe控制电台&quot; class=&quot;headerlink&quot; title=&quot;一、安装HamRadio Deluxe控制电台&quot;&gt;&lt;/a&gt;一、安装HamRadio Deluxe控制电台&lt;/h1&gt;&lt;h2 id=&quot;1-1、控制盒接到电脑后安装提供的驱动，找到设备管理器确定分配到的端口号（我的是com5）&quot;&gt;&lt;a href=&quot;#1-1、控制盒接到电脑后安装提供的驱动，找到设备管理器确定分配到的端口号（我的是com5）&quot; class=&quot;headerlink&quot; title=&quot;1.1、控制盒接到电脑后安装提供的驱动，找到设备管理器确定分配到的端口号（我的是com5）&quot;&gt;&lt;/a&gt;1.1、控制盒接到电脑后安装提供的驱动，找到设备管理器确定分配到的端口号（我的是com5）&lt;/h2&gt;&lt;p&gt;依次选择电台型号、com端口号、波特率、ci-v地址，注意这里每个电台的参数不一定相同，一定不要照搬。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="ham" scheme="https://bg4vrg.com/categories/ham/"/>
+    
+    
+    <category term="无线电" scheme="https://bg4vrg.com/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>aprs接收利器：GM300</title>
     <link href="https://bg4vrg.com/2016/09/11/aprs%E6%8E%A5%E6%94%B6%E5%88%A9%E5%99%A8%EF%BC%9AGM300/"/>
     <id>https://bg4vrg.com/2016/09/11/aprs%E6%8E%A5%E6%94%B6%E5%88%A9%E5%99%A8%EF%BC%9AGM300/</id>
@@ -444,28 +467,6 @@
     <summary type="html">&lt;p&gt;设备：avrt7，原装10厘米的橡胶天线。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/pic/20160521-1.jpg&quot;&gt;&lt;/p&gt;
 &lt;p&gt;去年11月安装后一直很稳定，覆盖范围也很稳定，不到1公里。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="ham" scheme="https://bg4vrg.com/categories/ham/"/>
-    
-    
-    <category term="无线电" scheme="https://bg4vrg.com/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>aprs是个坑</title>
-    <link href="https://bg4vrg.com/2016/05/21/aprs%E6%98%AF%E4%B8%AA%E5%9D%91/"/>
-    <id>https://bg4vrg.com/2016/05/21/aprs%E6%98%AF%E4%B8%AA%E5%9D%91/</id>
-    <published>2016-05-21T08:22:00.000Z</published>
-    <updated>2024-02-19T09:41:29.445Z</updated>
-    
-    <content type="html"><![CDATA[<p>昨天换上4米棒子，下班时让老婆打开电台从20公里外开始往家赶。眼巴巴的盯着地图20分钟，一直到距离igate5公里时才收到信号。</p><p>咨询BI7NOR得到如下回复：</p><span id="more"></span> <blockquote><p>【V6】BI7NOR</p><p>小飞侠，T7想要接收很弱的信号，这个不现实，因为T7内置的V模块，性能和宝丰5R差不多。因为APRS信号，一般要49信号以上才能解码，所以直频接收距离并不远的</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:42:19</p><p>如果想接收很弱的信号，可以外接GM300</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:42:36</p><p>这些专业接收机，手台是没法相比的</p><p>2016&#x2F;4&#x2F;11 21:44:58</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:44:58</p><p>另外，T7内置接收的效果，和外接电源有很大的关系。很多电源本身辐射超标，对V接收模块本身就是一个很强的干扰，造成接收效果很差</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:45:16</p><p>尽量用线性电源供电，接收效果会好很多</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:45:53</p><p>我所知道的，华为路由，网件路由配送的开关电源，t 7接收效果很好</p><p>2016&#x2F;4&#x2F;11 21:47:43</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:47:43</p><p>曾用过一个没品牌开关电源接收T7上，就在楼下200米外，T7都收不到信标，后来拆解电源，发现没有抗干扰电路的，就一个电阻串联加四个二极管，吓死大众</p></blockquote><p>看来，igate收的远我还有很多工作要做，可能即使全做了也不一定有多大效果提升，这里记录下提醒自己和其他同好。</p><p>一、更换质量更好的avrt7电源（DC7-12V），目前用的是杂牌监控电源</p><p>二、更换GM300车台</p><p>三、馈线从-3换到-5或者-7（只有6米长，可能不会有多少变化）</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;昨天换上4米棒子，下班时让老婆打开电台从20公里外开始往家赶。眼巴巴的盯着地图20分钟，一直到距离igate5公里时才收到信号。&lt;/p&gt;
-&lt;p&gt;咨询BI7NOR得到如下回复：&lt;/p&gt;</summary>
     
     
     
