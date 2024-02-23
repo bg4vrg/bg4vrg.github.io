@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-02-23T02:29:19.166Z</updated>
+  <updated>2024-02-20T07:01:32.920Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,50 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>拉杆正V调试</title>
-    <link href="https://bg4vrg.com/2024/02/23/%E6%8B%89%E6%9D%86%E6%AD%A3V%E8%B0%83%E8%AF%95/"/>
-    <id>https://bg4vrg.com/2024/02/23/%E6%8B%89%E6%9D%86%E6%AD%A3V%E8%B0%83%E8%AF%95/</id>
-    <published>2024-02-23T02:26:26.000Z</published>
-    <updated>2024-02-23T02:29:19.166Z</updated>
-    
-    <content type="html"><![CDATA[<p>0米波段<br>从最细端拉出5节，然后两只第5节均收回7厘米左右，驻波谐振28.18，1.0，29.6。 1.58</p><p>15米波段</p><span id="more"></span><p><img src="/pic/2016-01-03ant1.jpg" alt="天线实物"></p><p><img src="/pic/2016-01-03ant2.jpg" alt="10米"></p><p><img src="/pic/2016-01-03ant3.jpg" alt="15米"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;0米波段&lt;br&gt;从最细端拉出5节，然后两只第5节均收回7厘米左右，驻波谐振28.18，1.0，29.6。 1.58&lt;/p&gt;
-&lt;p&gt;15米波段&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="ham" scheme="https://bg4vrg.com/categories/ham/"/>
-    
-    
-    <category term="无线电" scheme="https://bg4vrg.com/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>今天寄出国内卡片11张</title>
-    <link href="https://bg4vrg.com/2024/02/23/%E4%BB%8A%E5%A4%A9%E5%AF%84%E5%87%BA%E5%9B%BD%E5%86%85%E5%8D%A1%E7%89%8711%E5%BC%A0/"/>
-    <id>https://bg4vrg.com/2024/02/23/%E4%BB%8A%E5%A4%A9%E5%AF%84%E5%87%BA%E5%9B%BD%E5%86%85%E5%8D%A1%E7%89%8711%E5%BC%A0/</id>
-    <published>2024-02-23T02:23:30.056Z</published>
-    <updated>2024-02-23T02:25:18.508Z</updated>
-    
-    <content type="html"><![CDATA[<p>分别是：bd0aai bd0bbb bg4ihp bd7lne ba1pk bd2fw bg4drl bh2ro&amp;bh2qjn bg9gxm bg2iur</p><p>回卡率应该超过80%吧</p><span id="more"></span><p><img src="/pic/2016-01-07.jpg" alt="img"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;分别是：bd0aai bd0bbb bg4ihp bd7lne ba1pk bd2fw bg4drl bh2ro&amp;amp;bh2qjn bg9gxm bg2iur&lt;/p&gt;
-&lt;p&gt;回卡率应该超过80%吧&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="ham" scheme="https://bg4vrg.com/categories/ham/"/>
-    
-    
-    <category term="无线电" scheme="https://bg4vrg.com/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-  </entry>
   
   <entry>
     <title>debian搭建webdav服务用于群晖备份</title>
@@ -465,6 +421,51 @@
     
     <summary type="html">&lt;p&gt;从2015.05.03开始第一个jt65，到今天终于第3000个qso了！&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/pic/3000jt65.png&quot; alt=&quot;3000a&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="ham" scheme="https://bg4vrg.com/categories/ham/"/>
+    
+    
+    <category term="无线电" scheme="https://bg4vrg.com/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BG4VRG-10升级天馈系统</title>
+    <link href="https://bg4vrg.com/2016/05/21/BG4VRG-10%E5%8D%87%E7%BA%A7%E5%A4%A9%E9%A6%88%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://bg4vrg.com/2016/05/21/BG4VRG-10%E5%8D%87%E7%BA%A7%E5%A4%A9%E9%A6%88%E7%B3%BB%E7%BB%9F/</id>
+    <published>2016-05-21T08:22:00.000Z</published>
+    <updated>2024-02-19T09:18:42.465Z</updated>
+    
+    <content type="html"><![CDATA[<p>设备：avrt7，原装10厘米的橡胶天线。</p><p><img src="/pic/20160521-1.jpg"></p><p>去年11月安装后一直很稳定，覆盖范围也很稳定，不到1公里。</p><span id="more"></span> <p>除了天线不给力，还有一个重要原因就是avrt7是放在铁箱子里的。。。。。</p><p>这次更换的是4米任丘棒子，定制频点144640</p><p>昨天八哥买的6米-3馈线到宿迁，今天联系bg4vzc正好上午没事，果断开工。底座是膨胀螺丝固定的，本来是移动基站的天线底座。</p><p>棒子和底座之间用1米5钢管，铅条固定纹丝不动。</p><p><img src="/pic/20160521-2.jpg"></p><p>城区v段覆盖越来越差，附近的高楼都是最近几年才建的。</p><p>下图是BG4VZC在开工。</p><p><img src="/pic/20160521-3.jpg"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;设备：avrt7，原装10厘米的橡胶天线。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pic/20160521-1.jpg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;去年11月安装后一直很稳定，覆盖范围也很稳定，不到1公里。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="ham" scheme="https://bg4vrg.com/categories/ham/"/>
+    
+    
+    <category term="无线电" scheme="https://bg4vrg.com/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>aprs是个坑</title>
+    <link href="https://bg4vrg.com/2016/05/21/aprs%E6%98%AF%E4%B8%AA%E5%9D%91/"/>
+    <id>https://bg4vrg.com/2016/05/21/aprs%E6%98%AF%E4%B8%AA%E5%9D%91/</id>
+    <published>2016-05-21T08:22:00.000Z</published>
+    <updated>2024-02-19T09:41:29.445Z</updated>
+    
+    <content type="html"><![CDATA[<p>昨天换上4米棒子，下班时让老婆打开电台从20公里外开始往家赶。眼巴巴的盯着地图20分钟，一直到距离igate5公里时才收到信号。</p><p>咨询BI7NOR得到如下回复：</p><span id="more"></span> <blockquote><p>【V6】BI7NOR</p><p>小飞侠，T7想要接收很弱的信号，这个不现实，因为T7内置的V模块，性能和宝丰5R差不多。因为APRS信号，一般要49信号以上才能解码，所以直频接收距离并不远的</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:42:19</p><p>如果想接收很弱的信号，可以外接GM300</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:42:36</p><p>这些专业接收机，手台是没法相比的</p><p>2016&#x2F;4&#x2F;11 21:44:58</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:44:58</p><p>另外，T7内置接收的效果，和外接电源有很大的关系。很多电源本身辐射超标，对V接收模块本身就是一个很强的干扰，造成接收效果很差</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:45:16</p><p>尽量用线性电源供电，接收效果会好很多</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:45:53</p><p>我所知道的，华为路由，网件路由配送的开关电源，t 7接收效果很好</p><p>2016&#x2F;4&#x2F;11 21:47:43</p><p>【V6】BI7NOR 2016&#x2F;4&#x2F;11 21:47:43</p><p>曾用过一个没品牌开关电源接收T7上，就在楼下200米外，T7都收不到信标，后来拆解电源，发现没有抗干扰电路的，就一个电阻串联加四个二极管，吓死大众</p></blockquote><p>看来，igate收的远我还有很多工作要做，可能即使全做了也不一定有多大效果提升，这里记录下提醒自己和其他同好。</p><p>一、更换质量更好的avrt7电源（DC7-12V），目前用的是杂牌监控电源</p><p>二、更换GM300车台</p><p>三、馈线从-3换到-5或者-7（只有6米长，可能不会有多少变化）</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;昨天换上4米棒子，下班时让老婆打开电台从20公里外开始往家赶。眼巴巴的盯着地图20分钟，一直到距离igate5公里时才收到信号。&lt;/p&gt;
+&lt;p&gt;咨询BI7NOR得到如下回复：&lt;/p&gt;</summary>
     
     
     
