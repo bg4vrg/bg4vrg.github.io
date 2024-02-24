@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-02-23T12:30:29.697Z</updated>
+  <updated>2024-02-24T03:47:41.433Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>seo优化之google收录</title>
+    <link href="https://bg4vrg.com/post/20240224112601.html"/>
+    <id>https://bg4vrg.com/post/20240224112601.html</id>
+    <published>2024-02-24T03:26:01.000Z</published>
+    <updated>2024-02-24T03:47:41.433Z</updated>
+    
+    <content type="html"><![CDATA[<p>网站部署成功后发现谷歌和百度没有爬到，网上查了一下好像还要手动seo，还好网上有篇教程，照着抄了一遍，因为是21年的文章，所以部分步骤和页面不太一样了<br>原文链接：<a href="https://www.duheweb.com/post/20210417143744.html">https://www.duheweb.com/post/20210417143744.html</a></p><span id="more"></span><h2 id="生成sitemap文件，需要两种hexo插件，"><a href="#生成sitemap文件，需要两种hexo插件，" class="headerlink" title="生成sitemap文件，需要两种hexo插件，"></a>生成sitemap文件，需要两种hexo插件，</h2><p>hexo-generator-sitemap供谷歌使用；</p><p>hexo-generator-baidu-sitemap则是针对百度。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save-dev</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save-dev</span><br></pre></td></tr></table></figure><p>安装完成后，重启hexo，执行hexo g后，在public目录下生成对应的xml文件。</p><p>本地可以通过下面地址访问到sitemap文件。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:4000/sitemap.xml</span><br><span class="line">http://localhost:4000/baidusitemap.xml</span><br></pre></td></tr></table></figure><p>确认可以访问到后，部署到网站</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>确认可以通过你的网站URL访问，比如我的是</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://www.duheweb.com/sitemap.xml</span><br><span class="line">https://www.duheweb.com/baidusitemap.xml</span><br></pre></td></tr></table></figure><h2 id="谷歌收录"><a href="#谷歌收录" class="headerlink" title="谷歌收录"></a>谷歌收录</h2><p>打开<a href="https://www.google.com/webmasters/verification/home">谷歌站长工具</a> 注意别打开错了，谷歌搜索控制台（search-console）是找不到用CNAM进行验证的入口的。</p><p>选择右侧那个，输入你的博客网址，然后选择cname认证，网页会自动识别域名提供商为cloudflare，点击按钮自动进入clouflare控制台进行自动化验证，这里图忘记截了。</p><p>打开<a href="https://search.google.com/search-console?hl=zh-CN">谷歌搜索控制台</a></p><p>在谷歌控制台提交sitemap</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://bg4vrg.com/sitemap.xml</span><br></pre></td></tr></table></figure><p><img src="/pic/2024-2-24zhandianditu.png" alt="937ccfd2594bf3ab2d733e6b5e25880"></p><p>提交成功后，睡一觉第二天起来，谷歌搜索下自己的博客发现已经可以搜索到了。</p><p>20240224状态：</p><p><img src="/pic/2024-2-24google.png" alt="image-20240224114339511"></p><p>等谷歌收录后再折腾百度的。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;网站部署成功后发现谷歌和百度没有爬到，网上查了一下好像还要手动seo，还好网上有篇教程，照着抄了一遍，因为是21年的文章，所以部分步骤和页面不太一样了&lt;br&gt;原文链接：&lt;a href=&quot;https://www.duheweb.com/post/20210417143744.html&quot;&gt;https://www.duheweb.com/post/20210417143744.html&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="网站" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%AB%99/"/>
+    
+    <category term="hexo" scheme="https://bg4vrg.com/tags/hexo/"/>
+    
+    <category term="seo" scheme="https://bg4vrg.com/tags/seo/"/>
+    
+  </entry>
   
   <entry>
     <title>BG9GXM浅析工信部第67号令——2024年新《业余无线电台管理办法》</title>
@@ -461,29 +486,6 @@
     
     <summary type="html">&lt;p&gt;从2015.05.03开始第一个jt65，到今天终于第3000个qso了！&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/pic/3000jt65.png&quot; alt=&quot;3000a&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="ham" scheme="https://bg4vrg.com/categories/ham/"/>
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>dxcc75-保加利亚LZ9W</title>
-    <link href="https://bg4vrg.com/post/20160521152200.html"/>
-    <id>https://bg4vrg.com/post/20160521152200.html</id>
-    <published>2016-05-21T07:22:00.000Z</published>
-    <updated>2024-02-24T02:05:53.636Z</updated>
-    
-    <content type="html"><![CDATA[<p>是cq wpx ssb搞的。</p><p>保加利亚好想有奇怪的东西</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BG4VRG LZ9W 2016-03-26 06:03:43  15M SSB  21.24410 BULGARIA</span><br></pre></td></tr></table></figure><span id="more"></span> <p><img src="/pic/bjly.png" alt="bjly"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;是cq wpx ssb搞的。&lt;/p&gt;
-&lt;p&gt;保加利亚好想有奇怪的东西&lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;BG4VRG LZ9W 2016-03-26 06:03:43  15M SSB  21.24410 BULGARIA&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
     
