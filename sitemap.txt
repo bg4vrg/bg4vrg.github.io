@@ -1,3 +1,4 @@
+https://bg4vrg.com/post/20240225212004.html
 https://bg4vrg.com/post/20210912202651.html
 https://bg4vrg.com/post/20130505121826.html
 https://bg4vrg.com/post/20140719130458.html
@@ -49,6 +50,9 @@ https://bg4vrg.com/tags/%E8%80%83%E8%AF%95/
 https://bg4vrg.com/tags/C%E7%B1%BB/
 https://bg4vrg.com/tags/hexo/
 https://bg4vrg.com/tags/seo/
+https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/
+https://bg4vrg.com/tags/wireguard/
+https://bg4vrg.com/tags/ros/
 https://bg4vrg.com/categories/ham/
 https://bg4vrg.com/categories/linux/
 https://bg4vrg.com/categories/network/
