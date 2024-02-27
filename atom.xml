@@ -31,7 +31,7 @@
     
     
     
-    <category term="网络" scheme="https://bg4vrg.com/categories/%E7%BD%91%E7%BB%9C/"/>
+    <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
     
     
     <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
@@ -84,7 +84,7 @@
     
     
     
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
@@ -126,9 +126,9 @@
     <link href="https://bg4vrg.com/post/20240217162201.html"/>
     <id>https://bg4vrg.com/post/20240217162201.html</id>
     <published>2024-02-17T08:22:01.000Z</published>
-    <updated>2024-02-24T13:32:27.374Z</updated>
+    <updated>2024-02-27T07:08:57.373Z</updated>
     
-    <content type="html"><![CDATA[<p>首次更发布于：2024-02-17，陆续更新中</p><h1 id="一、域名"><a href="#一、域名" class="headerlink" title="一、域名"></a>一、域名</h1><h2 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h2><p>cloudflare控制面板中在dns中创建cname记录，把bg4vrg.git.io的二级域名指向bg4vrg.com<br><img src="/pic/20240217customdomain.png" alt="img"></p><span id="more"></span><h2 id="1-2"><a href="#1-2" class="headerlink" title="1.2"></a>1.2</h2><p>在github pages设置里绑定bg4vrg.com，注意这里修改后无法强制启用https，需要第三步</p><h2 id="1-3"><a href="#1-3" class="headerlink" title="1.3"></a>1.3</h2><p>在cloudflare 规则页面创建一条页面规则，用于将<a href="http://bg4vrg.com/">http://bg4vrg.com/</a>* 的网址启用https规则<br><img src="/pic/20240217cloudflarerules.png" alt="img"></p><h1 id="二、本地git环境"><a href="#二、本地git环境" class="headerlink" title="二、本地git环境"></a>二、本地git环境</h1><h2 id="2-1"><a href="#2-1" class="headerlink" title="2.1"></a>2.1</h2><p>icarus下载主题，第一条命令网络不通使用npm安装</p><p><del>git clone <a href="https://github.com/ppoffice/hexo-theme-icarus.git">https://github.com/ppoffice/hexo-theme-icarus.git</a> themes&#x2F;icarus</del></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-icarus</span><br><span class="line">hexo config theme icarus</span><br></pre></td></tr></table></figure><h2 id="2-2"><a href="#2-2" class="headerlink" title="2.2"></a>2.2</h2><p>安装发布部署组件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><h2 id="2-3-初始化git环境"><a href="#2-3-初始化git环境" class="headerlink" title="2.3 初始化git环境"></a>2.3 初始化git环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure><h2 id="2-4-测试通讯"><a href="#2-4-测试通讯" class="headerlink" title="2.4 测试通讯"></a>2.4 测试通讯</h2><p>测试本地推送到github是否正常，注意要提前在本地生成密钥并部署到github上，因为用户名密码模式已不支持</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull git@github.com:bg4vrg/bg4vrg.github.io.git master</span><br></pre></td></tr></table></figure><h2 id="2-5-安装hexo"><a href="#2-5-安装hexo" class="headerlink" title="2.5 安装hexo"></a>2.5 安装hexo</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><h2 id="2-6-设置本地部署的博客目录"><a href="#2-6-设置本地部署的博客目录" class="headerlink" title="2.6 设置本地部署的博客目录"></a>2.6 设置本地部署的博客目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init /blog/</span><br></pre></td></tr></table></figure><h2 id="2-7-发布文章"><a href="#2-7-发布文章" class="headerlink" title="2.7 发布文章"></a>2.7 发布文章</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;我的第一篇博客文章&quot;</span><br></pre></td></tr></table></figure><h2 id="2-8-卸载hexo"><a href="#2-8-卸载hexo" class="headerlink" title="2.8 卸载hexo"></a>2.8 卸载hexo</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-cli -g</span><br></pre></td></tr></table></figure><h2 id="2-9-git回滚"><a href="#2-9-git回滚" class="headerlink" title="2.9 git回滚"></a>2.9 git回滚</h2><p>第二条命令后面的数字为上一条命令结果中显示的某一个节点数值</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline</span><br><span class="line">git reset 9ef9173</span><br></pre></td></tr></table></figure><h1 id="三、发布"><a href="#三、发布" class="headerlink" title="三、发布"></a>三、发布</h1><p>以下三条为常用命令，g为本地生成静态网站页面，s为开启本地服务方便测试（<a href="http://localhost:4000）,d为发布">http://localhost:4000）,d为发布</a></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s </span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure><h2 id="四、设置"><a href="#四、设置" class="headerlink" title="四、设置"></a>四、设置</h2><h3 id="永久链接"><a href="#永久链接" class="headerlink" title="永久链接"></a>永久链接</h3><p>此处参考原文：<a href="https://www.duheweb.com/post/20210417143744.html">https://www.duheweb.com/post/20210417143744.html</a></p><p>永久链接（Permalinks）即文章的URL地址</p><p>在站点配置文件_config.yml中，找到permalink，进行如下设置</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">permalink: :layout/:year:month:day:hour:minute:second.html</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br></pre></td></tr></table></figure><h3 id="百度sitemap安装报错"><a href="#百度sitemap安装报错" class="headerlink" title="百度sitemap安装报错"></a>百度sitemap安装报错</h3><p>在后面加上no-fund no-audit参数</p><p><code>npm install hexo-generator-baidu-sitemap --save-dev --no-fund --no-audit</code></p><h3 id="为网站所有外链增加nofollow"><a href="#为网站所有外链增加nofollow" class="headerlink" title="为网站所有外链增加nofollow"></a>为网站所有外链增加nofollow</h3><p>Add nofollow attribute to all external links automatically.</p><p>hexo-filter-nofollow add rel&#x3D;”noopener external nofollow noreferrer” to all external links for security, privacy and SEO.</p><h4 id="Installations"><a href="#Installations" class="headerlink" title="Installations"></a>Installations</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i hexo-filter-nofollow --save</span><br></pre></td></tr></table></figure><h4 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nofollow:</span><br><span class="line">  enable: true</span><br><span class="line">  field: site</span><br><span class="line">  exclude:</span><br><span class="line">    - &#x27;exclude1.com&#x27;</span><br><span class="line">    - &#x27;exclude2.com&#x27;</span><br></pre></td></tr></table></figure><p>enable - Enable the plugin. Default value is true.<br>field - The scope you want the plugin to proceed, can be ‘site’ or ‘post’. Default value is site.<br>‘post’ - Only add nofollow attribute to external links in your post content<br>‘site’ - Add nofollow attribute to external links of whole sites<br>exclude - Exclude hostname. Specify subdomain when applicable, including www.<br>‘exclude1.com’ does not apply to <a href="http://www.exclude1.com/">www.exclude1.com</a> nor en.exclude1.com.</p>]]></content>
+    <content type="html"><![CDATA[<p>首次更发布于：2024-02-17，陆续更新中</p><h1 id="一、域名"><a href="#一、域名" class="headerlink" title="一、域名"></a>一、域名</h1><h2 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h2><p>cloudflare控制面板中在dns中创建cname记录，把bg4vrg.git.io的二级域名指向bg4vrg.com<br><img src="/pic/20240217customdomain.png" alt="img"></p><span id="more"></span><h2 id="1-2"><a href="#1-2" class="headerlink" title="1.2"></a>1.2</h2><p>在github pages设置里绑定bg4vrg.com，注意这里修改后无法强制启用https，需要第三步</p><h2 id="1-3"><a href="#1-3" class="headerlink" title="1.3"></a>1.3</h2><p>在cloudflare 规则页面创建一条页面规则，用于将<a href="http://bg4vrg.com/">http://bg4vrg.com/</a>* 的网址启用https规则<br><img src="/pic/20240217cloudflarerules.png" alt="img"></p><h1 id="二、本地git环境"><a href="#二、本地git环境" class="headerlink" title="二、本地git环境"></a>二、本地git环境</h1><h2 id="2-1"><a href="#2-1" class="headerlink" title="2.1"></a>2.1</h2><p>icarus下载主题，第一条命令网络不通使用npm安装</p><p><del>git clone <a href="https://github.com/ppoffice/hexo-theme-icarus.git">https://github.com/ppoffice/hexo-theme-icarus.git</a> themes&#x2F;icarus</del></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-icarus</span><br><span class="line">hexo config theme icarus</span><br></pre></td></tr></table></figure><h2 id="2-2"><a href="#2-2" class="headerlink" title="2.2"></a>2.2</h2><p>安装发布部署组件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><h2 id="2-3-初始化git环境"><a href="#2-3-初始化git环境" class="headerlink" title="2.3 初始化git环境"></a>2.3 初始化git环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure><h2 id="2-4-测试通讯"><a href="#2-4-测试通讯" class="headerlink" title="2.4 测试通讯"></a>2.4 测试通讯</h2><p>测试本地推送到github是否正常，注意要提前在本地生成密钥并部署到github上，因为用户名密码模式已不支持</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull git@github.com:bg4vrg/bg4vrg.github.io.git master</span><br></pre></td></tr></table></figure><h2 id="2-5-安装hexo"><a href="#2-5-安装hexo" class="headerlink" title="2.5 安装hexo"></a>2.5 安装hexo</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><h2 id="2-6-设置本地部署的博客目录"><a href="#2-6-设置本地部署的博客目录" class="headerlink" title="2.6 设置本地部署的博客目录"></a>2.6 设置本地部署的博客目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init /blog/</span><br></pre></td></tr></table></figure><h2 id="2-7-发布文章"><a href="#2-7-发布文章" class="headerlink" title="2.7 发布文章"></a>2.7 发布文章</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;我的第一篇博客文章&quot;</span><br></pre></td></tr></table></figure><h2 id="2-8-卸载hexo"><a href="#2-8-卸载hexo" class="headerlink" title="2.8 卸载hexo"></a>2.8 卸载hexo</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-cli -g</span><br></pre></td></tr></table></figure><h2 id="2-9-git回滚"><a href="#2-9-git回滚" class="headerlink" title="2.9 git回滚"></a>2.9 git回滚</h2><p>第二条命令后面的数字为上一条命令结果中显示的某一个节点数值</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline</span><br><span class="line">git reset 9ef9173</span><br></pre></td></tr></table></figure><h1 id="三、发布"><a href="#三、发布" class="headerlink" title="三、发布"></a>三、发布</h1><p>以下三条为常用命令，g为本地生成静态网站页面，s为开启本地服务方便测试（<a href="http://localhost:4000）,d为发布">http://localhost:4000）,d为发布</a></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s </span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure><h2 id="四、设置"><a href="#四、设置" class="headerlink" title="四、设置"></a>四、设置</h2><h3 id="4-1永久链接"><a href="#4-1永久链接" class="headerlink" title="4.1永久链接"></a>4.1永久链接</h3><p>此处参考原文：<a href="https://www.duheweb.com/post/20210417143744.html">https://www.duheweb.com/post/20210417143744.html</a></p><p>永久链接（Permalinks）即文章的URL地址</p><p>在站点配置文件_config.yml中，找到permalink，进行如下设置</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">permalink: :layout/:year:month:day:hour:minute:second.html</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br></pre></td></tr></table></figure><h3 id="4-2百度sitemap安装报错"><a href="#4-2百度sitemap安装报错" class="headerlink" title="4.2百度sitemap安装报错"></a>4.2百度sitemap安装报错</h3><p>在后面加上no-fund no-audit参数</p><p><code>npm install hexo-generator-baidu-sitemap --save-dev --no-fund --no-audit</code></p><h3 id="4-3为网站所有外链增加nofollow"><a href="#4-3为网站所有外链增加nofollow" class="headerlink" title="4.3为网站所有外链增加nofollow"></a>4.3为网站所有外链增加nofollow</h3><p>Add nofollow attribute to all external links automatically.</p><p>hexo-filter-nofollow add rel&#x3D;”noopener external nofollow noreferrer” to all external links for security, privacy and SEO.</p><h4 id="Installations"><a href="#Installations" class="headerlink" title="Installations"></a>Installations</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i hexo-filter-nofollow --save</span><br></pre></td></tr></table></figure><h4 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nofollow:</span><br><span class="line">  enable: true</span><br><span class="line">  field: site</span><br><span class="line">  exclude:</span><br><span class="line">    - &#x27;exclude1.com&#x27;</span><br><span class="line">    - &#x27;exclude2.com&#x27;</span><br></pre></td></tr></table></figure><p>enable - Enable the plugin. Default value is true.<br>field - The scope you want the plugin to proceed, can be ‘site’ or ‘post’. Default value is site.<br>‘post’ - Only add nofollow attribute to external links in your post content<br>‘site’ - Add nofollow attribute to external links of whole sites<br>exclude - Exclude hostname. Specify subdomain when applicable, including www.<br>‘exclude1.com’ does not apply to <a href="http://www.exclude1.com/">www.exclude1.com</a> nor en.exclude1.com.</p><h3 id="4-4添加文章分类别名"><a href="#4-4添加文章分类别名" class="headerlink" title="4.4添加文章分类别名"></a>4.4添加文章分类别名</h3><p>如果博客分类使用了中文名分类，最好配置对应的英文名，否则在对应的分类url链接中就会出现 URL 编码的中文，比如这样</p><p><code>https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/</code></p><table><thead><tr><th align="left"></th><th align="left"></th><th align="left"></th></tr></thead><tbody><tr><td align="left">参数</td><td align="left">描述</td><td align="left">默认值</td></tr><tr><td align="left"><code>default_category</code></td><td align="left">默认分类</td><td align="left"><code>uncategorized</code></td></tr><tr><td align="left"><code>category_map</code></td><td align="left">分类别名</td><td align="left"></td></tr><tr><td align="left"><code>tag_map</code></td><td align="left">标签别名</td><td align="left"></td></tr></tbody></table><p>在_config.yml中做如下修改，前面是博客页面显示的中文字符，冒号后面是中文名分类对应的url名称</p><p>需要注意，每行别名前不要用tab键补全，要用空格，否则报错</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">category_map: </span><br><span class="line">  业余无线电: AmateurRadio</span><br><span class="line">  网络: network</span><br><span class="line">  记录: note</span><br></pre></td></tr></table></figure><p>_config.icarus.yml中设置如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">navbar:</span><br><span class="line">    # Navigation menu items</span><br><span class="line">    menu:</span><br><span class="line">        首页: /</span><br><span class="line">        归档: /archives</span><br><span class="line">        分类: /categories</span><br><span class="line">        标签: /tags</span><br><span class="line">        关于: /about</span><br><span class="line">        业余无线电: /categories/AmateurRadio</span><br><span class="line">        网络: /categories/network</span><br><span class="line">        Linux: /categories/linux</span><br></pre></td></tr></table></figure><p>修改后，上面乱码的url就会变成</p><p><code>https://bg4vrg.com/categories/AmateurRadio</code></p><h3 id="4-5-怎么在页面中将-categories-AmateurRadio变成-AmateurRadio"><a href="#4-5-怎么在页面中将-categories-AmateurRadio变成-AmateurRadio" class="headerlink" title="4.5 怎么在页面中将&#x2F;categories&#x2F;AmateurRadio变成&#x2F;AmateurRadio"></a>4.5 怎么在页面中将&#x2F;categories&#x2F;AmateurRadio变成&#x2F;AmateurRadio</h3><p>还没研究好，网上查了资料应该是把_config.yml中的category_dir值修改，但是我没找到具体办法</p><h3 id="4-6-将文章、页面从三栏变成两栏"><a href="#4-6-将文章、页面从三栏变成两栏" class="headerlink" title="4.6 将文章、页面从三栏变成两栏"></a>4.6 将文章、页面从三栏变成两栏</h3><p>在博客根目录，添加以下2个文件</p><p><code>_config.page.yml</code></p><p><code>_config.post.yml</code></p><p>分别添加以下内容即可</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">widgets:</span><br><span class="line">    -</span><br><span class="line">        type: recent_posts</span><br><span class="line">        position: left</span><br><span class="line">    -</span><br><span class="line">        type: categories</span><br><span class="line">        position: left</span><br><span class="line">    -</span><br><span class="line">        type: tags</span><br><span class="line">        position: left</span><br></pre></td></tr></table></figure>]]></content>
     
     
     <summary type="html">&lt;p&gt;首次更发布于：2024-02-17，陆续更新中&lt;/p&gt;
@@ -142,6 +142,8 @@
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
     <category term="网站" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%AB%99/"/>
+    
+    <category term="hexo" scheme="https://bg4vrg.com/tags/hexo/"/>
     
   </entry>
   
@@ -211,7 +213,7 @@
     
     
     
-    <category term="记录" scheme="https://bg4vrg.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
     
     
     <category term="pt" scheme="https://bg4vrg.com/tags/pt/"/>
@@ -238,7 +240,7 @@
     
     
     
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
     
     
     <category term="aprs" scheme="https://bg4vrg.com/tags/aprs/"/>
@@ -262,7 +264,7 @@
     
     
     
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
     
     
     <category term="aprs" scheme="https://bg4vrg.com/tags/aprs/"/>
@@ -317,7 +319,7 @@
     
     
     
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
@@ -339,7 +341,7 @@
     
     
     
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
@@ -366,7 +368,7 @@
     
     
     
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
@@ -393,7 +395,7 @@
     
     
     
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
@@ -419,7 +421,7 @@
     
     
     
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
@@ -440,7 +442,7 @@
     
     
     
-    <category term="网络" scheme="https://bg4vrg.com/categories/%E7%BD%91%E7%BB%9C/"/>
+    <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
     
     
     <category term="网站" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%AB%99/"/>
@@ -461,7 +463,7 @@
     
     
     
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
@@ -487,7 +489,7 @@
     
     
     
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
@@ -510,7 +512,7 @@
     
     
     
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>

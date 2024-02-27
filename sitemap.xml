@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://bg4vrg.com/post/20240217162201.html</loc>
+    
+    <lastmod>2024-02-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://bg4vrg.com/post/20180127125019.html</loc>
     
     <lastmod>2024-02-27</lastmod>
@@ -344,15 +353,6 @@
   </url>
   
   <url>
-    <loc>https://bg4vrg.com/post/20240217162201.html</loc>
-    
-    <lastmod>2024-02-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://bg4vrg.com/post/20240224112601.html</loc>
     
     <lastmod>2024-02-24</lastmod>
@@ -584,21 +584,21 @@
   </url>
   
   <url>
-    <loc>https://bg4vrg.com/categories/%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://bg4vrg.com/categories/note/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/</loc>
+    <loc>https://bg4vrg.com/categories/AmateurRadio/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://bg4vrg.com/categories/%E7%BD%91%E7%BB%9C/</loc>
+    <loc>https://bg4vrg.com/categories/network/</loc>
     <lastmod>2024-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
