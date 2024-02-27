@@ -272,6 +272,36 @@
   </entry>
   
   <entry>
+    <title>就是折腾 篇一：戴尔H310 mini阵列卡刷直通模式</title>
+    <link href="https://bg4vrg.com/post/20210714104439.html"/>
+    <id>https://bg4vrg.com/post/20210714104439.html</id>
+    <published>2021-07-14T02:44:39.000Z</published>
+    <updated>2024-02-27T05:03:39.464Z</updated>
+    
+    <content type="html"><![CDATA[<span id="more"></span><p>官方页面地址已经变更为<a href="https://fohdeesha.com/docs/perc.html">https://fohdeesha.com/docs/perc.html</a><br>目前提供的是2.0版本 </p><p><del>需要1.8版本的可以访问我上传的天e网盘，</del><br>本人仅仅是简单的搬运和技术研究，不对因此造成的数据损失承担任何责任，请各位大佬谨慎刷机。<br>一定要备份数据！ 一定要备份数据！ 一定要备份数据！</p><h1 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h1><h2 id="1、重点！引导文件和修改工具。感谢大神们的无私奉献！"><a href="#1、重点！引导文件和修改工具。感谢大神们的无私奉献！" class="headerlink" title="1、重点！引导文件和修改工具。感谢大神们的无私奉献！"></a>1、<strong>重点</strong>！引导文件和修改工具。感谢大神们的无私奉献！</h2><p>注意不同型号的阵列卡，写入步骤不同。我这里以h310mini为例</p><h2 id="2、注意了！"><a href="#2、注意了！" class="headerlink" title="2、注意了！"></a>2、注意了！</h2><p><strong>必须拆除存储卡上的电池</strong>！！！机器上也不能有其他阵列卡！！</p><h1 id="一、引导linux-iso"><a href="#一、引导linux-iso" class="headerlink" title="一、引导linux.iso"></a>一、引导linux.iso</h1><p>引导后直接回车进入linux live cd</p><p><img src="/pic/2021-07-14-1.jpg"></p><h2 id="1-1、-切换到root模式"><a href="#1-1、-切换到root模式" class="headerlink" title="1.1、 切换到root模式"></a>1.1、 切换到root模式</h2><blockquote><p>sudo su -</p></blockquote><h2 id="1-2、查看阵列卡sas序列号"><a href="#1-2、查看阵列卡sas序列号" class="headerlink" title="1.2、查看阵列卡sas序列号"></a>1.2、查看阵列卡sas序列号</h2><p>​    命令</p><blockquote><p>sas-h310</p></blockquote><p>显示如下，要记住！！！后面要用 </p><p>​    SAS Address : 5b*********</p><h2 id="1-3、-擦除阵列卡"><a href="#1-3、-擦除阵列卡" class="headerlink" title="1.3、 擦除阵列卡"></a>1.3、 擦除阵列卡</h2><p>​    命令</p><blockquote><p>H310</p></blockquote><p>自动执行后提示完成，出现下图提示这步就结束了。</p><p><img src="/pic/2021-07-14-2.jpg"></p><p>二、重启服务器并写入SAS地址</p><h2 id="2-1、上面步骤完成后重启，仍然使用linux-iso引导并切换到root哦用户"><a href="#2-1、上面步骤完成后重启，仍然使用linux-iso引导并切换到root哦用户" class="headerlink" title="2.1、上面步骤完成后重启，仍然使用linux.iso引导并切换到root哦用户"></a>2.1、上面步骤完成后重启，仍然使用linux.iso引导并切换到root哦用户</h2><h2 id="2-2、刷入sas-address"><a href="#2-2、刷入sas-address" class="headerlink" title="2.2、刷入sas address"></a>2.2、刷入sas address</h2><p>​    命令</p><blockquote><p>sudo su -</p><p>setsas 12345678889</p></blockquote><p>上面的数字要改成你自己的sas address（第一步里的）</p><p><img src="/pic/2021-07-14-3.jpg"></p><h2 id="2-3、输入命令查看刷机效果"><a href="#2-3、输入命令查看刷机效果" class="headerlink" title="2.3、输入命令查看刷机效果"></a>2.3、输入命令查看刷机效果</h2><p>​    命令</p><blockquote><p>info</p></blockquote><p>​    看下图，已经识别未LSI SAS 2008b2了![戴尔H310 mini阵列卡刷直通模式]<br><img src="/pic/2021-07-14-4.jpg"></p><h2 id="2-4、上机安装实测"><a href="#2-4、上机安装实测" class="headerlink" title="2.4、上机安装实测"></a>2.4、上机安装实测</h2><p>重新引导时，已经看不到“按ctrl+r进入阵列卡配置模式”的提示信息了</p><p>戳上truenas安装盘试试</p><p><img src="/pic/2021-07-14-5.jpg"></p><p>美滋滋，以前的raid卡里本身创建了1块raid1逻辑盘，这里直接显示4个物理盘，说明没问题。打完收工。</p><p>最后再次感谢无私奉献的大佬～～</p><p>下次试试h710 mini刷机</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;官方页面地址已经变更为&lt;a href=&quot;https://fohdeesha.com/docs/perc.html&quot;&gt;https://fohdeesha.com/docs/perc.html&lt;/a&gt;&lt;br&gt;目前提供的是2.0版</summary>
+      
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="直通" scheme="https://bg4vrg.com/tags/%E7%9B%B4%E9%80%9A/"/>
+    
+    <category term="raid" scheme="https://bg4vrg.com/tags/raid/"/>
+    
+  </entry>
+  
+  <entry>
     <title>解决HRD LOGBOOK中上传LOTW日志报错</title>
     <link href="https://bg4vrg.com/post/20181026162200.html"/>
     <id>https://bg4vrg.com/post/20181026162200.html</id>
@@ -418,6 +448,31 @@
   </entry>
   
   <entry>
+    <title>2018年沭阳县业余无线电爱好者新春联谊会2</title>
+    <link href="https://bg4vrg.com/post/20180127125019.html"/>
+    <id>https://bg4vrg.com/post/20180127125019.html</id>
+    <published>2018-01-27T04:50:19.000Z</published>
+    <updated>2024-02-27T05:03:37.153Z</updated>
+    
+    <content type="html"><![CDATA[<p>2018年1月27日，应本地老前辈BG4VOL邀请，我和BG4VZC参加了沭阳县业余无线电协会新年年会，尽兴而归。可惜因为中途大雪，没有条件合影留念，回来路上积雪严重，半夜才到家。</p><span id="more"></span><p><img src="/pic/2018-01-27-0.jpg"></p><p><img src="/pic/2018-01-27-1.jpg"></p><p><img src="/pic/2018-01-27-2.jpg"></p><p><img src="/pic/2018-01-27-3.jpg"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;2018年1月27日，应本地老前辈BG4VOL邀请，我和BG4VZC参加了沭阳县业余无线电协会新年年会，尽兴而归。可惜因为中途大雪，没有条件合影留念，回来路上积雪严重，半夜才到家。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+    
+    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+    <category term="活动" scheme="https://bg4vrg.com/tags/%E6%B4%BB%E5%8A%A8/"/>
+    
+    <category term="ham" scheme="https://bg4vrg.com/tags/ham/"/>
+    
+  </entry>
+  
+  <entry>
     <title>海能达td350写频线自制</title>
     <link href="https://bg4vrg.com/post/20171122094941.html"/>
     <id>https://bg4vrg.com/post/20171122094941.html</id>
@@ -461,51 +516,6 @@
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
     
     <category term="FT8" scheme="https://bg4vrg.com/tags/FT8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>宿迁HAM参加2016 IOTA</title>
-    <link href="https://bg4vrg.com/post/20160911162201.html"/>
-    <id>https://bg4vrg.com/post/20160911162201.html</id>
-    <published>2016-09-11T08:22:01.000Z</published>
-    <updated>2024-02-27T02:24:53.469Z</updated>
-    
-    <content type="html"><![CDATA[<p>每年7月的最后一个周末，是英国无线电协会RSGB组织的“IOTA空中之岛”比赛时间。这是一个重大的国际活动，每年都吸引了世界各地成千上万的参与者，业余无线电爱好者们将携带短波器材前往全球各地的海岛，参与这项海岛赛事。</p><p>IOTA比赛将持续24小时，参与者不必全程参加，考虑到白天地面温度较高，我们计划只参加周六晚上的12小时组。与其他比赛只记录双方信号报告和序列号不同，iota还需要记录海岛方的海岛编号。</p><span id="more"></span> <p>自从省无协组织的无盲区通联和vhf party活动后，一直没有野外架台，不少火腿早已摩拳擦掌，活动前一周，本地火腿BI4QGJ、BG4VYG就在微信群内讨论比赛的准备工作。我们首先确定了架台地址为骆马湖边，4月份wapc比赛时湖边的零底噪给我们留下深刻印象。电源依然使用100AH铅酸电池，天线准备两幅，一副自制的网线全尺寸40米倒V，一副20米波段拉杆GP天线。考虑到湖边架台，计划主力使用拉杆GP.其他帐篷等生活设备也一并做好excel表格提前准备。</p><p>7月30日下午出发时，我们的技术支撑BG4VZC也终于确定有时间参加此次比赛，于是我们一行4人分乘3辆车向骆马湖湖边浴场出发，未料临近湖边突降暴雨，持续了近一个小时，我们一度放弃本次活动。</p><p><img src="/pic/2016iota1.jpg"></p><p>晚上8，我们顺利搭起了帐篷、拉起横幅。<br><img src="/pic/2016iota2.jpg"></p><p>40米倒v前合影，从左到右依次为BG4VYG 、BG4VRG、 BG4VZC、 BIQQGJ。我们守候了10分钟彻底放弃40米波段，没有听到任何比赛台。</p><p><img src="/pic/2016iota3.jpg"></p><p>BG4VZC和BI4QGJ在湖边安装拉杆gp天线，考虑湖边沙滩潮湿，就放了十来根地网，也没有严格按照1&#x2F;4波长计算，驻波非常好调整一次性到位，阻抗也接近50欧姆，非常理想。20米底噪在s3左右，此时大概晚上8点半，附近的霓虹灯还常亮，当凌晨关闭后底噪就只有s0了，这时候即使信号不起表，依然能清晰听到欧洲的信号。</p><p><img src="/pic/2016iota4.jpg"></p><p>一切就绪后，把电台连上电脑开始比赛。令人沮丧的是国内台很少，只通联了as-158的BG2RHE以及AS-141的BG5BWZ，后者是温州的集体电台呼号。Qq群内问了一下大家，20米ssb传播普遍很差，我们在前半段时间基本通的是日本、泰国、印尼等东南亚电台，在凌晨左右欧洲信号开始过来，奥兰群岛的OH0V、荷兰的PI4DX都是喊一遍就确认。令人遗憾的是我们功率只有100瓦，不少欧洲岛屿台信号过来都是s9，但是我们就是喊不过去。</p><p>凌晨2点通联到福州集体台BG5UDN（AS-138）后，我们决定QRT。</p><p><img src="/pic/2016iota5.jpg"></p><p>总结此次比赛：各种英语口语还是不过关，老外只要语速过快，我们就要对方AGAIN，ssb看来玩的还是少了。本次比赛再次验证了骆马湖边优秀的电磁环境，欢迎各地火腿前来宿迁架台！</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;每年7月的最后一个周末，是英国无线电协会RSGB组织的“IOTA空中之岛”比赛时间。这是一个重大的国际活动，每年都吸引了世界各地成千上万的参与者，业余无线电爱好者们将携带短波器材前往全球各地的海岛，参与这项海岛赛事。&lt;/p&gt;
-&lt;p&gt;IOTA比赛将持续24小时，参与者不必全程参加，考虑到白天地面温度较高，我们计划只参加周六晚上的12小时组。与其他比赛只记录双方信号报告和序列号不同，iota还需要记录海岛方的海岛编号。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>aprs接收利器：GM300</title>
-    <link href="https://bg4vrg.com/post/20160911162000.html"/>
-    <id>https://bg4vrg.com/post/20160911162000.html</id>
-    <published>2016-09-11T08:20:00.000Z</published>
-    <updated>2024-02-27T02:24:49.637Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>1，硬件设施</strong><br>   接收机：GM300 V<br>   TNC  ：AVRT 7<br>   天线  ：任丘4米V段GP(15楼楼顶,附近有高楼遮挡)<br>   馈线  ：5米 50-7<br>   电源  ：DELL拆机12v电源<br>   网络  ：移动宽带接入<br>**2，目前运行状态：</p><span id="more"></span>**  <p> APRS.FI预估接受范围：200KM 这里有水分，应该是接收到南京紫金山BY4RSA-10和泰山R4MT-1的中继信号</p><p><img src="/pic/2016-9bg4vrg-10-status.png" alt="bg4vrg-10-status"></p><p>3, 2016年8月份台站接收列表、范围<br>  经常转发泰山和盐城的信标.尤其是和盐城的传播一直很稳定.另外bg4xwe-3盐城中继基本是长期通过bg4vrg-10联网。</p><p>  8月份已经使用了gm300作为接收设备，avrt7自带的vhf模块据BI7NOR讲，性能和gm300差距较大，类似于宝峰5r的效果。</p><p>  南边到盐城、南京、合肥、南通，北面到泰山、济宁、济南、淄博、潍坊。</p><p><img src="/pic/bg4vrg-10-2016aug.png" alt="bg4vrg-10-2016aug"></p><p>4，这是6月份的接收效果，使用avrt7的自带vhf模块接收</p><p><img src="/pic/bg4vrg-10-2016june.png" alt="bg4vrg-10-2016june"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;strong&gt;1，硬件设施&lt;/strong&gt;&lt;br&gt;   接收机：GM300 V&lt;br&gt;   TNC  ：AVRT 7&lt;br&gt;   天线  ：任丘4米V段GP(15楼楼顶,附近有高楼遮挡)&lt;br&gt;   馈线  ：5米 50-7&lt;br&gt;   电源  ：DELL拆机12v电源&lt;br&gt;   网络  ：移动宽带接入&lt;br&gt;**2，目前运行状态：&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-    
-    <category term="aprs" scheme="https://bg4vrg.com/tags/aprs/"/>
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
     
   </entry>
   
