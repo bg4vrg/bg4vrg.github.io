@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-02-28T07:54:16.263Z</updated>
+  <updated>2024-02-28T08:19:23.218Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一款黑客风格的屏保hollywood</title>
+    <link href="https://bg4vrg.com/post/20240228160039.html"/>
+    <id>https://bg4vrg.com/post/20240228160039.html</id>
+    <published>2024-02-28T08:00:39.000Z</published>
+    <updated>2024-02-28T08:19:23.218Z</updated>
+    
+    <content type="html"><![CDATA[<span id="more"></span><h1 id="一、启用linux子系统"><a href="#一、启用linux子系统" class="headerlink" title="一、启用linux子系统"></a>一、启用linux子系统</h1><p>win10 程序中找到并勾选wsl组件，按照提示重启电脑</p><h1 id="二、打开windows-商店"><a href="#二、打开windows-商店" class="headerlink" title="二、打开windows 商店"></a>二、打开windows 商店</h1><h2 id="下载并安装ubuntu-22-04"><a href="#下载并安装ubuntu-22-04" class="headerlink" title="下载并安装ubuntu 22.04"></a>下载并安装ubuntu 22.04</h2><p>要确保windows更新及相关服务正常，否则会出现报错。</p><p>以linux为关键字搜索，在搜索结果中找到ubuntu 22.04长期支持版</p><p><img src="/pic/2024-02-28-1.jpg"></p><h2 id="初始化ubuntu"><a href="#初始化ubuntu" class="headerlink" title="初始化ubuntu"></a>初始化ubuntu</h2><p>下载完成后，点击商店中对于项目的“打开”按钮，按照提示选y进行初始化操作</p><p>按照提示输入并创建ubuntu的账号和密码，密码要输入2次，且密码不可见</p><p><img src="/pic/2024-02-28-2.jpg"></p><h1 id="三、安装hollywood"><a href="#三、安装hollywood" class="headerlink" title="三、安装hollywood"></a>三、安装hollywood</h1><p>执行以下2条命令，第一条是更新软件源信息，第二条为安装软件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line"></span><br><span class="line">sudo apt install hollywood</span><br></pre></td></tr></table></figure><h1 id="四、-启动屏保"><a href="#四、-启动屏保" class="headerlink" title="四、 启动屏保"></a>四、 启动屏保</h1><p>很简单，直接在启动后的终端里输入hollywood即可，不需要sudo权限</p><p>另外：为了美观，可以使用mobaxterm的终端进入ubuntu后执行，可以全屏操作</p><p>下图为实际运行效果</p><p><img src="/pic/2024-02-28-3.jpg" alt="渣画质见谅"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;h1 id=&quot;一、启用linux子系统&quot;&gt;&lt;a href=&quot;#一、启用linux子系统&quot; class=&quot;headerlink&quot; title=&quot;一、启用linux子系统&quot;&gt;&lt;/a&gt;一、启用linux子系统&lt;/h1&gt;&lt;p&gt;win10</summary>
+      
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>linux常用工具命令速查</title>
@@ -513,27 +541,6 @@
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>博客可以外网访问啦～～</title>
-    <link href="https://bg4vrg.com/post/20180818000000.html"/>
-    <id>https://bg4vrg.com/post/20180818000000.html</id>
-    <published>2018-08-17T16:00:00.000Z</published>
-    <updated>2024-02-27T02:24:41.916Z</updated>
-    
-    <content type="html"><![CDATA[<p>现在内网穿透好厉害，可以绕过备案了。<br>使用软件：frpc0.16.1<br>免费vps跳板：chuantou.org<br>下载地址frp_0.16.1_linux_amd64.tar（2024-2-18注：网站迁移原因已失效）</p><span id="more"></span><p>网站服务器添加代码让frpc后台运行<br>vim &#x2F;etc&#x2F;rc.local</p><p><code>nohup /usr/local/frp_0.16.1/frpc -c /usr/local/frp_0.16.1/frpc.ini &gt; /dev/null 2&gt;&amp;1 &amp;</code></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;现在内网穿透好厉害，可以绕过备案了。&lt;br&gt;使用软件：frpc0.16.1&lt;br&gt;免费vps跳板：chuantou.org&lt;br&gt;下载地址frp_0.16.1_linux_amd64.tar（2024-2-18注：网站迁移原因已失效）&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
-    
-    
-    <category term="网站" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%AB%99/"/>
     
   </entry>
   
