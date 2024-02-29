@@ -332,6 +332,34 @@
   </entry>
   
   <entry>
+    <title>就是折腾 篇九：玩客云docker存储目录数据迁移</title>
+    <link href="https://bg4vrg.com/post/20220222172859.html"/>
+    <id>https://bg4vrg.com/post/20220222172859.html</id>
+    <published>2022-02-22T09:28:59.000Z</published>
+    <updated>2024-02-29T09:38:19.219Z</updated>
+    
+    <content type="html"><![CDATA[<p> 在《就是折腾 篇四：玩客云使用docker安装heimdall导航》中，我把一张存储卡插入了玩客云，用来存储配置文件。</p><p>​    当时因为镜像少，没有把docker默认存储目录改到存储卡上。考虑到玩客云还没把资源吃满，还有更大的压榨空间，这篇内容就是介绍如何将当前运行的docker容器无损迁移到存储卡上！</p><span id="more"></span><h1 id="一、查看当前存储目录"><a href="#一、查看当前存储目录" class="headerlink" title="一、查看当前存储目录"></a>一、查看当前存储目录</h1><p><img src="/pic/2022-02-22-1.jpg" alt="玩客云docker存储目录数据迁移"></p><h2 id="1-1、df-h"><a href="#1-1、df-h" class="headerlink" title="1.1、df -h"></a>1.1、df -h</h2><p>可以看到默认&#x2F;var&#x2F;lib&#x2F;docker还剩4g空间，存储卡&#x2F;data挂载目录还有27G。其实我一直想装个hass在玩客云上。（4g空间虽然足够运行hass，但是hass的日志好像挺大的，以前N1装过，没有多久空间就满了）。</p><p><img src="/pic/2022-02-22-2.jpg" alt="玩客云docker存储目录数据迁移"></p><h2 id="1-2、docker-system-df"><a href="#1-2、docker-system-df" class="headerlink" title="1.2、docker system df"></a>1.2、docker system df</h2><p>查看当前一共运行4个容器，大小1G多点</p><p><img src="/pic/2022-02-22-3.jpg" alt="玩客云docker存储目录数据迁移"></p><h2 id="1-3、docker-system-prune"><a href="#1-3、docker-system-prune" class="headerlink" title="1.3、docker system prune"></a>1.3、docker system prune</h2><p>可以用于清理无效的镜像文件，慎用。</p><h1 id="二、迁移"><a href="#二、迁移" class="headerlink" title="二、迁移"></a>二、迁移</h1><h2 id="2-1、停止容器运行"><a href="#2-1、停止容器运行" class="headerlink" title="2.1、停止容器运行"></a>2.1、停止容器运行</h2><blockquote><p>​             systemctl stop docker</p></blockquote><p><img src="/pic/2022-02-22-4.jpg" alt="玩客云docker存储目录数据迁移"></p><p>#@ 2.2、创建docker新的存储目录</p><blockquote><p>​       mkdir -p &#x2F;data&#x2F;docker&#x2F;lib&#x2F;docker</p></blockquote><h2 id="2-3、把默认的-var-lib-docker目录复制到新目录"><a href="#2-3、把默认的-var-lib-docker目录复制到新目录" class="headerlink" title="2.3、把默认的&#x2F;var&#x2F;lib&#x2F;docker目录复制到新目录"></a>2.3、把默认的&#x2F;var&#x2F;lib&#x2F;docker目录复制到新目录</h2><p>rsync和cp命令都可以。我这里使用rsync，你也可以用cp -rf命令。</p><blockquote><p>​    rsync -r -avz &#x2F;var&#x2F;lib&#x2F;docker &#x2F;data&#x2F;lib&#x2F;docker</p></blockquote><p>需要注意我的截图里复制目的路径是&#x2F;data&#x2F;lib一个效果</p><p>复制完成会有提示</p><p><img src="/pic/2022-02-22-5.jpg" alt="玩客云docker存储目录数据迁移"></p><h2 id="2-4、修改docker存储配置文件"><a href="#2-4、修改docker存储配置文件" class="headerlink" title="2.4、修改docker存储配置文件"></a>2.4、修改docker存储配置文件</h2><p>在“ExecStart”行尾加上参数“–graph&#x3D;&#x2F;data&#x2F;lib&#x2F;docker”</p><blockquote><p>vim &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;docker.service</p></blockquote><p><img src="/pic/2022-02-22-6.jpg" alt="玩客云docker存储目录数据迁移"></p><h2 id="2-5、重新载入配置文件并启动docker服务"><a href="#2-5、重新载入配置文件并启动docker服务" class="headerlink" title="2.5、重新载入配置文件并启动docker服务"></a>2.5、重新载入配置文件并启动docker服务</h2><blockquote><p>systemctl daemon-reload</p><p>systemctl start docker</p></blockquote><h1 id="三、查看修改是否成功，可以发现已经修改成功"><a href="#三、查看修改是否成功，可以发现已经修改成功" class="headerlink" title="三、查看修改是否成功，可以发现已经修改成功"></a>三、查看修改是否成功，可以发现已经修改成功</h1><blockquote><p> docker info</p></blockquote><p><img src="/pic/2022-02-22-7.jpg" alt="玩客云docker存储目录数据迁移"></p><p>4个容器状态正常</p><p><img src="/pic/2022-02-22-8.jpg" alt="玩客云docker存储目录数据迁移"></p><p><strong>参考文章</strong>：<a href="https://www.cnblogs.com/ariesblog/p/13884762.html">https://www.cnblogs.com/ariesblog/p/13884762.html</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt; 在《就是折腾 篇四：玩客云使用docker安装heimdall导航》中，我把一张存储卡插入了玩客云，用来存储配置文件。&lt;/p&gt;
+&lt;p&gt;​    当时因为镜像少，没有把docker默认存储目录改到存储卡上。考虑到玩客云还没把资源吃满，还有更大的压榨空间，这篇内容就是介绍如何将当前运行的docker容器无损迁移到存储卡上！&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
+    
+    <category term="玩客云" scheme="https://bg4vrg.com/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2021年9月份bg4vrg-10直接收听到的电台</title>
     <link href="https://bg4vrg.com/post/20211025000001.html"/>
     <id>https://bg4vrg.com/post/20211025000001.html</id>
@@ -513,29 +541,6 @@
     <category term="考试" scheme="https://bg4vrg.com/tags/%E8%80%83%E8%AF%95/"/>
     
     <category term="C类" scheme="https://bg4vrg.com/tags/C%E7%B1%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>不容易，终于捅到TO6OK了</title>
-    <link href="https://bg4vrg.com/post/20181005000000.html"/>
-    <id>https://bg4vrg.com/post/20181005000000.html</id>
-    <published>2018-10-04T16:00:00.000Z</published>
-    <updated>2024-02-27T02:24:28.066Z</updated>
-    
-    <content type="html"><![CDATA[<p>从to6ok开台起一直关注他的spot，前期远征台似乎不太重视FT8，大多为cw，ssb我又没时间守着电台。更惨的是有ft8 spot的频点，我连ja墙都看不到。。。。而且只解码2次远征台的信号。在放假前我已经基本放弃了这个南非附近的字头了。</p><p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;欢&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;度&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;国&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;庆&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p><p>今天10.5值班！</p><span id="more"></span><p>无聊中看了clulog上TO6OK的在线日志，BY已经有81人捅上了，而且前三名都是做了15次，真是人比人气死人啊-。-<br><img src="/pic/2018-10-05leaderborder.png" alt="img"><br>反正无事，看看Geo Propagation，发现他的高波段居然还不错，于是调到12米扔到后台，我按原计划继续拆25个记录仪的存储卡。。。<br><img src="/pic/2018-10-05Geo-Propagation.png" alt="img"><br>大概几十分钟后-时我在拧螺丝-居然从电脑音箱里传出“WANTED CALL”这让人激动的声音，而且30秒后再一次成功解码TO6OK，这意味着传播很稳定，运气来了！赶紧鼠标双击，前面几次没有其他人应答，连续发射几分钟没有应答，此时我已经怀疑是功率不够（大概30-40瓦），就在我准备拿好钥匙去电台室开满100瓦的时候，TO6OK在082030Z回应了我，并且很快在下一轮给了73.！！<br><img src="/pic/2018-10-05-TO6OK.jpg" alt="img"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;从to6ok开台起一直关注他的spot，前期远征台似乎不太重视FT8，大多为cw，ssb我又没时间守着电台。更惨的是有ft8 spot的频点，我连ja墙都看不到。。。。而且只解码2次远征台的信号。在放假前我已经基本放弃了这个南非附近的字头了。&lt;/p&gt;
-&lt;p&gt;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;欢&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;度&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;国&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;庆&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&amp;#x3D;&lt;/p&gt;
-&lt;p&gt;今天10.5值班！&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
     
   </entry>
   

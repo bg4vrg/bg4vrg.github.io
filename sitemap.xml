@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://bg4vrg.com/post/20220222172859.html</loc>
+    
+    <lastmod>2024-02-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://bg4vrg.com/post/20240229101330.html</loc>
     
     <lastmod>2024-02-29</lastmod>
@@ -644,6 +653,20 @@
   
   <url>
     <loc>https://bg4vrg.com/tags/%E7%83%AD%E6%B0%94%E7%90%83/</loc>
+    <lastmod>2024-02-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/docker/</loc>
+    <lastmod>2024-02-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/</loc>
     <lastmod>2024-02-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
