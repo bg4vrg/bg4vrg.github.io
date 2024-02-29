@@ -411,6 +411,40 @@
   </entry>
   
   <entry>
+    <title>就是折腾 篇四：玩客云使用docker安装heimdall导航</title>
+    <link href="https://bg4vrg.com/post/20210822103932.html"/>
+    <id>https://bg4vrg.com/post/20210822103932.html</id>
+    <published>2021-08-22T02:39:32.000Z</published>
+    <updated>2024-02-29T09:46:35.822Z</updated>
+    
+    <content type="html"><![CDATA[<p>这次开始玩玩玩客云。当初能卖1000，现在几十块包邮，老母鸡变成鸡shi。</p><p>都是泪 。</p><span id="more"></span><h1 id="一、刷入armbian-5-9"><a href="#一、刷入armbian-5-9" class="headerlink" title="一、刷入armbian 5.9"></a>一、刷入armbian 5.9</h1><p>关于玩客云的固件很多，线刷、u盘直刷都有，但是良莠不齐，我曾经刷过某固件，刷完直接把我路由器跑死机了。<br>好家伙，我直呼好家伙。</p><p>个人推荐参考恩山论坛mtr123发布的资源，应该是整合leo357449107的</p><p>刷机的话只需要使用<a href="https://www.right.com.cn/forum/thread-4754348-1-1.html">mtr123帖子</a>里的教程和资源就行了。一些技术细节可以看<a href="https://www.right.com.cn/forum/thread-4057492-1-2.html">leo大神的帖子</a>。</p><p><a href="https://www.right.com.cn/forum/thread-4754348-1-1.html">https://www.right.com.cn/forum/thread-4754348-1-1.html</a></p><p><a href="https://www.right.com.cn/forum/thread-4057492-1-2.html">https://www.right.com.cn/forum/thread-4057492-1-2.html</a>    </p><p>具体过程不再赘述，补充下刷机过程中遇到的问题：</p><h2 id="1、刷机流程"><a href="#1、刷机流程" class="headerlink" title="1、刷机流程"></a>1、刷机流程</h2><p>先用usb双公头刷底包—将5.88镜像写入u盘并刷入玩客云（完成后拔掉u盘重启一次检查是否成功）—将5.90镜像写入u盘引导并写入玩客云</p><h2 id="2、刷机成功后路由器会有2个玩客云的ip"><a href="#2、刷机成功后路由器会有2个玩客云的ip" class="headerlink" title="2、刷机成功后路由器会有2个玩客云的ip"></a>2、刷机成功后路由器会有2个玩客云的ip</h2><p>解决办法是在路由器里把2个ip对应的mac地址（一样的）设置为分配固定ip，重启玩客云即可</p><h3 id="3、docker内部的时间不对"><a href="#3、docker内部的时间不对" class="headerlink" title="3、docker内部的时间不对"></a>3、docker内部的时间不对</h3><p>我暂时没考虑解决，不影响我使用</p><h2 id="4、比较挑u盘，我换了2个才行"><a href="#4、比较挑u盘，我换了2个才行" class="headerlink" title="4、比较挑u盘，我换了2个才行"></a>4、比较挑u盘，我换了2个才行</h2><h2 id="5、5-90的系统可以识别网卡是1000M"><a href="#5、5-90的系统可以识别网卡是1000M" class="headerlink" title="5、5.90的系统可以识别网卡是1000M"></a>5、5.90的系统可以识别<a href="https://www.smzdm.com/fenlei/wangka/">网卡</a>是1000M</h2><h1 id="二、安装启动portainer，并通过portainer安装heimdall"><a href="#二、安装启动portainer，并通过portainer安装heimdall" class="headerlink" title="二、安装启动portainer，并通过portainer安装heimdall"></a>二、安装启动portainer，并通过portainer安装heimdall</h1><h2 id="1、挂载32G-sd卡"><a href="#1、挂载32G-sd卡" class="headerlink" title="1、挂载32G sd卡"></a>1、挂载32G <a href="https://www.smzdm.com/ju/sp63lz2/">sd卡</a></h2><p>简单说下流程，首先fdisk -l找到sd卡硬件</p><p>以下是我现在的sd卡信息，如果是新卡或者fat32分区，需要使用fdisk命令删除分区、重新创建并格式化，这里就不多占篇幅了，<a href="https://pinpai.smzdm.com/3357/">百度</a>一大把。注意最后操作完要保存。</p><blockquote><p>Disk &#x2F;dev&#x2F;mmcblk1: 29.7 GiB, 31914983424 bytes, 62333952 sectors</p><p>Units: sectors of 1 * 512 &#x3D; 512 bytes</p><p>Sector size (logical&#x2F;physical): 512 bytes &#x2F; 512 bytes</p><p>I&#x2F;O size (minimum&#x2F;optimal): 512 bytes &#x2F; 512 bytes</p><p>Disklabel type: dos</p><p>Disk identifier: 0xbccdc367</p><p>Device         Boot Start      End  Sectors  Size Id Type</p><p>&#x2F;dev&#x2F;mmcblk1p1       2048 62333951 62331904 29.7G 83 Linux</p></blockquote><p>格式化分区</p><blockquote><p>mkfs.ext4 &#x2F;dev&#x2F;mmcblk1p1</p></blockquote><p>将这个分区挂载到&#x2F;data目录（没有就随意创建一个）</p><blockquote><p>mount &#x2F;dev&#x2F;mmcblk1p1 &#x2F;data</p></blockquote><p>设置开机自动挂载</p><blockquote><p>nano &#x2F;etc&#x2F;fstab</p></blockquote><p>添加内容</p><blockquote><p>&#x2F;dev&#x2F;mmcblk1p1 &#x2F;data ext4 defaults,nosuid 0 0</p></blockquote><h2 id="2、安装并启动portainer"><a href="#2、安装并启动portainer" class="headerlink" title="2、安装并启动portainer"></a>2、安装并启动portainer</h2><p>具体安装配置过程略</p><blockquote><p>`&#96;&#96;bash</p><p> docker run -d</p><p> -p 9000:9000 </p><p> -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock</p><p> -v &#x2F;data&#x2F;docker&#x2F;portainer&#x2F;data:&#x2F;data –name&#x3D;portainer</p><p>–restart&#x3D;always</p><p>portainer&#x2F;portainer-ce</p><p>`&#96;&#96;</p></blockquote><h2 id="3、安装heimdall"><a href="#3、安装heimdall" class="headerlink" title="3、安装heimdall"></a>3、安装heimdall</h2><p>因为玩客云是32位arm所以image使用 linuxserver&#x2F;heimdall:arm32v7-development</p><p>这点很重要，默认的linuxserver&#x2F;heimdall是x86架构，会导致无法运行</p><p>还有个必要重要的设置是把镜像的&#x2F;config映射到host中的路径方便备份</p><p>请参考下图</p><p><img src="/pic/2021-08-22-1.jpg" alt="就是折腾 篇四：玩客云使用docker安装heimdall导航"></p><p><img src="/pic/2021-08-22-4.jpg" alt="就是折腾 篇四：玩客云使用docker安装heimdall导航"></p><p><img src="/pic/2021-08-22-2.jpg" alt="就是折腾 篇四：玩客云使用docker安装heimdall导航"></p><p><strong>这里要注意容器启动后，需要自动下载相关配置文件，如果你网络不出幺蛾子的话，大概10分钟左右就可以访问heimdall了。</strong></p><p><img src="/pic/2021-08-22-3.jpg" alt="就是折腾 篇四：玩客云使用docker安装heimdall导航"></p><p>相关汉化和配置，有空再写。咕咕咕!</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;这次开始玩玩玩客云。当初能卖1000，现在几十块包邮，老母鸡变成鸡shi。&lt;/p&gt;
+&lt;p&gt;都是泪 。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
+    
+    <category term="玩客云" scheme="https://bg4vrg.com/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/"/>
+    
+    <category term="armbian" scheme="https://bg4vrg.com/tags/armbian/"/>
+    
+    <category term="导航" scheme="https://bg4vrg.com/tags/%E5%AF%BC%E8%88%AA/"/>
+    
+    <category term="heimdall" scheme="https://bg4vrg.com/tags/heimdall/"/>
+    
+  </entry>
+  
+  <entry>
     <title>就是折腾 篇二：戴尔R720 H310mini阵列卡刷回IR模式并抢救数据</title>
     <link href="https://bg4vrg.com/post/20210715160921.html"/>
     <id>https://bg4vrg.com/post/20210715160921.html</id>
@@ -515,32 +549,6 @@
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>1012-1013参加郑州C类考试</title>
-    <link href="https://bg4vrg.com/post/20181016000000.html"/>
-    <id>https://bg4vrg.com/post/20181016000000.html</id>
-    <published>2018-10-15T16:00:00.000Z</published>
-    <updated>2024-02-27T02:24:23.752Z</updated>
-    
-    <content type="html"><![CDATA[<p>备考一个多月，总算结束了。</p><p>总体来说试题简单，抽到的是3-7，没有拦路虎，刷刷刷考完结束和bg5ifw闪人。高铁站上有幸遇到一起考试的bi3mwl、bh1tzo，希望以后能在电波中相遇。</p><span id="more"></span><p>2024-2-18更新：烩面没我想的好吃，可能不习惯<br><img src="/pic/2018-10-16-heying.jpg" alt="img"><br><img src="/pic/2018-10-16-kaochang.jpg" alt="img"><br><img src="/pic/2018-10-16-mianguan.jpg" alt="img"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;备考一个多月，总算结束了。&lt;/p&gt;
-&lt;p&gt;总体来说试题简单，抽到的是3-7，没有拦路虎，刷刷刷考完结束和bg5ifw闪人。高铁站上有幸遇到一起考试的bi3mwl、bh1tzo，希望以后能在电波中相遇。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-    <category term="考试" scheme="https://bg4vrg.com/tags/%E8%80%83%E8%AF%95/"/>
-    
-    <category term="C类" scheme="https://bg4vrg.com/tags/C%E7%B1%BB/"/>
     
   </entry>
   

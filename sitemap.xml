@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://bg4vrg.com/post/20210822103932.html</loc>
+    
+    <lastmod>2024-02-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://bg4vrg.com/post/20220222172859.html</loc>
     
     <lastmod>2024-02-29</lastmod>
@@ -667,6 +676,27 @@
   
   <url>
     <loc>https://bg4vrg.com/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/</loc>
+    <lastmod>2024-02-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/armbian/</loc>
+    <lastmod>2024-02-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/%E5%AF%BC%E8%88%AA/</loc>
+    <lastmod>2024-02-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/heimdall/</loc>
     <lastmod>2024-02-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
