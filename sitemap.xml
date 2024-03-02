@@ -2,6 +2,87 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://bg4vrg.com/post/20240302175424.html</loc>
+    
+    <lastmod>2024-03-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/post/20240302174317.html</loc>
+    
+    <lastmod>2024-03-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/post/20220626173548.html</loc>
+    
+    <lastmod>2024-03-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/post/20200523151656.html</loc>
+    
+    <lastmod>2024-03-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/post/20200313144733.html</loc>
+    
+    <lastmod>2024-03-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/post/20210531225555.html</loc>
+    
+    <lastmod>2024-03-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/post/20200102145342.html</loc>
+    
+    <lastmod>2024-03-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/post/20200116150030.html</loc>
+    
+    <lastmod>2024-03-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/post/20210822103932.html</loc>
+    
+    <lastmod>2024-03-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://bg4vrg.com/post/20211016110113.html</loc>
     
     <lastmod>2024-03-02</lastmod>
@@ -30,15 +111,6 @@
   
   <url>
     <loc>https://bg4vrg.com/post/20210714104439.html</loc>
-    
-    <lastmod>2024-02-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://bg4vrg.com/post/20210822103932.html</loc>
     
     <lastmod>2024-02-29</lastmod>
     
@@ -724,6 +796,97 @@
   
   <url>
     <loc>https://bg4vrg.com/tags/heimdall/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/vsphere/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/%E7%88%B1%E4%B9%90%E6%99%AE/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/%E7%94%B5%E6%B1%A0/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/%E5%BC%80%E7%AE%B1/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/knipex/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/unraid/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/%E5%B0%8F%E7%B1%B3/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/home-assistant/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/%E9%A9%AC%E6%8B%89%E6%9D%BE/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/%E8%B7%91%E6%AD%A5/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/fluke/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/linkiq/</loc>
     <lastmod>2024-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
