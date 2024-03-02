@@ -387,6 +387,96 @@
   </entry>
   
   <entry>
+    <title>就是折腾 篇八：群晖docker完整备份恢复到另一台群晖</title>
+    <link href="https://bg4vrg.com/post/20211016110113.html"/>
+    <id>https://bg4vrg.com/post/20211016110113.html</id>
+    <published>2021-10-16T03:01:13.000Z</published>
+    <updated>2024-03-02T07:09:00.787Z</updated>
+    
+    <content type="html"><![CDATA[<p>大家好，我又来水文了。</p><p>不得不说，docker是个伟大的项目，意义不亚于当年ghost系统的出现。</p><p>对喜欢折腾的垃圾佬、挨踢民工，快速部署一项服务是很有成就感的事情。</p><p>自打有了docker，告别安装依赖和排错，做回快乐的伸手党。</p><p>感谢Solomon Hykes，感谢开源！</p><p>没有docker加持，群晖、威联通不会像现在这么火（。。。吧？）。</p><span id="more"></span><p><img src="/pic/2021-10-16-1.jpg" alt="群晖docker完整备份恢复到另一台群晖"></p><p><strong>扯远了，进入正题。</strong></p><p>​    这个系列既然叫就是折腾，那就表示硬件、系统、软件大概率会频繁更换。群晖上的套件还好，我一般只会用到photo station和driver，只要备份好数据，套件的设置其实是傻瓜式的。</p><p>​    但是docker就不同了。</p><p>​    一般docker映像的发布者虽然解决了99%以上的工作，但是你还要考虑容器的文件夹映射、端口映射、环境变量、数据库初始化等等。群晖的docker备份是图形界面，这点深得我心。下边简单介绍下群晖下如何将容器完整的迁移到另一台群晖设备。记住是迁移到另一台群晖，如果是其他linux系统，需要你ssh到群晖里命令行操作。</p><p><img src="/pic/2021-10-16-2.jpg" alt="群晖docker完整备份恢复到另一台群晖"></p><h1 id="一、备份"><a href="#一、备份" class="headerlink" title="一、备份"></a>一、备份</h1><h2 id="1-1、首先停止正在运行的容器"><a href="#1-1、首先停止正在运行的容器" class="headerlink" title="1.1、首先停止正在运行的容器"></a>1.1、首先停止正在运行的容器</h2><p>以觅思文档为例，强烈推荐有笔记整理记录需求的同好使用</p><p><a href="https://www.mrdoc.fun/project-1/doc-389/">https://www.mrdoc.fun/project-1/doc-389/</a></p><blockquote><p>jonnyan404&#x2F;mrdoc-nginx</p></blockquote><h2 id="1-2、如下图导出“容器内容和全部设置”，导出文件名mrdoc-syno-txz"><a href="#1-2、如下图导出“容器内容和全部设置”，导出文件名mrdoc-syno-txz" class="headerlink" title="1.2、如下图导出“容器内容和全部设置”，导出文件名mrdoc.syno.txz"></a>1.2、如下图导出“容器内容和全部设置”，导出文件名mrdoc.syno.txz</h2><p>这个文件包含了容器的映像、容器的volume、端口等设置。记住这个格式只能用在群晖设备里。</p><p><img src="/pic/2021-10-16-3.jpg" alt="群晖docker完整备份恢复到另一台群晖"></p><h2 id="1-3、记录映射文件夹完整路径，并备份文件夹内全部内容，并（如没有，本步忽略）"><a href="#1-3、记录映射文件夹完整路径，并备份文件夹内全部内容，并（如没有，本步忽略）" class="headerlink" title="1.3、记录映射文件夹完整路径，并备份文件夹内全部内容，并（如没有，本步忽略）"></a>1.3、记录映射文件夹完整路径，并备份文件夹内全部内容，并（如没有，本步忽略）</h2><p>​    本例中容器内&#x2F;app&#x2F;mrdoc映射到host的&#x2F;volume1&#x2F;docker&#x2F;mrdoc</p><h1 id="二、恢复到另一台群晖设备"><a href="#二、恢复到另一台群晖设备" class="headerlink" title="二、恢复到另一台群晖设备"></a>二、恢复到另一台群晖设备</h1><h2 id="2-1、首先按照旧群晖设备上映射文件夹路径，将备份的文件夹内容复制到新群晖设备上"><a href="#2-1、首先按照旧群晖设备上映射文件夹路径，将备份的文件夹内容复制到新群晖设备上" class="headerlink" title="2.1、首先按照旧群晖设备上映射文件夹路径，将备份的文件夹内容复制到新群晖设备上"></a>2.1、首先按照旧群晖设备上映射文件夹路径，将备份的文件夹内容复制到新群晖设备上</h2><p>如旧群晖上的映射文件夹为&#x2F;volume1&#x2F;docker&#x2F;mrdoc</p><p>那么新群晖上应该在相同路径有和旧群晖同样的文件夹和文件</p><h2 id="2-2、在新群晖上导入mrdoc-syno-txz文件"><a href="#2-2、在新群晖上导入mrdoc-syno-txz文件" class="headerlink" title="2.2、在新群晖上导入mrdoc.syno.txz文件"></a>2.2、在新群晖上导入mrdoc.syno.txz文件</h2><p><img src="/pic/2021-10-16-4.jpg" alt="群晖docker完整备份恢复到另一台群晖"></p><h2 id="2-3、检查导入后的容器设置以及相应容器的映射文件夹，没有问题直接启动容器就行了"><a href="#2-3、检查导入后的容器设置以及相应容器的映射文件夹，没有问题直接启动容器就行了" class="headerlink" title="2.3、检查导入后的容器设置以及相应容器的映射文件夹，没有问题直接启动容器就行了"></a>2.3、检查导入后的容器设置以及相应容器的映射文件夹，没有问题直接启动容器就行了</h2><p>好了，这篇就这样，下次再见。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;大家好，我又来水文了。&lt;/p&gt;
+&lt;p&gt;不得不说，docker是个伟大的项目，意义不亚于当年ghost系统的出现。&lt;/p&gt;
+&lt;p&gt;对喜欢折腾的垃圾佬、挨踢民工，快速部署一项服务是很有成就感的事情。&lt;/p&gt;
+&lt;p&gt;自打有了docker，告别安装依赖和排错，做回快乐的伸手党。&lt;/p&gt;
+&lt;p&gt;感谢Solomon Hykes，感谢开源！&lt;/p&gt;
+&lt;p&gt;没有docker加持，群晖、威联通不会像现在这么火（。。。吧？）。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="群晖" scheme="https://bg4vrg.com/tags/%E7%BE%A4%E6%99%96/"/>
+    
+    <category term="备份" scheme="https://bg4vrg.com/tags/%E5%A4%87%E4%BB%BD/"/>
+    
+    <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>就是折腾 篇七：黑群晖7.0安装踩坑小结</title>
+    <link href="https://bg4vrg.com/post/20211012212829.html"/>
+    <id>https://bg4vrg.com/post/20211012212829.html</id>
+    <published>2021-10-12T13:28:29.000Z</published>
+    <updated>2024-03-02T07:03:10.181Z</updated>
+    
+    <content type="html"><![CDATA[<p>2024-03-02更新：目前最新黑群晖版本为DSM 7.2.1-69057 Update 4 </p><p><a href="https://www.openos.org/threads/116dsm-7-2-1-69057-update-4.4962/">最新引导看这里</a></p><span id="more"></span><h1 id="一、引导后，群晖助手无法发现设备"><a href="#一、引导后，群晖助手无法发现设备" class="headerlink" title="一、引导后，群晖助手无法发现设备"></a>一、引导后，群晖助手无法发现设备</h1><p>可能是你的机器或者引导固件不兼容uefi引导，改成传统的legacy引导模式（开启csm，关闭secure boot）</p><h1 id="二、安装界面识别不到硬盘"><a href="#二、安装界面识别不到硬盘" class="headerlink" title="二、安装界面识别不到硬盘"></a>二、安装界面识别不到硬盘</h1><p>注意硬盘模式从ide改成ahci，老电脑（比如我的h81+4代i5）默认是ide模式</p><h1 id="三、安装界面提示sata端口被禁用"><a href="#三、安装界面提示sata端口被禁用" class="headerlink" title="三、安装界面提示sata端口被禁用"></a>三、安装界面提示sata端口被禁用</h1><p>﻿</p><p><img src="/pic/2021-10-12-1.jpg" alt="群晖7.0安装踩坑小结"></p><p>修改引导u盘分区grub.cfg，在引导参数后添加以下参数。表示只使用第一个sata控制器，然后你只接1块硬盘到sata1接口上（一般<a href="https://www.smzdm.com/fenlei/zhuban/">主板</a>上会标明1、2、3、4顺序，其实都插上硬盘也只显示sata控制器1上的硬盘）.我用的<a href="https://pinpai.smzdm.com/99802/">联想扬天</a>机器，h81m主板上3个sata，2个原生sata红色，还有一个黄色的是第三方控制器扩展的。</p><blockquote><p>DiskIdxMap&#x3D;00 SataPortMap&#x3D;1 SasIdxMap&#x3D;0</p></blockquote><p>注意当系统安装完成后，关机。再把grub.cfg这段参数删除，即可识别其他硬盘。</p><p>我是懒人，想完美折腾硬盘顺序的参考这篇文章。</p><h3 id="黑群辉改sata控制器识别接口数、硬盘盘序的经验总结"><a href="#黑群辉改sata控制器识别接口数、硬盘盘序的经验总结" class="headerlink" title="黑群辉改sata控制器识别接口数、硬盘盘序的经验总结"></a><a href="https://www.ruoyer.com/heiqun.html">黑群辉改sata控制器识别接口数、硬盘盘序的经验总结</a></h3><p><b><span style="color:rgb(21, 100, 0);">2024-03-02更新</span></b>：推荐使用下面工具完美解决</p><p> <a href="https://www.openos.org/threads/sataportmapdiskidxmap.3979/">自动生成SataPortMap和DiskIdxMap参数工具</a></p><p><a href="https://github.com/pocopico/tinycore-redpill">这里是github地址</a></p><h1 id="四、安装卡55-进度"><a href="#四、安装卡55-进度" class="headerlink" title="四、安装卡55%进度"></a>四、安装卡55%进度</h1><p>参考过zdm上大佬那篇telnet登录群晖修改引导盘参数的，但是失败了。</p><p>而且7.0.1据说已经修复了这个问题，大神们也不建议这么做。</p><p>这个问题卡了我一个下午加一晚上，搜资料时发现在6.x时代也有同样的问题，于是第二天在更换引导文件后仍无法解决时，抱着死马当活马医的想法，进winpe把硬盘重新分区。</p><p>再次安装，很快跳过55%到56%安装成功了。</p><p><img src="/pic/2021-10-12-2.jpg" alt="群晖7.0安装踩坑小结"></p><p>我第二次用的是openos的引导文件。有需要的<strong>点</strong><a href="https://www.openos.org/threads/dsm-7-0-redpill-108.3536/"><strong>这里自取</strong></a>。</p><h1 id="五、引导u盘不能热启动"><a href="#五、引导u盘不能热启动" class="headerlink" title="五、引导u盘不能热启动"></a>五、引导u盘不能热启动</h1><p>这个可能是u盘体质问题。我用的一个安国主控u盘（买泛达送的赠品），只有冷启动时能发现这个引导设备，这就意味着不能远程从web端重启了。估计只能更换u盘解决。推荐用闪迪的那个小豆子。</p><h1 id="使用感受："><a href="#使用感受：" class="headerlink" title="使用感受："></a>使用感受：</h1><p>dsm7.0真是一个大更新，第一直观体验就是“好快”，网页访问速度明显加快。有那种从<a href="https://pinpai.smzdm.com/3063/">威联通</a>ui切到群晖的感觉。哈哈哈</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;2024-03-02更新：目前最新黑群晖版本为DSM 7.2.1-69057 Update 4 &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.openos.org/threads/116dsm-7-2-1-69057-update-4.4962/&quot;&gt;最新引导看这里&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="群晖" scheme="https://bg4vrg.com/tags/%E7%BE%A4%E6%99%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>就是折腾 篇六：docker安装typecho 导航主题webstack（钻芒二开版）</title>
+    <link href="https://bg4vrg.com/post/20211006204415.html"/>
+    <id>https://bg4vrg.com/post/20211006204415.html</id>
+    <published>2021-10-06T12:44:15.000Z</published>
+    <updated>2024-03-02T06:50:31.193Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前用过html版本的webstack，很好用.<br>唯一缺点就是需要手动编辑页面，真正玩起来太费眼了。</p><p>还好有大佬开发了typecho版本的webstack主题，这样编辑导航页面就省事多了。</p><span id="more"></span><h2 id="这是昨晚看的分享文章，写的很详细，标题有docker，但是实际环境是基于群晖的web功能。不适应于docker版typecho。"><a href="#这是昨晚看的分享文章，写的很详细，标题有docker，但是实际环境是基于群晖的web功能。不适应于docker版typecho。" class="headerlink" title="这是昨晚看的分享文章，写的很详细，标题有docker，但是实际环境是基于群晖的web功能。不适应于docker版typecho。"></a>这是昨晚看的分享文章，写的很详细，标题有docker，但是实际环境是基于群晖的web功能。不适应于docker版typecho。</h2><p><a href="https://post.smzdm.com/p/a6lx8nwn/">【Docker哈搞巴搞】 篇一：通过typecho轻量博客通过WebStack来搭建导航页</a></p><h2 id="这里是-主题作者的发布页面。最新版本是1-10-3。"><a href="#这里是-主题作者的发布页面。最新版本是1-10-3。" class="headerlink" title="这里是 主题作者的发布页面。最新版本是1.10.3。"></a>这里是 主题作者的发布页面。最新版本是1.10.3。</h2><h3 id="typecho-导航主题Webstack-钻芒博客二开美化版-新增暗黑模式全屏切换等"><a href="#typecho-导航主题Webstack-钻芒博客二开美化版-新增暗黑模式全屏切换等" class="headerlink" title="typecho 导航主题Webstack 钻芒博客二开美化版 新增暗黑模式全屏切换等"></a><a href="https://www.zmki.cn/5366.html">typecho 导航主题Webstack 钻芒博客二开美化版 新增暗黑模式全屏切换等</a></h3><h1 id="一、docker环境准备"><a href="#一、docker环境准备" class="headerlink" title="一、docker环境准备"></a>一、docker环境准备</h1><p>以下操作基于群晖ds918+，typecho镜像使用灯大的，地址是80x86&#x2F;typecho。具体配置不再赘述，说说几个关键的地方。</p><h2 id="1-1、将容器的-data目录映射到宿主机"><a href="#1-1、将容器的-data目录映射到宿主机" class="headerlink" title="1.1、将容器的&#x2F;data目录映射到宿主机"></a>1.1、将容器的&#x2F;data目录映射到宿主机</h2><p>（我这里映射到&#x2F;volume1&#x2F;docker&#x2F;80x86typecho&#x2F;data），这是基操，网站的内容保存在这里，包括主题文件</p><h2 id="1-2、关于“admin”和“var”"><a href="#1-2、关于“admin”和“var”" class="headerlink" title="1.2、关于“admin”和“var”"></a>1.2、关于“admin”和“var”</h2><p>根据主题安装说明，还需要复制部分文件到“admin”“var”两个文件夹内，这2个文件夹经过检查路径为&#x2F;app&#x2F;admin和&#x2F;app&#x2F;var。但是很遗憾这2个路径无法直接映射到宿主机，需要通过docker cp命令从宿主机复制到容器内。</p><h1 id="二、启动typecho容器并初始化typecho网站后开始主题安装"><a href="#二、启动typecho容器并初始化typecho网站后开始主题安装" class="headerlink" title="二、启动typecho容器并初始化typecho网站后开始主题安装"></a>二、启动typecho容器并初始化typecho网站后开始主题安装</h1><h2 id="2-1、复制主题文件内的var-和admin文件夹到容器内部"><a href="#2-1、复制主题文件内的var-和admin文件夹到容器内部" class="headerlink" title="2.1、复制主题文件内的var 和admin文件夹到容器内部"></a>2.1、复制主题文件内的var 和admin文件夹到容器内部</h2><p>命令如下</p><blockquote><p>root@ds918# docker cp 要复制的文件路径 <strong>容器id</strong>:容器内部目的路径</p></blockquote><p>typecho容器id，通过以下命令获得，每个人都不一样的，不要照抄。容易id后使用冒号将要复制的文件传递给容器内部路径</p><blockquote><p>root@ds918:~# docker ps</p><p>CONTAINER ID   IMAGE                           COMMAND                  CREATED         STATUS</p><p>7224220f1906   80x86&#x2F;typecho:latest            “&#x2F;entrypoint.sh &#x2F;app…”   5 minutes ago   Up About a minute (healthy)</p></blockquote><p>我没有直接复制文件夹，而是一个个文件复制，嫌麻烦的可以用cp -r试试。这步目的是“主要是修改typecho程序，让其实现支持自定义排序功能”。</p><blockquote><p>root@ds918# docker cp &#x2F;volume1&#x2F;docker&#x2F;80x86typecho&#x2F;webstack103&#x2F;admin&#x2F;manage-posts.php 7224220f1906:&#x2F;app&#x2F;admin&#x2F;manage-posts.php</p><p>root@ds918# docker cp &#x2F;volume1&#x2F;docker&#x2F;80x86typecho&#x2F;webstack103&#x2F;admin&#x2F;write-post.php 7224220f1906:&#x2F;app&#x2F;admin&#x2F;write-post.php</p><p>root@ds918# docker cp &#x2F;volume1&#x2F;docker&#x2F;80x86typecho&#x2F;webstack103&#x2F;var&#x2F;Widget&#x2F;Contents&#x2F;Post&#x2F;Edit.php 7224220f1906:&#x2F;app&#x2F;var&#x2F;Widget&#x2F;Contents&#x2F;Post&#x2F;Edit.php</p><p>root@ds918# docker cp &#x2F;volume1&#x2F;docker&#x2F;80x86typecho&#x2F;webstack103&#x2F;var&#x2F;Widget&#x2F;Contents&#x2F;Post&#x2F;Recent.php 7224220f1906:&#x2F;app&#x2F;var&#x2F;Widget&#x2F;Contents&#x2F;Post&#x2F;Recent.php</p></blockquote><h2 id="2-2、安装导航主题"><a href="#2-2、安装导航主题" class="headerlink" title="2.2、安装导航主题"></a>2.2、安装导航主题</h2><p>将主题WebStack_zmki_1.10.3.zip解压到.&#x2F;data&#x2F;theme文件夹(实际路径看你真实的&#x2F;data映射地址)，确保主题文件夹名称为WebStack</p><h2 id="2-3、添加友链"><a href="#2-3、添加友链" class="headerlink" title="2.3、添加友链"></a>2.3、添加友链</h2><p>如果需要友情链接功能，还需要把主题包内的Links.zip解压后放到.&#x2F;data&#x2F;plugins目录</p><h2 id="三、其他设置"><a href="#三、其他设置" class="headerlink" title="三、其他设置"></a>三、其他设置</h2><p>完成以上操作后登陆typecho后台启用webstack主题即可设置项很多。</p><p><img src="/pic/2021-10-06.jpg" alt="docke安装typecho 导航主题webstack（钻芒二开版）"></p><p>最后问下各位大佬，链接导航的logo图片怎么能稍微大点呢，感觉没有html版的大。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;之前用过html版本的webstack，很好用.&lt;br&gt;唯一缺点就是需要手动编辑页面，真正玩起来太费眼了。&lt;/p&gt;
+&lt;p&gt;还好有大佬开发了typecho版本的webstack主题，这样编辑导航页面就省事多了。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title>动手做个Esp8266迷你太阳能气象站</title>
     <link href="https://bg4vrg.com/post/20210912202651.html"/>
     <id>https://bg4vrg.com/post/20210912202651.html</id>
@@ -469,82 +559,6 @@
     <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
     <category term="raid" scheme="https://bg4vrg.com/tags/raid/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>就是折腾 篇一：戴尔H310 mini阵列卡刷直通模式</title>
-    <link href="https://bg4vrg.com/post/20210714104439.html"/>
-    <id>https://bg4vrg.com/post/20210714104439.html</id>
-    <published>2021-07-14T02:44:39.000Z</published>
-    <updated>2024-02-29T09:50:10.955Z</updated>
-    
-    <content type="html"><![CDATA[<p>官方页面地址已经变更为<a href="https://fohdeesha.com/docs/perc.html">https://fohdeesha.com/docs/perc.html</a><br>目前提供的是2.0版本 </p><p><del>需要1.8版本的可以访问我上传的天e网盘，</del><br>本人仅仅是简单的搬运和技术研究，不对因此造成的数据损失承担任何责任，请各位大佬谨慎刷机。<br>一定要备份数据！ 一定要备份数据！ 一定要备份数据！</p><span id="more"></span><h1 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h1><h2 id="1、重点！"><a href="#1、重点！" class="headerlink" title="1、重点！"></a>1、<strong>重点</strong>！</h2><p>引导文件和修改工具。感谢大神们的无私奉献！</p><p>注意不同型号的阵列卡，写入步骤不同。我这里以h310mini为例</p><h2 id="2、注意了！"><a href="#2、注意了！" class="headerlink" title="2、注意了！"></a>2、注意了！</h2><p><strong>必须拆除存储卡上的电池</strong>！！！机器上也不能有其他阵列卡！！</p><h1 id="一、引导linux-iso"><a href="#一、引导linux-iso" class="headerlink" title="一、引导linux.iso"></a>一、引导linux.iso</h1><p>引导后直接回车进入linux live cd</p><p><img src="/pic/2021-07-14-1.jpg"></p><h2 id="1-1、-切换到root模式"><a href="#1-1、-切换到root模式" class="headerlink" title="1.1、 切换到root模式"></a>1.1、 切换到root模式</h2><blockquote><p>sudo su -</p></blockquote><h2 id="1-2、查看阵列卡sas序列号"><a href="#1-2、查看阵列卡sas序列号" class="headerlink" title="1.2、查看阵列卡sas序列号"></a>1.2、查看阵列卡sas序列号</h2><p>​    命令</p><blockquote><p>sas-h310</p></blockquote><p>显示如下，要记住！！！后面要用 </p><p>​    SAS Address : 5b*********</p><h2 id="1-3、-擦除阵列卡"><a href="#1-3、-擦除阵列卡" class="headerlink" title="1.3、 擦除阵列卡"></a>1.3、 擦除阵列卡</h2><p>​    命令</p><blockquote><p>H310</p></blockquote><p>自动执行后提示完成，出现下图提示这步就结束了。</p><p><img src="/pic/2021-07-14-2.jpg"></p><h1 id="二、重启服务器并写入SAS地址"><a href="#二、重启服务器并写入SAS地址" class="headerlink" title="二、重启服务器并写入SAS地址"></a>二、重启服务器并写入SAS地址</h1><h2 id="2-1、重启"><a href="#2-1、重启" class="headerlink" title="2.1、重启"></a>2.1、重启</h2><p>上面步骤完成后重启，仍然使用linux.iso引导并切换到root用户</p><h2 id="2-2、刷入sas-address"><a href="#2-2、刷入sas-address" class="headerlink" title="2.2、刷入sas address"></a>2.2、刷入sas address</h2><p>​    命令</p><blockquote><p>sudo su -</p><p>setsas 12345678889</p></blockquote><p>上面的数字要改成你自己的sas address（第一步里的）</p><p><img src="/pic/2021-07-14-3.jpg"></p><h2 id="2-3、输入命令查看刷机效果"><a href="#2-3、输入命令查看刷机效果" class="headerlink" title="2.3、输入命令查看刷机效果"></a>2.3、输入命令查看刷机效果</h2><p>​    命令</p><blockquote><p>info</p></blockquote><p>​    看下图，已经识别未LSI SAS 2008b2了![戴尔H310 mini阵列卡刷直通模式]<br><img src="/pic/2021-07-14-4.jpg"></p><h2 id="2-4、上机安装实测"><a href="#2-4、上机安装实测" class="headerlink" title="2.4、上机安装实测"></a>2.4、上机安装实测</h2><p>重新引导时，已经看不到“按ctrl+r进入阵列卡配置模式”的提示信息了</p><p>戳上truenas安装盘试试</p><p><img src="/pic/2021-07-14-5.jpg"></p><p>美滋滋，以前的raid卡里本身创建了1块raid1逻辑盘，这里直接显示4个物理盘，说明没问题。打完收工。</p><p>最后再次感谢无私奉献的大佬～～</p><p>下次试试h710 mini刷机</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;官方页面地址已经变更为&lt;a href=&quot;https://fohdeesha.com/docs/perc.html&quot;&gt;https://fohdeesha.com/docs/perc.html&lt;/a&gt;&lt;br&gt;目前提供的是2.0版本 &lt;/p&gt;
-&lt;p&gt;&lt;del&gt;需要1.8版本的可以访问我上传的天e网盘，&lt;/del&gt;&lt;br&gt;本人仅仅是简单的搬运和技术研究，不对因此造成的数据损失承担任何责任，请各位大佬谨慎刷机。&lt;br&gt;一定要备份数据！ 一定要备份数据！ 一定要备份数据！&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
-    
-    <category term="直通" scheme="https://bg4vrg.com/tags/%E7%9B%B4%E9%80%9A/"/>
-    
-    <category term="raid" scheme="https://bg4vrg.com/tags/raid/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>智能家居 篇三：轻松连机房温湿度报警和断电监测</title>
-    <link href="https://bg4vrg.com/post/20200615095932.html"/>
-    <id>https://bg4vrg.com/post/20200615095932.html</id>
-    <published>2020-06-15T01:59:32.000Z</published>
-    <updated>2024-02-28T03:30:01.333Z</updated>
-    
-    <content type="html"><![CDATA[<p>此产品系自费购入使用，没有从任何渠道以任何方式获取生产厂家和销售渠道的好处。</p><h1 id="购买理由"><a href="#购买理由" class="headerlink" title="购买理由"></a>购买理由</h1><p>首先机房报警很多人都在用zabbix这套开源程序。但是如果机房网络中断就很麻烦了，所以需要有一套简单的支持手机网络的报警设备，功能单一些，支持温度、湿度、断电监测就行了。    </p><p>准确的说不算智能家居，这套系统一般用在机房和温室大棚之类的生产环境中。本次购买的是GS1-AL2G1RS（2G+WIFI）内置锂电池+sim卡（移动2g）的版本，防水等级IP64。（厂家网站是ip65）</p><span id="more"></span><blockquote><p>工业产品防护等级（防尘防水等级）“IP64”　即：防尘为6级：灰尘封闭：柜体内在20毫巴的低压时不应进入灰尘；　防水等级为4级：防止飞溅的水侵入 防止各方向飞溅而来的水侵入。　GB 4208 2008 《外壳防护等级(IP代码)》</p></blockquote><h1 id="外观展示"><a href="#外观展示" class="headerlink" title="外观展示"></a>外观展示</h1><p>开箱，这次买了4个。手机卡本地开物联网卡便宜的多，1年十几块钱（流量几十MB那种，这种设备对流量要求很低。）</p><p><img src="/pic/2020-06-15-1.jpg" alt="机房温湿度报警和断电监测"></p><p>设备包装背面。</p><p><img src="/pic/2020-06-15-2.jpg" alt="机房温湿度报警和断电监测"></p><p>打开包装</p><p><img src="/pic/2020-06-15-3.jpg" alt="机房温湿度报警和断电监测"></p><p>全家福展示。包括一个主机、一个5v2a的电源，一根usb-a转type-c数据线，一个手机天线和一张简单的说明书。</p><p><img src="/pic/2020-06-15-4.jpg" alt="机房温湿度报警和断电监测"></p><p>机器自带锂电池。按住右侧开关按钮3秒，机器通电开机。</p><p><img src="/pic/2020-06-15-5.jpg" alt="机房温湿度报警和断电监测"></p><p>产品外观示意图</p><p><img src="/pic/2020-06-15-6.jpg" alt="机房温湿度报警和断电监测"></p><p>底部接口实物图，type-c电源接口上方是手机卡位置。</p><p><img src="/pic/2020-06-15-7.jpg" alt="机房温湿度报警和断电监测"></p><h1 id="简单配置"><a href="#简单配置" class="headerlink" title="简单配置"></a>简单配置</h1><p>扫描说明书的二维码，安装软件并注册</p><p>配置设备wifi或者sim卡联网</p><p>选择 添加设备</p><p><img src="/pic/2020-06-15-8.jpg" alt="机房温湿度报警和断电监测"></p><p>扫描设备左侧的二维码</p><p>我的sim卡还没拿到，暂时选择wifi接入</p><p><img src="/pic/2020-06-15-9.jpg" alt="机房温湿度报警和断电监测"></p><p>按照说明，长按菜单键3秒开启设备wifi</p><p><img src="/pic/2020-06-15-10.jpg" alt="机房温湿度报警和断电监测"></p><p>打开手机Wi-Fi接入无线网，并选择好家里的wifi ssid，输入正确的密码</p><p><img src="/pic/2020-06-15-11.jpg" alt="机房温湿度报警和断电监测"></p><p>点击下一步，按屏幕说明，切换到设备自带的wifi ssid（Ubibot开头）</p><p><img src="/pic/2020-06-15-12.jpg" alt="机房温湿度报警和断电监测"></p><p><img src="/pic/2020-06-15-13.jpg" alt="机房温湿度报警和断电监测"></p><p>切回app页面，设备自动添加成功。</p><p><img src="/pic/2020-06-15-14.jpg" alt="机房温湿度报警和断电监测"></p><p>这是app界面</p><p><img src="/pic/2020-06-15-15.jpg" alt="机房温湿度报警和断电监测"></p><p>设备监测历史趋势图</p><p><img src="/pic/2020-06-15-16.jpg" alt="机房温湿度报警和断电监测"></p><h1 id="添加成功后按需求设置："><a href="#添加成功后按需求设置：" class="headerlink" title="添加成功后按需求设置："></a>添加成功后按需求设置：</h1><h2 id="1、修改设备名称"><a href="#1、修改设备名称" class="headerlink" title="1、修改设备名称"></a>1、修改设备名称</h2><p>比如xx机房</p><h2 id="2、将设备共享给其他app用户"><a href="#2、将设备共享给其他app用户" class="headerlink" title="2、将设备共享给其他app用户"></a>2、将设备共享给其他app用户</h2><p>记住共享完成后，对方要再“ta的设备”里才能看到共享的设备，这点感觉不太好，或许应该和“我的设备”合并，通过图标颜色之类的区分。</p><p><img src="/pic/2020-06-15-17.jpg" alt="机房温湿度报警和断电监测"></p><h2 id="3、默认的显示数据太多了"><a href="#3、默认的显示数据太多了" class="headerlink" title="3、默认的显示数据太多了"></a>3、默认的显示数据太多了</h2><p>我的app只显示温度、湿度、流明、电压   ，更简洁易看。</p><p><img src="/pic/2020-06-15-18.jpg" alt="机房温湿度报警和断电监测"></p><h2 id="4、设置自定义预警规则。"><a href="#4、设置自定义预警规则。" class="headerlink" title="4、设置自定义预警规则。"></a>4、设置自定义预警规则。</h2><p><img src="/pic/2020-06-15-19.jpg" alt="机房温湿度报警和断电监测"></p><h2 id="5、绑定app的账号"><a href="#5、绑定app的账号" class="headerlink" title="5、绑定app的账号"></a>5、绑定app的账号</h2><p>关注厂家微信公众号，并绑定app的账号，可以获取免费的设备报警信息推送。（短信、语音报警是收费的。）</p><p><img src="/pic/2020-06-15-20.jpg" alt="机房温湿度报警和断电监测"></p><h1 id="使用感受"><a href="#使用感受" class="headerlink" title="使用感受"></a>使用感受</h1><p>​    1、app界面美工很好，很喜欢，软件设置选项较多</p><p>​    2、对厂家提供的服务依赖较大，一旦厂家不提供免费服务，这个设备就废了</p><p>​    3、app、微信报警免费足够大多数人使用了</p><p>​    4、存储数据统计功能很好</p><p>​    5、断电测试灵敏</p><p>​    6、温度范围-20–60度，还可以通过rs485接口使用工业探头（-50-400度）</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>简单好用！运维🐶不用在机房之间来回奔波了。</p><p>测试一天数据流1MB,最低档的物联网卡流量足以。</p><p>ps：厂家还提供了10瓦太阳能板（输出5v）配件，价格有点离谱，有需要的建议去其他家购买。</p><p>就这个板子，180mm*270mm</p><p><img src="/pic/2020-06-15-21.jpg" alt="机房温湿度报警和断电监测"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;此产品系自费购入使用，没有从任何渠道以任何方式获取生产厂家和销售渠道的好处。&lt;/p&gt;
-&lt;h1 id=&quot;购买理由&quot;&gt;&lt;a href=&quot;#购买理由&quot; class=&quot;headerlink&quot; title=&quot;购买理由&quot;&gt;&lt;/a&gt;购买理由&lt;/h1&gt;&lt;p&gt;首先机房报警很多人都在用zabbix这套开源程序。但是如果机房网络中断就很麻烦了，所以需要有一套简单的支持手机网络的报警设备，功能单一些，支持温度、湿度、断电监测就行了。    &lt;/p&gt;
-&lt;p&gt;准确的说不算智能家居，这套系统一般用在机房和温室大棚之类的生产环境中。本次购买的是GS1-AL2G1RS（2G+WIFI）内置锂电池+sim卡（移动2g）的版本，防水等级IP64。（厂家网站是ip65）&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
-    
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="报警" scheme="https://bg4vrg.com/tags/%E6%8A%A5%E8%AD%A6/"/>
-    
-    <category term="温湿度" scheme="https://bg4vrg.com/tags/%E6%B8%A9%E6%B9%BF%E5%BA%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决HRD LOGBOOK中上传LOTW日志报错</title>
-    <link href="https://bg4vrg.com/post/20181026162200.html"/>
-    <id>https://bg4vrg.com/post/20181026162200.html</id>
-    <published>2018-10-26T08:22:00.000Z</published>
-    <updated>2024-02-27T02:25:42.836Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近一周在hrd logbook中上传lotw老是失败，即使开了全局ssr还是同样问题。检查logbook的日志报错如下：</p><p><img src="/pic/2018-10-26.jpg"></p><p>但是实际lotw服务器正常的，单独使用TQSL软件上传也没问题，看来是哪里软件设置出错了，但是根据软件中的中文关键词搜索不到有用信息。</p><span id="more"></span> <p>直接定位C:\Users\All Users\Microsoft\WLSetup\Logs这里日志，找到最后两行</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10:09:23 LOTW Login          Error =                    </span><br><span class="line">10:09:23 GetHttpConnection       Failure ........: Login</span><br></pre></td></tr></table></figure><p>这下放google就很容易在qrz forum发现有类似故障，AA6YQ给出了解决办法：</p><blockquote><p>Open Internet Explorer’s Tools menu and select the “Internet Options” command. In the “Internet Options” window, select the Advanced tab, and scroll down to the Security settings. Enable the “Use TLS 1.0”, “Use TLS 1.1”, and “Use TLS 1.2” options (not all may be present on IE versions earlier than 11). Click the OK button. Can you now upload to LoTW?</p></blockquote><p>经检查，果然我的ie只启用了TLS 1.0 和3.0，果断全部打勾后再上传就正常了。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;最近一周在hrd logbook中上传lotw老是失败，即使开了全局ssr还是同样问题。检查logbook的日志报错如下：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/pic/2018-10-26.jpg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;但是实际lotw服务器正常的，单独使用TQSL软件上传也没问题，看来是哪里软件设置出错了，但是根据软件中的中文关键词搜索不到有用信息。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
     
   </entry>
   
