@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-03-04T08:38:35.500Z</updated>
+  <updated>2024-03-04T09:00:41.145Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>业余电台操作证书考试题库(v20211022)</title>
+    <link href="https://bg4vrg.com/post/20240304165551.html"/>
+    <id>https://bg4vrg.com/post/20240304165551.html</id>
+    <published>2024-03-04T08:55:51.000Z</published>
+    <updated>2024-03-04T09:00:41.145Z</updated>
+    
+    <content type="html"><![CDATA[<p>业余电台操作证书考试题库TXT题库包（A为正确答案）</p><p>更新时间为2021年10月22日</p><p>注意部分题目可能答案是错的，但是考试时请一定以题库为准。</p><span id="more"></span><p> <a href="/fj/20211022155018_8471.zip">点击这里</a> 下载压缩包。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;业余电台操作证书考试题库TXT题库包（A为正确答案）&lt;/p&gt;
+&lt;p&gt;更新时间为2021年10月22日&lt;/p&gt;
+&lt;p&gt;注意部分题目可能答案是错的，但是考试时请一定以题库为准。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
+    
+    
+    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+  </entry>
   
   <entry>
     <title>局域网搭建类speedtest测速网站 librespeed</title>
@@ -526,32 +549,6 @@
     <category term="备份" scheme="https://bg4vrg.com/tags/%E5%A4%87%E4%BB%BD/"/>
     
     <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>就是折腾 篇七：黑群晖7.0安装踩坑小结</title>
-    <link href="https://bg4vrg.com/post/20211012212829.html"/>
-    <id>https://bg4vrg.com/post/20211012212829.html</id>
-    <published>2021-10-12T13:28:29.000Z</published>
-    <updated>2024-03-02T07:03:10.181Z</updated>
-    
-    <content type="html"><![CDATA[<p>2024-03-02更新：目前最新黑群晖版本为DSM 7.2.1-69057 Update 4 </p><p><a href="https://www.openos.org/threads/116dsm-7-2-1-69057-update-4.4962/">最新引导看这里</a></p><span id="more"></span><h1 id="一、引导后，群晖助手无法发现设备"><a href="#一、引导后，群晖助手无法发现设备" class="headerlink" title="一、引导后，群晖助手无法发现设备"></a>一、引导后，群晖助手无法发现设备</h1><p>可能是你的机器或者引导固件不兼容uefi引导，改成传统的legacy引导模式（开启csm，关闭secure boot）</p><h1 id="二、安装界面识别不到硬盘"><a href="#二、安装界面识别不到硬盘" class="headerlink" title="二、安装界面识别不到硬盘"></a>二、安装界面识别不到硬盘</h1><p>注意硬盘模式从ide改成ahci，老电脑（比如我的h81+4代i5）默认是ide模式</p><h1 id="三、安装界面提示sata端口被禁用"><a href="#三、安装界面提示sata端口被禁用" class="headerlink" title="三、安装界面提示sata端口被禁用"></a>三、安装界面提示sata端口被禁用</h1><p>﻿</p><p><img src="/pic/2021-10-12-1.jpg" alt="群晖7.0安装踩坑小结"></p><p>修改引导u盘分区grub.cfg，在引导参数后添加以下参数。表示只使用第一个sata控制器，然后你只接1块硬盘到sata1接口上（一般<a href="https://www.smzdm.com/fenlei/zhuban/">主板</a>上会标明1、2、3、4顺序，其实都插上硬盘也只显示sata控制器1上的硬盘）.我用的<a href="https://pinpai.smzdm.com/99802/">联想扬天</a>机器，h81m主板上3个sata，2个原生sata红色，还有一个黄色的是第三方控制器扩展的。</p><blockquote><p>DiskIdxMap&#x3D;00 SataPortMap&#x3D;1 SasIdxMap&#x3D;0</p></blockquote><p>注意当系统安装完成后，关机。再把grub.cfg这段参数删除，即可识别其他硬盘。</p><p>我是懒人，想完美折腾硬盘顺序的参考这篇文章。</p><h3 id="黑群辉改sata控制器识别接口数、硬盘盘序的经验总结"><a href="#黑群辉改sata控制器识别接口数、硬盘盘序的经验总结" class="headerlink" title="黑群辉改sata控制器识别接口数、硬盘盘序的经验总结"></a><a href="https://www.ruoyer.com/heiqun.html">黑群辉改sata控制器识别接口数、硬盘盘序的经验总结</a></h3><p><b><span style="color:rgb(21, 100, 0);">2024-03-02更新</span></b>：推荐使用下面工具完美解决</p><p> <a href="https://www.openos.org/threads/sataportmapdiskidxmap.3979/">自动生成SataPortMap和DiskIdxMap参数工具</a></p><p><a href="https://github.com/pocopico/tinycore-redpill">这里是github地址</a></p><h1 id="四、安装卡55-进度"><a href="#四、安装卡55-进度" class="headerlink" title="四、安装卡55%进度"></a>四、安装卡55%进度</h1><p>参考过zdm上大佬那篇telnet登录群晖修改引导盘参数的，但是失败了。</p><p>而且7.0.1据说已经修复了这个问题，大神们也不建议这么做。</p><p>这个问题卡了我一个下午加一晚上，搜资料时发现在6.x时代也有同样的问题，于是第二天在更换引导文件后仍无法解决时，抱着死马当活马医的想法，进winpe把硬盘重新分区。</p><p>再次安装，很快跳过55%到56%安装成功了。</p><p><img src="/pic/2021-10-12-2.jpg" alt="群晖7.0安装踩坑小结"></p><p>我第二次用的是openos的引导文件。有需要的<strong>点</strong><a href="https://www.openos.org/threads/dsm-7-0-redpill-108.3536/"><strong>这里自取</strong></a>。</p><h1 id="五、引导u盘不能热启动"><a href="#五、引导u盘不能热启动" class="headerlink" title="五、引导u盘不能热启动"></a>五、引导u盘不能热启动</h1><p>这个可能是u盘体质问题。我用的一个安国主控u盘（买泛达送的赠品），只有冷启动时能发现这个引导设备，这就意味着不能远程从web端重启了。估计只能更换u盘解决。推荐用闪迪的那个小豆子。</p><h1 id="使用感受："><a href="#使用感受：" class="headerlink" title="使用感受："></a>使用感受：</h1><p>dsm7.0真是一个大更新，第一直观体验就是“好快”，网页访问速度明显加快。有那种从<a href="https://pinpai.smzdm.com/3063/">威联通</a>ui切到群晖的感觉。哈哈哈</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;2024-03-02更新：目前最新黑群晖版本为DSM 7.2.1-69057 Update 4 &lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.openos.org/threads/116dsm-7-2-1-69057-update-4.4962/&quot;&gt;最新引导看这里&lt;/a&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="群晖" scheme="https://bg4vrg.com/tags/%E7%BE%A4%E6%99%96/"/>
     
   </entry>
   
