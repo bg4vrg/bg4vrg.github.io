@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-03-04T09:00:41.145Z</updated>
+  <updated>2024-03-07T02:07:57.882Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo g 报错[DEP0170] DeprecationWarning</title>
+    <link href="https://bg4vrg.com/post/20240307095911.html"/>
+    <id>https://bg4vrg.com/post/20240307095911.html</id>
+    <published>2024-03-07T01:59:11.000Z</published>
+    <updated>2024-03-07T02:07:57.882Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>首先是因为在source根目录下创建Ads.txt并发布成功，后来发现应该为小写字母，于是直接修改源文件，再hexo g，这时候发现报错了，报错如下：</p><span id="more"></span><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">INFO  Validating config</span><br><span class="line">Inferno is in development mode.</span><br><span class="line">INFO  =======================================</span><br><span class="line">INFO  === Checking package dependencies ===</span><br><span class="line">INFO  === Checking theme configurations ===</span><br><span class="line">INFO  === Registering Hexo extensions ===</span><br><span class="line">INFO  Start processing</span><br><span class="line">Inferno is in development mode.</span><br><span class="line">INFO  Files loaded in 1.37 s</span><br><span class="line">(node:50916) [DEP0170] DeprecationWarning: The URL http://localhost:4000）,d为发布 is invalid. Future versions of Node.js will throw an error.</span><br><span class="line">(Use `node --trace-deprecation ...` to show where the warning was created)</span><br></pre></td></tr></table></figure><p>按照提示输入命令</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ node --trace-deprecation ...</span><br><span class="line">node:internal/modules/cjs/loader:1145</span><br><span class="line">  throw err;</span><br><span class="line">  ^</span><br><span class="line"></span><br><span class="line">Error: Cannot find module &#x27;E:\PortableGit\blog\...&#x27;</span><br><span class="line">    at Module._resolveFilename (node:internal/modules/cjs/loader:1142:15)</span><br><span class="line">    at Module._load (node:internal/modules/cjs/loader:983:27)</span><br><span class="line">    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:142:12)</span><br><span class="line">    at node:internal/main/run_main_module:28:49 &#123;</span><br><span class="line">  code: &#x27;MODULE_NOT_FOUND&#x27;,</span><br><span class="line">  requireStack: []</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Node.js v21.7.0</span><br></pre></td></tr></table></figure><p>看来关键是MODULE_NOT_FOUND</p><h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>还在摸索。。。。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h1&gt;&lt;p&gt;首先是因为在source根目录下创建Ads.txt并发布成功，后来发现应该为小写字母，于是直接修改源文件，再hexo g，这时候发现报错了，报错如下：&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="网站" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%AB%99/"/>
+    
+    <category term="hexo" scheme="https://bg4vrg.com/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>业余电台操作证书考试题库(v20211022)</title>
@@ -513,42 +536,6 @@
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
     
     <category term="aprs" scheme="https://bg4vrg.com/tags/aprs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>就是折腾 篇八：群晖docker完整备份恢复到另一台群晖</title>
-    <link href="https://bg4vrg.com/post/20211016110113.html"/>
-    <id>https://bg4vrg.com/post/20211016110113.html</id>
-    <published>2021-10-16T03:01:13.000Z</published>
-    <updated>2024-03-02T07:09:00.787Z</updated>
-    
-    <content type="html"><![CDATA[<p>大家好，我又来水文了。</p><p>不得不说，docker是个伟大的项目，意义不亚于当年ghost系统的出现。</p><p>对喜欢折腾的垃圾佬、挨踢民工，快速部署一项服务是很有成就感的事情。</p><p>自打有了docker，告别安装依赖和排错，做回快乐的伸手党。</p><p>感谢Solomon Hykes，感谢开源！</p><p>没有docker加持，群晖、威联通不会像现在这么火（。。。吧？）。</p><span id="more"></span><p><img src="/pic/2021-10-16-1.jpg" alt="群晖docker完整备份恢复到另一台群晖"></p><p><strong>扯远了，进入正题。</strong></p><p>​    这个系列既然叫就是折腾，那就表示硬件、系统、软件大概率会频繁更换。群晖上的套件还好，我一般只会用到photo station和driver，只要备份好数据，套件的设置其实是傻瓜式的。</p><p>​    但是docker就不同了。</p><p>​    一般docker映像的发布者虽然解决了99%以上的工作，但是你还要考虑容器的文件夹映射、端口映射、环境变量、数据库初始化等等。群晖的docker备份是图形界面，这点深得我心。下边简单介绍下群晖下如何将容器完整的迁移到另一台群晖设备。记住是迁移到另一台群晖，如果是其他linux系统，需要你ssh到群晖里命令行操作。</p><p><img src="/pic/2021-10-16-2.jpg" alt="群晖docker完整备份恢复到另一台群晖"></p><h1 id="一、备份"><a href="#一、备份" class="headerlink" title="一、备份"></a>一、备份</h1><h2 id="1-1、首先停止正在运行的容器"><a href="#1-1、首先停止正在运行的容器" class="headerlink" title="1.1、首先停止正在运行的容器"></a>1.1、首先停止正在运行的容器</h2><p>以觅思文档为例，强烈推荐有笔记整理记录需求的同好使用</p><p><a href="https://www.mrdoc.fun/project-1/doc-389/">https://www.mrdoc.fun/project-1/doc-389/</a></p><blockquote><p>jonnyan404&#x2F;mrdoc-nginx</p></blockquote><h2 id="1-2、如下图导出“容器内容和全部设置”，导出文件名mrdoc-syno-txz"><a href="#1-2、如下图导出“容器内容和全部设置”，导出文件名mrdoc-syno-txz" class="headerlink" title="1.2、如下图导出“容器内容和全部设置”，导出文件名mrdoc.syno.txz"></a>1.2、如下图导出“容器内容和全部设置”，导出文件名mrdoc.syno.txz</h2><p>这个文件包含了容器的映像、容器的volume、端口等设置。记住这个格式只能用在群晖设备里。</p><p><img src="/pic/2021-10-16-3.jpg" alt="群晖docker完整备份恢复到另一台群晖"></p><h2 id="1-3、记录映射文件夹完整路径，并备份文件夹内全部内容，并（如没有，本步忽略）"><a href="#1-3、记录映射文件夹完整路径，并备份文件夹内全部内容，并（如没有，本步忽略）" class="headerlink" title="1.3、记录映射文件夹完整路径，并备份文件夹内全部内容，并（如没有，本步忽略）"></a>1.3、记录映射文件夹完整路径，并备份文件夹内全部内容，并（如没有，本步忽略）</h2><p>​    本例中容器内&#x2F;app&#x2F;mrdoc映射到host的&#x2F;volume1&#x2F;docker&#x2F;mrdoc</p><h1 id="二、恢复到另一台群晖设备"><a href="#二、恢复到另一台群晖设备" class="headerlink" title="二、恢复到另一台群晖设备"></a>二、恢复到另一台群晖设备</h1><h2 id="2-1、首先按照旧群晖设备上映射文件夹路径，将备份的文件夹内容复制到新群晖设备上"><a href="#2-1、首先按照旧群晖设备上映射文件夹路径，将备份的文件夹内容复制到新群晖设备上" class="headerlink" title="2.1、首先按照旧群晖设备上映射文件夹路径，将备份的文件夹内容复制到新群晖设备上"></a>2.1、首先按照旧群晖设备上映射文件夹路径，将备份的文件夹内容复制到新群晖设备上</h2><p>如旧群晖上的映射文件夹为&#x2F;volume1&#x2F;docker&#x2F;mrdoc</p><p>那么新群晖上应该在相同路径有和旧群晖同样的文件夹和文件</p><h2 id="2-2、在新群晖上导入mrdoc-syno-txz文件"><a href="#2-2、在新群晖上导入mrdoc-syno-txz文件" class="headerlink" title="2.2、在新群晖上导入mrdoc.syno.txz文件"></a>2.2、在新群晖上导入mrdoc.syno.txz文件</h2><p><img src="/pic/2021-10-16-4.jpg" alt="群晖docker完整备份恢复到另一台群晖"></p><h2 id="2-3、检查导入后的容器设置以及相应容器的映射文件夹，没有问题直接启动容器就行了"><a href="#2-3、检查导入后的容器设置以及相应容器的映射文件夹，没有问题直接启动容器就行了" class="headerlink" title="2.3、检查导入后的容器设置以及相应容器的映射文件夹，没有问题直接启动容器就行了"></a>2.3、检查导入后的容器设置以及相应容器的映射文件夹，没有问题直接启动容器就行了</h2><p>好了，这篇就这样，下次再见。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;大家好，我又来水文了。&lt;/p&gt;
-&lt;p&gt;不得不说，docker是个伟大的项目，意义不亚于当年ghost系统的出现。&lt;/p&gt;
-&lt;p&gt;对喜欢折腾的垃圾佬、挨踢民工，快速部署一项服务是很有成就感的事情。&lt;/p&gt;
-&lt;p&gt;自打有了docker，告别安装依赖和排错，做回快乐的伸手党。&lt;/p&gt;
-&lt;p&gt;感谢Solomon Hykes，感谢开源！&lt;/p&gt;
-&lt;p&gt;没有docker加持，群晖、威联通不会像现在这么火（。。。吧？）。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
-    
-    <category term="群晖" scheme="https://bg4vrg.com/tags/%E7%BE%A4%E6%99%96/"/>
-    
-    <category term="备份" scheme="https://bg4vrg.com/tags/%E5%A4%87%E4%BB%BD/"/>
-    
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
     
   </entry>
   
