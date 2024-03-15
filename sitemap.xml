@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://bg4vrg.com/post/20240315130414.html</loc>
+    
+    <lastmod>2024-03-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://bg4vrg.com/post/20191219140118.html</loc>
     
     <lastmod>2024-03-15</lastmod>
@@ -1006,6 +1015,20 @@
   
   <url>
     <loc>https://bg4vrg.com/tags/%E6%98%9F%E9%99%85%E9%AD%94%E7%9B%92/</loc>
+    <lastmod>2024-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/unifi/</loc>
+    <lastmod>2024-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/tags/aredn/</loc>
     <lastmod>2024-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
