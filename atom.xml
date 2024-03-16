@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-03-16T03:16:24.711Z</updated>
+  <updated>2024-03-16T03:18:07.938Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://bg4vrg.com/post/20240316110600.html"/>
     <id>https://bg4vrg.com/post/20240316110600.html</id>
     <published>2024-03-16T03:06:00.000Z</published>
-    <updated>2024-03-16T03:16:24.711Z</updated>
+    <updated>2024-03-16T03:18:07.938Z</updated>
     
-    <content type="html"><![CDATA[<p>aprs.fi已经很久无法显示正常地图页面了。</p><p>之前是因为google被墙，后来aprs.fi运营因为google map api费用太高选择了openstreetmap这个用户自建图源，但可惜的是2022年osm还是被墙。</p><p>我试了下修改host无效，只能通过工具绕过了。</p><p>国内用户为了方便，建议使用aprs.tv。</p><span id="more"></span><p>OpenStreetMap 是<em>开放数据</em>:只要您表明使用了 OpenStreetMap 并承认其贡献者的工作，您就可以使用 OpenStreetMap。如果您改变或者使用这些数据，您必须按照相同的版权协议发布结果。详情请参见<a href="https://www.openstreetmap.org/copyright">著作权与许可</a>。</p><p><strong>Q</strong>: <em>怎么被屏蔽的，使用什么方法？</em></p><p>A: 和维基百科相同的</p><ul><li>DNS 污染，xxx劫持对后缀为 openstreetmap.org 域名的 DNS 查询，注入伪造结果，伪造结果中的IP不可达或者已被封锁。这体现在浏览器中的“连接超时”错误。</li></ul><p>和</p><ul><li>深度包检测，发起HTTPS连接时xxx检测到后缀为 openstreetmap.org 的 SNI 即发起 TCP 重置攻击。这体现在浏览器中的“连接被重置”错误。</li></ul><p><strong>Q</strong>: <em>如何绕过？</em></p><p>A:</p><ol><li>域前置</li><li>TCB desync</li><li>使用工具。不必多说。</li></ol><p>前两种方法在中文维基百科的帮助页面有详细的介绍。</p>]]></content>
+    <content type="html"><![CDATA[<p>aprs.fi已经很久无法显示正常地图页面了。</p><p>之前是因为google被墙，后来aprs.fi运营因为google map api费用太高选择了openstreetmap这个用户自建图源，但可惜的是2022年osm还是被墙。</p><p>我试了下修改host无效，只能通过工具绕过了。</p><p>国内用户为了方便，建议使用aprs.tv。</p><span id="more"></span><p>OpenStreetMap 是<em>开放数据</em>:只要您表明使用了 OpenStreetMap 并承认其贡献者的工作，您就可以使用 OpenStreetMap。如果您改变或者使用这些数据，您必须按照相同的版权协议发布结果。详情请参见<a href="https://www.openstreetmap.org/copyright">著作权与许可</a>。</p><p><strong>Q</strong>: <em>怎么被屏蔽的，使用什么方法？</em></p><p>A: </p><ul><li><p>和维基百科相同的 DNS 污染，劫持后缀为 openstreetmap.org 域名的 DNS 查询，注入伪造结果，伪造结果中的IP不可达或者已被封锁。这体现在浏览器中的“连接超时”错误。</p></li><li><p>深度包检测，发起HTTPS连接时检测到后缀为 openstreetmap.org 的 SNI 即发起 TCP 重置攻击。这体现在浏览器中的“连接被重置”错误。</p></li></ul><p><strong>Q</strong>: <em>如何绕过？</em></p><p>A:</p><ul><li>域前置</li><li>TCB desync</li><li>使用工具。不必多说。</li></ul>]]></content>
     
     
     <summary type="html">&lt;p&gt;aprs.fi已经很久无法显示正常地图页面了。&lt;/p&gt;
