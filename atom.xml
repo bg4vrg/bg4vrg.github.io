@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-03-15T06:04:29.242Z</updated>
+  <updated>2024-03-16T03:16:24.711Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>解决aprs.fi无法显示地图</title>
+    <link href="https://bg4vrg.com/post/20240316110600.html"/>
+    <id>https://bg4vrg.com/post/20240316110600.html</id>
+    <published>2024-03-16T03:06:00.000Z</published>
+    <updated>2024-03-16T03:16:24.711Z</updated>
+    
+    <content type="html"><![CDATA[<p>aprs.fi已经很久无法显示正常地图页面了。</p><p>之前是因为google被墙，后来aprs.fi运营因为google map api费用太高选择了openstreetmap这个用户自建图源，但可惜的是2022年osm还是被墙。</p><p>我试了下修改host无效，只能通过工具绕过了。</p><p>国内用户为了方便，建议使用aprs.tv。</p><span id="more"></span><p>OpenStreetMap 是<em>开放数据</em>:只要您表明使用了 OpenStreetMap 并承认其贡献者的工作，您就可以使用 OpenStreetMap。如果您改变或者使用这些数据，您必须按照相同的版权协议发布结果。详情请参见<a href="https://www.openstreetmap.org/copyright">著作权与许可</a>。</p><p><strong>Q</strong>: <em>怎么被屏蔽的，使用什么方法？</em></p><p>A: 和维基百科相同的</p><ul><li>DNS 污染，xxx劫持对后缀为 openstreetmap.org 域名的 DNS 查询，注入伪造结果，伪造结果中的IP不可达或者已被封锁。这体现在浏览器中的“连接超时”错误。</li></ul><p>和</p><ul><li>深度包检测，发起HTTPS连接时xxx检测到后缀为 openstreetmap.org 的 SNI 即发起 TCP 重置攻击。这体现在浏览器中的“连接被重置”错误。</li></ul><p><strong>Q</strong>: <em>如何绕过？</em></p><p>A:</p><ol><li>域前置</li><li>TCB desync</li><li>使用工具。不必多说。</li></ol><p>前两种方法在中文维基百科的帮助页面有详细的介绍。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;aprs.fi已经很久无法显示正常地图页面了。&lt;/p&gt;
+&lt;p&gt;之前是因为google被墙，后来aprs.fi运营因为google map api费用太高选择了openstreetmap这个用户自建图源，但可惜的是2022年osm还是被墙。&lt;/p&gt;
+&lt;p&gt;我试了下修改host无效，只能通过工具绕过了。&lt;/p&gt;
+&lt;p&gt;国内用户为了方便，建议使用aprs.tv。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
+    
+    
+    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>业余无线电aredn固件刷回原厂unifi</title>
@@ -523,29 +549,6 @@
     
     
     <category term="日常" scheme="https://bg4vrg.com/tags/%E6%97%A5%E5%B8%B8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何节约大量的bt种子校验时间（手动辅种）</title>
-    <link href="https://bg4vrg.com/post/20230102092002.html"/>
-    <id>https://bg4vrg.com/post/20230102092002.html</id>
-    <published>2023-01-02T01:20:02.000Z</published>
-    <updated>2024-02-27T07:20:56.401Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>​    transmission不像qbittorrent那样可以快速跳过校验，如果重装系统没有备份配置文件，或者是辅种，几百GB大包子的校验过程让你欲哭无泪，尤其那些小文件多的种子，简直让你欲哭无泪。</p><span id="more"></span><h1 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h1><p><a href="https://sites.google.com/site/ultimasites/bencode-editor">BEncode Editor</a>    </p><p><img src="/pic/2023-01-021.jpg"></p><h1 id="下面开始正式流程："><a href="#下面开始正式流程：" class="headerlink" title="下面开始正式流程："></a>下面开始正式流程：</h1><p>  <b><span style="color:rgb(255, 0, 0);">首先把辅种的种子用transmission打开，并选择正确的下载目录，取消“添加后开始”，确保不自动下载。</span></b></p><h2 id="一、通过下载软件界面获取种子的校验值，记住这串数字。"><a href="#一、通过下载软件界面获取种子的校验值，记住这串数字。" class="headerlink" title="一、通过下载软件界面获取种子的校验值，记住这串数字。"></a>一、通过下载软件界面获取种子的校验值，记住这串数字。</h2><p>​    老版本bt软件的配置文件夹里种子是按照种子发布名称明保存的，但是现在已经改成种子校验值了，所以一定要先确定好校验值和种子对应下载目录，防止辅种时选错目录。</p><p><img src="/pic/2023-01-022.jpg">]</p><h2 id="二、找到transmission的配置文件夹"><a href="#二、找到transmission的配置文件夹" class="headerlink" title="二、找到transmission的配置文件夹"></a>二、找到transmission的配置文件夹</h2><blockquote><p>​        子文件夹torrents–对应校验值的文件种子</p><p>​        子文件夹resume–对应校验值的文件的校验文件，也是我们需要修改的文件</p></blockquote><h2 id="三、用BEncode-Editor打开resume文件夹中对应的“校验值-resume”"><a href="#三、用BEncode-Editor打开resume文件夹中对应的“校验值-resume”" class="headerlink" title="三、用BEncode Editor打开resume文件夹中对应的“校验值.resume”"></a>三、用BEncode Editor打开resume文件夹中对应的“校验值.resume”</h2><p>​     注意：以下操作要求<strong>停止transmission服务</strong></p><p>​       确认以下字段是否正确，确定下载目的文件夹是否正确（是否含有对应下载文件）</p><blockquote><pre><code>        desstination--种子下载的文件保存目录        name--种子任务名称</code></pre><p>dnd和priority值为该种子下载的文件总数量，transmission已经打开了种子，会自动填写正确数字。</p></blockquote><p><img src="/pic/2023-01-023.jpg"></p><h2 id="四、修改以下3个字段"><a href="#四、修改以下3个字段" class="headerlink" title="四、修改以下3个字段"></a>四、修改以下3个字段</h2><blockquote><p>paused 从1改为 0<br>progress下的blocks 从none（也可能是其他）修改为 all 注意类型为string<br>新增一个和blocks同级别的字段<br>have 值为all也是string</p></blockquote><p><img src="/pic/2023-01-024.jpg"></p><p>注意：以上步骤中的dnd和priority值因为是已经打开了种子文件，所以都是正确数值不需要修改</p><h2 id="五、检查以下三处字段是否修改好，选择file-save保存"><a href="#五、检查以下三处字段是否修改好，选择file-save保存" class="headerlink" title="五、检查以下三处字段是否修改好，选择file-save保存"></a>五、检查以下三处字段是否修改好，选择file-save保存</h2><p><img src="/pic/2023-01-025.jpg"></p><h2 id="六、保存文件并启动-transmission服务"><a href="#六、保存文件并启动-transmission服务" class="headerlink" title="六、保存文件并启动 transmission服务"></a>六、保存文件并启动 transmission服务</h2><p>参考文章： </p><p><img src="/pic/2023-01-026.jpg"></p><h2 id="另外说下前段时间用truenas-scale安装docker版transmission的一个坑："><a href="#另外说下前段时间用truenas-scale安装docker版transmission的一个坑：" class="headerlink" title="另外说下前段时间用truenas scale安装docker版transmission的一个坑："></a>另外说下前段时间用truenas scale安装docker版transmission的一个坑：</h2><p>安装后如果下载，那么truenas物理机的cpu虽然总体显示占用很低（1%），但是实际**单线程cpu已经爆100%**了，只要下载就100%，无论下载速度是1MB还是10Mb。</p><p>期间使用了限速、限连接数、降docker版本，均无法解决。</p><p>如果限制该容器cpu使用率，虽然cpu占用低了，但是访问控制transmission的web界面会变得非常卡顿，几乎无法打开页面，这个办法也不行。</p><p>然后更换使用大神ChisBread爆改的docker版本后临时解决，单线程cpu只有20%。</p><p>但是没过几天下载又老问题，不知道有没有大佬能指点一下啊。</p>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h1&gt;&lt;p&gt;​    transmission不像qbittorrent那样可以快速跳过校验，如果重装系统没有备份配置文件，或者是辅种，几百GB大包子的校验过程让你欲哭无泪，尤其那些小文件多的种子，简直让你欲哭无泪。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
-    
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="pt" scheme="https://bg4vrg.com/tags/pt/"/>
     
   </entry>
   
