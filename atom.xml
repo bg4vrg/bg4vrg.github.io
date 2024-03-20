@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-03-20T04:32:02.144Z</updated>
+  <updated>2024-03-20T05:01:41.396Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://bg4vrg.com/post/20240320122111.html"/>
     <id>https://bg4vrg.com/post/20240320122111.html</id>
     <published>2024-03-20T04:21:11.000Z</published>
-    <updated>2024-03-20T04:32:02.144Z</updated>
+    <updated>2024-03-20T05:01:41.396Z</updated>
     
-    <content type="html"><![CDATA[<p>接上篇<a href="https://bg4vrg.com/post/20240224112601.html">《seo优化之google收录》</a>，本篇记录下百度seo记录。不主动提交，它就是不收入我的博客。</p><span id="more"></span><h1 id="一、生成sitemap文件"><a href="#一、生成sitemap文件" class="headerlink" title="一、生成sitemap文件"></a>一、生成sitemap文件</h1><p>hexo-generator-baidu-sitemap则是针对百度。注意参数加上–no-fund –no-audit，否则会报错。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-baidu-sitemap --save-dev --no-fund --no-audit</span><br></pre></td></tr></table></figure><p>安装完成后，重启hexo，执行<code>hexo g &amp;&amp; hexo s</code>后，在public目录下生成对应的xml文件。</p><p>本地可以通过下面地址访问到sitemap文件。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:4000/baidusitemap.xml</span><br></pre></td></tr></table></figure><p>确认可以访问到后，部署到网站</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>确认可以通过你的网站URL访问，比如我的是</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://bg4vrg.com/baidusitemap.xml</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>接上篇<a href="https://bg4vrg.com/post/20240224112601.html">《seo优化之google收录》</a>，本篇记录下百度seo记录。不主动提交，它就是不收入我的博客。</p><span id="more"></span><h1 id="一、生成sitemap文件"><a href="#一、生成sitemap文件" class="headerlink" title="一、生成sitemap文件"></a>一、生成sitemap文件</h1><p>hexo-generator-baidu-sitemap则是针对百度。注意参数加上–no-fund –no-audit，否则会报错。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-baidu-sitemap --save-dev --no-fund --no-audit</span><br></pre></td></tr></table></figure><p>安装完成后，重启hexo，执行<code>hexo g &amp;&amp; hexo s</code>后，在public目录下生成对应的xml文件。</p><p>本地可以通过下面地址访问到sitemap文件。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:4000/baidusitemap.xml</span><br></pre></td></tr></table></figure><p>确认可以访问到后，部署到网站</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>确认可以通过你的网站URL访问，比如我的是</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://bg4vrg.com/baidusitemap.xml</span><br></pre></td></tr></table></figure><h1 id="二、百度添加网站"><a href="#二、百度添加网站" class="headerlink" title="二、百度添加网站"></a>二、百度添加网站</h1><p><img src="/../pic/2024-3-20-baideseo1.png"></p><p><img src="/../pic/2024-3-20-baideseo2.png"></p><p><img src="/../pic/2024-3-20-baideseo3.png"></p><p><img src="/../pic/2024-3-20-baideseo4.png"></p>]]></content>
     
     
     <summary type="html">&lt;p&gt;接上篇&lt;a href=&quot;https://bg4vrg.com/post/20240224112601.html&quot;&gt;《seo优化之google收录》&lt;/a&gt;，本篇记录下百度seo记录。不主动提交，它就是不收入我的博客。&lt;/p&gt;</summary>
