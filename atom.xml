@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-03-19T13:22:41.359Z</updated>
+  <updated>2024-03-20T04:32:02.144Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>seo优化之baidu收录</title>
+    <link href="https://bg4vrg.com/post/20240320122111.html"/>
+    <id>https://bg4vrg.com/post/20240320122111.html</id>
+    <published>2024-03-20T04:21:11.000Z</published>
+    <updated>2024-03-20T04:32:02.144Z</updated>
+    
+    <content type="html"><![CDATA[<p>接上篇<a href="https://bg4vrg.com/post/20240224112601.html">《seo优化之google收录》</a>，本篇记录下百度seo记录。不主动提交，它就是不收入我的博客。</p><span id="more"></span><h1 id="一、生成sitemap文件"><a href="#一、生成sitemap文件" class="headerlink" title="一、生成sitemap文件"></a>一、生成sitemap文件</h1><p>hexo-generator-baidu-sitemap则是针对百度。注意参数加上–no-fund –no-audit，否则会报错。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-baidu-sitemap --save-dev --no-fund --no-audit</span><br></pre></td></tr></table></figure><p>安装完成后，重启hexo，执行<code>hexo g &amp;&amp; hexo s</code>后，在public目录下生成对应的xml文件。</p><p>本地可以通过下面地址访问到sitemap文件。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:4000/baidusitemap.xml</span><br></pre></td></tr></table></figure><p>确认可以访问到后，部署到网站</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>确认可以通过你的网站URL访问，比如我的是</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://bg4vrg.com/baidusitemap.xml</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;接上篇&lt;a href=&quot;https://bg4vrg.com/post/20240224112601.html&quot;&gt;《seo优化之google收录》&lt;/a&gt;，本篇记录下百度seo记录。不主动提交，它就是不收入我的博客。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
+    
+    
+    <category term="hexo" scheme="https://bg4vrg.com/tags/hexo/"/>
+    
+    <category term="seo" scheme="https://bg4vrg.com/tags/seo/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>无氧力量训练步骤分解2019版</title>
@@ -477,9 +502,9 @@
     <link href="https://bg4vrg.com/post/20240224112601.html"/>
     <id>https://bg4vrg.com/post/20240224112601.html</id>
     <published>2024-02-24T03:26:01.000Z</published>
-    <updated>2024-02-27T12:40:07.506Z</updated>
+    <updated>2024-03-20T04:28:36.657Z</updated>
     
-    <content type="html"><![CDATA[<p>网站部署成功后发现谷歌和百度没有爬到，网上查了一下好像还要手动seo，还好网上有篇教程，照着抄了一遍，因为是21年的文章，所以部分步骤和页面不太一样了<br>原文链接：<a href="https://www.duheweb.com/post/20210417143744.html">https://www.duheweb.com/post/20210417143744.html</a></p><span id="more"></span><h1 id="一、生成sitemap文件"><a href="#一、生成sitemap文件" class="headerlink" title="一、生成sitemap文件"></a>一、生成sitemap文件</h1><p>需要两种hexo插件</p><p>hexo-generator-sitemap供谷歌使用；</p><p>hexo-generator-baidu-sitemap则是针对百度。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save-dev</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save-dev</span><br></pre></td></tr></table></figure><p>安装完成后，重启hexo，执行hexo g后，在public目录下生成对应的xml文件。</p><p>本地可以通过下面地址访问到sitemap文件。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:4000/sitemap.xml</span><br><span class="line">http://localhost:4000/baidusitemap.xml</span><br></pre></td></tr></table></figure><p>确认可以访问到后，部署到网站</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>确认可以通过你的网站URL访问，比如我的是</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://www.duheweb.com/sitemap.xml</span><br><span class="line">https://www.duheweb.com/baidusitemap.xml</span><br></pre></td></tr></table></figure><h1 id="二、-谷歌收录"><a href="#二、-谷歌收录" class="headerlink" title="二、 谷歌收录"></a>二、 谷歌收录</h1><p>打开<a href="https://www.google.com/webmasters/verification/home">谷歌站长工具</a> 注意别打开错了，谷歌搜索控制台（search-console）是找不到用CNAM进行验证的入口的。</p><p>选择右侧那个，输入你的博客网址，然后选择cname认证，网页会自动识别域名提供商为cloudflare，点击按钮自动进入clouflare控制台进行自动化验证，这里图忘记截了。</p><p>打开<a href="https://search.google.com/search-console?hl=zh-CN">谷歌搜索控制台</a></p><p>在谷歌控制台提交sitemap</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://bg4vrg.com/sitemap.xml</span><br></pre></td></tr></table></figure><p><img src="/pic/2024-2-24zhandianditu.png" alt="937ccfd2594bf3ab2d733e6b5e25880"></p><p>提交成功后，睡一觉第二天起来，谷歌搜索下自己的博客发现已经可以搜索到了。</p><p>20240224状态：</p><p><img src="/pic/2024-2-24google.png" alt="image-20240224114339511"></p><p>等谷歌收录后再折腾百度的。</p><p>2-24-21:29：baidu要验证手机号，不搞了</p>]]></content>
+    <content type="html"><![CDATA[<p>网站部署成功后发现谷歌和百度没有爬到，网上查了一下好像还要手动seo，还好网上有篇教程，照着抄了一遍，因为是21年的文章，所以部分步骤和页面不太一样了<br>原文链接：<a href="https://www.duheweb.com/post/20210417143744.html">https://www.duheweb.com/post/20210417143744.html</a></p><span id="more"></span><h1 id="一、生成sitemap文件"><a href="#一、生成sitemap文件" class="headerlink" title="一、生成sitemap文件"></a>一、生成sitemap文件</h1><p>需要两种hexo插件</p><p>hexo-generator-sitemap供谷歌使用；</p><p>hexo-generator-baidu-sitemap则是针对百度。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save-dev</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save-dev</span><br></pre></td></tr></table></figure><p>安装完成后，重启hexo，执行hexo g后，在public目录下生成对应的xml文件。</p><p>本地可以通过下面地址访问到sitemap文件。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:4000/sitemap.xml</span><br><span class="line">http://localhost:4000/baidusitemap.xml</span><br></pre></td></tr></table></figure><p>确认可以访问到后，部署到网站</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>确认可以通过你的网站URL访问，比如我的是</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://bg4vrg.com/sitemap.xml</span><br><span class="line">https://bg4vrg.com/baidusitemap.xml</span><br></pre></td></tr></table></figure><h1 id="二、-谷歌收录"><a href="#二、-谷歌收录" class="headerlink" title="二、 谷歌收录"></a>二、 谷歌收录</h1><p>打开<a href="https://www.google.com/webmasters/verification/home">谷歌站长工具</a> 注意别打开错了，谷歌搜索控制台（search-console）是找不到用CNAM进行验证的入口的。</p><p>选择右侧那个，输入你的博客网址，然后选择cname认证，网页会自动识别域名提供商为cloudflare，点击按钮自动进入clouflare控制台进行自动化验证，这里图忘记截了。</p><p>打开<a href="https://search.google.com/search-console?hl=zh-CN">谷歌搜索控制台</a></p><p>在谷歌控制台提交sitemap</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://bg4vrg.com/sitemap.xml</span><br></pre></td></tr></table></figure><p><img src="/pic/2024-2-24zhandianditu.png" alt="937ccfd2594bf3ab2d733e6b5e25880"></p><p>提交成功后，睡一觉第二天起来，谷歌搜索下自己的博客发现已经可以搜索到了。</p><p>20240224状态：</p><p><img src="/pic/2024-2-24google.png" alt="image-20240224114339511"></p><p>等谷歌收录后再折腾百度的。</p><p>2-24-21:29：baidu要验证手机号，不搞了</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;网站部署成功后发现谷歌和百度没有爬到，网上查了一下好像还要手动seo，还好网上有篇教程，照着抄了一遍，因为是21年的文章，所以部分步骤和页面不太一样了&lt;br&gt;原文链接：&lt;a href=&quot;https://www.duheweb.com/post/20210417143744.html&quot;&gt;https://www.duheweb.com/post/20210417143744.html&lt;/a&gt;&lt;/p&gt;</summary>
@@ -518,36 +543,6 @@
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>debian搭建webdav服务用于群晖备份</title>
-    <link href="https://bg4vrg.com/post/20240220150000.html"/>
-    <id>https://bg4vrg.com/post/20240220150000.html</id>
-    <published>2024-02-20T07:00:00.000Z</published>
-    <updated>2024-02-27T12:43:13.036Z</updated>
-    
-    <content type="html"><![CDATA[<p>学习资料如下<br><a href="https://www.cnblogs.com/wxfy/p/15813425.html">https://www.cnblogs.com/wxfy/p/15813425.html</a><br><a href="https://github.com/hacdias/webdav">https://github.com/hacdias/webdav</a></p><p>第二个链接是webdav服务github地址</p><p>具体步骤如下：</p><h1 id="一、webdav服务搭建"><a href="#一、webdav服务搭建" class="headerlink" title="一、webdav服务搭建"></a>一、webdav服务搭建</h1><span id="more"></span><p>在一台debian11机器上搭建webdav服务，端口8088，用户名密码admin，服务目录&#x2F;home&#x2F;bg4vrg&#x2F;dsm273bak</p><p>首先到hacdias&#x2F;webdav下载源码，注意也有docker</p><p>debian11，所以下载linux-amd64版本</p><h2 id="1-1、下载完解压缩。"><a href="#1-1、下载完解压缩。" class="headerlink" title="1.1、下载完解压缩。"></a>1.1、下载完解压缩。</h2><p>把webdav目录cp或者move到&#x2F;usr&#x2F;bin<br><code>tar -zxvf linux-amd64-webdav.tar.gz</code></p><h2 id="1-2、创建webdav-service服务文件"><a href="#1-2、创建webdav-service服务文件" class="headerlink" title="1.2、创建webdav.service服务文件"></a>1.2、创建webdav.service服务文件</h2><p><code>sudo nano /etc/systemd/system/webdav.service</code><br>文件内容如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=WebDAV server</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/webdav --config /opt/webdav.config.yml</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Restart=on-failure</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure><h2 id="1-3、创建配置文件webdav-config-yml"><a href="#1-3、创建配置文件webdav-config-yml" class="headerlink" title="1.3、创建配置文件webdav.config.yml"></a>1.3、创建配置文件webdav.config.yml</h2><p><code>sudo nano /opt/webdav.config.yml</code><br>内容如下，注意端口和服务主目录scope，另外用户名密码可以明文也可以加密</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">  GNU nano 5.4                 /opt/webdav.config.yml</span><br><span class="line"><span class="comment"># Server related settings</span></span><br><span class="line">address: 0.0.0.0</span><br><span class="line">port: 8088</span><br><span class="line">auth: <span class="literal">true</span></span><br><span class="line">tls: <span class="literal">false</span></span><br><span class="line">prefix: /</span><br><span class="line"></span><br><span class="line"><span class="comment"># Default user settings (will be merged)</span></span><br><span class="line">scope: .</span><br><span class="line">modify: <span class="literal">true</span></span><br><span class="line">rules: []</span><br><span class="line"></span><br><span class="line">cors:</span><br><span class="line">enabled: <span class="literal">false</span></span><br><span class="line">credentials: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">users</span>:</span><br><span class="line">- username: admin</span><br><span class="line">  password: admin</span><br><span class="line">  scope: /home/bg4vrg/dsm273bak</span><br><span class="line">  modify:   <span class="literal">true</span></span><br></pre></td></tr></table></figure><h2 id="1-4、设置开机启动webdav服务"><a href="#1-4、设置开机启动webdav服务" class="headerlink" title="1.4、设置开机启动webdav服务"></a>1.4、设置开机启动webdav服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> webdav</span><br><span class="line">sudo systemctl start webdav</span><br></pre></td></tr></table></figure><p>scope即为根目录本地映射地址。password可以用明文，也可以加密，Bcrypt密码在线生成地址： <a href="https://bcrypt-generator.com/">https://bcrypt-generator.com/</a></p><h1 id="二、在群晖上使用hyper-backup创建任务备份"><a href="#二、在群晖上使用hyper-backup创建任务备份" class="headerlink" title="二、在群晖上使用hyper backup创建任务备份"></a>二、在群晖上使用hyper backup创建任务备份</h1><p><img src="/../pic/2024-02-20-beifen.png" alt="hyperbackup"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;学习资料如下&lt;br&gt;&lt;a href=&quot;https://www.cnblogs.com/wxfy/p/15813425.html&quot;&gt;https://www.cnblogs.com/wxfy/p/15813425.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/hacdias/webdav&quot;&gt;https://github.com/hacdias/webdav&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;第二个链接是webdav服务github地址&lt;/p&gt;
-&lt;p&gt;具体步骤如下：&lt;/p&gt;
-&lt;h1 id=&quot;一、webdav服务搭建&quot;&gt;&lt;a href=&quot;#一、webdav服务搭建&quot; class=&quot;headerlink&quot; title=&quot;一、webdav服务搭建&quot;&gt;&lt;/a&gt;一、webdav服务搭建&lt;/h1&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
-    
-    <category term="群晖" scheme="https://bg4vrg.com/tags/%E7%BE%A4%E6%99%96/"/>
-    
-    <category term="备份" scheme="https://bg4vrg.com/tags/%E5%A4%87%E4%BB%BD/"/>
-    
-    <category term="webdav" scheme="https://bg4vrg.com/tags/webdav/"/>
     
   </entry>
   
