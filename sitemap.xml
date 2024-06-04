@@ -11,15 +11,6 @@
   </url>
   
   <url>
-    <loc>https://bg4vrg.com/post/20240530155558.html</loc>
-    
-    <lastmod>2024-06-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://bg4vrg.com/post/20240421204758.html</loc>
     
     <lastmod>2024-06-04</lastmod>
@@ -29,9 +20,9 @@
   </url>
   
   <url>
-    <loc>https://bg4vrg.com/post/20240522130744.html</loc>
+    <loc>https://bg4vrg.com/post/20240530155558.html</loc>
     
-    <lastmod>2024-06-04</lastmod>
+    <lastmod>2024-06-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -41,6 +32,15 @@
     <loc>https://bg4vrg.com/post/20240602160403.html</loc>
     
     <lastmod>2024-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/post/20240522130744.html</loc>
+    
+    <lastmod>2024-05-22</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1373,6 +1373,27 @@
   
   <url>
     <loc>https://bg4vrg.com/categories/linux/</loc>
+    <lastmod>2024-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/categories/note/linux/</loc>
+    <lastmod>2024-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/categories/note/linux/AmateurRadio/</loc>
+    <lastmod>2024-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bg4vrg.com/categories/note/linux/AmateurRadio/network/</loc>
     <lastmod>2024-06-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
