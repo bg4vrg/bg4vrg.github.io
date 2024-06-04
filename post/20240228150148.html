@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="zh"><head><meta name="baidu-site-verification" content="codeva-UlX0cGL1PK"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>linux常用工具命令速查 - BG4VRG的无线电之旅</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="BG4VRG的无线电之旅"><meta name="msapplication-TileImage" content="/img/freebsd.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="BG4VRG的无线电之旅"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="linux常用工具总述 原文链接在此  mv、cp、wc 目录操作   grep 基础知识"><meta property="og:type" content="blog"><meta property="og:title" content="linux常用工具命令速查"><meta property="og:url" content="https://bg4vrg.com/post/20240228150148.html"><meta property="og:site_name" content="BG4VRG的无线电之旅"><meta property="og:description" content="linux常用工具总述 原文链接在此  mv、cp、wc 目录操作   grep 基础知识"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://bg4vrg.com/img/og_image.png"><meta property="article:published_time" content="2024-02-28T07:01:48.000Z"><meta property="article:modified_time" content="2024-02-28T07:54:16.263Z"><meta property="article:author" content="fei"><meta property="article:tag" content="linux"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://bg4vrg.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://bg4vrg.com/post/20240228150148.html"},"headline":"linux常用工具命令速查","image":["https://bg4vrg.com/img/og_image.png"],"datePublished":"2024-02-28T07:01:48.000Z","dateModified":"2024-02-28T07:54:16.263Z","author":{"@type":"Person","name":"fei"},"publisher":{"@type":"Organization","name":"BG4VRG的无线电之旅","logo":{"@type":"ImageObject","url":"https://bg4vrg.com/img/freebsd.svg"}},"description":"linux常用工具总述 原文链接在此  mv、cp、wc 目录操作   grep 基础知识"}</script><link rel="canonical" href="https://bg4vrg.com/post/20240228150148.html"><link rel="alternate" href="/atom.xml" title="BG4VRG的无线电之旅" type="application/atom+xml"><link rel="icon" href="/img/freebsd.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1305232905963539" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a><a class="navbar-item" href="/categories/AmateurRadio">业余无线电</a><a class="navbar-item" href="/categories/network">网络</a><a class="navbar-item" href="/categories/linux">Linux</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-search"></i></a></div></div></div></nav><br><center><span id="jinrishici-sentence" style="font-size:17px">正在加载今日诗词....</span><span class="mtip" style="font-size:14px"></span></center><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2024-02-28T07:01:48.000Z" title="2024/2/28 15:01:48">2024-02-28</time>发表</span><span class="level-item"><time datetime="2024-02-28T07:54:16.263Z" title="2024/2/28 15:54:16">2024-02-28</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/linux/">linux</a></span><span class="level-item">1 小时读完 (大约9399个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">linux常用工具命令速查</h1><div class="content"><p>linux常用工具总述</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.aztreelet.top/linux%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E6%80%BB%E8%BF%B0/#ssh%E8%BF%9C%E7%A8%8B%E8%BD%AC%E5%8F%91%EF%BC%88%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%EF%BC%89">原文链接在此</a></p>
+<ol>
+<li>mv、cp、wc<ol>
+<li><a href="/post/20240228150148.html#%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C">目录操作</a></li>
+</ol>
+</li>
+<li>grep<ol>
+<li><a href="/post/20240228150148.html#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">基础知识</a></li>
+</ol>
+</li>
+</ol>
+<span id="more"></span>
+
+
+<ol start="3">
+<li><a href="/post/20240228150148.html#sed">sed</a></li>
+<li><a href="/post/20240228150148.html#awk">awk</a></li>
+<li>find<ol>
+<li>常用实例<ol>
+<li><a href="/post/20240228150148.html#%E6%99%AE%E9%80%9A%E6%9F%A5%E6%89%BE%E4%B8%8E%E5%8C%B9%E9%85%8D">普通查找与匹配</a></li>
+<li><a href="/post/20240228150148.html#%E6%8C%89%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B%E5%8C%B9%E9%85%8D">按文件类型匹配</a></li>
+<li><a href="/post/20240228150148.html#%E6%8C%89%E6%97%B6%E9%97%B4%E6%9F%A5%E6%89%BE">按时间查找</a></li>
+<li><a href="/post/20240228150148.html#%E6%8C%89%E5%A4%A7%E5%B0%8F%E6%9F%A5%E6%89%BE">按大小查找</a></li>
+<li><a href="/post/20240228150148.html#%E5%88%A0%E9%99%A4%E5%8C%B9%E9%85%8D%E6%96%87%E4%BB%B6">删除匹配文件</a></li>
+<li><a href="/post/20240228150148.html#%E6%8C%89%E7%85%A7%E6%9D%83%E9%99%90%E6%9F%A5%E6%89%BE">按照权限查找</a></li>
+<li><a href="/post/20240228150148.html#%E5%80%9F%E5%8A%A9-exec%E4%B8%8E%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4%E8%BF%9E%E7%94%A8">借助-exec与其他命令连用</a></li>
+<li><a href="/post/20240228150148.html#exec%E5%90%8E%E6%8E%A5%E5%A4%9A%E8%A1%8C%E5%91%BD%E4%BB%A4">-exec后接多行命令</a></li>
+<li><a href="/post/20240228150148.html#%E8%B7%B3%E8%BF%87%EF%BC%88%E6%8E%92%E9%99%A4%EF%BC%89%E6%8C%87%E5%AE%9A%E7%9B%AE%E5%BD%95%E6%90%9C%E7%B4%A2">跳过（排除）指定目录搜索</a></li>
+</ol>
+</li>
+<li><a href="/post/20240228150148.html#find%E5%85%B6%E4%BB%96%E6%8A%80%E5%B7%A7%E6%94%B6%E9%9B%86">find其他技巧收集</a></li>
+<li><a href="/post/20240228150148.html#%E8%AF%A6%E7%BB%86%E8%AF%AD%E6%B3%95">详细语法</a></li>
+</ol>
+</li>
+<li>zsh<ol>
+<li>配置<ol>
+<li><a href="/post/20240228150148.html#oh-my-zsh">oh-my-zsh</a></li>
+<li><a href="/post/20240228150148.html#zsh-autosuggestions">zsh-autosuggestions</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>head<ol>
+<li><a href="/post/20240228150148.html#%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E5%A4%9A%E8%A1%8C">查看指定多行</a></li>
+</ol>
+</li>
+<li>sort<ol>
+<li><a href="/post/20240228150148.html#%E5%9F%BA%E7%A1%80">基础</a></li>
+<li><a href="/post/20240228150148.html#%E6%8C%89%E7%85%A7%E6%8C%87%E5%AE%9A%E5%88%97%E6%8E%92%E5%BA%8F">按照指定列排序</a></li>
+</ol>
+</li>
+<li><a href="/post/20240228150148.html#uniq">uniq</a></li>
+<li><a href="/post/20240228150148.html#clash">clash</a></li>
+<li>ssh<ol>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/weixin_38638945/article/details/113867770">ssh远程转发（反向代理）</a></li>
+<li>配置无响应断连的时长<ol>
+<li><a href="/post/20240228150148.html#%E6%96%B9%E6%A1%881%EF%BC%8C%E4%BF%AE%E6%94%B9ssgd-config">方案1，修改ssgd_config</a></li>
+<li><a href="/post/20240228150148.html#%E6%96%B9%E6%A1%882%EF%BC%8C%E4%BF%AE%E6%94%B9profile%EF%BC%8C%E8%AE%BE%E7%BD%AETMOUT">方案2，修改profile，设置TMOUT</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>tar<ol>
+<li><a href="/post/20240228150148.html#%E5%8E%8B%E7%BC%A9">压缩</a></li>
+<li><a href="/post/20240228150148.html#%E8%A7%A3%E5%8E%8B">解压</a></li>
+</ol>
+</li>
+<li><a href="/post/20240228150148.html#samba%E9%85%8D%E7%BD%AE">samba配置</a></li>
+<li>windows<ol>
+<li><a href="/post/20240228150148.html#chocolately%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8">chocolately包管理器</a></li>
+</ol>
+</li>
+<li>linux<ol>
+<li><a href="/post/20240228150148.html#%E5%85%B3%E6%9C%BA">关机</a></li>
+<li><a href="/post/20240228150148.html#ctrl-z">ctrl+z</a></li>
+<li>apt<ol>
+<li><a href="/post/20240228150148.html#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6">查看已安装软件</a></li>
+<li><a href="/post/20240228150148.html#%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6">卸载软件</a></li>
+</ol>
+</li>
+<li>dpkg<ol>
+<li><a href="/post/20240228150148.html#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6-1">查看已安装软件</a></li>
+<li><a href="/post/20240228150148.html#%E6%9F%A5%E7%9C%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84">查看软件安装路径</a></li>
+</ol>
+</li>
+<li><a href="/post/20240228150148.html#ubuntu18-04%E6%9B%B4%E6%8D%A2%E6%B8%85%E5%8D%8E%E6%BA%90">ubuntu18.04更换清华源</a></li>
+<li>ln 软硬链接<ol>
+<li><a href="/post/20240228150148.html#%E7%A1%AC%E9%93%BE%E6%8E%A5">硬链接</a></li>
+<li><a href="/post/20240228150148.html#%E8%BD%AF%E8%BF%9E%E6%8E%A5">软连接</a></li>
+<li><a href="/post/20240228150148.html#%E8%BD%AF%E7%A1%AC%E9%93%BE%E6%8E%A5%E7%9A%84%E5%8C%BA%E5%88%AB">软硬链接的区别</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="/post/20240228150148.html#gcc">gcc</a></li>
+<li><a href="/post/20240228150148.html#gdb">gdb</a></li>
+<li><a href="/post/20240228150148.html#shell">shell</a></li>
+<li><a href="/post/20240228150148.html#SpaceVim">SpaceVim</a></li>
+<li>VIM<ol>
+<li>vim + grep 过滤文件内容<ol>
+<li><a href="/post/20240228150148.html#%E4%BF%9D%E7%95%99%E6%8C%87%E5%AE%9A%E5%86%85%E5%AE%B9">保留指定内容</a></li>
+<li><a href="/post/20240228150148.html#%E4%BF%9D%E7%95%99%E5%A4%9A%E4%B8%AA%E6%8C%87%E5%AE%9A%E5%86%85%E5%AE%B9%E7%9A%84%E8%A1%8C">保留多个指定内容的行</a></li>
+<li><a href="/post/20240228150148.html#%E5%8F%8D%E5%90%91%E8%BF%87%E6%BB%A4%EF%BC%8C%E4%B8%8D%E8%A6%81%E6%8C%87%E5%AE%9A%E5%86%85%E5%AE%B9%E7%9A%84%E8%A1%8C">反向过滤，不要指定内容的行</a></li>
+</ol>
+</li>
+<li><a href="/post/20240228150148.html#%E5%B0%86%E5%85%B6%E4%BB%96%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BE%93%E5%87%BA%E5%AF%BC%E5%85%A5vim">将其他程序的输出导入vim</a></li>
+<li>模式匹配相关<ol>
+<li><a href="/post/20240228150148.html#%E5%A4%A7%E5%B0%8F%E5%86%99">大小写</a></li>
+<li><a href="/post/20240228150148.html#%E6%AD%A3%E5%88%99%E7%9B%B8%E5%85%B3">正则相关</a></li>
+<li><a href="/post/20240228150148.html#%E7%95%8C%E5%AE%9A%E7%AC%A6-%E2%80%9C-%E2%80%9D">界定符 “&lt; &gt;”</a></li>
+</ol>
+</li>
+<li><a href="/post/20240228150148.html#%E4%BD%BF%E7%94%A8%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D">使用括号匹配</a></li>
+<li><a href="/post/20240228150148.html#vimc%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">vimc常用命令</a></li>
+<li>安装<ol>
+<li><a href="/post/20240228150148.html#%E2%AD%90Carl%E7%9A%84VIM%E5%AE%89%E8%A3%85">⭐Carl的VIM安装</a></li>
+<li>针对vim低于8版本的安装<ol>
+<li><a href="/post/20240228150148.html#%E5%AE%89%E8%A3%85vim9">安装vim9</a></li>
+<li><a href="/post/20240228150148.html#%E5%AE%89%E8%A3%85neovim">安装neovim</a></li>
+</ol>
+</li>
+<li><a href="/post/20240228150148.html#zr-nvim%E5%8F%8A%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85">zr_nvim及插件安装</a></li>
+</ol>
+</li>
+<li><a href="/post/20240228150148.html#nvim%E4%B8%AD%E8%B0%83%E7%94%A8shell%E5%91%BD%E4%BB%A4">nvim中调用shell命令</a></li>
+<li><a href="/post/20240228150148.html#nvim%E9%85%8D%E7%BD%AE">nvim配置</a></li>
+<li><a href="/post/20240228150148.html#%E5%9C%A8%E5%A4%9A%E8%A1%8C%E5%BC%80%E5%A4%B4%E5%92%8C%E7%BB%93%E5%B0%BE%E6%B7%BB%E5%8A%A0">在多行开头和结尾添加</a></li>
+</ol>
+</li>
+<li><a href="/post/20240228150148.html#tmux">tmux</a></li>
+<li>Makefile<ol>
+<li>自制模板V1.2<br>1. </li>
+<li><a href="/post/20240228150148.html#%E6%AD%A3%E7%82%B9%E5%8E%9F%E5%AD%90%E6%A8%A1%E6%9D%BF">正点原子模板</a></li>
+<li><a href="/post/20240228150148.html#%E6%8A%A5%E9%94%99-deps%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6">报错.deps是一个文件</a></li>
+</ol>
+</li>
+<li>git<ol>
+<li><a href="/post/20240228150148.html#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93">远程仓库</a></li>
+<li><a href="/post/20240228150148.html#%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%85%B3%E8%81%94%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF">本地仓库关联远程分支</a></li>
+<li><a href="/post/20240228150148.html#%E5%B0%86%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6git-push%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%96%B0%E5%BB%BA%E4%BB%93%E5%BA%93">将本地文件git push到远程新建仓库</a></li>
+<li><a href="/post/20240228150148.html#%E6%92%A4%E9%94%80git-add%E7%9A%84%E6%96%87%E4%BB%B6">撤销git add的文件</a></li>
+</ol>
+</li>
+<li><a href="/post/20240228150148.html#gitigonre%E4%B8%8D%E8%B5%B7%E4%BD%9C%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98">gitigonre不起作用的问题</a></li>
+<li>sed<ol>
+<li><a href="/post/20240228150148.html#sed%E4%B8%AD%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7">sed中特殊符号</a></li>
+<li><a href="/post/20240228150148.html#%E6%8F%90%E5%8F%96%E6%A0%87%E7%AD%BE%E5%B9%B6%E8%AE%A1%E7%AE%97%E4%B8%8D%E9%87%8D%E5%A4%8D%E6%A0%87%E7%AD%BE%E6%95%B0">提取标签并计算不重复标签数</a></li>
+</ol>
+</li>
+<li>vscode<ol>
+<li><a href="/post/20240228150148.html#vscode%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E5%8C%BA">vscode创建工作区</a></li>
+</ol>
+</li>
+<li>uboot<ol>
+<li><a href="/post/20240228150148.html#uboot%E6%9F%A5%E7%9C%8Bmmc%EF%BC%88SD%EF%BC%89%E6%98%AF%E5%90%A6%E6%AD%A3%E5%B8%B8">uboot查看mmc（SD）是否正常</a></li>
+</ol>
+</li>
+<li>tree<ol>
+<li><a href="/post/20240228150148.html#windows10%E4%B8%8B%E5%88%97%E5%87%BA%E6%89%80%E6%9C%89%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6">windows10下列出所有目录下文件</a></li>
+</ol>
+</li>
+</ol>
+<p>基础命令，但仅日常使用到的在此总结，以作查阅；</p>
+<p><strong>简介：</strong>对于使用过的命令以及应对场景进行总结，主要以linux下基础命令为主，归档以供随时查阅；</p>
+<p><strong>Version</strong></p>
+<ul>
+<li>20230804 V1.0：初稿</li>
+</ul>
+<hr>
+<h1 id="mv、cp、wc"><a href="#mv、cp、wc" class="headerlink" title="mv、cp、wc"></a>mv、cp、wc</h1><h2 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mv /dir_old /dir_new</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-f 强制覆盖</li>
+</ul>
+<p><code>$ cp -rp </code> -p会保持原权限、属性、时间戳等；</p>
+<p><code>$ wc -l</code> 统计行数</p>
+<h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 在file中查找内容</span><br><span class="line">$ grep aaa file</span><br><span class="line">## -v 反向搜索</span><br><span class="line">$ grep -v t file</span><br><span class="line">## -n 加行号</span><br><span class="line">$ grep -n t file</span><br><span class="line">## -c 打印匹配个数</span><br><span class="line">$ grep -c t file</span><br><span class="line">## -e 指定多个匹配项，一次查找多个匹配性</span><br><span class="line">$ grep -e 14 -e 23 -e 29 -e 33 -e 35 file</span><br><span class="line">## -i 忽略大小写</span><br><span class="line">$ grep -i </span><br><span class="line">## --color=auto 颜色显示</span><br><span class="line"></span><br><span class="line"># 可使用正则</span><br><span class="line">$ grep [tf] file</span><br><span class="line">... ...</span><br><span class="line"></span><br><span class="line"># 其它</span><br><span class="line">$ grep -a   # 将binary以text方式搜索</span><br></pre></td></tr></table></figure>
+
+<h1 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h1><h1 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h1><h1 id="find"><a href="#find" class="headerlink" title="find"></a>find</h1><h2 id="常用实例"><a href="#常用实例" class="headerlink" title="常用实例"></a>常用实例</h2><h5 id="普通查找与匹配"><a href="#普通查找与匹配" class="headerlink" title="### 普通查找与匹配"></a>### 普通查找与匹配</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">## 查找以.txt结尾的文件</span><br><span class="line">find /home -name &quot;*.txt&quot;</span><br><span class="line">## 查找以.txt和.pdf结尾的文件</span><br><span class="line">find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \)</span><br><span class="line">find . -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot;</span><br><span class="line">## 匹配文件路径或者文件</span><br><span class="line">find /usr/ -path &quot;*local*&quot;</span><br><span class="line"></span><br><span class="line">## 基于正则匹配</span><br><span class="line">find . -regex &quot;.*\(\.txt\|\.pdf\)$&quot;</span><br><span class="line">## 同上，但忽略大小写</span><br><span class="line">find . -iregex &quot;.*\(\.txt\|\.pdf\)$&quot;</span><br><span class="line"></span><br><span class="line"># 否定</span><br><span class="line">## 找出不是以.txt结尾的文件</span><br><span class="line">find /home ! -name &quot;*.txt&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="按文件类型匹配"><a href="#按文件类型匹配" class="headerlink" title="按文件类型匹配"></a>按文件类型匹配</h3><ul>
+<li>f 普通文件</li>
+<li>l 符号链接</li>
+<li>d 目录</li>
+<li>c 字符设备</li>
+<li>b 块设备</li>
+<li>s 套接字</li>
+<li>p fifo</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 按文件类型匹配</span><br><span class="line">## 搜索向下深度为2的所有普通文件</span><br><span class="line">find . -mindepth 2 -type f</span><br></pre></td></tr></table></figure>
+
+<h3 id="按时间查找"><a href="#按时间查找" class="headerlink" title="按时间查找"></a>按时间查找</h3><p>linux文件系统每个文件都有三种时间戳：</p>
+<ul>
+<li><strong>访问时间</strong>（-atime&#x2F;天，-amin&#x2F;分钟）：用户最近一次访问时间。</li>
+<li><strong>修改时间</strong>（-mtime&#x2F;天，-mmin&#x2F;分钟）：文件最后一次修改时间。</li>
+<li><strong>变化时间</strong>（-ctime&#x2F;天，-cmin&#x2F;分钟）：文件数据元（例如权限等）最后一次修改时间。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">## 搜索最近7天内被访问过的所有文件</span><br><span class="line">find . -type f -atime -7</span><br><span class="line">## 搜索恰好在7天前被访问过的文件</span><br><span class="line">find . -type f -atime 7</span><br><span class="line">## 搜索最近7天外被访问过的所有文件</span><br><span class="line">find . -type f -atime +7</span><br><span class="line"></span><br><span class="line">## 搜索比file.log修改时间更长的文件</span><br><span class="line">find . -type f -newer file.log</span><br></pre></td></tr></table></figure>
+
+<h3 id="按大小查找"><a href="#按大小查找" class="headerlink" title="按大小查找"></a>按大小查找</h3><ul>
+<li>b —— 块（512字节）</li>
+<li><strong>c</strong> —— 字节</li>
+<li>w—— 字（2字节）</li>
+<li><strong>k</strong> —— 千字节</li>
+<li><strong>M</strong> —— 兆字节</li>
+<li><strong>G</strong> —— 吉字节</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## 搜索 大于/小于/等于 10k的文件</span><br><span class="line">find . -type f -size +10k</span><br><span class="line">find . -type f -size -10k</span><br><span class="line">find . -type f -size 10k</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除匹配文件"><a href="#删除匹配文件" class="headerlink" title="删除匹配文件"></a>删除匹配文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -name &quot;*.txt&quot; -delete</span><br></pre></td></tr></table></figure>
+
+<h3 id="按照权限查找"><a href="#按照权限查找" class="headerlink" title="按照权限查找"></a>按照权限查找</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">## 找出权限为777的文件</span><br><span class="line">find . -type f -perm 777</span><br><span class="line"></span><br><span class="line">## 找出权限不是644的.php文件</span><br><span class="line">find . -type f -name &quot;*.php&quot; ! -perm 644</span><br><span class="line"></span><br><span class="line">## 找出当前目录用户组zhai拥有的文件</span><br><span class="line">find . -type f -group zhai</span><br></pre></td></tr></table></figure>
+
+<h3 id="借助-exec与其他命令连用"><a href="#借助-exec与其他命令连用" class="headerlink" title="借助-exec与其他命令连用"></a>借助-exec与其他命令连用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">## 找出当前目录下所有root的文件，并把所有权更改为用户tom</span><br><span class="line">find .-type f -user root -exec chown tom &#123;&#125; \;</span><br><span class="line"># 上例中，**&#123;&#125;** 用于与**-exec**选项结合使用来匹配所有文件，然后会被替换为相应的文件名。</span><br><span class="line">## 找出自己家目录下所有的.txt文件并删除</span><br><span class="line">find $HOME/. -name &quot;*.txt&quot; -ok rm &#123;&#125; \;</span><br><span class="line"># 上例中，**-ok**和**-exec**行为一样，不过它会给出提示，是否执行相应的操作。</span><br><span class="line">## 查找当前目录下所有.txt文件并把他们拼接起来写入到all.txt文件中</span><br><span class="line">find . -type f -name &quot;*.txt&quot; -exec cat &#123;&#125; \;&gt; all.txt</span><br><span class="line">## 将30天前的.log文件移动到old目录中</span><br><span class="line">find . -type f -mtime +30 -name &quot;*.log&quot; -exec cp &#123;&#125; old \;</span><br><span class="line">## 找出当前目录下所有.txt文件并以“File:文件名”的形式打印出来</span><br><span class="line">find . -type f -name &quot;*.txt&quot; -exec printf &quot;File: %s\n&quot; &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<h3 id="exec后接多行命令"><a href="#exec后接多行命令" class="headerlink" title="-exec后接多行命令"></a>-exec后接多行命令</h3><p>因为单行命令中-exec参数中无法使用多个命令，以下方法可以实现在-exec之后接受多条命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-exec ./text.sh &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<h3 id="跳过（排除）指定目录搜索"><a href="#跳过（排除）指定目录搜索" class="headerlink" title="跳过（排除）指定目录搜索"></a>跳过（排除）指定目录搜索</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## 查找当前目录或者子目录下所有.txt文件，但是跳过子目录sk</span><br><span class="line">find . -path &quot;./sk&quot; -prune -o -name &quot;*.txt&quot; -print</span><br></pre></td></tr></table></figure>
+
+<h2 id="find其他技巧收集"><a href="#find其他技巧收集" class="headerlink" title="find其他技巧收集"></a>find其他技巧收集</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## 要列出所有长度为零的文件</span><br><span class="line">find . -empty</span><br></pre></td></tr></table></figure>
+
+<h2 id="详细语法"><a href="#详细语法" class="headerlink" title="详细语法"></a>详细语法</h2><p>查找目录：find &#x2F;（查找范围） -name ‘查找关键字’ -type d </p>
+<p>查找文件：find &#x2F;（查找范围） -name 查找关键字 -print</p>
+<p><strong>find命令</strong>用来在指定目录下查找文件。任何位于参数之前的字符串都将被视为欲查找的目录名。如果使用该命令时，不设置任何参数，则find命令将在当前目录下查找子目录与文件。并且将查找到的子目录和文件全部进行显示。</p>
+<p><strong>语法</strong>：<code>find &lt;选项&gt; &lt;参数&gt;</code></p>
+<h1 id="zsh"><a href="#zsh" class="headerlink" title="zsh"></a>zsh</h1><p>&#96;&#96;$ chsh -s &#x2F;bin&#x2F;zsh&#96; 命令将 zsh 设置为系统默认 shell</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h5 id="oh-my-zsh"><a href="#oh-my-zsh" class="headerlink" title="oh-my-zsh"></a>oh-my-zsh</h5><p>使用 wget 下载脚本并安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c &quot;$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后同意使用 Oh-my-zsh 的配置模板覆盖已有的 <code>.zshrc</code>：</p>
+<h5 id="zsh-autosuggestions"><a href="#zsh-autosuggestions" class="headerlink" title="zsh-autosuggestions"></a>zsh-autosuggestions</h5><p>安装步骤：</p>
+<ol>
+<li>把插件下载到本地的 <code>~/.oh-my-zsh/custom/plugins</code> 目录：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在 <code>.zshrc</code> 中，把 <code>zsh-autosuggestions</code> 加入插件列表：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plugins=(</span><br><span class="line">    # other plugins...</span><br><span class="line">    zsh-autosuggestions  # 插件之间使用空格隔开</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h1 id="head"><a href="#head" class="headerlink" title="head"></a>head</h1><h2 id="查看指定多行"><a href="#查看指定多行" class="headerlink" title="查看指定多行"></a>查看指定多行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ head -n 1000</span><br></pre></td></tr></table></figure>
+
+<p>#sort</p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# sort [-fbMnrtuk] [file or stdin]</span><br><span class="line">选项与参数：</span><br><span class="line">-f  ：忽略大小写的差异，例如 A 与 a 视为编码相同；</span><br><span class="line">-b  ：忽略最前面的空白字元部分；</span><br><span class="line">-M  ：以月份的名字来排序，例如 JAN, DEC 等等的排序方法；</span><br><span class="line">-n  ：使用‘纯数字’进行排序(预设是以文字型态来排序的)；</span><br><span class="line">-r  ：反向排序；</span><br><span class="line">-u  ：就是 uniq ，相同的资料中，仅出现一行代表；</span><br><span class="line">-t  ：分隔符号，预设是用 [tab] 键来分隔；</span><br><span class="line">-k  ：以那个区间 (field) 来进行排序的意思</span><br></pre></td></tr></table></figure>
+
+<h2 id="按照指定列排序"><a href="#按照指定列排序" class="headerlink" title="按照指定列排序"></a>按照指定列排序</h2><p><code>$ sort -nk 3</code>	#按照第 3 列排序</p>
+<h1 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# uniq [-ic]</span><br><span class="line">选项与参数：</span><br><span class="line">-i  ：忽略大小写字元的不同；</span><br><span class="line">-c  ：进行计数</span><br></pre></td></tr></table></figure>
+
+<p>#clash</p>
+<p>在linux下使用clash</p>
+<p>（1）下载clash-for-linux</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/wanhebin/clash-for-linux.git</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>start.sh</code>中URL为订阅地址；</p>
+<p>（2）启动程序</p>
+<p>直接运行脚本<code>start.sh</code>，会打印以下信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ sh start.sh</span><br><span class="line">Clash订阅地址可访问！                                      [  OK  ]</span><br><span class="line">配置文件config.yaml下载成功！                              [  OK  ]</span><br><span class="line">服务启动成功！                                             [  OK  ]</span><br><span class="line"></span><br><span class="line">Clash Dashboard 访问地址：http://IP:9090/ui</span><br><span class="line">Secret：xxxxxxxxxxxxx</span><br><span class="line"></span><br><span class="line">请执行以下命令加载环境变量: source /etc/profile.d/clash.sh</span><br><span class="line"></span><br><span class="line">请执行以下命令开启系统代理: proxy_on</span><br><span class="line"></span><br><span class="line">若要临时关闭系统代理，请执行: proxy_off</span><br></pre></td></tr></table></figure>
+
+<p>使用命令行登录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># $  curl http://192.168.10.29:9090/ui -H &quot;Authentication: b&amp;ZlKTte5OnEt2Sn&quot;</span><br><span class="line">$ curl http://192.168.1.123:9090/ui -H &quot;Authentication: b&amp;ZlKTte5OnEt2Sn&quot;</span><br><span class="line">$ source /etc/profile.d/clash.sh</span><br><span class="line">$ proxy_on</span><br></pre></td></tr></table></figure>
+
+<p>（3）检查是否打开</p>
+<p>检查服务端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ netstat -tln | grep -E &#x27;9090|789.&#x27;</span><br><span class="line">tcp        0      0 127.0.0.1:9090          0.0.0.0:*               LISTEN     </span><br><span class="line">tcp6       0      0 :::7890                 :::*                    LISTEN     </span><br><span class="line">tcp6       0      0 :::7891                 :::*                    LISTEN     </span><br><span class="line">tcp6       0      0 :::7892                 :::*                    LISTEN</span><br></pre></td></tr></table></figure>
+
+<p>检查环境变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ env | grep -E &#x27;http_proxy|https_proxy&#x27;</span><br><span class="line">http_proxy=http://127.0.0.1:7890</span><br><span class="line">https_proxy=http://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
+
+<p>如果上述信息正常，表示启动成功。</p>
+<p>（4）停止程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd clash-for-linux</span><br><span class="line">$ ./shutdown.sh</span><br></pre></td></tr></table></figure>
+
+<p>然后关闭系统代理：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ proxy_off</span><br></pre></td></tr></table></figure>
+
+<p>再次检查程序端口、进程以及环境变量，都没有的话表示服务正常关闭。</p>
+<h1 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h1><h2 id="ssh远程转发（反向代理）"><a href="#ssh远程转发（反向代理）" class="headerlink" title="ssh远程转发（反向代理）"></a>ssh远程转发（反向代理）</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/weixin_38638945/article/details/113867770">(105条消息) 利用阿里云虚拟机作为跳板机实现内网穿透_阿里云跳板机_coderduck的博客-CSDN博客</a></p>
+<p>使用ipad通过云主机huiweiyun跳转连接到办公室主机deepin上；</p>
+<p><strong>云主机上的操作：</strong></p>
+<p>如果需要用20022端口做转发，则需要把改端口开放</p>
+<p><strong>以下操作在办公室电脑上完成：</strong></p>
+<p>（1）ssh使用密匙登录云主机（实现免密登录）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">### 1. 生成ssh密匙 </span><br><span class="line">$ ssh-keygen</span><br><span class="line">### 2. 上传到远程主机的authorized_keys文件上 </span><br><span class="line">$ ssh-copy-id zhai@&lt;huaweiyun_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（2）设置办公室主机ssh监视端口，以允许任意端口可以监视ssh端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">### 1.修改配置文件</span><br><span class="line">$ sudo vim /etc/ssh/sshd_config</span><br><span class="line"># 然后找到“#GatewayPorts no”，取消注释并把no改为yes</span><br><span class="line"></span><br><span class="line">### 2.重启sshd服务</span><br><span class="line">$ sudo systemctl restart sshd</span><br><span class="line">#或者</span><br><span class="line">$ sudo service sshd restart</span><br></pre></td></tr></table></figure>
+
+<p>（3）安装autossh（主要是有一个掉线自连的功能）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install autossh</span><br></pre></td></tr></table></figure>
+
+<p>（4）开启autossh</p>
+<p>此操作将云主机的20023端口作为转发端口，外界如ipad ssh连接到20023端口后，所有与此端口的交互都会被转发到实验室主机的22端口（ssh端口），以此实现内网穿透；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ autossh -p 22 -M 1234 -fCNR 20023:localhost:22 zhai@&lt;huaweiyun_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参数介绍：</p>
+<ul>
+<li>-p 指定远程连接到的ssh端口（如果是22可省略，因为22是ssh默认端口号）</li>
+<li>-M “port” 指定端口，用于监听该ssh转发服务；如果该服务异常关闭会自动重启；</li>
+<li>-f 后台运行</li>
+<li>-N 不执行远程命令</li>
+<li>-R 将云主机20023端口的内容转发到localhost的22端口</li>
+</ul>
+</blockquote>
+<p>（5）可选，设置autossh开机自启</p>
+<p>如果不设置此项，可手动执行步骤(4)中的指令启动；（个人未设置）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">### 修改一个开机执行的脚本，将启动命令加进去</span><br><span class="line">$ sudo vim /etc/rc.local</span><br><span class="line">### 添加以下命令</span><br><span class="line">$ su -c &#x27;autossh  -p 22 -M 1234 -fCNR 20023:localhost:22 zhai@&lt;huaweiyun_ip&gt;&#x27; &lt;本地用户&gt; &amp;</span><br></pre></td></tr></table></figure>
+
+<p><strong>进行访问</strong>：</p>
+<p>在任何一台支持ssh的主机上输入命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh &lt;实验室主机用户名&gt;@&lt;huaweiyun_ip&gt; -p 20023</span><br></pre></td></tr></table></figure>
+
+<p>注意连接密码是实验室主机上的用户密码。</p>
+<h2 id="配置无响应断连的时长"><a href="#配置无响应断连的时长" class="headerlink" title="配置无响应断连的时长"></a>配置无响应断连的时长</h2><h5 id="方案1，修改ssgd-config"><a href="#方案1，修改ssgd-config" class="headerlink" title="方案1，修改ssgd_config"></a>方案1，修改ssgd_config</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/ssh/sshd_config </span><br><span class="line">#ClientAliveInterval 0  #服务器向客户端发送请求消息的时间间隔，默认为0，不发送</span><br><span class="line">#ClientAliveCountMax 3  #服务器发出求后客户端没有响应的最大次数，超过后将自动断开。</span><br><span class="line">ClientAliveInterval 60  #每60秒发送一个KeepAlive请求</span><br><span class="line">ClientAliveCountMax 15  #总时间为：15*60 ，15分钟没有操作,终端断开。</span><br></pre></td></tr></table></figure>
+
+<p>重启：<code> #重启ssh服务，或用service sshd restart</code></p>
+<h5 id="方案2，修改profile，设置TMOUT"><a href="#方案2，修改profile，设置TMOUT" class="headerlink" title="方案2，修改profile，设置TMOUT"></a>方案2，修改profile，设置TMOUT</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/profile</span><br><span class="line">export TMOUT=1200 #单位秒  ,在文件末尾添加</span><br><span class="line">$ source /etc/profile  #reload配置文件</span><br></pre></td></tr></table></figure>
+
+<h1 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h1><h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><ul>
+<li>tar –cvf jpg.tar *.jpg 将目录里所有jpg文件打包成tar.jpg</li>
+<li>tar –czf jpg.tar.gz *.jpg 将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz</li>
+<li>tar –cjf jpg.tar.bz2 *.jpg 将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2</li>
+<li>tar –cZf jpg.tar.Z *.jpg 将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z</li>
+<li>rar a jpg.rar *.jpg rar格式的压缩，需要先下载rar for linux</li>
+<li>zip jpg.zip *.jpg zip格式的压缩，需要先下载zip for linux</li>
+</ul>
+<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><ul>
+<li>tar –xvf file.tar 解压 tar包</li>
+<li>tar -xzvf file.tar.gz 解压tar.gz</li>
+<li>tar -xjvf file.tar.bz2 解压 tar.bz2</li>
+<li>tar –xZvf file.tar.Z 解压tar.Z</li>
+<li>unrar e file.rar 解压rar</li>
+<li>unzip file.zip 解压zip</li>
+</ul>
+<p>.bz2<br>　　解压1：bzip2 -d FileName.bz2<br>　　解压2：bunzip2 FileName.bz2<br>　　压缩： bzip2 -z FileName </p>
+<p>.tar.bz2<br>　　解压：tar jxvf FileName.tar.bz2        或 tar –bzip xvf FileName.tar.bz2<br>　　压缩：tar jcvf FileName.tar.bz2 DirName </p>
+<h1 id="samba配置"><a href="#samba配置" class="headerlink" title="samba配置"></a>samba配置</h1><p>注：在deepin系统上配置（大同小异）</p>
+<ol>
+<li>编辑配置文件： <code>sudo nvim /etc/samba/smb.conf</code></li>
+<li>将linux用户添加到可使用samba的名单中：<code>sudo smbpasswd zhai</code> ，然后会要求输出密码（独立的远程访问密码，可与sudo密码不一致）</li>
+<li>添加配置：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[zhai_workspace]	# 用win连接时会显示的远程文件目录名称</span><br><span class="line">    comment = zhai Directories</span><br><span class="line">    #是否可浏览</span><br><span class="line">    browseable = yes</span><br><span class="line">    # 共享目录的路径</span><br><span class="line">    path = /home/zhai/workspace/</span><br><span class="line">    # 是否可写</span><br><span class="line">    writable = yes</span><br><span class="line">    # 设置远程用户创建文件时的默认权限</span><br><span class="line">    directory mode = 0755</span><br><span class="line">    force directory mode = 0755</span><br><span class="line">    # 是否可创建文件夹</span><br><span class="line">    create mode = 0644</span><br><span class="line">    force create = 0644</span><br><span class="line">    # 设置能访问该目录的用户</span><br><span class="line">    valid user = zhai</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在windows文件管理器–网络中输入ip地址<code>\\192.168.1.123</code>，即可看到共享的文件夹，点击输入用户名和密码即可（第一次连接即使用户名密码输入正确也会报输入错误，此时重新打开文件管理器即可）；</li>
+</ol>
+<h1 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h1><h2 id="chocolately包管理器"><a href="#chocolately包管理器" class="headerlink" title="chocolately包管理器"></a>chocolately包管理器</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choco install  &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><p>##关机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 关机</span><br><span class="line">$ shutdown -h now</span><br><span class="line">$ shutdown -h +30  ## 30分钟后</span><br><span class="line">## ：在晚上 20:00 关机，并显示 &quot;系统维护&quot; 消息给登录用户</span><br><span class="line">$ sudo shutdown -h 20:00 &quot;系统维护&quot;</span><br><span class="line"></span><br><span class="line"># 重启</span><br><span class="line">$ shutdown -r</span><br></pre></td></tr></table></figure>
+
+<h2 id="ctrl-z"><a href="#ctrl-z" class="headerlink" title="ctrl+z"></a>ctrl+z</h2><p>将程序切换到后台</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 输入ctrl+z可以将程序暂停并放到后台，运行后会有如下提示：</span><br><span class="line">[1]+ stopped ...</span><br><span class="line"></span><br><span class="line"># 把程序调度到后台执行</span><br><span class="line">$ bg 1		# 1为作业号</span><br><span class="line"># 查看作业号</span><br><span class="line">$ jobs</span><br><span class="line">[1]+ running ... &amp;</span><br><span class="line"># 调到前台运行</span><br><span class="line">$ fg 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><h3 id="查看已安装软件"><a href="#查看已安装软件" class="headerlink" title="查看已安装软件"></a>查看已安装软件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt list --installed</span><br></pre></td></tr></table></figure>
+
+<p>一般使用dpkg</p>
+<p>###卸载软件</p>
+<table>
+<thead>
+<tr>
+<th>apt-get remove</th>
+<th>删除已安装的软件包（保留配置文件），不会删除依赖软件包，保留配置文件；</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>apt-get purge</td>
+<td>删除已安装的软件包（不保留配置文件)，删除软件包，同时删除相应依赖软件包；</td>
+</tr>
+<tr>
+<td>apt-get autoremove</td>
+<td>删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件；</td>
+</tr>
+<tr>
+<td>apt-get clean</td>
+<td>删除已经安装过的的软件安装包；</td>
+</tr>
+</tbody></table>
+<h2 id="dpkg"><a href="#dpkg" class="headerlink" title="dpkg"></a>dpkg</h2><h3 id="查看已安装软件-1"><a href="#查看已安装软件-1" class="headerlink" title="查看已安装软件"></a>查看已安装软件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ dpkg -l | grep  </span><br></pre></td></tr></table></figure>
+
+<h3 id="查看软件安装路径"><a href="#查看软件安装路径" class="headerlink" title="查看软件安装路径"></a>查看软件安装路径</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ dpkg -L | grep</span><br></pre></td></tr></table></figure>
+
+<h2 id="ubuntu18-04更换清华源"><a href="#ubuntu18-04更换清华源" class="headerlink" title="ubuntu18.04更换清华源"></a>ubuntu18.04更换清华源</h2><p>先备份一下原文件，然后编辑文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+<h2 id="ln-软硬链接"><a href="#ln-软硬链接" class="headerlink" title="ln 软硬链接"></a>ln 软硬链接</h2><p>命令格式：<code>$ ln [选项] 源文件 目标文件</code></p>
+<p>选项：</p>
+<ul>
+<li>-s：建立软链接文件。如果不加 “-s” 选项，则建立硬链接文件；</li>
+<li>-f：强制。如果目标文件已经存在，则删除目标文件后再建立链接文件；</li>
+</ul>
+<h3 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ln /root/cangls /tmp</span><br><span class="line"># 建立硬链接文件，目标文件没有写文件名，会和原名一致</span><br><span class="line"># 也就是/tmp/cangls 是硬链接文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="软连接"><a href="#软连接" class="headerlink" title="软连接"></a>软连接</h3><p>类似快捷方式，删除软链接并不影响源文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#建立软链接文件</span><br><span class="line">$ ln -s /zhai/bols /tmp</span><br><span class="line">## ln -s &lt;源存在文件&gt; &lt;“快捷方式”&gt;</span><br><span class="line">## 会在tmp下创建一个“软链接（快捷方式）”指向/zhai/bols</span><br><span class="line">## 结果：/tmp/bols --&gt; /zhai/bols</span><br><span class="line"></span><br><span class="line"># 链接目录</span><br><span class="line">$ ln -s /zhai/test/ /tmp/</span><br><span class="line">## 结果：/tmp/test/ --&gt; /zhai/test/</span><br><span class="line"></span><br><span class="line"># 修改软链接</span><br><span class="line">$ ln –snf  [新的源文件或目录]  [目标文件或目录]</span><br></pre></td></tr></table></figure>
+
+<p>注：这里需要注意，软链接文件的源文件必须写成<em>绝对路径</em>，而不能写成相对路径（硬链接没有这样的要求）；否则软链接文件会报错。这是初学者非常容易犯的错误。</p>
+<h3 id="软硬链接的区别"><a href="#软硬链接的区别" class="headerlink" title="软硬链接的区别"></a>软硬链接的区别</h3><p>参考文献： <a target="_blank" rel="external nofollow noopener noreferrer" href="http://c.biancheng.net/view/740.html">Linux ln软硬链接原理详解</a></p>
+<p>“一般使用软链接”；</p>
+<p><em>硬链接的特点</em></p>
+<p>不论是修改源文件（test 文件），还是修改硬链接文件（test-hard 文件），另一个文件中的数据都会发生改变。</p>
+<ul>
+<li>不论是删除源文件，还是删除硬链接文件，只要还有一个文件存在，这个文件（inode 号是 262147 的文件）都可以被访问。</li>
+<li>硬链接不会建立新的 inode 信息，也不会更改 inode 的总数。</li>
+<li>硬链接不能跨文件系统（分区）建立，因为在不同的文件系统中，inode 号是重新计算的。</li>
+<li>硬链接不能链接目录，因为如果给目录建立硬链接，那么不仅目录本身需要重新建立，目录下所有的子文件，包括子目录中的所有子文件都需要建立硬链接，这对当前的 Linux 来讲过于复杂。</li>
+</ul>
+<p>硬链接的限制比较多，既不能跨文件系统，也不能链接目录，而且源文件和硬链接文件之间除 inode 号是一样的之外，没有其他明显的特征。这些特征都使得硬链接并不常用，大家有所了解就好。</p>
+<p><em>软链接的特点（软链接的特点和 Windows 中的快捷方式完全一致）</em></p>
+<ul>
+<li>不论是修改源文件（check），还是修改硬链接文件（check-soft)，另一个文件中的数据都会发生改变。</li>
+<li>删除软链接文件，源文件不受影响。而删除原文件，软链接文件将找不到实际的数据，从而显示文件不存在。</li>
+<li>软链接会新建自己的 inode 信息和 block，只是在 block 中不存储实际文件数据，而存储的是源文件的文件名及 inode 号。</li>
+<li>软链接可以链接目录。</li>
+<li>软链接可以跨分区。</li>
+</ul>
+<h1 id="gcc"><a href="#gcc" class="headerlink" title="gcc"></a>gcc</h1><p>一些编译选项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 打印日志</span><br><span class="line">--verbose</span><br><span class="line"></span><br><span class="line"># 打印链接选项</span><br><span class="line">-Wl</span><br></pre></td></tr></table></figure>
+
+<h1 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&gt; layout next  //显示源程序</span><br><span class="line">&gt; r //运行源程序</span><br><span class="line">&gt; refresh  //清除界面信息</span><br><span class="line">&gt; b &lt;func_name&gt;  //对函数打断点</span><br><span class="line">&gt; b &lt;line_num&gt; if a == 2</span><br><span class="line">&gt; tbreak  //临时断点（只中断一次）</span><br><span class="line">&gt; where  //段错误时可定位到哪一行错误</span><br><span class="line">&gt; watch a  //查看变量a变化，会在界面打印a的值</span><br><span class="line">&gt; c  //运行直到下一个断点</span><br><span class="line">&gt; thread apply all watch a</span><br><span class="line">&gt; info threads </span><br><span class="line">&gt; info b  //查看所有断点</span><br><span class="line">&gt; d &lt;break_num&gt;  //删除断点</span><br><span class="line">&gt; thread 3  //查看线程3</span><br><span class="line">&gt; bt  //查看调用堆栈</span><br><span class="line"></span><br><span class="line">&gt; n  //下一步（不进入函数）</span><br><span class="line">&gt; s  //下一步（进入函数）</span><br><span class="line">&gt; c  //执行到断点</span><br><span class="line">&gt; q  //退出</span><br><span class="line">&gt; start  //执行到main停下</span><br><span class="line">&gt; p a  //查看a值</span><br><span class="line">&gt; ptype a  //查看a类型</span><br><span class="line"></span><br><span class="line">&gt; set args &lt;参数1&gt; ; r  //设置参数后执行</span><br><span class="line">&gt; r &lt;参数1&gt;  //设置启动参数1</span><br><span class="line">&gt; display a  //每次单步执行后查看变量值</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>(gdb) p hct-&gt;m_epollfd ==&gt; $2 = (int *) 0x0</code>：指针值为 <code>0x0</code> 表示该指针当前为空指针，即未指向任何有效的内存地址；</li>
+</ul>
+<h1 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br></pre></td></tr></table></figure>
+
+<h1 id="SpaceVim"><a href="#SpaceVim" class="headerlink" title="SpaceVim"></a>SpaceVim</h1><p>需要的快捷键：</p>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能描述</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\</td>
+<td><leader></leader></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>便签页操作</strong></td>
+<td>###################################</td>
+<td>################</td>
+</tr>
+<tr>
+<td>Leader 1</td>
+<td>跳转到标签栏1</td>
+<td></td>
+</tr>
+<tr>
+<td>g r</td>
+<td>跳回前一个Tab，常用于两个Tab来回切换</td>
+<td></td>
+</tr>
+<tr>
+<td>SPC t t</td>
+<td>打开标签管理器</td>
+<td></td>
+</tr>
+<tr>
+<td>–&gt; o r n N x</td>
+<td>展开&#x2F;重命名&#x2F;新建命名&#x2F;新建匿名标签页</td>
+<td>打开标签管理器后的操作</td>
+</tr>
+<tr>
+<td>–&gt; Ctrl-S-↑</td>
+<td>向上移动光标下的标签页</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>文件树</strong></td>
+<td>###################################</td>
+<td>################</td>
+</tr>
+<tr>
+<td>F3 &#x2F; SPC f t</td>
+<td>切换文件树</td>
+<td>F3被截图占用，使用后者打开</td>
+</tr>
+<tr>
+<td>–&gt; h j k l</td>
+<td>移至父目录并关闭文件夹 上 下 展开或打开</td>
+<td></td>
+</tr>
+<tr>
+<td>–&gt; N</td>
+<td>在光标位置新建文件</td>
+<td></td>
+</tr>
+<tr>
+<td>–&gt; y y</td>
+<td>复制光标下文件路径值系统剪切板</td>
+<td></td>
+</tr>
+<tr>
+<td>–&gt; y Y</td>
+<td>复制文件</td>
+<td></td>
+</tr>
+<tr>
+<td>–&gt; P</td>
+<td>粘贴文件</td>
+<td></td>
+</tr>
+<tr>
+<td>–&gt; .</td>
+<td>切换显示隐藏文件</td>
+<td></td>
+</tr>
+<tr>
+<td>–&gt; s v&#x2F;g</td>
+<td>水平&#x2F;垂直分屏编辑文件</td>
+<td></td>
+</tr>
+<tr>
+<td>–&gt; &lt; &gt;</td>
+<td>调整文件树宽度</td>
+<td></td>
+</tr>
+<tr>
+<td>–&gt; ‘ &#x2F; V</td>
+<td>标记 取消标记 光标下的文件（夹）</td>
+<td></td>
+</tr>
+<tr>
+<td>–&gt; Ctrl + r</td>
+<td>刷新页面</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>基本操作</strong></td>
+<td>###################################</td>
+<td>##################</td>
+</tr>
+<tr>
+<td>H &#x2F; L</td>
+<td>移动光标至屏幕顶部 &#x2F; 底部</td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; &#x2F; &lt;</td>
+<td>左右移动文本</td>
+<td></td>
+</tr>
+<tr>
+<td>} &#x2F; {</td>
+<td>向前 &#x2F; 后 移动一个段落</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl-f&#x2F;b Shift-↓&#x2F;↑</td>
+<td>向下 &#x2F; 上翻页</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>注释</strong></td>
+<td>###################################</td>
+<td>##################</td>
+</tr>
+<tr>
+<td>SPC ;</td>
+<td>进入注释选择模式</td>
+<td>需要搭配 3 + j&#x2F;k样式使用</td>
+</tr>
+<tr>
+<td>SPC c l</td>
+<td>注释&#x2F;反注释 当前行</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="VIM"><a href="#VIM" class="headerlink" title="VIM"></a>VIM</h1><h2 id="vim-grep-过滤文件内容"><a href="#vim-grep-过滤文件内容" class="headerlink" title="vim + grep 过滤文件内容"></a>vim + grep 过滤文件内容</h2><p>其实就是用grep的结果覆盖掉所选定范围内的内容，具体操作看grep的使用。</p>
+<p>在vim中输入：</p>
+<h3 id="保留指定内容"><a href="#保留指定内容" class="headerlink" title="保留指定内容"></a>保留指定内容</h3><p><code>:%!grep execve</code> 用grep的结果来替换全文的内容；</p>
+<ul>
+<li><code>%</code>表示范围为所有内容，也可使用块模式选择范围后使用，或者使用行号表示范围；</li>
+<li><code>!</code>表示管道符</li>
+</ul>
+<h3 id="保留多个指定内容的行"><a href="#保留多个指定内容的行" class="headerlink" title="保留多个指定内容的行"></a>保留多个指定内容的行</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%!grep -e str01 -e str02 ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="反向过滤，不要指定内容的行"><a href="#反向过滤，不要指定内容的行" class="headerlink" title="反向过滤，不要指定内容的行"></a>反向过滤，不要指定内容的行</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%!grep -v str01</span><br></pre></td></tr></table></figure>
+
+<h2 id="将其他程序的输出导入vim"><a href="#将其他程序的输出导入vim" class="headerlink" title="将其他程序的输出导入vim"></a>将其他程序的输出导入vim</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ strace -f gcc helloworld.c |&amp; vim -</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其中<code>|&amp;</code>是将 <strong>stdin</strong> 和 <strong>stderr</strong> 的信息全部放入管道。</li>
+<li><code>vim -</code>命令 将 stdin 重定向到 <code>/dev/null</code>并打开vim，意味着可以在没有文件名的情况下启动vim并读取stdin内容；<code>$ cat | vim - output.txt //读取stdin并保存到output.txt中</code></li>
+</ul>
+<p>注意：必须是<code>vim -</code>，少 - 会闪退。</p>
+<h2 id="模式匹配相关"><a href="#模式匹配相关" class="headerlink" title="模式匹配相关"></a>模式匹配相关</h2><p>####大小写</p>
+<ul>
+<li><code>/\c</code> 查找模式忽略大小写；</li>
+<li><code>/\C</code> 查找强制区分大小写；</li>
+</ul>
+<h3 id="正则相关"><a href="#正则相关" class="headerlink" title="正则相关"></a>正则相关</h3><p>默认模式下<code>( ) &#123; &#125; </code>需要转义。以下的在前缀匹配符号：<code>/</code> 后面的那内容：</p>
+<ul>
+<li><code>\v</code> very magic模式，假定 <code>_ 所有字母 0~9</code>之外的所有字符都具有特殊含义（想用源字符加 \）；</li>
+<li><code>\x</code> 匹配完整的字符集：<code>[0-9a-fA-F]</code>；</li>
+<li><code>\V</code> 按照原文匹配（不按照正则），如匹配”a.b”：<code>/\Va.b</code>，“.”不会被当作特殊字符；</li>
+<li><code>/\v%(A|B)</code> “%()”表示仅匹配但并不会赋值给寄存器<code>\1</code></li>
+</ul>
+<p>&#x3D;&#x3D;<em>一个例子：</em>&#x3D;&#x3D;csv格式的三元组（中间用空格隔开），创建为neo4j的插入语句，原数据为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">江河 超过警戒水位 当地防汛机构</span><br></pre></td></tr></table></figure>
+
+<p>需要改写为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(江河:地点&#123;name:&#x27;江河&#x27;&#125;),</span><br><span class="line">(当地防汛机构:管理单位&#123;name:&#x27;当地防汛机构&#x27;&#125;),</span><br><span class="line">(江河)-[:发生]-&gt;(超过警戒水位),</span><br><span class="line">(超过警戒水位)-[:管理单位]-&gt;(当地防汛机构),</span><br></pre></td></tr></table></figure>
+
+<p>当然上述是两种格式，分两个匹配格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">### 两种为：</span><br><span class="line">:s/\v(\w+)\_s(\w+)\_s(\w+)\_s/(\1:地点&#123;name:&#x27;\1&#x27;&#125;),\r(\3:风险事件&#123;name:&#x27;\3&#x27;&#125;),/g</span><br><span class="line">:s/\v(\w+)\_s(\w+)\_s(\w+)\_s/(\1)-[:发生]-&gt;(\3),\r(\2)-[:管理单位]-&gt;(\3),/g</span><br></pre></td></tr></table></figure>
+
+<h3 id="界定符-“-”"><a href="#界定符-“-”" class="headerlink" title="界定符 “&lt; &gt;”"></a>界定符 “&lt; &gt;”</h3><p>对于文本内容：“these the they the”，如果直接匹配the，会匹配到 4 个结果。如果想只匹配the，加上界定符即可：<code>/\v&lt;the&gt;</code></p>
+<h2 id="使用括号匹配"><a href="#使用括号匹配" class="headerlink" title="使用括号匹配"></a>使用括号匹配</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 例如有如下文件格式：test.txt</span><br><span class="line">$ cat test.txt</span><br><span class="line">AAA BBB CCC</span><br><span class="line">DDD EEE FFF</span><br><span class="line"># 使用(括号)匹配，将他们格式化为&quot;CCC BBB AAA&quot;和&quot;DDD EEE FFF&quot;</span><br><span class="line">## 方法一：直接使用 先用shift+v选中块，然后:s替换 \v表示</span><br><span class="line">:s/\v(\w+)\_s(\w+)\_s(\w+)\_s/\3 \2 \1/g</span><br><span class="line"></span><br><span class="line">## 方法二：先 /搜索并将文本加入缓存，再使用:s</span><br><span class="line">/\v(\w+)\_s(\w+)\_s(\w+)\_s</span><br><span class="line">:s/\1 \2 \3/\3 \2 \1/g</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><code>\w+</code>表示匹配一个或多个字母或数字，如果是汉字，需要使用<code>\S+</code></li>
+<li><code>(\w+)</code>表示将匹配的值加入缓存，使用<code>\数字</code>来使用它</li>
+<li><code>\_s</code>表示匹配空格或换行</li>
+<li><code>\r</code>表示换行</li>
+</ul>
+<h2 id="vimc常用命令"><a href="#vimc常用命令" class="headerlink" title="vimc常用命令"></a>vimc常用命令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#vim </span><br><span class="line">&gt; 全局替换：`:g/p1/s//p2/g`</span><br><span class="line">&gt; 范围替换：`:n1,n2s/p1/p2/g`</span><br><span class="line">&gt; 单行替换：`s/p1/p2/g`</span><br><span class="line"></span><br><span class="line">#缓冲区</span><br><span class="line">&gt; :ls 查看缓冲区文件列表</span><br><span class="line">&gt; :bpre :bnext :bfirst :blast 切换缓冲区内的文件</span><br><span class="line">&gt; :edit &lt;filename&gt; 把文件加入缓冲区</span><br><span class="line"></span><br><span class="line">#多窗口（水平切是指上下窗口）</span><br><span class="line">&gt; &lt;C-w&gt;s 水平  &lt;C-w&gt;v 垂直</span><br><span class="line">&gt; :split &#123;file&#125; 水平切分窗口，新窗口显示file（即把file加入缓冲区）</span><br><span class="line">&gt; :vsplit &#123;file&#125;</span><br><span class="line">&gt; &lt;C-w&gt;w &lt;C-w&gt;hjkl 切换窗口</span><br><span class="line">&gt; &lt;C-w&gt;c  :close  关闭活动窗口</span><br><span class="line">&gt; &lt;C-w&gt;o  :only  只保留活动窗口，关闭其他窗口</span><br><span class="line"></span><br><span class="line"># 合并行，保留空格</span><br><span class="line">&gt; 1, 3J</span><br><span class="line"># 合并行，行之间无空格</span><br><span class="line">&gt; g + shift + j</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h4 id="⭐Carl的VIM安装"><a href="#⭐Carl的VIM安装" class="headerlink" title="⭐Carl的VIM安装"></a>⭐Carl的VIM安装</h4><blockquote>
+<p>当前方案</p>
+</blockquote>
+<p>zr修改版本地址：<code>https://gitee.com/zhaixiangchao/zr_vim.git</code></p>
+<ul>
+<li>使用：创建<code>~/.config/nvim/</code>，将上述clone至nvim&#x2F;下（注意将目录移一下）</li>
+</ul>
+<p>源地址<code>https://github.com/youngyangyang04/PowerVim</code></p>
+<p>注意，其中自带Nerdtree、airline等，不需要自己安装</p>
+<p>所做的修改：</p>
+<ul>
+<li>主题修改</li>
+<li>去掉一些java的辅助</li>
+<li>windows下需要安装ctags，简单下载，放到环境变量里即可；linux下apt直接安装。</li>
+<li></li>
+</ul>
+<h3 id="针对vim低于8版本的安装"><a href="#针对vim低于8版本的安装" class="headerlink" title="针对vim低于8版本的安装"></a>针对vim低于8版本的安装</h3><h4 id="安装vim9"><a href="#安装vim9" class="headerlink" title="安装vim9"></a>安装vim9</h4><p>1、先卸载默认的vim8</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt purge vim vim-*</span><br><span class="line">sudo apt autoremove</span><br></pre></td></tr></table></figure>
+
+<p>2、安装编译依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install lua5.3 liblua5.3-dev ruby2.5-dev python3-pip cmake gettext</span><br></pre></td></tr></table></figure>
+
+<p>3、下载源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone -b v9.0.1504 https://github.com/vim/vim.git ~/Downloads/vim9</span><br></pre></td></tr></table></figure>
+
+<p>4、编译与安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/opt/vim \</span><br><span class="line">    --with-features=huge \</span><br><span class="line">    --enable-multibyte \</span><br><span class="line">    --enable-rubyinterp=yes \</span><br><span class="line">    --enable-python3interp=yes \</span><br><span class="line">    --enable-luainterp=yes \</span><br><span class="line">    --enable-gui=gtk2 \</span><br><span class="line">    --enable-cscope \</span><br><span class="line">    --enable-fail-if-missing</span><br><span class="line"></span><br><span class="line">make -j6</span><br><span class="line">sudo make install</span><br><span class="line">sudo ln -s /opt/vim/bin/vim /usr/local/bin/vim</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装neovim"><a href="#安装neovim" class="headerlink" title="安装neovim"></a>安装neovim</h4><p>1、下载源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone -b v0.9.0 https://github.com/neovim/neovim.git ~/Downloads/neovim9</span><br></pre></td></tr></table></figure>
+
+<p>2、编译与安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">make CMAKE_EXTRA_FLAGS=&quot;-DCMAKE_INSTALL_PREFIX=/opt/neovim&quot;</span><br><span class="line">sudo make install</span><br><span class="line">sudo ln -s /opt/neovim/bin/nvim /usr/local/bin/nvim</span><br></pre></td></tr></table></figure>
+
+<h5 id="zr-nvim及插件安装"><a href="#zr-nvim及插件安装" class="headerlink" title="zr_nvim及插件安装"></a><del>zr_nvim及插件安装</del></h5><p>所有必要的东西已传git：<code>https://e.coding.net/zhaixc/util_workspace/utils_git.git</code></p>
+<p>安装方式见其中的<code>README.txt</code></p>
+<p>##nvim中调用shell命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:!man socket</span><br></pre></td></tr></table></figure>
+
+<h2 id="nvim配置"><a href="#nvim配置" class="headerlink" title="nvim配置"></a>nvim配置</h2><blockquote>
+<p>直接下载上述zr版即可，不需要配置</p>
+</blockquote>
+<p><strong>windows</strong>配置文件路径：<code>C:\Users\zhai\AppData\Local\nvim\init.vim</code></p>
+<p><strong>linux</strong> 安装nvim后自己在<code>~/.config/nvim/init.vim</code></p>
+<p>配置内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">zhai@zhai-PC:~/.config$ cat nvim/init.vim</span><br><span class="line">set tabstop=4</span><br><span class="line">set softtabstop=4</span><br><span class="line">set shiftwidth=4</span><br><span class="line"></span><br><span class="line">set noexpandtab</span><br><span class="line">set nu</span><br><span class="line">set autoindent</span><br><span class="line">set cindent</span><br><span class="line">set encoding=utf-8</span><br><span class="line">set fileencodings=utf-8</span><br><span class="line"></span><br><span class="line">&quot; 设置默认主题</span><br><span class="line">set bg=dark                     &quot;设置背景为黑色</span><br><span class="line">colorscheme snazzy              &quot;设置主题为 snazzy</span><br><span class="line">&quot; set guioptions=                 &quot;去掉两边的scrollbar</span><br><span class="line">&quot; set guifont=Monaco:h17          &quot;设置字体和字的大小</span><br><span class="line"></span><br><span class="line">&quot; 设置光标</span><br><span class="line">&quot; set guicursor=a:blinkon100    &quot;设置光标为方块闪烁，使用windows terminal时配置此选项</span><br><span class="line">set guicursor=n:blinkon100,i:ver10,v:hor40</span><br></pre></td></tr></table></figure>
+
+<p><strong>插件放置（离线安装）</strong></p>
+<p>在github下载相应的插件源码后，直接将必要的源码复制到<code>nvim/</code>下即可；</p>
+<p>目录内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zhai@zhai-PC:~/.config$ ls nvim/</span><br><span class="line">_config.yml  autoload  colors  init.vim  lib  nerdtree_plugin  plugin  syntax</span><br></pre></td></tr></table></figure>
+
+<h2 id="在多行开头和结尾添加"><a href="#在多行开头和结尾添加" class="headerlink" title="在多行开头和结尾添加"></a>在多行开头和结尾添加</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:1,10s/^/&quot;/g	# ^表示行开头，且不包含字符；同理$表示末尾</span><br><span class="line">:1,10s/$/&quot;/g</span><br></pre></td></tr></table></figure>
+
+<h1 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tmux source-file ~/.tmux.conf</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>TIPS：如果ssh连接意外断开，则所有进程或者下载进度都会被终止；而使用tmux创建的会话是被保存的，不会终止。</p>
+</blockquote>
+<p><strong>结构</strong>：Session( windows( panes ) )</p>
+<ul>
+<li><code>$ tmux</code> 打开新窗口</li>
+<li><code>$ tmux new -s &lt;session-name&gt; </code>会话外新建会话，也可以先离开当前会话，再输入<code>tmux</code>创建新的会话</li>
+<li><code>$ tmux attach -t &lt;session-name&gt;</code>重新进入会话</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>快捷键 默认都加前缀 ctrl + b</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt;&gt;<em>会话快捷键</em></td>
+<td>#######################################</td>
+</tr>
+<tr>
+<td>s</td>
+<td>列出所有会话</td>
+</tr>
+<tr>
+<td>$</td>
+<td>重命名当前会话</td>
+</tr>
+<tr>
+<td>d</td>
+<td>离开当前会话（工作空间），但是该会话仍然存在</td>
+</tr>
+<tr>
+<td>$ tmux attach -t &lt;会话编号&gt;</td>
+<td>可重新连接会话</td>
+</tr>
+<tr>
+<td>&gt;&gt; <em>窗口快捷键</em></td>
+<td>########################################</td>
+</tr>
+<tr>
+<td>c</td>
+<td>创建一个新窗口</td>
+</tr>
+<tr>
+<td>n</td>
+<td>切换到下一个窗口</td>
+</tr>
+<tr>
+<td>w</td>
+<td>从列表中选择窗口</td>
+</tr>
+<tr>
+<td>&lt;0~9&gt; “</td>
+<td>切换到指定编号的窗口，编号在状态栏上下分屏</td>
+</tr>
+<tr>
+<td>q</td>
+<td>会显示窗口编号</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>，</td>
+<td>重命名窗口</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>关闭窗口</td>
+</tr>
+<tr>
+<td>&gt;&gt; <em>窗格的快捷键</em></td>
+<td>#########################################</td>
+</tr>
+<tr>
+<td>%</td>
+<td>左右分屏</td>
+</tr>
+<tr>
+<td>z</td>
+<td>当前窗格全屏显示，再按一次恢复</td>
+</tr>
+<tr>
+<td>q</td>
+<td>显示窗格编号</td>
+</tr>
+<tr>
+<td>t</td>
+<td>在当前窗格显示时间</td>
+</tr>
+<tr>
+<td>&lt;上下左右&gt;</td>
+<td>切换窗格</td>
+</tr>
+<tr>
+<td>o</td>
+<td>光标切换到下一个窗格</td>
+</tr>
+<tr>
+<td>{ 、 }</td>
+<td>左移、右移当前窗格</td>
+</tr>
+<tr>
+<td>Ctrl+o、 Alt+o</td>
+<td>上移、下移当前窗格</td>
+</tr>
+<tr>
+<td>space</td>
+<td>切换窗格布局</td>
+</tr>
+<tr>
+<td>x</td>
+<td>关闭当前块屏</td>
+</tr>
+<tr>
+<td>ctrl + d 或 exit</td>
+<td>退出窗口</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h1><table>
+<thead>
+<tr>
+<th>变量</th>
+<th>含义</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$@</td>
+<td>（左边的）所有生成目标</td>
+<td></td>
+</tr>
+<tr>
+<td>$&lt;</td>
+<td>取所有依赖目标中的第一个</td>
+<td></td>
+</tr>
+<tr>
+<td>$?</td>
+<td>所有比目标新的依赖目标的集合</td>
+<td></td>
+</tr>
+<tr>
+<td>$^</td>
+<td>所哟依赖目标的集合</td>
+<td></td>
+</tr>
+<tr>
+<td>$+</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$*</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="自制模板V1-2"><a href="#自制模板V1-2" class="headerlink" title="自制模板V1.2"></a>自制模板V1.2</h2><p>非交叉编译使用此模板，只需要修改<code>vpath</code>对应新的.c目录即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">VERSION := 1.2</span><br><span class="line"></span><br><span class="line">CC := gcc</span><br><span class="line">CFLAGS := -Wall</span><br><span class="line">LIBS := -lpthread</span><br><span class="line"></span><br><span class="line">SRCS := $(shell find ./ -name &quot;*.c&quot;)</span><br><span class="line"></span><br><span class="line">SRCS_WITHOUT_DIR := $(notdir $(SRCS))</span><br><span class="line">OBJS := $(SRCS_WITHOUT_DIR:.c=.o)</span><br><span class="line">BUILD := ./build</span><br><span class="line">OBJS := $(addprefix $(BUILD)/, $(OBJS))</span><br><span class="line"></span><br><span class="line">TARGET := test</span><br><span class="line"></span><br><span class="line">DEPDIR := .deps</span><br><span class="line">DEPFILES := $(SRCS_WITHOUT_DIR:%.c=$(DEPDIR)/%.d)</span><br><span class="line"># DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d</span><br><span class="line"></span><br><span class="line">vpath %.c config</span><br><span class="line">vpath %.c lock</span><br><span class="line">vpath %.c log</span><br><span class="line">vpath %.c webserver</span><br><span class="line"></span><br><span class="line">all: $(TARGET)</span><br><span class="line"></span><br><span class="line">include $(DEPFILES)</span><br><span class="line"></span><br><span class="line">$(TARGET) : $(OBJS)</span><br><span class="line">    $(CC) $(CFLAGS) $^ -o $@ $(LIBS)</span><br><span class="line"></span><br><span class="line">$(OBJS): $(BUILD)/%.o : %.c $(DEPDIR)/%.d | $(DEPDIR)</span><br><span class="line">    $(CC) -c $(CFLAGS) $&lt; -o $@ $(LIBS)</span><br><span class="line"></span><br><span class="line"># 生成.d文件</span><br><span class="line">$(DEPFILES) : $(DEPDIR)/%.d : %.c | $(DEPDIR)</span><br><span class="line">    $(CC) -MM $&lt; &gt; $@ </span><br><span class="line"></span><br><span class="line">$(DEPDIR):</span><br><span class="line">    @mkdir -p $(DEPDIR)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.PHONY: clean debug</span><br><span class="line"></span><br><span class="line">clean :</span><br><span class="line">    rm -rf .deps $(OBJS)</span><br><span class="line"></span><br><span class="line">debug :</span><br><span class="line">    @echo OBJS is[$(OBJS)]</span><br><span class="line">    @echo DEPFILES is[$(DEPFILES)]</span><br><span class="line">    @echo SRCS_WITHOUT_DOR is[$(SRCS_WITHOUT_DIR)]</span><br><span class="line">    @echo ALL_VPATH is[$(SRCS_WITHOUT_DIR)]</span><br></pre></td></tr></table></figure>
+
+<p>路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">zhai@zhai-PC:~/linux_workspace/c_webserver$ tree</span><br><span class="line">.</span><br><span class="line">├── Makefile</span><br><span class="line">├── README.md</span><br><span class="line">├── build</span><br><span class="line">│   ├── main.o</span><br><span class="line">│   ├── util.o</span><br><span class="line">│   └── web_server.o</span><br><span class="line">├── main.c</span><br><span class="line">├── obj</span><br><span class="line">├── project</span><br><span class="line">├── test_server</span><br><span class="line">├── util</span><br><span class="line">│   ├── util.c</span><br><span class="line">│   └── util.h</span><br><span class="line">└── web_server</span><br><span class="line">    ├── web_server.c</span><br><span class="line">    └── web_server.h</span><br></pre></td></tr></table></figure>
+
+<h5 id><a href="#" class="headerlink" title></a></h5><h2 id="正点原子模板"><a href="#正点原子模板" class="headerlink" title="正点原子模板"></a>正点原子模板</h2><p>参考正点原子，路径：<code>F:\scm_source_workspace\IMX6Umini\01、例程源码\01、裸机例程\05_ledc_bsp\</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">CROSS_COMPILE 	?= arm-linux-gnueabihf-</span><br><span class="line">TARGET		  	?= bsp</span><br><span class="line"></span><br><span class="line">CC 				:= $(CROSS_COMPILE)gcc</span><br><span class="line">LD				:= $(CROSS_COMPILE)ld</span><br><span class="line">OBJCOPY 		:= $(CROSS_COMPILE)objcopy</span><br><span class="line">OBJDUMP 		:= $(CROSS_COMPILE)objdump</span><br><span class="line"></span><br><span class="line">INCDIRS 		:= imx6ul \</span><br><span class="line">                   bsp/clk \</span><br><span class="line">                   bsp/led \</span><br><span class="line">                   bsp/delay </span><br><span class="line">                   			   </span><br><span class="line">SRCDIRS			:= project \</span><br><span class="line">                   bsp/clk \</span><br><span class="line">                   bsp/led \</span><br><span class="line">                   bsp/delay </span><br><span class="line">                   </span><br><span class="line">                   </span><br><span class="line">INCLUDE			:= $(patsubst %, -I %, $(INCDIRS))</span><br><span class="line"></span><br><span class="line">SFILES			:= $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.S))</span><br><span class="line">CFILES			:= $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.c))</span><br><span class="line"></span><br><span class="line">SFILENDIR		:= $(notdir  $(SFILES))</span><br><span class="line">CFILENDIR		:= $(notdir  $(CFILES))</span><br><span class="line"></span><br><span class="line">SOBJS			:= $(patsubst %, obj/%, $(SFILENDIR:.S=.o))</span><br><span class="line">COBJS			:= $(patsubst %, obj/%, $(CFILENDIR:.c=.o))</span><br><span class="line">OBJS			:= $(SOBJS) $(COBJS)</span><br><span class="line"></span><br><span class="line">VPATH			:= $(SRCDIRS)</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br><span class="line">    </span><br><span class="line">$(TARGET).bin : $(OBJS)</span><br><span class="line">    $(LD) -Timx6ul.lds -o $(TARGET).elf $^</span><br><span class="line">    $(OBJCOPY) -O binary -S $(TARGET).elf $@</span><br><span class="line">    $(OBJDUMP) -D -m arm $(TARGET).elf &gt; $(TARGET).dis</span><br><span class="line"></span><br><span class="line">$(SOBJS) : obj/%.o : %.S</span><br><span class="line">    $(CC) -Wall -nostdlib -c -O2  $(INCLUDE) -o $@ $&lt;</span><br><span class="line"></span><br><span class="line">$(COBJS) : obj/%.o : %.c</span><br><span class="line">    $(CC) -Wall -nostdlib -c -O2  $(INCLUDE) -o $@ $&lt;</span><br><span class="line">    </span><br><span class="line">clean:</span><br><span class="line">    rm -rf $(TARGET).elf $(TARGET).dis $(TARGET).bin $(COBJS) $(SOBJS)</span><br></pre></td></tr></table></figure>
+
+<p>对应路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"># win10下tree</span><br><span class="line">$ tree . /f</span><br><span class="line"></span><br><span class="line">│  imx6ul.lds</span><br><span class="line">│  imxdownload</span><br><span class="line">│  ledc_bsp.code-workspace</span><br><span class="line">│  load.imx</span><br><span class="line">│  Makefile</span><br><span class="line">│</span><br><span class="line">├─bsp</span><br><span class="line">│  ├─clk</span><br><span class="line">│  │      bsp_clk.c</span><br><span class="line">│  │      bsp_clk.h</span><br><span class="line">│  │</span><br><span class="line">│  ├─delay</span><br><span class="line">│  │      bsp_delay.c</span><br><span class="line">│  │      bsp_delay.h</span><br><span class="line">│  │</span><br><span class="line">│  └─led</span><br><span class="line">│          bsp_led.c</span><br><span class="line">│          bsp_led.h</span><br><span class="line">│</span><br><span class="line">├─imx6ul</span><br><span class="line">│      cc.h</span><br><span class="line">│      fsl_common.h</span><br><span class="line">│      fsl_iomuxc.h</span><br><span class="line">│      imx6ul.h</span><br><span class="line">│      MCIMX6Y2.h</span><br><span class="line">│</span><br><span class="line">├─obj</span><br><span class="line">└─project</span><br><span class="line">        main.c</span><br><span class="line">        start.S</span><br></pre></td></tr></table></figure>
+
+<h2 id="报错-deps是一个文件"><a href="#报错-deps是一个文件" class="headerlink" title="报错.deps是一个文件"></a>报错.deps是一个文件</h2><p>报错：<code>make: *** .deps: Is a directory.  Stop.</code></p>
+<p>原因：<code>.deps </code>赋值时后面有空格</p>
+<h1 id="git"><a href="#git" class="headerlink" title="git"></a>git</h1><h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 1 clone仓库(clone之后一般自动关联)</span><br><span class="line">$ clone </span><br><span class="line"># 2 关联远程仓库（可选）</span><br><span class="line">$ git remote add origin https://e.coding.net/zhaixc/linux/webserver_cc.git</span><br><span class="line"></span><br><span class="line"># 创建分支</span><br><span class="line">git branch &lt;name&gt;</span><br><span class="line"># 重命名分支</span><br><span class="line">git branch -m &lt;oldname&gt; &lt;newname&gt;</span><br><span class="line"># 删除分支</span><br><span class="line">git branch -d &lt;name&gt;</span><br><span class="line"># 列出分支</span><br><span class="line">git branch</span><br><span class="line"># 切换分支</span><br><span class="line">git checkout &lt;name&gt;</span><br><span class="line"># 合并分支</span><br><span class="line">git merge</span><br></pre></td></tr></table></figure>
+
+<h2 id="本地仓库关联远程分支"><a href="#本地仓库关联远程分支" class="headerlink" title="本地仓库关联远程分支"></a>本地仓库关联远程分支</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 初始化仓库</span><br><span class="line">git init</span><br><span class="line"># 创建本地分支</span><br><span class="line">git branch zhai_branch</span><br><span class="line"># 关联远程仓库</span><br><span class="line">git remote add origin &lt;url&gt;</span><br><span class="line"># 拉取远程分支（master，或者需要要关联的分支）</span><br><span class="line">git pull origin master --allow-unrelated-histories</span><br><span class="line">git pull origin zhai_branch --allow-unrelated-histories</span><br><span class="line"># 读取远程仓库分支信息</span><br><span class="line">git branch -r</span><br><span class="line"># 本地分支与远程分支关联</span><br><span class="line">git branch -u origin/zhai_branch zhai_branch</span><br></pre></td></tr></table></figure>
+
+<h2 id="将本地文件git-push到远程新建仓库"><a href="#将本地文件git-push到远程新建仓库" class="headerlink" title="将本地文件git push到远程新建仓库"></a>将本地文件git push到远程新建仓库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 初始化本地仓库</span><br><span class="line">git init</span><br><span class="line"># 关联远程仓库</span><br><span class="line">git remote add origin &lt;url&gt;</span><br><span class="line"># 上传</span><br><span class="line">git add .</span><br><span class="line">git commot -m &quot; &quot;</span><br><span class="line">git push origin master</span><br><span class="line"></span><br><span class="line">### 可能会出现报错</span><br><span class="line">--------------------------------------------------------------------------</span><br><span class="line">Username for ‘https://gitee.com’: xxxxxx</span><br><span class="line">Password for ‘https://Lizxxxxx@gitee.com’:</span><br><span class="line">To https://gitee.com/Lizxxxxx0321/LZMtest.git</span><br><span class="line">! [rejected] master -&gt; master (fetch first)</span><br><span class="line">error: 无法推送一些引用到 ‘https://gitee.com/Lizhiming0321/LZMtest.git’</span><br><span class="line">提示：更新被拒绝，因为远程仓库包含您本地尚不存在的提交。这通常是因为另外</span><br><span class="line">提示：一个仓库已向该引用进行了推送。再次推送前，您可能需要先整合远程变更</span><br><span class="line">提示：（如 ‘git pull …’）。</span><br><span class="line">提示：详见 ‘git push --help’ 中的 ‘Note about fast-forwards’ 小节。</span><br><span class="line">--------------------------------------------------------------------------</span><br><span class="line">### 解决方案：</span><br><span class="line">git push -u origin +master</span><br></pre></td></tr></table></figure>
+
+<h2 id="撤销git-add的文件"><a href="#撤销git-add的文件" class="headerlink" title="撤销git add的文件"></a>撤销git add的文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset &lt;filename&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="gitigonre不起作用的问题"><a href="#gitigonre不起作用的问题" class="headerlink" title="gitigonre不起作用的问题"></a>gitigonre不起作用的问题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.gitigorne</span><br></pre></td></tr></table></figure>
+
+<p>注意其中路径要用斜杠<code>/</code>，反斜杠不起作用</p>
+<h1 id="sed-1"><a href="#sed-1" class="headerlink" title="sed"></a>sed</h1><p>#正则 </p>
+<h2 id="sed中特殊符号"><a href="#sed中特殊符号" class="headerlink" title="sed中特殊符号"></a>sed中特殊符号</h2><p>需要转义的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">. * [ ] $ &#123; &#125; \ + ? | ( )</span><br></pre></td></tr></table></figure>
+
+<h2 id="提取标签并计算不重复标签数"><a href="#提取标签并计算不重复标签数" class="headerlink" title="提取标签并计算不重复标签数"></a>提取标签并计算不重复标签数</h2><p>文件内容格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">你|+-+|B-NAM</span><br><span class="line">好|+-+|B-LOC</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>目的：过去出B-*并计算不重复标签数</p>
+<p>使用#grep 和#sed : </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># uniq只能去除相邻的相同行，所以需要先排序</span><br><span class="line">grep &quot;|B-.*&quot; bio_data.txt | sed &#x27;s/.*B-/B-/g&#x27; | sort | uniq -c</span><br></pre></td></tr></table></figure>
+
+<p>注意字符串中其它相同字符的影响，（有bug版本如下）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;B-.*&quot; bio_data.txt | sed &#x27;s/.*B/B/g&#x27; | sort | uniq -c</span><br></pre></td></tr></table></figure>
+
+<h1 id="vscode"><a href="#vscode" class="headerlink" title="vscode"></a>vscode</h1><h2 id="vscode创建工作区"><a href="#vscode创建工作区" class="headerlink" title="vscode创建工作区"></a>vscode创建工作区</h2><p>目的：查看一些工程源码，创建工作区后可以修改配置文件，可将无关的目录源码屏蔽掉；</p>
+<p>实例：比喻查看uboot启动流程；</p>
+<p>参考：imx6ul驱动开发指南–第31章–31.2 P740</p>
+<p>实现：</p>
+<ol>
+<li>点击“文件–&gt;将工作区另存为”，保存到当前源码根路径下；</li>
+<li>创建<code>.vscode</code>文件夹，在其下创建<code>setting.json</code>文件</li>
+<li>输入</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">    &quot;search.exclude&quot;: &#123; </span><br><span class="line">        &quot;**/node_modules&quot;: true, </span><br><span class="line">        &quot;**/bower_components&quot;: true, </span><br><span class="line">    &#125;, </span><br><span class="line">    &quot;files.exclude&quot;: &#123; </span><br><span class="line">        &quot;**/.git&quot;: true, </span><br><span class="line">        &quot;**/.svn&quot;: true, </span><br><span class="line">        &quot;**/.hg&quot;: true, </span><br><span class="line">        &quot;**/CVS&quot;: true, </span><br><span class="line">        &quot;**/.DS_Store&quot;: true,       </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>#uboot</p>
+<h2 id="uboot查看mmc（SD）是否正常"><a href="#uboot查看mmc（SD）是否正常" class="headerlink" title="uboot查看mmc（SD）是否正常"></a>uboot查看mmc（SD）是否正常</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">Normal Boot</span><br><span class="line">Hit any key to stop autoboot:  0 </span><br><span class="line">=&gt; </span><br><span class="line"></span><br><span class="line">=&gt; mmc list							# 查看所有存储设备</span><br><span class="line">FSL_SDHC: 0 (SD)</span><br><span class="line">FSL_SDHC: 1</span><br><span class="line">=&gt; mmc dev 0						# 切换到dev 0</span><br><span class="line">switch to partitions #0, OK</span><br><span class="line">mmc0 is current device</span><br><span class="line">=&gt; mmc info							# 查看信息</span><br><span class="line">Device: FSL_SDHC</span><br><span class="line">Manufacturer ID: 3</span><br><span class="line">OEM: 5344</span><br><span class="line">Name: SU08G </span><br><span class="line">Tran Speed: 25000000</span><br><span class="line">Rd Block Len: 512</span><br><span class="line">SD version 3.0</span><br><span class="line">High Capacity: Yes</span><br><span class="line">Capacity: 7.4 GiB</span><br><span class="line">Bus Width: 4-bit</span><br><span class="line">Erase Group Size: 512 Bytes</span><br><span class="line">=&gt; mmc dev 1</span><br><span class="line">switch to partitions #0, OK</span><br><span class="line">mmc1(part 0) is current device</span><br><span class="line">=&gt; mmc info</span><br><span class="line">Device: FSL_SDHC</span><br><span class="line">Manufacturer ID: 15</span><br><span class="line">OEM: 100</span><br><span class="line">Name: 8GTF4 </span><br><span class="line">Tran Speed: 52000000</span><br><span class="line">Rd Block Len: 512</span><br><span class="line">MMC version 4.0</span><br><span class="line">High Capacity: Yes</span><br><span class="line">Capacity: 7.3 GiB</span><br><span class="line">Bus Width: 8-bit</span><br><span class="line">Erase Group Size: 512 KiB</span><br></pre></td></tr></table></figure>
+
+<h1 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h1><h2 id="windows10下列出所有目录下文件"><a href="#windows10下列出所有目录下文件" class="headerlink" title="windows10下列出所有目录下文件"></a>windows10下列出所有目录下文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tree . \f</span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>linux常用工具命令速查</p><p><a href="https://bg4vrg.com/post/20240228150148.html">https://bg4vrg.com/post/20240228150148.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>fei</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-02-28</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-02-28</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/linux/">linux</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/alipay.png" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/wechatpay.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/20240228160039.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">一款黑客风格的屏保hollywood</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/20240225212004.html"><span class="level-item">wireguard学习配置</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://bg4vrg.com/post/20240228150148.html';
+            this.page.identifier = 'post/20240228150148.html';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'bg4vrg' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time datetime="2024-06-04T09:47:05.000Z">2024-06-04</time></p><p class="title"><a href="/post/20240604174705.html">迁移transmission数据到新建服务器</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-06-02T08:04:03.000Z">2024-06-02</time></p><p class="title"><a href="/post/20240602160403.html">rsync免密码传输</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-05-30T07:55:58.000Z">2024-05-30</time></p><p class="title"><a href="/post/20240530155558.html">unraid中部分硬盘无法休眠</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-05-22T05:07:44.000Z">2024-05-22</time></p><p class="title"><a href="/post/20240522130744.html">廉价业余无线电收发套件ADX-S v2</a></p><p class="categories"><a href="/categories/AmateurRadio/">业余无线电</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-04-21T12:47:58.000Z">2024-04-21</time></p><p class="title"><a href="/post/20240421204758.html">CsiR大佬新作NetOpsGUI:netops2.0的图形版</a></p><p class="categories"><a href="/categories/network/">网络</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/linux/"><span class="level-start"><span class="level-item">linux</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/AmateurRadio/"><span class="level-start"><span class="level-item">业余无线电</span></span><span class="level-end"><span class="level-item tag">40</span></span></a></li><li><a class="level is-mobile" href="/categories/network/"><span class="level-start"><span class="level-item">网络</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile" href="/categories/note/"><span class="level-start"><span class="level-item">记录</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#mv、cp、wc"><span class="level-left"><span class="level-item">mv、cp、wc</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#目录操作"><span class="level-left"><span class="level-item">目录操作</span></span></a></li></ul></li><li><a class="level is-mobile" href="#grep"><span class="level-left"><span class="level-item">grep</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基础知识"><span class="level-left"><span class="level-item">基础知识</span></span></a></li></ul></li><li><a class="level is-mobile" href="#sed"><span class="level-left"><span class="level-item">sed</span></span></a></li><li><a class="level is-mobile" href="#awk"><span class="level-left"><span class="level-item">awk</span></span></a></li><li><a class="level is-mobile" href="#find"><span class="level-left"><span class="level-item">find</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#常用实例"><span class="level-left"><span class="level-item">常用实例</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#按文件类型匹配"><span class="level-left"><span class="level-item">按文件类型匹配</span></span></a></li><li><a class="level is-mobile" href="#按时间查找"><span class="level-left"><span class="level-item">按时间查找</span></span></a></li><li><a class="level is-mobile" href="#按大小查找"><span class="level-left"><span class="level-item">按大小查找</span></span></a></li><li><a class="level is-mobile" href="#删除匹配文件"><span class="level-left"><span class="level-item">删除匹配文件</span></span></a></li><li><a class="level is-mobile" href="#按照权限查找"><span class="level-left"><span class="level-item">按照权限查找</span></span></a></li><li><a class="level is-mobile" href="#借助-exec与其他命令连用"><span class="level-left"><span class="level-item">借助-exec与其他命令连用</span></span></a></li><li><a class="level is-mobile" href="#exec后接多行命令"><span class="level-left"><span class="level-item">-exec后接多行命令</span></span></a></li><li><a class="level is-mobile" href="#跳过（排除）指定目录搜索"><span class="level-left"><span class="level-item">跳过（排除）指定目录搜索</span></span></a></li></ul></li><li><a class="level is-mobile" href="#find其他技巧收集"><span class="level-left"><span class="level-item">find其他技巧收集</span></span></a></li><li><a class="level is-mobile" href="#详细语法"><span class="level-left"><span class="level-item">详细语法</span></span></a></li></ul></li><li><a class="level is-mobile" href="#zsh"><span class="level-left"><span class="level-item">zsh</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#配置"><span class="level-left"><span class="level-item">配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#head"><span class="level-left"><span class="level-item">head</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#查看指定多行"><span class="level-left"><span class="level-item">查看指定多行</span></span></a></li><li><a class="level is-mobile" href="#基础"><span class="level-left"><span class="level-item">基础</span></span></a></li><li><a class="level is-mobile" href="#按照指定列排序"><span class="level-left"><span class="level-item">按照指定列排序</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uniq"><span class="level-left"><span class="level-item">uniq</span></span></a></li><li><a class="level is-mobile" href="#ssh"><span class="level-left"><span class="level-item">ssh</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#ssh远程转发（反向代理）"><span class="level-left"><span class="level-item">ssh远程转发（反向代理）</span></span></a></li><li><a class="level is-mobile" href="#配置无响应断连的时长"><span class="level-left"><span class="level-item">配置无响应断连的时长</span></span></a></li></ul></li><li><a class="level is-mobile" href="#tar"><span class="level-left"><span class="level-item">tar</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#压缩"><span class="level-left"><span class="level-item">压缩</span></span></a></li><li><a class="level is-mobile" href="#解压"><span class="level-left"><span class="level-item">解压</span></span></a></li></ul></li><li><a class="level is-mobile" href="#samba配置"><span class="level-left"><span class="level-item">samba配置</span></span></a></li><li><a class="level is-mobile" href="#windows"><span class="level-left"><span class="level-item">windows</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#chocolately包管理器"><span class="level-left"><span class="level-item">chocolately包管理器</span></span></a></li></ul></li><li><a class="level is-mobile" href="#linux"><span class="level-left"><span class="level-item">linux</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#ctrl-z"><span class="level-left"><span class="level-item">ctrl+z</span></span></a></li><li><a class="level is-mobile" href="#apt"><span class="level-left"><span class="level-item">apt</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#查看已安装软件"><span class="level-left"><span class="level-item">查看已安装软件</span></span></a></li></ul></li><li><a class="level is-mobile" href="#dpkg"><span class="level-left"><span class="level-item">dpkg</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#查看已安装软件-1"><span class="level-left"><span class="level-item">查看已安装软件</span></span></a></li><li><a class="level is-mobile" href="#查看软件安装路径"><span class="level-left"><span class="level-item">查看软件安装路径</span></span></a></li></ul></li><li><a class="level is-mobile" href="#ubuntu18-04更换清华源"><span class="level-left"><span class="level-item">ubuntu18.04更换清华源</span></span></a></li><li><a class="level is-mobile" href="#ln-软硬链接"><span class="level-left"><span class="level-item">ln 软硬链接</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#硬链接"><span class="level-left"><span class="level-item">硬链接</span></span></a></li><li><a class="level is-mobile" href="#软连接"><span class="level-left"><span class="level-item">软连接</span></span></a></li><li><a class="level is-mobile" href="#软硬链接的区别"><span class="level-left"><span class="level-item">软硬链接的区别</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#gcc"><span class="level-left"><span class="level-item">gcc</span></span></a></li><li><a class="level is-mobile" href="#gdb"><span class="level-left"><span class="level-item">gdb</span></span></a></li><li><a class="level is-mobile" href="#shell"><span class="level-left"><span class="level-item">shell</span></span></a></li><li><a class="level is-mobile" href="#SpaceVim"><span class="level-left"><span class="level-item">SpaceVim</span></span></a></li><li><a class="level is-mobile" href="#VIM"><span class="level-left"><span class="level-item">VIM</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#vim-grep-过滤文件内容"><span class="level-left"><span class="level-item">vim + grep 过滤文件内容</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#保留指定内容"><span class="level-left"><span class="level-item">保留指定内容</span></span></a></li><li><a class="level is-mobile" href="#保留多个指定内容的行"><span class="level-left"><span class="level-item">保留多个指定内容的行</span></span></a></li><li><a class="level is-mobile" href="#反向过滤，不要指定内容的行"><span class="level-left"><span class="level-item">反向过滤，不要指定内容的行</span></span></a></li></ul></li><li><a class="level is-mobile" href="#将其他程序的输出导入vim"><span class="level-left"><span class="level-item">将其他程序的输出导入vim</span></span></a></li><li><a class="level is-mobile" href="#模式匹配相关"><span class="level-left"><span class="level-item">模式匹配相关</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#正则相关"><span class="level-left"><span class="level-item">正则相关</span></span></a></li><li><a class="level is-mobile" href="#界定符-“-”"><span class="level-left"><span class="level-item">界定符 “&lt; &gt;”</span></span></a></li></ul></li><li><a class="level is-mobile" href="#使用括号匹配"><span class="level-left"><span class="level-item">使用括号匹配</span></span></a></li><li><a class="level is-mobile" href="#vimc常用命令"><span class="level-left"><span class="level-item">vimc常用命令</span></span></a></li><li><a class="level is-mobile" href="#安装"><span class="level-left"><span class="level-item">安装</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#针对vim低于8版本的安装"><span class="level-left"><span class="level-item">针对vim低于8版本的安装</span></span></a></li></ul></li><li><a class="level is-mobile" href="#nvim配置"><span class="level-left"><span class="level-item">nvim配置</span></span></a></li><li><a class="level is-mobile" href="#在多行开头和结尾添加"><span class="level-left"><span class="level-item">在多行开头和结尾添加</span></span></a></li></ul></li><li><a class="level is-mobile" href="#tmux"><span class="level-left"><span class="level-item">tmux</span></span></a></li><li><a class="level is-mobile" href="#Makefile"><span class="level-left"><span class="level-item">Makefile</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#自制模板V1-2"><span class="level-left"><span class="level-item">自制模板V1.2</span></span></a></li><li><a class="level is-mobile" href="#正点原子模板"><span class="level-left"><span class="level-item">正点原子模板</span></span></a></li><li><a class="level is-mobile" href="#报错-deps是一个文件"><span class="level-left"><span class="level-item">报错.deps是一个文件</span></span></a></li></ul></li><li><a class="level is-mobile" href="#git"><span class="level-left"><span class="level-item">git</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#远程仓库"><span class="level-left"><span class="level-item">远程仓库</span></span></a></li><li><a class="level is-mobile" href="#本地仓库关联远程分支"><span class="level-left"><span class="level-item">本地仓库关联远程分支</span></span></a></li><li><a class="level is-mobile" href="#将本地文件git-push到远程新建仓库"><span class="level-left"><span class="level-item">将本地文件git push到远程新建仓库</span></span></a></li><li><a class="level is-mobile" href="#撤销git-add的文件"><span class="level-left"><span class="level-item">撤销git add的文件</span></span></a></li><li><a class="level is-mobile" href="#gitigonre不起作用的问题"><span class="level-left"><span class="level-item">gitigonre不起作用的问题</span></span></a></li></ul></li><li><a class="level is-mobile" href="#sed-1"><span class="level-left"><span class="level-item">sed</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#sed中特殊符号"><span class="level-left"><span class="level-item">sed中特殊符号</span></span></a></li><li><a class="level is-mobile" href="#提取标签并计算不重复标签数"><span class="level-left"><span class="level-item">提取标签并计算不重复标签数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#vscode"><span class="level-left"><span class="level-item">vscode</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#vscode创建工作区"><span class="level-left"><span class="level-item">vscode创建工作区</span></span></a></li><li><a class="level is-mobile" href="#uboot查看mmc（SD）是否正常"><span class="level-left"><span class="level-item">uboot查看mmc（SD）是否正常</span></span></a></li></ul></li><li><a class="level is-mobile" href="#tree"><span class="level-left"><span class="level-item">tree</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#windows10下列出所有目录下文件"><span class="level-left"><span class="level-item">windows10下列出所有目录下文件</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1305232905963539" data-ad-slot="5679527426" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div><br></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a><p class="is-size-7"><span>&copy; 2024 fei</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a><br><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script>
+        var now = new Date();
+        function createtime() {
+            var grt= new Date("10/24/2015 00:00:00");//此处修改你的建站时间或者网站上线时间
+            now.setTime(now.getTime()+250);
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+            document.getElementById("timeDate").innerHTML = "| 本站已运行 "+dnum+" 天 ";
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        }
+        setInterval("createtime()",250);
+        </script><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span><span> | </span><span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv">0</span></span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;" rel="external nofollow noreferrer">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

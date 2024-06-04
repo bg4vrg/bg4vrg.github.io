@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh"><head><meta name="baidu-site-verification" content="codeva-UlX0cGL1PK"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>动手做个Esp8266迷你太阳能气象站 - BG4VRG的无线电之旅</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="BG4VRG的无线电之旅"><meta name="msapplication-TileImage" content="/img/freebsd.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="BG4VRG的无线电之旅"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="本项目基于BG4UVR的开源项目-https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;bg4uvr&amp;#x2F;esp8266mws&amp;#x2F;tree&amp;#x2F;master 说明：本文在bg4uvr大佬的热心指导下下完成。感谢他的源码，虽然国内已经不适合气象站的存在了。但是无线电玩的不就是折腾吗？本文不涉及太阳能板和电池。"><meta property="og:type" content="blog"><meta property="og:title" content="动手做个Esp8266迷你太阳能气象站"><meta property="og:url" content="https://bg4vrg.com/post/20210912202651.html"><meta property="og:site_name" content="BG4VRG的无线电之旅"><meta property="og:description" content="本项目基于BG4UVR的开源项目-https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;bg4uvr&amp;#x2F;esp8266mws&amp;#x2F;tree&amp;#x2F;master 说明：本文在bg4uvr大佬的热心指导下下完成。感谢他的源码，虽然国内已经不适合气象站的存在了。但是无线电玩的不就是折腾吗？本文不涉及太阳能板和电池。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://bg4vrg.com/pic/8266-A0.jpg"><meta property="og:image" content="https://bg4vrg.com/pic/8266-jiexian.jpg"><meta property="og:image" content="https://bg4vrg.com/pic/8266wx-2.jpg"><meta property="og:image" content="https://bg4vrg.com/pic/8266-wifi-config.jpg"><meta property="og:image" content="https://bg4vrg.com/pic/8266-wifi-ssid-set.jpg"><meta property="og:image" content="https://bg4vrg.com/pic/esp-tiaoshi-lianjie.jpg"><meta property="article:published_time" content="2021-09-12T12:26:51.000Z"><meta property="article:modified_time" content="2024-02-27T12:38:34.112Z"><meta property="article:author" content="fei"><meta property="article:tag" content="业余无线电"><meta property="article:tag" content="aprs"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://bg4vrg.com/pic/8266-A0.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://bg4vrg.com/post/20210912202651.html"},"headline":"动手做个Esp8266迷你太阳能气象站","image":["https://bg4vrg.com/pic/8266-A0.jpg","https://bg4vrg.com/pic/8266-jiexian.jpg","https://bg4vrg.com/pic/8266wx-2.jpg","https://bg4vrg.com/pic/8266-wifi-config.jpg","https://bg4vrg.com/pic/8266-wifi-ssid-set.jpg","https://bg4vrg.com/pic/esp-tiaoshi-lianjie.jpg"],"datePublished":"2021-09-12T12:26:51.000Z","dateModified":"2024-02-27T12:38:34.112Z","author":{"@type":"Person","name":"fei"},"publisher":{"@type":"Organization","name":"BG4VRG的无线电之旅","logo":{"@type":"ImageObject","url":"https://bg4vrg.com/img/freebsd.svg"}},"description":"本项目基于BG4UVR的开源项目-https:&#x2F;&#x2F;github.com&#x2F;bg4uvr&#x2F;esp8266mws&#x2F;tree&#x2F;master 说明：本文在bg4uvr大佬的热心指导下下完成。感谢他的源码，虽然国内已经不适合气象站的存在了。但是无线电玩的不就是折腾吗？本文不涉及太阳能板和电池。"}</script><link rel="canonical" href="https://bg4vrg.com/post/20210912202651.html"><link rel="alternate" href="/atom.xml" title="BG4VRG的无线电之旅" type="application/atom+xml"><link rel="icon" href="/img/freebsd.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1305232905963539" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a><a class="navbar-item" href="/categories/AmateurRadio">业余无线电</a><a class="navbar-item" href="/categories/network">网络</a><a class="navbar-item" href="/categories/linux">Linux</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-search"></i></a></div></div></div></nav><br><center><span id="jinrishici-sentence" style="font-size:17px">正在加载今日诗词....</span><span class="mtip" style="font-size:14px"></span></center><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2021-09-12T12:26:51.000Z" title="2021/9/12 20:26:51">2021-09-12</time>发表</span><span class="level-item"><time datetime="2024-02-27T12:38:34.112Z" title="2024/2/27 20:38:34">2024-02-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/AmateurRadio/">业余无线电</a></span><span class="level-item">9 分钟读完 (大约1283个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">动手做个Esp8266迷你太阳能气象站</h1><div class="content"><p>本项目基于BG4UVR的开源项目-<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/bg4uvr/esp8266mws/tree/master">https://github.com/bg4uvr/esp8266mws/tree/master</a></p>
+<h3 id="说明：本文在bg4uvr大佬的热心指导下下完成。"><a href="#说明：本文在bg4uvr大佬的热心指导下下完成。" class="headerlink" title="说明：本文在bg4uvr大佬的热心指导下下完成。"></a>说明：本文在bg4uvr大佬的热心指导下下完成。</h3><p>感谢他的源码，虽然国内已经不适合气象站的存在了。但是无线电玩的不就是折腾吗？<br>本文不涉及太阳能板和电池。</p>
+<span id="more"></span>
+
+<h1 id="记录最重要的一点"><a href="#记录最重要的一点" class="headerlink" title="记录最重要的一点"></a>记录最重要的一点</h1><p>A0针脚的2个贴片电阻一定要去掉，否则固件刷完重启后无法正常启动</p>
+<blockquote>
+<p>此处放针脚被吹掉后的图 </p>
+</blockquote>
+<p>  <img src="/pic/8266-A0.jpg"></p>
+<h1 id="一、硬件准备"><a href="#一、硬件准备" class="headerlink" title="一、硬件准备"></a>一、硬件准备</h1><p>1、Esp8266 1个 约12元淘宝包邮<br>2、AHT20+BMP280一体化传感器 1个 约10元包邮<br>3、470欧姆电阻 1个 没有的话就买传感器顺路买个电阻包<br>4、杜邦线 1根<br>5、风枪或者电烙铁，用于去掉贴片电阻</p>
+<h1 id="二、软件准备"><a href="#二、软件准备" class="headerlink" title="二、软件准备"></a>二、软件准备</h1><h2 id="2-1、ch340-驱动"><a href="#2-1、ch340-驱动" class="headerlink" title="2.1、ch340 驱动"></a>2.1、ch340 驱动</h2><p>此处放驱动文件（windows7 64bit）</p>
+<h2 id="2-2、乐鑫-Flash-下载工具"><a href="#2-2、乐鑫-Flash-下载工具" class="headerlink" title="2.2、乐鑫 Flash 下载工具"></a>2.2、乐鑫 Flash 下载工具</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.espressif.com/zh-hans/support/download/other-tools">https://www.espressif.com/zh-hans/support/download/other-tools</a></p>
+<h2 id="2-3、网络调试工具"><a href="#2-3、网络调试工具" class="headerlink" title="2.3、网络调试工具"></a>2.3、网络调试工具</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="http://free.cmsoft.cn/download/cmsoft/assistant/netassist4.3.29.zip">http://free.cmsoft.cn/download/cmsoft/assistant/netassist4.3.29.zip</a></p>
+<h1 id="三、调试步骤"><a href="#三、调试步骤" class="headerlink" title="三、调试步骤"></a>三、调试步骤</h1><h2 id="使用风枪吹掉A0-针脚的2个贴片电阻"><a href="#使用风枪吹掉A0-针脚的2个贴片电阻" class="headerlink" title="使用风枪吹掉A0 针脚的2个贴片电阻"></a>使用风枪吹掉A0 针脚的2个贴片电阻</h2><p>260度加热几十秒后，用镊子随便推下就掉了</p>
+<h2 id="3-0、按照readme-md说明连接好传感器"><a href="#3-0、按照readme-md说明连接好传感器" class="headerlink" title="3.0、按照readme.md说明连接好传感器"></a>3.0、按照readme.md说明连接好传感器</h2><p> (1)连接传感器，传感器送的线缆，一端用小刀割开就可以牢牢插紧。</p>
+<pre><code>esp8266              aht20+bmp280传感器
+D5(gpio14) .......     SCL
+D6（gpio12）........    SDA
+3.3v    ........       VDD
+G       ........       GND
+</code></pre>
+<p> （2）在D0和RST之间连接470欧姆电阻<br>    过程略。我用2根杜邦线连接，后期会用热熔胶或焊锡之类固定</p>
+<p>  <img src="/pic/8266-jiexian.jpg"></p>
+<h2 id="3-1、刷入固件"><a href="#3-1、刷入固件" class="headerlink" title="3.1、刷入固件"></a>3.1、刷入固件</h2><p>参考bg4uvr设置，这里注意下右下角波特率我使用的是本机上的115200</p>
+<p><img src="/pic/8266wx-2.jpg"></p>
+<h2 id="3-2、-检查路由器的lan口ip地址是否为192-168-1-1"><a href="#3-2、-检查路由器的lan口ip地址是否为192-168-1-1" class="headerlink" title="3.2、 检查路由器的lan口ip地址是否为192.168.1.1"></a>3.2、 检查路由器的lan口ip地址是否为192.168.1.1</h2><p>很重要，因为代码里指定里服务端ip为192.168.1.125，不修改是给自己添乱</p>
+<h2 id="3-3、配置wifi"><a href="#3-3、配置wifi" class="headerlink" title="3.3、配置wifi"></a>3.3、配置wifi</h2><p>过程：<br>（1）刷机后重新给8266上电或者按reset完成重启<br>（2）观察8266主板上的蓝色led灯是否亮起，如果不亮说明刷机失败，或者那2各贴片电阻没去掉</p>
+<pre><code>    注意：8266的wifi天线性能差，不要距离路由器太远，否则会连不上wifi
+</code></pre>
+<p> （3）连接wifi<br>        找到一个名为“Esp8266MWS-SET”的未加密无线网，连接后会自动弹出一个网页窗口如下图。如果没有，用浏览器直接访问这个esp的wifi网关。</p>
+<p><img src="/pic/8266-wifi-config.jpg"></p>
+<p>（4）点击加入你自己家的路由器，然后输入密码</p>
+<p><img src="/pic/8266-wifi-ssid-set.jpg"></p>
+<p>（5）提示保存成功够，重启esp8266<br>    注意8266离wifi近一点，如果太远（5米以上）就会无法加入你设定的家庭wifi，这时表现为又出现“Esp8266MWS-SET”的ssid。</p>
+<h2 id="3-4、网络调试工具中配置呼号、坐标等信息"><a href="#3-4、网络调试工具中配置呼号、坐标等信息" class="headerlink" title="3.4、网络调试工具中配置呼号、坐标等信息"></a>3.4、网络调试工具中配置呼号、坐标等信息</h2><p>（1）首先配置你自己的电脑ip地址为192.168.1.125<br>    wifi的话就配无线网卡上<br>    有线连接就配有线网卡</p>
+<p>（2）运行下载的网络调试工具<br>    为确保软件正常工作，请做一下设置<br>    a、软件语言更改为english（软件左上角点击倒三角符号，在lanauage里选english）<br>    b、软件右方空白地方点击右键，编码选择UTF8<br>     然后按下图红色箭头设置，依次选择<br>     c、protocol 为TCP<br>     d、local host 192.168.1.125<br>     e、Local port 设置为12345<br>     f、open下方按图示选择对应选项<br>     最后点击open<br>     <img src="/pic/esp-tiaoshi-lianjie.jpg"></p>
+<p> （3）一旦esp8266加入指定wifi并获得正确ip地址（格式192.168.1.x），那么就会自动连接调试软件，并在软件窗口显示配置信息</p>
+<h2 id="3-5、发送aprs设置参数"><a href="#3-5、发送aprs设置参数" class="headerlink" title="3.5、发送aprs设置参数"></a>3.5、发送aprs设置参数</h2><p>命令如下<br><code>配置命令示例:     cfg -c YOURCALL -w 12345 -d 10 -o 12100.00 -a 3100.00 -s asia.aprs2.net</code></p>
+<figure class="highlight plaintext"><figcaption><span>配置命令格式说明：</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt; </span><br><span class="line">&gt;     cfg -c callsign -w password -o lon -a lat -s serveradd [其他可选参数]</span><br><span class="line">&gt; </span><br><span class="line">&gt;     参数    含义            格式                说明</span><br><span class="line">&gt; </span><br><span class="line">&gt; 必设参数:</span><br><span class="line">&gt;     -c      呼号            BGnXXX              个人台站的呼号</span><br><span class="line">&gt;     -w      验证码          12345               这个验证码的来源不解释</span><br><span class="line">&gt;     -o      经度            12106.00            格式：dddmm.mm，东正西负</span><br><span class="line">&gt;     -a      纬度            3153.00             格式：ddmm.mm，北正南负</span><br><span class="line">&gt;     -s      APRS服务器地址  xxx.aprs2.net       不解释</span><br><span class="line">&gt; 可选参数：</span><br><span class="line">    -d      SSID            13                  SSID(支持2位字母的新规则)</span><br><span class="line">    -p      APRS服务器端口  14580               不解释</span><br><span class="line">    -g      调试主机地址    192.168.1.125       用于调试、配置及监控的主机内网IP</span><br><span class="line">    -e      调试主机端口    12345               不解释</span><br><span class="line">    -v      停机电压        3.1                 电压低于此值系统停止工作（最小值3.1）</span><br><span class="line">    -r      重新工作电压    3.5                 电压高于此值系统重新工作（最大值3.6）</span><br><span class="line">    -n      最小发送间隔    600                 单位：秒（最小值300）</span><br><span class="line">    -x      最大发送间隔    1800                单位：秒（最大值1800）</span><br><span class="line">    -m      用户定制消息(新版已被删除)                        最大长度：不大于67个英文字符</span><br><span class="line">    -l      语言选择        CN                  0 中文；1 英文</span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>动手做个Esp8266迷你太阳能气象站</p><p><a href="https://bg4vrg.com/post/20210912202651.html">https://bg4vrg.com/post/20210912202651.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>fei</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-09-12</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-02-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/">业余无线电</a><a class="link-muted mr-2" rel="tag" href="/tags/aprs/">aprs</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/alipay.png" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/wechatpay.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/20211006204415.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">就是折腾 篇六：docker安装typecho 导航主题webstack（钻芒二开版）</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/20210822103932.html"><span class="level-item">就是折腾 篇四：玩客云使用docker安装heimdall导航</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://bg4vrg.com/post/20210912202651.html';
+            this.page.identifier = 'post/20210912202651.html';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'bg4vrg' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time datetime="2024-06-04T09:47:05.000Z">2024-06-04</time></p><p class="title"><a href="/post/20240604174705.html">迁移transmission数据到新建服务器</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-06-02T08:04:03.000Z">2024-06-02</time></p><p class="title"><a href="/post/20240602160403.html">rsync免密码传输</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-05-30T07:55:58.000Z">2024-05-30</time></p><p class="title"><a href="/post/20240530155558.html">unraid中部分硬盘无法休眠</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-05-22T05:07:44.000Z">2024-05-22</time></p><p class="title"><a href="/post/20240522130744.html">廉价业余无线电收发套件ADX-S v2</a></p><p class="categories"><a href="/categories/AmateurRadio/">业余无线电</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-04-21T12:47:58.000Z">2024-04-21</time></p><p class="title"><a href="/post/20240421204758.html">CsiR大佬新作NetOpsGUI:netops2.0的图形版</a></p><p class="categories"><a href="/categories/network/">网络</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/linux/"><span class="level-start"><span class="level-item">linux</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/AmateurRadio/"><span class="level-start"><span class="level-item">业余无线电</span></span><span class="level-end"><span class="level-item tag">40</span></span></a></li><li><a class="level is-mobile" href="/categories/network/"><span class="level-start"><span class="level-item">网络</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile" href="/categories/note/"><span class="level-start"><span class="level-item">记录</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li></ul></div></div></div><!--!--><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1305232905963539" data-ad-slot="5679527426" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div><br></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a><p class="is-size-7"><span>&copy; 2024 fei</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a><br><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script>
+        var now = new Date();
+        function createtime() {
+            var grt= new Date("10/24/2015 00:00:00");//此处修改你的建站时间或者网站上线时间
+            now.setTime(now.getTime()+250);
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+            document.getElementById("timeDate").innerHTML = "| 本站已运行 "+dnum+" 天 ";
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        }
+        setInterval("createtime()",250);
+        </script><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span><span> | </span><span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv">0</span></span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;" rel="external nofollow noreferrer">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh"><head><meta name="baidu-site-verification" content="codeva-UlX0cGL1PK"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>就是折腾 篇一：戴尔H310 mini阵列卡刷直通模式 - BG4VRG的无线电之旅</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="BG4VRG的无线电之旅"><meta name="msapplication-TileImage" content="/img/freebsd.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="BG4VRG的无线电之旅"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="官方页面地址已经变更为https:&amp;#x2F;&amp;#x2F;fohdeesha.com&amp;#x2F;docs&amp;#x2F;perc.html目前提供的是2.0版本  需要1.8版本的可以访问我上传的天e网盘，本人仅仅是简单的搬运和技术研究，不对因此造成的数据损失承担任何责任，请各位大佬谨慎刷机。一定要备份数据！ 一定要备份数据！ 一定要备份数据！"><meta property="og:type" content="blog"><meta property="og:title" content="就是折腾 篇一：戴尔H310 mini阵列卡刷直通模式"><meta property="og:url" content="https://bg4vrg.com/post/20210714104439.html"><meta property="og:site_name" content="BG4VRG的无线电之旅"><meta property="og:description" content="官方页面地址已经变更为https:&amp;#x2F;&amp;#x2F;fohdeesha.com&amp;#x2F;docs&amp;#x2F;perc.html目前提供的是2.0版本  需要1.8版本的可以访问我上传的天e网盘，本人仅仅是简单的搬运和技术研究，不对因此造成的数据损失承担任何责任，请各位大佬谨慎刷机。一定要备份数据！ 一定要备份数据！ 一定要备份数据！"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://bg4vrg.com/pic/2021-07-14-1.jpg"><meta property="og:image" content="https://bg4vrg.com/pic/2021-07-14-2.jpg"><meta property="og:image" content="https://bg4vrg.com/pic/2021-07-14-3.jpg"><meta property="og:image" content="https://bg4vrg.com/pic/2021-07-14-4.jpg"><meta property="og:image" content="https://bg4vrg.com/pic/2021-07-14-5.jpg"><meta property="article:published_time" content="2021-07-14T02:44:39.000Z"><meta property="article:modified_time" content="2024-02-29T09:50:10.955Z"><meta property="article:author" content="fei"><meta property="article:tag" content="raid"><meta property="article:tag" content="linux"><meta property="article:tag" content="直通"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://bg4vrg.com/pic/2021-07-14-1.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://bg4vrg.com/post/20210714104439.html"},"headline":"就是折腾 篇一：戴尔H310 mini阵列卡刷直通模式","image":["https://bg4vrg.com/pic/2021-07-14-1.jpg","https://bg4vrg.com/pic/2021-07-14-2.jpg","https://bg4vrg.com/pic/2021-07-14-3.jpg","https://bg4vrg.com/pic/2021-07-14-4.jpg","https://bg4vrg.com/pic/2021-07-14-5.jpg"],"datePublished":"2021-07-14T02:44:39.000Z","dateModified":"2024-02-29T09:50:10.955Z","author":{"@type":"Person","name":"fei"},"publisher":{"@type":"Organization","name":"BG4VRG的无线电之旅","logo":{"@type":"ImageObject","url":"https://bg4vrg.com/img/freebsd.svg"}},"description":"官方页面地址已经变更为https:&#x2F;&#x2F;fohdeesha.com&#x2F;docs&#x2F;perc.html目前提供的是2.0版本  需要1.8版本的可以访问我上传的天e网盘，本人仅仅是简单的搬运和技术研究，不对因此造成的数据损失承担任何责任，请各位大佬谨慎刷机。一定要备份数据！ 一定要备份数据！ 一定要备份数据！"}</script><link rel="canonical" href="https://bg4vrg.com/post/20210714104439.html"><link rel="alternate" href="/atom.xml" title="BG4VRG的无线电之旅" type="application/atom+xml"><link rel="icon" href="/img/freebsd.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1305232905963539" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a><a class="navbar-item" href="/categories/AmateurRadio">业余无线电</a><a class="navbar-item" href="/categories/network">网络</a><a class="navbar-item" href="/categories/linux">Linux</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-search"></i></a></div></div></div></nav><br><center><span id="jinrishici-sentence" style="font-size:17px">正在加载今日诗词....</span><span class="mtip" style="font-size:14px"></span></center><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2021-07-14T02:44:39.000Z" title="2021/7/14 10:44:39">2021-07-14</time>发表</span><span class="level-item"><time datetime="2024-02-29T09:50:10.955Z" title="2024/2/29 17:50:10">2024-02-29</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/linux/">linux</a></span><span class="level-item">4 分钟读完 (大约531个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">就是折腾 篇一：戴尔H310 mini阵列卡刷直通模式</h1><div class="content"><p>官方页面地址已经变更为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://fohdeesha.com/docs/perc.html">https://fohdeesha.com/docs/perc.html</a><br>目前提供的是2.0版本 </p>
+<p><del>需要1.8版本的可以访问我上传的天e网盘，</del><br>本人仅仅是简单的搬运和技术研究，不对因此造成的数据损失承担任何责任，请各位大佬谨慎刷机。<br>一定要备份数据！ 一定要备份数据！ 一定要备份数据！</p>
+<span id="more"></span>
+
+<h1 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h1><h2 id="1、重点！"><a href="#1、重点！" class="headerlink" title="1、重点！"></a>1、<strong>重点</strong>！</h2><p>引导文件和修改工具。感谢大神们的无私奉献！</p>
+<p>注意不同型号的阵列卡，写入步骤不同。我这里以h310mini为例</p>
+<h2 id="2、注意了！"><a href="#2、注意了！" class="headerlink" title="2、注意了！"></a>2、注意了！</h2><p><strong>必须拆除存储卡上的电池</strong>！！！机器上也不能有其他阵列卡！！</p>
+<h1 id="一、引导linux-iso"><a href="#一、引导linux-iso" class="headerlink" title="一、引导linux.iso"></a>一、引导linux.iso</h1><p>引导后直接回车进入linux live cd</p>
+<p><img src="/pic/2021-07-14-1.jpg"></p>
+<h2 id="1-1、-切换到root模式"><a href="#1-1、-切换到root模式" class="headerlink" title="1.1、 切换到root模式"></a>1.1、 切换到root模式</h2><blockquote>
+<p>sudo su -</p>
+</blockquote>
+<h2 id="1-2、查看阵列卡sas序列号"><a href="#1-2、查看阵列卡sas序列号" class="headerlink" title="1.2、查看阵列卡sas序列号"></a>1.2、查看阵列卡sas序列号</h2><p>​    命令</p>
+<blockquote>
+<p>sas-h310</p>
+</blockquote>
+<p>显示如下，要记住！！！后面要用 </p>
+<p>​    SAS Address : 5b*********</p>
+<h2 id="1-3、-擦除阵列卡"><a href="#1-3、-擦除阵列卡" class="headerlink" title="1.3、 擦除阵列卡"></a>1.3、 擦除阵列卡</h2><p>​    命令</p>
+<blockquote>
+<p>H310</p>
+</blockquote>
+<p>自动执行后提示完成，出现下图提示这步就结束了。</p>
+<p><img src="/pic/2021-07-14-2.jpg"></p>
+<h1 id="二、重启服务器并写入SAS地址"><a href="#二、重启服务器并写入SAS地址" class="headerlink" title="二、重启服务器并写入SAS地址"></a>二、重启服务器并写入SAS地址</h1><h2 id="2-1、重启"><a href="#2-1、重启" class="headerlink" title="2.1、重启"></a>2.1、重启</h2><p>上面步骤完成后重启，仍然使用linux.iso引导并切换到root用户</p>
+<h2 id="2-2、刷入sas-address"><a href="#2-2、刷入sas-address" class="headerlink" title="2.2、刷入sas address"></a>2.2、刷入sas address</h2><p>​    命令</p>
+<blockquote>
+<p>sudo su -</p>
+<p>setsas 12345678889</p>
+</blockquote>
+<p>上面的数字要改成你自己的sas address（第一步里的）</p>
+<p><img src="/pic/2021-07-14-3.jpg"></p>
+<h2 id="2-3、输入命令查看刷机效果"><a href="#2-3、输入命令查看刷机效果" class="headerlink" title="2.3、输入命令查看刷机效果"></a>2.3、输入命令查看刷机效果</h2><p>​    命令</p>
+<blockquote>
+<p>info</p>
+</blockquote>
+<p>​    看下图，已经识别未LSI SAS 2008b2了![戴尔H310 mini阵列卡刷直通模式]<br><img src="/pic/2021-07-14-4.jpg"></p>
+<h2 id="2-4、上机安装实测"><a href="#2-4、上机安装实测" class="headerlink" title="2.4、上机安装实测"></a>2.4、上机安装实测</h2><p>重新引导时，已经看不到“按ctrl+r进入阵列卡配置模式”的提示信息了</p>
+<p>戳上truenas安装盘试试</p>
+<p><img src="/pic/2021-07-14-5.jpg"></p>
+<p>美滋滋，以前的raid卡里本身创建了1块raid1逻辑盘，这里直接显示4个物理盘，说明没问题。打完收工。</p>
+<p>最后再次感谢无私奉献的大佬～～</p>
+<p>下次试试h710 mini刷机</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>就是折腾 篇一：戴尔H310 mini阵列卡刷直通模式</p><p><a href="https://bg4vrg.com/post/20210714104439.html">https://bg4vrg.com/post/20210714104439.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>fei</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-07-14</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-02-29</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/raid/">raid</a><a class="link-muted mr-2" rel="tag" href="/tags/linux/">linux</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%9B%B4%E9%80%9A/">直通</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/alipay.png" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/wechatpay.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/20210715160921.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">就是折腾 篇二：戴尔R720 H310mini阵列卡刷回IR模式并抢救数据</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/20210531225555.html"><span class="level-item">福禄克fluke linkiq kit简单开箱</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://bg4vrg.com/post/20210714104439.html';
+            this.page.identifier = 'post/20210714104439.html';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'bg4vrg' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time datetime="2024-06-04T09:47:05.000Z">2024-06-04</time></p><p class="title"><a href="/post/20240604174705.html">迁移transmission数据到新建服务器</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-06-02T08:04:03.000Z">2024-06-02</time></p><p class="title"><a href="/post/20240602160403.html">rsync免密码传输</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-05-30T07:55:58.000Z">2024-05-30</time></p><p class="title"><a href="/post/20240530155558.html">unraid中部分硬盘无法休眠</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-05-22T05:07:44.000Z">2024-05-22</time></p><p class="title"><a href="/post/20240522130744.html">廉价业余无线电收发套件ADX-S v2</a></p><p class="categories"><a href="/categories/AmateurRadio/">业余无线电</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-04-21T12:47:58.000Z">2024-04-21</time></p><p class="title"><a href="/post/20240421204758.html">CsiR大佬新作NetOpsGUI:netops2.0的图形版</a></p><p class="categories"><a href="/categories/network/">网络</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/linux/"><span class="level-start"><span class="level-item">linux</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/AmateurRadio/"><span class="level-start"><span class="level-item">业余无线电</span></span><span class="level-end"><span class="level-item tag">40</span></span></a></li><li><a class="level is-mobile" href="/categories/network/"><span class="level-start"><span class="level-item">网络</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile" href="/categories/note/"><span class="level-start"><span class="level-item">记录</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#准备工作："><span class="level-left"><span class="level-item">准备工作：</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1、重点！"><span class="level-left"><span class="level-item">1、重点！</span></span></a></li><li><a class="level is-mobile" href="#2、注意了！"><span class="level-left"><span class="level-item">2、注意了！</span></span></a></li></ul></li><li><a class="level is-mobile" href="#一、引导linux-iso"><span class="level-left"><span class="level-item">一、引导linux.iso</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-1、-切换到root模式"><span class="level-left"><span class="level-item">1.1、 切换到root模式</span></span></a></li><li><a class="level is-mobile" href="#1-2、查看阵列卡sas序列号"><span class="level-left"><span class="level-item">1.2、查看阵列卡sas序列号</span></span></a></li><li><a class="level is-mobile" href="#1-3、-擦除阵列卡"><span class="level-left"><span class="level-item">1.3、 擦除阵列卡</span></span></a></li></ul></li><li><a class="level is-mobile" href="#二、重启服务器并写入SAS地址"><span class="level-left"><span class="level-item">二、重启服务器并写入SAS地址</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#2-1、重启"><span class="level-left"><span class="level-item">2.1、重启</span></span></a></li><li><a class="level is-mobile" href="#2-2、刷入sas-address"><span class="level-left"><span class="level-item">2.2、刷入sas address</span></span></a></li><li><a class="level is-mobile" href="#2-3、输入命令查看刷机效果"><span class="level-left"><span class="level-item">2.3、输入命令查看刷机效果</span></span></a></li><li><a class="level is-mobile" href="#2-4、上机安装实测"><span class="level-left"><span class="level-item">2.4、上机安装实测</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1305232905963539" data-ad-slot="5679527426" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div><br></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a><p class="is-size-7"><span>&copy; 2024 fei</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a><br><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script>
+        var now = new Date();
+        function createtime() {
+            var grt= new Date("10/24/2015 00:00:00");//此处修改你的建站时间或者网站上线时间
+            now.setTime(now.getTime()+250);
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+            document.getElementById("timeDate").innerHTML = "| 本站已运行 "+dnum+" 天 ";
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        }
+        setInterval("createtime()",250);
+        </script><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span><span> | </span><span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv">0</span></span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;" rel="external nofollow noreferrer">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
