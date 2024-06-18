@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-06-17T08:15:05.372Z</updated>
+  <updated>2024-06-18T13:36:24.154Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://bg4vrg.com/post/20240614160329.html"/>
     <id>https://bg4vrg.com/post/20240614160329.html</id>
     <published>2024-06-14T08:03:29.000Z</published>
-    <updated>2024-06-17T08:15:05.372Z</updated>
+    <updated>2024-06-18T13:36:24.154Z</updated>
     
     <content type="html"><![CDATA[<p>dockerhub挂了，一直以为电信精品网可以豁免，没想到想多了。赶紧指定下代理地址来拉下镜像。</p><span id="more"></span><p>进入ssh</p><p><code>vim  /usr/local/lib/systemd/system/pkg-Docker-dockerd.service</code></p><p>添加以下内容</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Environment=&quot;HTTP_PROXY=http://10.139.27.5:10811&quot;</span><br><span class="line">Environment=&quot;HTTPS_PROXY=http://10.139.27.5:10811&quot;</span><br><span class="line">Environment=&quot;NO_PROXY=localhost,127.0.0.0/8,10.139.0.0/16&quot;</span><br></pre></td></tr></table></figure><p>1、2行为自己搭建的代理地址及端口，3行为排除本地局域网地址。</p><p>最重要的是要重启下docker服务，然后docker info确认下</p>]]></content>
     
@@ -30,13 +30,7 @@
     
     
     
-    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
-    
-    <category term="linux" scheme="https://bg4vrg.com/categories/note/linux/"/>
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/note/linux/AmateurRadio/"/>
-    
-    <category term="网络" scheme="https://bg4vrg.com/categories/note/linux/AmateurRadio/network/"/>
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
     <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
