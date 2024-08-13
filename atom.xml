@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-08-13T00:35:03.605Z</updated>
+  <updated>2024-08-13T02:05:41.766Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>相机扫描二维码连接隐藏wifi</title>
+    <link href="https://bg4vrg.com/post/20240813095513.html"/>
+    <id>https://bg4vrg.com/post/20240813095513.html</id>
+    <published>2024-08-13T01:55:13.000Z</published>
+    <updated>2024-08-13T02:05:41.766Z</updated>
+    
+    <content type="html"><![CDATA[<p>现在对wifi无线局域网的安全要求越来越严格，近期不少地方要求对wifi的ssid进行隐藏并设置复杂密码，这样导致连接隐藏wifi时会比较复杂。</p><p>比较简单的办法是先生成一个包含wifi ssid（明文显示）和密码的二维码，然后使用原生相机扫码，手机会自动提示点击加入wifi即可。</p><p>需要注意的是，部分老安卓手机可能不支持，这时可以使用支付宝扫码功能连接。</p><p>微信扫码是不支持直连wifi的，毕竟人家是要靠这个收费的。</p><span id="more"></span><p>生成二维码的源码在这里：<a href="https://github.com/bndw/wifi-card">https://github.com/bndw/wifi-card</a></p><p>一般不需要重新搭建，可以直接使用官方网站生成二维码</p><p><a href="https://wificard.io/">https://wificard.io/</a></p><p>可以选择将密码选择隐藏或显示出来</p><p><img src="/../pic/image-20240813100257642.png" alt="image-20240813100257642"></p><p>苹果手机扫码效果如下：直接点击黄色ssid即可</p><p><img src="/../pic/image-20240813100514611.png" alt="image-20240813100514611"></p><p>或者使用支付宝扫码如下图</p><p><img src="/../pic/580471e3438b727a73d50d19f050b7a.jpg" alt="580471e3438b727a73d50d19f050b7a"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;现在对wifi无线局域网的安全要求越来越严格，近期不少地方要求对wifi的ssid进行隐藏并设置复杂密码，这样导致连接隐藏wifi时会比较复杂。&lt;/p&gt;
+&lt;p&gt;比较简单的办法是先生成一个包含wifi ssid（明文显示）和密码的二维码，然后使用原生相机扫码，手机会自动提示点击加入wifi即可。&lt;/p&gt;
+&lt;p&gt;需要注意的是，部分老安卓手机可能不支持，这时可以使用支付宝扫码功能连接。&lt;/p&gt;
+&lt;p&gt;微信扫码是不支持直连wifi的，毕竟人家是要靠这个收费的。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
+    
+    
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="wifi" scheme="https://bg4vrg.com/tags/wifi/"/>
+    
+    <category term="支付宝" scheme="https://bg4vrg.com/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/"/>
+    
+    <category term="相机" scheme="https://bg4vrg.com/tags/%E7%9B%B8%E6%9C%BA/"/>
+    
+    <category term="二维码" scheme="https://bg4vrg.com/tags/%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
+    
+  </entry>
   
   <entry>
     <title>esxi下ros虚拟机更换网卡后无法联网</title>
@@ -560,35 +594,6 @@
     <category term="aprs" scheme="https://bg4vrg.com/tags/aprs/"/>
     
     <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>业余无线电aredn固件刷回原厂unifi</title>
-    <link href="https://bg4vrg.com/post/20240315130414.html"/>
-    <id>https://bg4vrg.com/post/20240315130414.html</id>
-    <published>2024-03-15T05:04:14.000Z</published>
-    <updated>2024-04-18T08:32:50.300Z</updated>
-    
-    <content type="html"><![CDATA[<p>aredn固件刷完之后一直没玩，想办法刷回unifi原厂固件继续搭建网桥使用。</p><span id="more"></span><p>如果您已尝试使用重置按钮将 Ubiquiti ISP 无线设备（例如，airMAX、airFiber、LTU）重置为出厂默认值，但您无法访问该设备，我们建议您执行 TFTP 恢复。</p><p>通过重新加载新固件来恢复设备，此过程也可用于恢复在没有其他解决方案起作用时出现故障的设备。</p><p><strong>警告：</strong>固件升级过程中请勿 关闭<strong>、</strong>重启或断开设备电源，否则可能会损坏设备。</p><h1 id="一、要求"><a href="#一、要求" class="headerlink" title="一、要求"></a>一、要求</h1><p><strong>在开始之前，请确保具备以下条件：</strong></p><ul><li><p>按下重置按钮的窄工具（如回形针）</p></li><li><p>以太网电缆</p></li><li><p>PC上运行的TFTP客户端</p></li><li><p>正确的airOS 固件。所有固件都可以从<a href="https://www.ui.com/download/">下载部分</a>下载（使用左侧菜单查找正确的产品类别和固件）。</p></li><li><p>使用的固件取决于：</p><ul><li><p>与产品（例如airMAX M 或AC 型号）兼容的固件。</p></li><li><p>版本。</p><p>最初您必须<strong>使用与设备运行的相同的airOS 固件</strong>。</p><p>设备恢复后，通过 WebUI 定期升级到最新的 AirOS 固件。</p></li></ul></li></ul><p><strong>重要的 TFTP 更改</strong></p><ul><li>自 v6.3.0 起，处于 TFTP 模式的 airMAX M 设备将尝试通过 DHCP 获取 IP 地址并响应来自WiFiman Desktop和 WiFiman Mobile Android) &#x2F; iOS的发现请求</li><li>如果不存在 DHCP 服务器或无法通过 DHCP 获取 IP，无线电将恢复为 192.168.1.20</li><li>对于固件&gt; &#x3D; 2.8.0的airCube，您可以刷新&gt; &#x3D; 2.8.1</li><li>对于固件&lt;2.8.0的airCube，您可以刷新&lt;&#x3D;2.8.0</li></ul><h1 id="二、步骤：Windows-的恢复过程"><a href="#二、步骤：Windows-的恢复过程" class="headerlink" title="二、步骤：Windows 的恢复过程"></a>二、步骤：Windows 的恢复过程</h1><h2 id="2-1-关闭设备电源。"><a href="#2-1-关闭设备电源。" class="headerlink" title="2.1 关闭设备电源。"></a>2.1 关闭设备电源。</h2><h2 id="2-2-配置您的计算机"><a href="#2-2-配置您的计算机" class="headerlink" title="2.2 配置您的计算机"></a>2.2 配置您的计算机</h2><p>必须使用以下设置手动配置 Windows PC 的以太网（在网络连接下）：<br>   IP 地址：192.168.1.254，子网掩码：255.255.255.0</p><h2 id="2-3-将您的设备连接到电脑。"><a href="#2-3-将您的设备连接到电脑。" class="headerlink" title="2.3 将您的设备连接到电脑。"></a>2.3 将您的设备连接到电脑。</h2><h2 id="2-4-按设备上的重置按钮。"><a href="#2-4-按设备上的重置按钮。" class="headerlink" title="2.4 按设备上的重置按钮。"></a>2.4 按设备上的重置按钮。</h2><p>将节点的以太网电缆插入PoE 适配器上的<em>POE</em>端口时按住重置按钮，将 Ubiquiti 设备置于 TFTP 模式。继续按住设备的重置按钮大约 8秒松开重置按钮，等待30 到 45 秒，直到看到节点上的 LED 指示灯以 1-3、2-4、1-3、2-4 模式交替变化。过一会就可以ping通192.168.1.20了。</p><p>如果没有进入13、24交替闪灯模式，可能是没按住reset按钮，多试几次，或者一直长按直到13、24交替闪灯再松开。</p><h2 id="2-5-对于airCube（ISP-和AC）："><a href="#2-5-对于airCube（ISP-和AC）：" class="headerlink" title="2.5  对于airCube（ISP 和AC）："></a>2.5  <strong>对于airCube（ISP 和AC）：</strong></h2><p>按下重置按钮并按住，同时为设备供电。LED 面板应快速闪烁几次，继续按住重置按钮，LED 应关闭。现在您可以松开重置按钮，LED 将缓慢闪烁 3 次。</p><h2 id="2-6-确保设备响应-ping"><a href="#2-6-确保设备响应-ping" class="headerlink" title="2.6 确保设备响应 ping"></a>2.6 确保设备响应 ping</h2><p>（从 DOS 窗口执行<em>ping 192.168.1.20</em> ）<br>如果没有响应，请返回第一步并重复。<br>如果您没有收到回复，请参阅顶部“注释和要求”下有关 TFTP 更改的注释。</p><p>   <img src="/pic/2024-03-15-unifi1.PNG"></p><p>   <img src="/pic/2024-03-15-unifi2.PNG"></p><h2 id="2-7-使用TFTP客户端软件（二进制模式）将固件映像文件（-bin-）上传到192-168-1-20。"><a href="#2-7-使用TFTP客户端软件（二进制模式）将固件映像文件（-bin-）上传到192-168-1-20。" class="headerlink" title="2.7  使用TFTP客户端软件（二进制模式）将固件映像文件（.bin ）上传到192.168.1.20。"></a>2.7  使用TFTP客户端软件（二进制模式）将固件映像文件（.bin ）上传到192.168.1.20。</h2><p>   Windows 集成命令行 TFTP 客户端或下载第三方实用程序来上传 airOS 固件。</p><ol><li><p>在 Windows PC 上，您可以从 DOS 窗口使用 TFTP 命令行 (START&gt;&gt;&gt;CMD)： </p><p><img src="/pic/2024-03-15-unifi3.PNG"></p></li><li><p>进入与固件相同的目录结构（例如，假设您已将映像文件存储在<em>c:\firmware</em> 目录中，请键入命令 : <code>cd c:\firmware</code>）并输入以下内容（如需帮助，请键入 TFTP -h），例如：</p><p><code>tftp -i 192.168.1.20 put WA.v8.5.0.36727.180118.1314.bin</code></p><p><img src="/pic/2024-03-15-unifi4.PNG"></p><p><b><span style="color:rgb(255, 0, 0);">非常重要：1、请务必关闭Windows防火墙，否则会提示“连接请求失败”！2、如果进入tftp模式后ping不通192.168.1.20，请使用傻瓜交换机连接电脑和unifi设备，不要直连到电脑网卡上。</span></b></p></li></ol><h2 id="2-8-刷回固件"><a href="#2-8-刷回固件" class="headerlink" title="2.8. 刷回固件"></a>2.8. 刷回固件</h2><p>升级过程中，信号 LED 将从左到右4格快速闪烁。等待大约 7-10 分钟（取决于设备和固件）。请记住，在操作过程中不要关闭设备电源。</p><p>unifi固件升级后默认地址仍为192.168.1.20</p><h2 id="2-9-升级unifi最新版本"><a href="#2-9-升级unifi最新版本" class="headerlink" title="2.9 升级unifi最新版本"></a>2.9 升级unifi最新版本</h2><p>​设备重新上线后，请通过 WebUI 升级到最新的 AirOS 固件。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;aredn固件刷完之后一直没玩，想办法刷回unifi原厂固件继续搭建网桥使用。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
-    
-    <category term="unifi" scheme="https://bg4vrg.com/tags/unifi/"/>
-    
-    <category term="aredn" scheme="https://bg4vrg.com/tags/aredn/"/>
     
   </entry>
   
