@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2024-06-18T13:36:24.154Z</updated>
+  <updated>2024-08-13T00:35:03.605Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>esxi下ros虚拟机更换网卡后无法联网</title>
+    <link href="https://bg4vrg.com/post/20240813082145.html"/>
+    <id>https://bg4vrg.com/post/20240813082145.html</id>
+    <published>2024-08-13T00:21:45.000Z</published>
+    <updated>2024-08-13T00:35:03.605Z</updated>
+    
+    <content type="html"><![CDATA[<p>前几天因为互联网esxi集群vcsa虚拟机证书过期，导致无法登陆。一番折腾后放弃，直接删除原vcenter后重装，结果发现原来创建的分布式交换机在新的vcenter中无法加载。将普通虚拟机更换为标准交换机的端口组后，ros虚拟机掉线了。。。。</p><span id="more"></span><p>经过排查，发现是ros不能像windows、linux虚拟机那样自动更新网卡mac地址。使用以下命令在ros命令行中重置网卡即可，ip地址不会丢失。</p><p><code>interface ethernet print</code></p><p>显示物理网卡编号、名称、状态、mac，R代表ready已启用,#一列代表网卡编号，从</p><p><img src="/../pic/image-20240813082815372.png" alt="image-20240813082815372"></p><p><code>interface ethernet reset-mac-address numbers=0</code></p><p>重置编号为0的网卡mac地址</p><p><code>ip address print</code></p><p><img src="/../pic/image-20240813083141077.png" alt="image-20240813083141077"></p><p><code>ip route print</code> </p><p>显示路由表</p><p><img src="/../pic/image-20240813083218558.png" alt="image-20240813083218558"></p><p>配置网卡IP</p><p><code>ip address add address=192.168.0.11/24 interface=ether1</code></p><p>配置默认路由</p><p><code>ip route add gateway=192.168.0.1</code></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;前几天因为互联网esxi集群vcsa虚拟机证书过期，导致无法登陆。一番折腾后放弃，直接删除原vcenter后重装，结果发现原来创建的分布式交换机在新的vcenter中无法加载。将普通虚拟机更换为标准交换机的端口组后，ros虚拟机掉线了。。。。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
+    
+    
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>群晖docker配置代理地址</title>
@@ -564,35 +589,6 @@
     <category term="unifi" scheme="https://bg4vrg.com/tags/unifi/"/>
     
     <category term="aredn" scheme="https://bg4vrg.com/tags/aredn/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>windows远程桌面mstsc操作时隐藏讨人闲的顶端状态栏</title>
-    <link href="https://bg4vrg.com/post/20240313191001.html"/>
-    <id>https://bg4vrg.com/post/20240313191001.html</id>
-    <published>2024-03-13T11:10:01.000Z</published>
-    <updated>2024-03-13T13:48:05.442Z</updated>
-    
-    <content type="html"><![CDATA[<p>平时工作一般都是远程到一台windows server 2019上操作，比如微信就是24小时在线，浏览网页正常也在这里，除了观看视频、打游戏不行，日常使用都很舒坦。</p><p>不过一直有个很惹人厌的小麻烦，远程桌面登录后会在顶部出现远程服务器信息的一个小小的状态栏，虽然可以自动隐藏，但是鼠标一不小心移动到桌面顶端后，状态栏会自动出现。现在浏览器的标签页一般都是在顶端，所以会极大概率触发这一事件。</p><p>以前解决办法是将这个状态栏左右缩小，勉强使用。不过在关闭重新连接远程服务器后，并不能记忆原先“缩小状态栏”，还是默认的长条。此外，这个状态栏只能在顶端水平移动，不能像输入法那样满屏任意移动。</p><span id="more"></span><p><b><span style="color:rgb(255, 1, 0);">解决办法很简单：取消勾选“显示”标签左下方的“全屏显示时显示连接栏”。</span></b></p><p>这样当再次远程桌面到远端服务器后，仅在刚登陆那几秒钟会在顶端短暂出现显示有ip地址信息内容的状态栏，之后即使鼠标放上去也不会自动出现状态栏了。</p><p>如果需要了解当前是否操作远程桌面，或者想关闭远程桌面，使用热键“CTRL+ALT+HOME”即可呼叫出顶端状态栏。</p><p>当然，呼叫出的状态栏也是只出现几秒钟，要抓紧时间操作。</p><p><img src="/../pic/2024-3-13-mstsc.png"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;平时工作一般都是远程到一台windows server 2019上操作，比如微信就是24小时在线，浏览网页正常也在这里，除了观看视频、打游戏不行，日常使用都很舒坦。&lt;/p&gt;
-&lt;p&gt;不过一直有个很惹人厌的小麻烦，远程桌面登录后会在顶部出现远程服务器信息的一个小小的状态栏，虽然可以自动隐藏，但是鼠标一不小心移动到桌面顶端后，状态栏会自动出现。现在浏览器的标签页一般都是在顶端，所以会极大概率触发这一事件。&lt;/p&gt;
-&lt;p&gt;以前解决办法是将这个状态栏左右缩小，勉强使用。不过在关闭重新连接远程服务器后，并不能记忆原先“缩小状态栏”，还是默认的长条。此外，这个状态栏只能在顶端水平移动，不能像输入法那样满屏任意移动。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
-    
-    
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="mstsc" scheme="https://bg4vrg.com/tags/mstsc/"/>
-    
-    <category term="远程桌面" scheme="https://bg4vrg.com/tags/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/"/>
     
   </entry>
   
