@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="zh"><head><meta name="baidu-site-verification" content="codeva-UlX0cGL1PK"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>pve集群单硬盘剩余空间创建OSD - BG4VRG的无线电之旅</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="BG4VRG的无线电之旅"><meta name="msapplication-TileImage" content="/img/freebsd.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="BG4VRG的无线电之旅"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="本文主要记录3台双网卡主机搭建pve集群（ceph）中操作要点，实验性质，所以不是很严谨仅供参考。 lsbk命令用于查询pve主机的硬盘及分区情况  fdisk -l命令查看并给硬盘分区  使用fdisk命令对sda硬盘分区操作  输入n开始创建，全部默认相信  使用命令p查看现在分区4是否创建成功  确认无误使用w命令保存  不放心的可以使用partprobe让内核及时识别最新的分区布局，而无需"><meta property="og:type" content="blog"><meta property="og:title" content="pve集群单硬盘剩余空间创建OSD"><meta property="og:url" content="https://bg4vrg.com/post/20250219182201.html"><meta property="og:site_name" content="BG4VRG的无线电之旅"><meta property="og:description" content="本文主要记录3台双网卡主机搭建pve集群（ceph）中操作要点，实验性质，所以不是很严谨仅供参考。 lsbk命令用于查询pve主机的硬盘及分区情况  fdisk -l命令查看并给硬盘分区  使用fdisk命令对sda硬盘分区操作  输入n开始创建，全部默认相信  使用命令p查看现在分区4是否创建成功  确认无误使用w命令保存  不放心的可以使用partprobe让内核及时识别最新的分区布局，而无需"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://bg4vrg.com/pic/image-20250219182800298.png"><meta property="og:image" content="https://bg4vrg.com/pic/image-20250219182837182.png"><meta property="og:image" content="https://bg4vrg.com/pic/image-20250219183205602.png"><meta property="og:image" content="https://bg4vrg.com/pic/image-20250219183305518.png"><meta property="og:image" content="https://bg4vrg.com/pic/image-20250219183339891.png"><meta property="og:image" content="https://bg4vrg.com/pic/image-20250219183403084.png"><meta property="og:image" content="https://bg4vrg.com/pic/image-20250219183452221.png"><meta property="og:image" content="https://bg4vrg.com/pic/image-20250219183815137.png"><meta property="og:image" content="https://bg4vrg.com/pic/image-20250219184039418.png"><meta property="og:image" content="https://bg4vrg.com/pic/image-20250219201710043.png"><meta property="article:published_time" content="2025-02-19T10:22:01.000Z"><meta property="article:modified_time" content="2025-03-04T07:39:24.567Z"><meta property="article:author" content="fei"><meta property="article:tag" content="linux"><meta property="article:tag" content="pve"><meta property="article:tag" content="集群"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://bg4vrg.com/pic/image-20250219182800298.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://bg4vrg.com/post/20250219182201.html"},"headline":"pve集群单硬盘剩余空间创建OSD","image":["https://bg4vrg.com/pic/image-20250219182800298.png","https://bg4vrg.com/pic/image-20250219182837182.png","https://bg4vrg.com/pic/image-20250219183205602.png","https://bg4vrg.com/pic/image-20250219183305518.png","https://bg4vrg.com/pic/image-20250219183339891.png","https://bg4vrg.com/pic/image-20250219183403084.png","https://bg4vrg.com/pic/image-20250219183452221.png","https://bg4vrg.com/pic/image-20250219183815137.png","https://bg4vrg.com/pic/image-20250219184039418.png","https://bg4vrg.com/pic/image-20250219201710043.png"],"datePublished":"2025-02-19T10:22:01.000Z","dateModified":"2025-03-04T07:39:24.567Z","author":{"@type":"Person","name":"fei"},"publisher":{"@type":"Organization","name":"BG4VRG的无线电之旅","logo":{"@type":"ImageObject","url":"https://bg4vrg.com/img/freebsd.svg"}},"description":"本文主要记录3台双网卡主机搭建pve集群（ceph）中操作要点，实验性质，所以不是很严谨仅供参考。 lsbk命令用于查询pve主机的硬盘及分区情况  fdisk -l命令查看并给硬盘分区  使用fdisk命令对sda硬盘分区操作  输入n开始创建，全部默认相信  使用命令p查看现在分区4是否创建成功  确认无误使用w命令保存  不放心的可以使用partprobe让内核及时识别最新的分区布局，而无需"}</script><link rel="canonical" href="https://bg4vrg.com/post/20250219182201.html"><link rel="alternate" href="/atom.xml" title="BG4VRG的无线电之旅" type="application/atom+xml"><link rel="icon" href="/img/freebsd.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1305232905963539" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a><a class="navbar-item" href="/categories/AmateurRadio">业余无线电</a><a class="navbar-item" href="/categories/network">网络</a><a class="navbar-item" href="/categories/linux">Linux</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-search"></i></a></div></div></div></nav><br><center><span id="jinrishici-sentence" style="font-size:17px">正在加载今日诗词....</span><span class="mtip" style="font-size:14px"></span></center><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2025-02-19T10:22:01.000Z" title="2025/2/19 18:22:01">2025-02-19</time>发表</span><span class="level-item"><time datetime="2025-03-04T07:39:24.567Z" title="2025/3/4 15:39:24">2025-03-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/linux/">linux</a></span><span class="level-item">12 分钟读完 (大约1820个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">pve集群单硬盘剩余空间创建OSD</h1><div class="content"><p>本文主要记录3台双网卡主机搭建pve集群（ceph）中操作要点，实验性质，所以不是很严谨仅供参考。</p>
+<h2 id="lsbk命令"><a href="#lsbk命令" class="headerlink" title="lsbk命令"></a>lsbk命令</h2><p>用于查询pve主机的硬盘及分区情况</p>
+<p><img src="/../pic/image-20250219182800298.png" alt="lsbk命令"></p>
+<h2 id="fdisk-l命令"><a href="#fdisk-l命令" class="headerlink" title="fdisk -l命令"></a>fdisk -l命令</h2><p>查看并给硬盘分区</p>
+<p><img src="/../pic/image-20250219182837182.png" alt="fdisk -l命令"></p>
+<p>使用fdisk命令对sda硬盘分区操作</p>
+<p><img src="/../pic/image-20250219183205602.png" alt="image-20250219183205602"></p>
+<p>输入n开始创建，全部默认相信</p>
+<p><img src="/../pic/image-20250219183305518.png" alt="image-20250219183305518"></p>
+<p>使用命令p查看现在分区4是否创建成功</p>
+<p><img src="/../pic/image-20250219183339891.png" alt="image-20250219183339891"></p>
+<p>确认无误使用w命令保存</p>
+<p><img src="/../pic/image-20250219183403084.png" alt="image-20250219183403084"></p>
+<p>不放心的可以使用partprobe让内核及时识别最新的分区布局，而无需重启系统。</p>
+<h2 id="创建OSD"><a href="#创建OSD" class="headerlink" title="创建OSD"></a>创建OSD</h2><p>此时在pve2管理页面创建osd那里就可以看到刚才创建的sda4了，因为没有挂载目录，不需要写启动项。因为只有1块物理盘，所以db磁盘和wal磁盘也没法选择，全部默认下一步就行了。</p>
+<p><img src="/../pic/image-20250219183452221.png" alt="image-20250219183452221"></p>
+<p><img src="/../pic/image-20250219183815137.png" alt="image-20250219183815137"></p>
+<p><img src="/../pic/image-20250219184039418.png" alt="image-20250219184039418"></p>
+<h3 id="创建资源池pool"><a href="#创建资源池pool" class="headerlink" title="创建资源池pool"></a>创建资源池pool</h3><p><img src="/../pic/image-20250219201710043.png" alt="image-20250219201710043"></p>
+<h3 id="创建RBD"><a href="#创建RBD" class="headerlink" title="创建RBD"></a>创建RBD</h3><p>用于存储虚拟机，默认即可</p>
+<p>在 PVE（Proxmox VE）中部署 Ceph 时，通常使用 BlueStore 作为 OSD（对象存储守护进程）的存储后端，而 BlueStore 会利用额外的磁盘分区来提升性能，这就是 WAL 磁盘和 DB 磁盘的作用：</p>
+<ul>
+<li><pre><code>- **WAL 磁盘**：用于存储写前日志（Write-Ahead Log）。在写入数据时，数据首先被写入 WAL，这样可以快速记录数据修改的操作，确保在出现故障时能够进行数据恢复。将 WAL 放在一个高速（通常是 SSD 或 NVMe）设备上，可以降低写入延迟并提高数据安全性。
+- **DB 磁盘**：用于存储 BlueStore 的元数据数据库（例如 RocksDB）。这个数据库记录了 OSD 内部的元数据信息，如索引、对象布局等。把 DB 放在专用的快速存储设备上，可以加速元数据的读写操作，进一步提高整个 Ceph 存储系统的性能。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+RBD 是 Ceph 中的块存储设备，全称为 **RADOS Block Device**。其核心概念和作用如下：
+</code></pre>
+</li>
+<li><p><strong>块存储接口</strong>：RBD 把 Ceph 底层的对象存储（RADOS）抽象成块设备，类似于传统的硬盘或 SSD。这样，用户可以像使用常规磁盘那样对其进行格式化、挂载和读写操作。</p>
+</li>
+<li><p><strong>数据分布和高可用性</strong>：由于 RBD 数据实际上存储在 Ceph 集群中的多个 OSD 上，所以具备良好的数据冗余和容错能力。一旦某个节点故障，数据依然可以从其他节点获取，确保高可用性。</p>
+</li>
+<li><p><strong>快照和克隆功能</strong>：RBD 支持快速快照和克隆，这对于备份、恢复以及测试环境的快速部署都非常有用。</p>
+</li>
+<li><p><strong>应用场景</strong>：RBD 常用于虚拟化平台（例如 KVM、QEMU）作为虚拟机磁盘存储，也适用于数据库、容器存储等需要块级存储访问的场景。</p>
+</li>
+</ul>
+<p>简单来说，RBD 将 Ceph 的分布式、可扩展、高可靠性的存储能力以块设备的形式呈现出来，使得用户能够方便地利用这些优势构建灵活高效的存储解决方案。</p>
+<pre><code>
+做个说明就是关于DB磁盘和WAL磁盘的容量大小设定问题：
+
+ Ceph的wal和db的容量到底应该多大，网上说法不一。
+
+默认情况下， wal 和 db 的大小分别是 512 MB 和 1GB, 但是也有人提到2T的数据db应该20G的。
+
+ DB磁盘：ceph官方建议是hdd的4%，但ceph社区里的普遍意见是30GB以及300GB，而大多数选择30GB。如果资金充裕当然是尽量300GB或者按照官方推荐的4%，个人建议条件允许的话最好设定40G以上，越大肯定效果越好。 
+
+WAL磁盘：ceph社区大多数人设定的2GB
+
+
+
+![image-20250219202103363](../pic/image-20250219202103363.png)
+
+![image-20250219202939790](../pic/image-20250219202939790.png)
+
+![image-20250219202954304](../pic/image-20250219202954304.png)
+
+
+
+### pve的高可用
+
+#### 先创建主机组，然后并配置主机优先级（也可默认自动）
+
+指定优先级后，虚拟机会在优先级高的节点上先后自动迁移到优先级高的节点上。
+
+![image-20250219205910038](../pic/image-20250219205910038.png)
+
+
+
+## cephfs
+
+![image-20250221181300803](../pic/image-20250221181300803.png)
+
+
+
+![image-20250221181834161](../pic/image-20250221181834161.png)
+
+如果没有cephfs，那么在任一pve主机上创建虚拟机时，只能看到本地local磁盘下上传的iso文件。假设pve2 local硬盘里有iso，只能pve2节点才能使用，pve1节点是无法使用的，即使是同一集群内。
+
+![image-20250221182000424](../pic/image-20250221182000424.png)
+
+## cephfs步骤
+
+#### 首先在任意节点创建元数据服务器如下图，这是必须的前提
+
+![image-20250221182304479](../pic/image-20250221182304479.png)
+
+![image-20250221182351261](../pic/image-20250221182351261.png)
+
+#### 然后创建cephfs
+
+![image-20250221182437618](../pic/image-20250221182437618.png)
+
+![image-20250221182518219](../pic/image-20250221182518219.png)
+
+![image-20250221182541433](../pic/image-20250221182541433.png)
+
+#### 然后“数据中心-存储”中可以看到cephfs了
+
+![image-20250221182642817](../pic/image-20250221182642817.png)
+
+#### 这时候可以从左侧任意节点的cephfs上传文件了
+
+![image-20250221182833963](../pic/image-20250221182833963.png)
+
+![image-20250221183148858](../pic/image-20250221183148858.png)
+
+可以看到，通过pve1节点上传的iso，在pve2的节点下依然能看到。
+
+#### 再通过pve3节点创建虚拟机试试
+
+![image-20250221183347736](../pic/image-20250221183347736.png)
+
+没问题，依然能找到文件
+
+![image-20250221183408684](../pic/image-20250221183408684.png)
+
+注意存储选项里选rbd文件系统保存虚拟机
+
+![image-20250221183640933](../pic/image-20250221183640933.png)
+
+创建后发现无法启动虚拟机
+
+![image-20250221203839260](../pic/image-20250221203839260.png)
+
+看来是宿主机的p8600 cpu太老了，直接选择内核为kvm64或者host即可
+
+![image-20250221203735502](../pic/image-20250221203735502.png)
+
+
+
+![image-20250221203859982](../pic/image-20250221203859982.png)
+
+注意ikuai这里只有1块网卡的话，如果不用单臂路由就只能用旁路由模式只配lan地址为你的局域网地址了。到ikuai后台要添加一条静态路由，目标地址和子网掩码都为0.0.0.0 下一跳地址写你局域网能上网的网关地址。
+
+迁移到pve2成功
+
+![image-20250221210240382](../pic/image-20250221210240382.png)
+
+
+
+ikuai的插件功能需要注册帐号绑定二维码，不太厚道，我选择创建一个istoreos玩玩，教程在这里https://doc.linkease.com/zh/guide/istoreos/install_pve.html
+
+需要注意的是pve安装方法除了iso外，还可以先创建一个没有硬盘的虚拟机，再使用img2kvm工具直接在pve宿主机上添加硬盘。
+
+
+
+注意这个工具默认安装在local-lvm存储，不然会报错。
+
+![image-20250221213058577](../pic/image-20250221213058577.png)
+
+
+
+可以在命令img2kvm istoreos××××img.gz后指定存储为local或cephfs
+
+![image-20250221213317538](../pic/image-20250221213317538.png)
+
+导入到cephfs不行，不支持img，改到rbd存储成功
+
+![image-20250221213859059](../pic/image-20250221213859059.png)
+
+
+
+![image-20250221213941326](../pic/image-20250221213941326.png)
+
+
+
+
+
+![image-20250221214004600](../pic/image-20250221214004600.png)
+
+
+
+注意要双击“未使用的磁盘0”来启用该硬盘，并在左侧选项中修改引导顺序。
+
+
+
+
+</code></pre>
+</div><div class="article-licensing box"><div class="licensing-title"><p>pve集群单硬盘剩余空间创建OSD</p><p><a href="https://bg4vrg.com/post/20250219182201.html">https://bg4vrg.com/post/20250219182201.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>fei</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2025-02-19</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2025-03-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/linux/">linux</a><a class="link-muted mr-2" rel="tag" href="/tags/pve/">pve</a><a class="link-muted mr-2" rel="tag" href="/tags/%E9%9B%86%E7%BE%A4/">集群</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/alipay.png" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/wechatpay.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/20250224171109.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">ssh下群晖docker套件重启</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/20240813095513.html"><span class="level-item">相机扫描二维码连接隐藏wifi</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://bg4vrg.com/post/20250219182201.html';
+            this.page.identifier = 'post/20250219182201.html';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'bg4vrg' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time datetime="2025-03-04T05:22:00.000Z">2025-03-04</time></p><p class="title"><a href="/post/20250304132200.html">wekan电子看板搭建</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2025-02-24T09:11:09.000Z">2025-02-24</time></p><p class="title"><a href="/post/20250224171109.html">ssh下群晖docker套件重启</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2025-02-19T10:22:01.000Z">2025-02-19</time></p><p class="title"><a href="/post/20250219182201.html">pve集群单硬盘剩余空间创建OSD</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-08-13T01:55:13.000Z">2024-08-13</time></p><p class="title"><a href="/post/20240813095513.html">相机扫描二维码连接隐藏wifi</a></p><p class="categories"><a href="/categories/network/">网络</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2024-08-13T00:21:45.000Z">2024-08-13</time></p><p class="title"><a href="/post/20240813082145.html">esxi下ros虚拟机更换网卡后无法联网</a></p><p class="categories"><a href="/categories/network/">网络</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/linux/"><span class="level-start"><span class="level-item">linux</span></span><span class="level-end"><span class="level-item tag">26</span></span></a></li><li><a class="level is-mobile" href="/categories/AmateurRadio/"><span class="level-start"><span class="level-item">业余无线电</span></span><span class="level-end"><span class="level-item tag">40</span></span></a></li><li><a class="level is-mobile" href="/categories/network/"><span class="level-start"><span class="level-item">网络</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li><li><a class="level is-mobile" href="/categories/note/"><span class="level-start"><span class="level-item">记录</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#lsbk命令"><span class="level-left"><span class="level-item">lsbk命令</span></span></a></li><li><a class="level is-mobile" href="#fdisk-l命令"><span class="level-left"><span class="level-item">fdisk -l命令</span></span></a></li><li><a class="level is-mobile" href="#创建OSD"><span class="level-left"><span class="level-item">创建OSD</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#创建资源池pool"><span class="level-left"><span class="level-item">创建资源池pool</span></span></a></li><li><a class="level is-mobile" href="#创建RBD"><span class="level-left"><span class="level-item">创建RBD</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1305232905963539" data-ad-slot="5679527426" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div><br></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a><p class="is-size-7"><span>&copy; 2025 fei</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a><br><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script>
+        var now = new Date();
+        function createtime() {
+            var grt= new Date("10/24/2015 00:00:00");//此处修改你的建站时间或者网站上线时间
+            now.setTime(now.getTime()+250);
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+            document.getElementById("timeDate").innerHTML = "| 本站已运行 "+dnum+" 天 ";
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        }
+        setInterval("createtime()",250);
+        </script><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span><span> | </span><span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv">0</span></span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;" rel="external nofollow noreferrer">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
