@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2025-03-04T07:26:52.472Z</updated>
+  <updated>2025-04-27T03:38:52.334Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,72 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>飞牛阵列掉盘，提示存储空间已移除</title>
+    <link href="https://bg4vrg.com/post/20250427101701.html"/>
+    <id>https://bg4vrg.com/post/20250427101701.html</id>
+    <published>2025-04-27T02:17:01.000Z</published>
+    <updated>2025-04-27T03:38:52.334Z</updated>
+    
+    <content type="html"><![CDATA[<p>飞牛的存储空间还是不太适合求稳的企业个人，频繁的每周更新也可能是造成硬盘存储空间报错的原因之一（需要重启）。</p><p>下面简单记录下我的飞牛存储修复过程。</p><h1 id="起因："><a href="#起因：" class="headerlink" title="起因："></a>起因：</h1><p>某次更新重启后发现用于pt数据的存储空间2提示“存储空间已移除，请。。。。”，我检查后发现10块硬盘都是正常连接的，也可以被正常识别，硬盘状态也没有告警。搜索论坛发现，不少用户都遇到过这个故障，有的人重启几次就解决了，可惜我重启无法解决。扒了下论坛<a href="https://club.fnnas.com/forum.php?mod=viewthread&tid=16940">这篇帖子</a>，根据大佬的思路尝试修复成功。</p><h1 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h1><p>飞牛的软raid功能和其他老牌nas软件比还是有一定差距。此外每次硬件重启后硬盘的编号会随机变化，同一块硬盘这次在fdisk -l里显示sda，下次可能叫sdb。。。。</p><p>之所以丢盘，应该是重启过程中每块数据盘的数据没有完全同步，导致同一阵列下的硬盘状态不同，而飞牛机制错认为这些没同步完成的硬盘出现故障了。。。</p><p>所以硬盘应该是没坏，而是阵列数据同步没有完成造成的软件故障，这可能和飞牛升级后默认立即重启也有一定关系，如果可以延迟重启或者暂不重启，或许可以大幅降低此类故障。</p><h1 id="实战步骤如下："><a href="#实战步骤如下：" class="headerlink" title="实战步骤如下："></a>实战步骤如下：</h1><span id="more"></span><h2 id="查看阵列状态"><a href="#查看阵列状态" class="headerlink" title="查看阵列状态"></a>查看阵列状态</h2><p><code>mdadm -Ds</code></p><p><img src="/../pic/image-20250427110836568.png" alt="image-20250427110836568"></p><p>其中md127就是被移除的存储空间，显示inactive了</p><h2 id="查看阵列内磁盘状态"><a href="#查看阵列内磁盘状态" class="headerlink" title="查看阵列内磁盘状态"></a>查看阵列内磁盘状态</h2><p><code>lsblk -fp</code></p><p><img src="/../pic/image-20250427111024130.png" alt="image-20250427111024130"></p><p>这里可以看到md127内有8块硬盘，其中sdk sdd被剔除在md127之外了。按道理md127是raid6，是支持2块硬盘故障的。再具体看下这8块硬盘的events</p><p> <code>mdadm --examine /dev/sda1</code></p><p><img src="/../pic/image-20250427111652272.png" alt="image-20250427111652272"></p><p>可以看到events是157 ，md127内各硬盘基本都是157，除了sdf（156） 以及另外2块sdd（137）和sdk（4）</p><p><img src="/../pic/image-20250427111827884.png" alt="image-20250427111827884"></p><p><img src="/../pic/image-20250427111852862.png" alt="image-20250427111852862"></p><p><img src="/../pic/image-20250427111923182.png" alt="image-20250427111923182"></p><p>关于events的解释如下：</p><p>在 Linux 的 mdadm 软件 RAID 中，Events 值记录了阵列元数据的更新次数。每次阵列发生配置变更（如创建、重组、磁盘添加&#x2F;移除、同步事件等），Events 值会递增。通过 mdadm –examine &#x2F;dev&#x2F;sdX 查看的 Events 值反映了该成员磁盘参与的阵列事件次数。</p><blockquote><ul><li><strong><code>Events</code> 值不一致</strong>：表示这些磁盘的元数据更新次数不同，可能部分磁盘未同步或状态异常。</li><li><strong>典型原因</strong>：<ol><li>某些磁盘离线时间较长，未参与最近的阵列操作。</li><li>磁盘被替换后未完成同步（或同步中断）。</li><li>磁盘存在硬件故障，导致元数据无法更新。</li><li>阵列处于降级或恢复状态。</li></ol></li></ul></blockquote><p>156的sdf与其他盘仅差距1，可以认为是好盘。那么就可以尝试手动将这8块盘（除了sdd和sdk的8快）强制启动阵列，运气好的话阵列（raid6）就可以降级的形式启动了。</p><h2 id="停止阵列"><a href="#停止阵列" class="headerlink" title="停止阵列"></a>停止阵列</h2><p> <code>mdadm --stop /dev/md127</code></p><h2 id="手动启动降级的阵列"><a href="#手动启动降级的阵列" class="headerlink" title="手动启动降级的阵列"></a>手动启动降级的阵列</h2><p>只启动10块盘中的8块</p><p><code>mdadm --assemble --force -v /dev/md127 /dev/sda1 /dev/sdb1 /dev/sdc1 /dev/sde1 /dev/sdf1 /dev/sdg1 /dev/sdh1  /dev/sdi1</code></p><p><img src="/../pic/image-20250427101840492.png" alt="image-20250427101840492"></p><p>可以看到提示成功，已经启动了。</p><h2 id="网页操作"><a href="#网页操作" class="headerlink" title="网页操作"></a>网页操作</h2><p>刷新浏览器如下图，存储空间2已经回来了，只是缺了2块盘，我们暂时不管它。</p><p><img src="/../pic/image-20250427101821458.png" alt="image-20250427101821458"></p><p>点击“去挂载”</p><p><img src="/../pic/image-20250427102218072.png" alt="image-20250427102218072"></p><p>挂载成功后添加硬盘修复</p><p><img src="/../pic/image-20250427102255884.png" alt="image-20250427102255884"></p><p>很快，说明实际并没有丢失数据，只是硬盘events状态问题</p><p><img src="/../pic/image-20250427102312152.png" alt="image-20250427102312152"></p><p><img src="/../pic/image-20250427102332720.png" alt="image-20250427102332720"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;飞牛的存储空间还是不太适合求稳的企业个人，频繁的每周更新也可能是造成硬盘存储空间报错的原因之一（需要重启）。&lt;/p&gt;
+&lt;p&gt;下面简单记录下我的飞牛存储修复过程。&lt;/p&gt;
+&lt;h1 id=&quot;起因：&quot;&gt;&lt;a href=&quot;#起因：&quot; class=&quot;headerlink&quot; title=&quot;起因：&quot;&gt;&lt;/a&gt;起因：&lt;/h1&gt;&lt;p&gt;某次更新重启后发现用于pt数据的存储空间2提示“存储空间已移除，请。。。。”，我检查后发现10块硬盘都是正常连接的，也可以被正常识别，硬盘状态也没有告警。搜索论坛发现，不少用户都遇到过这个故障，有的人重启几次就解决了，可惜我重启无法解决。扒了下论坛&lt;a href=&quot;https://club.fnnas.com/forum.php?mod=viewthread&amp;tid=16940&quot;&gt;这篇帖子&lt;/a&gt;，根据大佬的思路尝试修复成功。&lt;/p&gt;
+&lt;h1 id=&quot;分析：&quot;&gt;&lt;a href=&quot;#分析：&quot; class=&quot;headerlink&quot; title=&quot;分析：&quot;&gt;&lt;/a&gt;分析：&lt;/h1&gt;&lt;p&gt;飞牛的软raid功能和其他老牌nas软件比还是有一定差距。此外每次硬件重启后硬盘的编号会随机变化，同一块硬盘这次在fdisk -l里显示sda，下次可能叫sdb。。。。&lt;/p&gt;
+&lt;p&gt;之所以丢盘，应该是重启过程中每块数据盘的数据没有完全同步，导致同一阵列下的硬盘状态不同，而飞牛机制错认为这些没同步完成的硬盘出现故障了。。。&lt;/p&gt;
+&lt;p&gt;所以硬盘应该是没坏，而是阵列数据同步没有完成造成的软件故障，这可能和飞牛升级后默认立即重启也有一定关系，如果可以延迟重启或者暂不重启，或许可以大幅降低此类故障。&lt;/p&gt;
+&lt;h1 id=&quot;实战步骤如下：&quot;&gt;&lt;a href=&quot;#实战步骤如下：&quot; class=&quot;headerlink&quot; title=&quot;实战步骤如下：&quot;&gt;&lt;/a&gt;实战步骤如下：&lt;/h1&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>尝鲜安装飞牛OS-华为rh2288 v3</title>
+    <link href="https://bg4vrg.com/post/20250306175755.html"/>
+    <id>https://bg4vrg.com/post/20250306175755.html</id>
+    <published>2025-03-06T09:57:55.000Z</published>
+    <updated>2025-03-06T10:01:57.172Z</updated>
+    
+    <content type="html"><![CDATA[<p>123</p><span id="more"></span><p><img src="/../pic/image-20250306175817951.png" alt="image-20250306175817951"></p><p><img src="/../pic/image-20250306175846735.png" alt="image-20250306175846735"></p><p>看到没，swap不允许超过8G，我内存64呢。他严格按照debian官方建议使用物理内存平方根的，那就还是用默认7吧</p><p><img src="/../pic/image-20250306180140129.png" alt="image-20250306180140129"></p><p><img src="/../pic/image-20250306180151529.png" alt="image-20250306180151529"></p><p>安装很快</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;123&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/note/linux/"/>
+    
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/note/linux/AmateurRadio/"/>
+    
+    <category term="网络" scheme="https://bg4vrg.com/categories/note/linux/AmateurRadio/network/"/>
+    
+    
+    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="玩客云" scheme="https://bg4vrg.com/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>wekan电子看板搭建</title>
@@ -550,53 +616,6 @@
     <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
     
     <category term="calibre-web" scheme="https://bg4vrg.com/tags/calibre-web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>seo优化之baidu收录</title>
-    <link href="https://bg4vrg.com/post/20240320122111.html"/>
-    <id>https://bg4vrg.com/post/20240320122111.html</id>
-    <published>2024-03-20T04:21:11.000Z</published>
-    <updated>2024-03-20T05:30:45.518Z</updated>
-    
-    <content type="html"><![CDATA[<p>接上篇<a href="https://bg4vrg.com/post/20240224112601.html">《seo优化之google收录》</a>，本篇记录下百度seo记录。不主动提交，它就是不收入我的博客。</p><span id="more"></span><h1 id="一、生成sitemap文件"><a href="#一、生成sitemap文件" class="headerlink" title="一、生成sitemap文件"></a>一、生成sitemap文件</h1><p>hexo-generator-baidu-sitemap则是针对百度。注意参数加上–no-fund –no-audit，否则会报错。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-baidu-sitemap --save-dev --no-fund --no-audit</span><br></pre></td></tr></table></figure><p>安装完成后，重启hexo，执行<code>hexo g &amp;&amp; hexo s</code>后，在public目录下生成对应的xml文件。</p><p>本地可以通过下面地址访问到sitemap文件。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:4000/baidusitemap.xml</span><br></pre></td></tr></table></figure><p>确认可以访问到后，部署到网站</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>确认可以通过你的网站URL访问，比如我的是</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://bg4vrg.com/baidusitemap.xml</span><br></pre></td></tr></table></figure><h1 id="二、百度添加网站"><a href="#二、百度添加网站" class="headerlink" title="二、百度添加网站"></a>二、百度添加网站</h1><p><img src="/../pic/2024-3-20-baideseo1.png"></p><p><img src="/../pic/2024-3-20-baideseo2.png"></p><p><img src="/../pic/2024-3-20-baideseo3.png"></p><p><img src="/../pic/2024-3-20-baideseo4.png"></p><p><img src="/../pic/2024-3-20-baideseo6.png" alt="image-20240320130642138"></p><p><img src="/../pic/2024-3-20-baideseo5.png" alt="image-20240320130553742"></p><p>目前发现验证完成后，sitemap提交配额为0，暂告一段落，后期有时间搞下api主动提交。</p><p><code>今日提交上限：0条  今日提交余额：0条</code></p><h1 id="三-、-hexo-submit-urls-to-search-engine-插件"><a href="#三-、-hexo-submit-urls-to-search-engine-插件" class="headerlink" title="三 、 hexo-submit-urls-to-search-engine 插件"></a>三 、 hexo-submit-urls-to-search-engine 插件</h1><p>主动推送</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;接上篇&lt;a href=&quot;https://bg4vrg.com/post/20240224112601.html&quot;&gt;《seo优化之google收录》&lt;/a&gt;，本篇记录下百度seo记录。不主动提交，它就是不收入我的博客。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
-    
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="hexo" scheme="https://bg4vrg.com/tags/hexo/"/>
-    
-    <category term="seo" scheme="https://bg4vrg.com/tags/seo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>无氧力量训练步骤分解2019版</title>
-    <link href="https://bg4vrg.com/post/20240319195438.html"/>
-    <id>https://bg4vrg.com/post/20240319195438.html</id>
-    <published>2024-03-19T11:54:38.000Z</published>
-    <updated>2024-03-19T13:22:41.359Z</updated>
-    
-    <content type="html"><![CDATA[<p>这些动作大概是2019年葛总教我的，当时还有京东边上的健身房可以免费训练。可惜随后不久就进入口罩时期，荒废到现在。</p><p>记录下备查，我的目标是小区单双杠能玩哈哈。</p><span id="more"></span><h1 id="第一天（胸部）"><a href="#第一天（胸部）" class="headerlink" title="第一天（胸部）"></a>第一天（胸部）</h1><h2 id="1-1-哑铃卧推"><a href="#1-1-哑铃卧推" class="headerlink" title="1.1 哑铃卧推"></a>1.1 哑铃卧推</h2><p><img src="/pic/liliangxunlian1.jpg"><img src="/pic/liliangxunlian2.jpg"> </p><p><img src="/pic/liliangxunlian3.jpg"><img src="/pic/liliangxunlian4.jpg"> </p><p>​    </p><h2 id="1-2-哑铃飞鸟"><a href="#1-2-哑铃飞鸟" class="headerlink" title="1.2 哑铃飞鸟"></a>1.2 哑铃飞鸟</h2><p><img src="/pic/liliangxunlian5.jpg"> </p><h2 id="替代："><a href="#替代：" class="headerlink" title="替代："></a>替代：</h2><p><img src="/pic/liliangxunlian6.jpg"><img src="/pic/liliangxunlian7.jpg"> </p><h2 id="1-3-蝴蝶、龙门夹胸"><a href="#1-3-蝴蝶、龙门夹胸" class="headerlink" title="1.3 蝴蝶、龙门夹胸"></a>1.3 蝴蝶、龙门夹胸</h2><p> <img src="/pic/liliangxunlian8.jpg"></p><h3 id="1-3-1-调整座位高度"><a href="#1-3-1-调整座位高度" class="headerlink" title="1.3.1 调整座位高度"></a>1.3.1 调整座位高度</h3><p>使把手与你的肩在同一高度，双臂保持微弯状态，注意双臂不要打开过度（打开到背平面就可以了），以免伤到肩关节，重量不要太重，内收时停顿3秒，充分挤压胸大肌。</p><h3 id="1-3-2-呼吸"><a href="#1-3-2-呼吸" class="headerlink" title="1.3.2 呼吸"></a>1.3.2 呼吸</h3><p>每做1次自然呼吸1次。</p><h3 id="1-3-3-注意事项："><a href="#1-3-3-注意事项：" class="headerlink" title="1.3.3 注意事项："></a>1.3.3 <strong>注意事项：</strong></h3><ul><li><p>一定要挺直身体，不借助外力，内夹时要用胸大肌发力，放松还原时要和缓。</p></li><li><p>动作过程中肘关节保持向后和外侧，而不是向下。</p></li><li><p>坐凳高度要合适，否则手把位置过高，锻炼肩三角肌会多一些；</p></li></ul><h1 id="第二天（背和二头）"><a href="#第二天（背和二头）" class="headerlink" title="第二天（背和二头）"></a>第二天（背和二头）</h1><h2 id="2-1-宽拉引体向上"><a href="#2-1-宽拉引体向上" class="headerlink" title="2.1 宽拉引体向上"></a>2.1 宽拉引体向上</h2><p>每组之间休息30-60秒，别超时了</p><p>从70公斤辅助开始做引体向上，先别忙上去就练，先调旁边的配重块，尝试可以做12次，记住这个重量. </p><p>然后第二组减少一块，坚持8次，第三组再减少一块，坚持6次，第四组维持第三组重量，做到做不动. </p><p>三个大循环以后，从第二组的重量来起步12次，小循环依次减少. 做完接着坐姿下拉. </p><p><img src="/pic/liliangxunlian9.jpg"> </p><h2 id="2-2-机械坐姿下拉"><a href="#2-2-机械坐姿下拉" class="headerlink" title="2.2 机械坐姿下拉"></a>2.2 机械坐姿下拉</h2><p>从10公斤开始.</p><p>8-12次一组，四组，不减重量，每次力竭，第四组你可能只能做三个，不要紧</p><h2 id="2-3-哑铃划船"><a href="#2-3-哑铃划船" class="headerlink" title="2.3 哑铃划船"></a>2.3 哑铃划船</h2><p>可以换成<strong>杠铃弯举</strong>、<strong>哑铃弯举</strong></p><h1 id="第三天（肩）"><a href="#第三天（肩）" class="headerlink" title="第三天（肩）"></a>第三天（肩）</h1><ul><li><p>哑铃坐姿推肩</p></li><li><p>哑铃侧平举</p></li><li><p>坐姿反飞鸟</p></li></ul><h1 id="第四天（手臂）"><a href="#第四天（手臂）" class="headerlink" title="第四天（手臂）"></a>第四天（手臂）</h1><ul><li><p>哑铃弯举</p></li><li><p>杠铃弯举</p></li><li><p>龙门架绳索下拉</p></li></ul><p><img src="/pic/liliangxunlian10.jpg"> </p><ul><li>单臂划船</li></ul><p><img src="/pic/liliangxunlian11.jpg"> </p><p><img src="/pic/liliangxunlian12.jpg"> </p><p><img src="/pic/liliangxunlian13.jpg"> </p><p><img src="/pic/liliangxunlian14.jpg"> </p><p><img src="/pic/liliangxunlian15.jpg"> </p><p><img src="/pic/liliangxunlian16.jpg"><br><img src="/pic/liliangxunlian17.jpg"> </p><p><img src="/pic/liliangxunlian18.jpg"><br><img src="/pic/liliangxunlian19.jpg"><br><img src="/pic/liliangxunlian20.jpg"> </p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;这些动作大概是2019年葛总教我的，当时还有京东边上的健身房可以免费训练。可惜随后不久就进入口罩时期，荒废到现在。&lt;/p&gt;
-&lt;p&gt;记录下备查，我的目标是小区单双杠能玩哈哈。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
-    
-    
-    <category term="锻炼" scheme="https://bg4vrg.com/tags/%E9%94%BB%E7%82%BC/"/>
     
   </entry>
   
