@@ -161,7 +161,7 @@
     <link href="https://bg4vrg.com/post/20250306175755.html"/>
     <id>https://bg4vrg.com/post/20250306175755.html</id>
     <published>2025-03-06T09:57:55.000Z</published>
-    <updated>2025-03-06T10:01:57.172Z</updated>
+    <updated>2025-07-21T01:43:54.715Z</updated>
     
     <content type="html"><![CDATA[<p>123</p><span id="more"></span><p><img src="/../pic/image-20250306175817951.png" alt="image-20250306175817951"></p><p><img src="/../pic/image-20250306175846735.png" alt="image-20250306175846735"></p><p>看到没，swap不允许超过8G，我内存64呢。他严格按照debian官方建议使用物理内存平方根的，那就还是用默认7吧</p><p><img src="/../pic/image-20250306180140129.png" alt="image-20250306180140129"></p><p><img src="/../pic/image-20250306180151529.png" alt="image-20250306180151529"></p><p>安装很快</p>]]></content>
     
@@ -172,24 +172,14 @@
     
     <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
     
-    <category term="linux" scheme="https://bg4vrg.com/categories/note/linux/"/>
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/note/linux/AmateurRadio/"/>
-    
-    <category term="网络" scheme="https://bg4vrg.com/categories/note/linux/AmateurRadio/network/"/>
-    
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
     
     <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="玩客云" scheme="https://bg4vrg.com/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/"/>
     
     <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
-    <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
+    <category term="飞牛" scheme="https://bg4vrg.com/tags/%E9%A3%9E%E7%89%9B/"/>
     
   </entry>
   
