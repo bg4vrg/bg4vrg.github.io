@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2025-07-20T05:05:34.784Z</updated>
+  <updated>2025-07-29T13:43:45.654Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,61 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LSI 3008阵列卡 ir模式刷IT直通</title>
+    <link href="https://bg4vrg.com/post/20250729204902.html"/>
+    <id>https://bg4vrg.com/post/20250729204902.html</id>
+    <published>2025-07-29T12:49:02.000Z</published>
+    <updated>2025-07-29T13:43:45.654Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文记录3008卡从ir模式刷直通模式。</p><p>3008这张卡只支持riad 0、1非常鸡肋，而且不支持jbod，如果想用在群晖、unraid等系统，最好刷成直通模式。</p><span id="more"></span><h1 id="一、软件准备"><a href="#一、软件准备" class="headerlink" title="一、软件准备"></a>一、软件准备</h1><h2 id="1-1-引导镜像freedos11"><a href="#1-1-引导镜像freedos11" class="headerlink" title="1.1 引导镜像freedos11"></a>1.1 引导镜像freedos11</h2><p>iso下载地址：<a href="http://pingtool.org/downloads/fd11src_live.iso">http://pingtool.org/downloads/fd11src_live.iso</a></p><h2 id="1-2-固件下载"><a href="#1-2-固件下载" class="headerlink" title="1.2 固件下载"></a>1.2 固件下载</h2><p>下载地址：<a href="https://docs.broadcom.com/docs-and-downloads/host-bus-adapters/host-bus-adapters-common-files/sas_sata_12g_p16_15_point_release/9311_8i_Pkg_P16_IR_IT_FW_BIOS_for_MSDOS_Windows.zip">https://docs.broadcom.com/docs-and-downloads/host-bus-adapters/host-bus-adapters-common-files/sas_sata_12g_p16_15_point_release/9311_8i_Pkg_P16_IR_IT_FW_BIOS_for_MSDOS_Windows.zip</a></p><p>解压后准备好下面3个文件，使用ultraiso写入1.1的dos引导镜像里</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SAS9300_8i_IT.bin</span><br><span class="line">#3008的it模式固件</span><br><span class="line">sas3flsh.exe</span><br><span class="line">#dos环境下刷固件工具</span><br><span class="line">mptsas3.rom</span><br><span class="line">#刷完it固件后还需要刷这个bios文件（这个是legacy模式的，uefi模式是另外一个文件），不然无法在bios下配置阵列卡</span><br></pre></td></tr></table></figure><h1 id="二、刷机"><a href="#二、刷机" class="headerlink" title="二、刷机"></a>二、刷机</h1><p>使用freedos镜像引导系统进入dos模式</p><h2 id="2-0-备份sas-address"><a href="#2-0-备份sas-address" class="headerlink" title="2.0 备份sas address"></a>2.0 备份sas address</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sas3flsh.exe -list</span><br></pre></td></tr></table></figure><p><img src="/../pic/c4eca586a8807992b748627e654310c.jpg" alt="c4eca586a8807992b748627e654310c"></p><h2 id="2-1-清除阵列卡flash"><a href="#2-1-清除阵列卡flash" class="headerlink" title="2.1 清除阵列卡flash"></a>2.1 清除阵列卡flash</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sas3flsh.exe -o -e 6</span><br></pre></td></tr></table></figure><p><img src="/../pic/461d8c01fafcfaa2952eb36a97f7481.png" alt="461d8c01fafcfaa2952eb36a97f7481"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sas3flsh.exe -o -f SAS9300_8i_IT.bin</span><br><span class="line">#注意下图因为复制固件时文件名没有完整保留，以实际文件名为准</span><br></pre></td></tr></table></figure><p><img src="/../pic/59f3c8b34a68980952c91b9909556b3.png" alt="59f3c8b34a68980952c91b9909556b3"></p><p><img src="/../pic/2bb8fba7dc220fd7678bc34efa01321.png" alt="2bb8fba7dc220fd7678bc34efa01321"></p><h2 id="2-2-检查3008卡状态"><a href="#2-2-检查3008卡状态" class="headerlink" title="2.2 检查3008卡状态"></a>2.2 检查3008卡状态</h2><p>红框内IT表明刷机成功</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sas3flsh.exe -list</span><br></pre></td></tr></table></figure><p><img src="/../pic/77299660d55144465984a4eb27397ce.png" alt="77299660d55144465984a4eb27397ce"></p><p>刷机成功。如果是使用u盘等作为引导，硬盘只是存储那么这里就可以了。如果想使用硬盘做为引导盘，那么还需要刷如raid bios控制程序</p><h2 id="2-3-刷入阵列卡的bios控制程序"><a href="#2-3-刷入阵列卡的bios控制程序" class="headerlink" title="2.3 刷入阵列卡的bios控制程序"></a>2.3 刷入阵列卡的bios控制程序</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sas3flsh.exe -o -b mptsas3.rom</span><br></pre></td></tr></table></figure><h2 id="2-4-写入sas-address"><a href="#2-4-写入sas-address" class="headerlink" title="2.4 写入sas address"></a>2.4 写入sas address</h2><p>注意不要有“-”，否则会报错</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sas3flsh.exe -o -sasadd ×××××××××</span><br></pre></td></tr></table></figure><p><img src="/../pic/ce2e9c013f05875765e9fbc15dd6f79.png" alt="ce2e9c013f05875765e9fbc15dd6f79"></p><h2 id="2-5-重启就有raid卡信息了"><a href="#2-5-重启就有raid卡信息了" class="headerlink" title="2.5 重启就有raid卡信息了"></a>2.5 重启就有raid卡信息了</h2><p><img src="/../pic/bb4c9d482d41d66c8d0075626996df0.png" alt="bb4c9d482d41d66c8d0075626996df0"></p><p>也能够使用ctrl+c进入raid控制界面配置硬盘引岛了</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;本文记录3008卡从ir模式刷直通模式。&lt;/p&gt;
+&lt;p&gt;3008这张卡只支持riad 0、1非常鸡肋，而且不支持jbod，如果想用在群晖、unraid等系统，最好刷成直通模式。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="raid" scheme="https://bg4vrg.com/tags/raid/"/>
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="直通" scheme="https://bg4vrg.com/tags/%E7%9B%B4%E9%80%9A/"/>
+    
+    <category term="3008" scheme="https://bg4vrg.com/tags/3008/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pe环境使用Physdiskwrite将img磁盘镜像写入硬盘</title>
+    <link href="https://bg4vrg.com/post/20250729090917.html"/>
+    <id>https://bg4vrg.com/post/20250729090917.html</id>
+    <published>2025-07-29T01:09:17.000Z</published>
+    <updated>2025-07-29T01:20:33.903Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用usm pe引导到pe下可以识别到3008直通模式下的硬盘，而easy-u不行。win32diskimager是安装包，Physdiskwrite有命令行程序，也有gui界面，但是gui需要.net环境。</p><span id="more"></span><h1 id="1、下载Physdiskwrite-exe"><a href="#1、下载Physdiskwrite-exe" class="headerlink" title="1、下载Physdiskwrite.exe"></a>1、下载Physdiskwrite.exe</h1><p>官网地址<a href="https://m0n0.ch/wall/physdiskwrite.php">https://m0n0.ch/wall/physdiskwrite.php</a></p><p>想办法通过iso或者u盘导入到pe环境下的华为rh2288v3服务器</p><h1 id="2、格式化硬盘"><a href="#2、格式化硬盘" class="headerlink" title="2、格式化硬盘"></a>2、格式化硬盘</h1><h2 id="2-1、pe下管理员模式打开cmd"><a href="#2-1、pe下管理员模式打开cmd" class="headerlink" title="2.1、pe下管理员模式打开cmd"></a>2.1、pe下管理员模式打开cmd</h2><h2 id="2-2-输入以下命令"><a href="#2-2-输入以下命令" class="headerlink" title="2.2 输入以下命令"></a>2.2 输入以下命令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">diskpart</span><br><span class="line">#进入磁盘管理程序</span><br><span class="line">listdisk</span><br><span class="line">#列出系统下硬盘</span><br><span class="line">select disk *</span><br><span class="line">#选择要被写入镜像的磁盘编号，从0开始的数字</span><br><span class="line">clean</span><br><span class="line">#清除</span><br><span class="line">exit</span><br><span class="line">#退出程序</span><br></pre></td></tr></table></figure><p><img src="/../pic/image-20250729091741215.png" alt="image-20250729091741215"></p><p>如果硬盘有分区，写入会报错如下图</p><p><img src="/../pic/image-20250729091337621.png" alt="image-20250729091337621"></p><h1 id="3、写入镜像"><a href="#3、写入镜像" class="headerlink" title="3、写入镜像"></a>3、写入镜像</h1><p>将镜像文件和physdiskwrite复制到另一块硬盘或者pe的内存虚拟分区的根目录后执行下面命令</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">physdiskwrite.exe -u rr.img</span><br></pre></td></tr></table></figure><p><img src="/../pic/image-20250729091953993.png" alt="image-20250729091953993"></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;使用usm pe引导到pe下可以识别到3008直通模式下的硬盘，而easy-u不行。win32diskimager是安装包，Physdiskwrite有命令行程序，也有gui界面，但是gui需要.net环境。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
+    
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="Physdiskwrite" scheme="https://bg4vrg.com/tags/Physdiskwrite/"/>
+    
+    <category term="服务器" scheme="https://bg4vrg.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>ubnt er-x 安装配置wireguard</title>
@@ -555,61 +610,6 @@
     <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos7安装miniconda3</title>
-    <link href="https://bg4vrg.com/post/20240418164858.html"/>
-    <id>https://bg4vrg.com/post/20240418164858.html</id>
-    <published>2024-04-18T08:48:58.000Z</published>
-    <updated>2024-04-18T11:33:18.265Z</updated>
-    
-    <content type="html"><![CDATA[<p>windows下安装miniconda3很简单，参考CSIR大佬这篇文章：<a href="https://kiraster.github.io/posts/f2cfb11.html">https://kiraster.github.io/posts/f2cfb11.html</a></p><p>最近折腾袖子Seven的轻量化网络运维平台NetOPSCenter（<a href="https://github.com/XiuziSeven/NetOpsCenter">项目地址</a>），发现有的代码是针对linux环境写的，在windows下会因为路径和命令不支持的原因导致批量备份时发生500错误，无法使用。</p><p>这里记录下centos7下安装miniconda3的过程。后续有条件可以试试ubuntu等环境测试，毕竟centos7快挂了。</p><span id="more"></span><h1 id="一、最小化安装centos7"><a href="#一、最小化安装centos7" class="headerlink" title="一、最小化安装centos7"></a>一、最小化安装centos7</h1><p>这里不赘述了，主要是配下ip地址，安装nano、wget等基本命令。</p><h1 id="二、下载并运行miniconda3安装脚本"><a href="#二、下载并运行miniconda3安装脚本" class="headerlink" title="二、下载并运行miniconda3安装脚本"></a>二、下载并运行miniconda3安装脚本</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.anaconda.com/miniconda/Miniconda3-py310_24.3.0-0-Linux-x86_64.sh --no-check-certificate</span><br><span class="line">chmod +x Miniconda3-py310_24.3.0-0-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-py310_24.3.0-0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure><h2 id="2-1-按照提示一路yes安装"><a href="#2-1-按照提示一路yes安装" class="headerlink" title="2.1 按照提示一路yes安装"></a>2.1 按照提示一路yes安装</h2><h2 id="2-2-安装路径修改为-home-miniconda3"><a href="#2-2-安装路径修改为-home-miniconda3" class="headerlink" title="2.2 安装路径修改为&#x2F;home&#x2F;miniconda3"></a>2.2 安装路径修改为&#x2F;home&#x2F;miniconda3</h2><p>尽量不安装在默认的&#x2F;root&#x2F;miniconda3下</p><p><img src="/../pic/2024-4-18-miniconda3-1.png"></p><h2 id="2-3-这一步选yes，让miniconda自动添加环境变量路径"><a href="#2-3-这一步选yes，让miniconda自动添加环境变量路径" class="headerlink" title="2.3 这一步选yes，让miniconda自动添加环境变量路径"></a>2.3 这一步选yes，让miniconda自动添加环境变量路径</h2><p><img src="/../pic/2024-4-18-miniconda3-2.png"></p><h1 id="三、重启服务器，检查安装版本"><a href="#三、重启服务器，检查安装版本" class="headerlink" title="三、重启服务器，检查安装版本"></a>三、重启服务器，检查安装版本</h1><p><code>conda --version</code></p><p><code>conda info</code></p><p><img src="/../pic/2024-4-18-miniconda3-3.png"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;windows下安装miniconda3很简单，参考CSIR大佬这篇文章：&lt;a href=&quot;https://kiraster.github.io/posts/f2cfb11.html&quot;&gt;https://kiraster.github.io/posts/f2cfb11.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;最近折腾袖子Seven的轻量化网络运维平台NetOPSCenter（&lt;a href=&quot;https://github.com/XiuziSeven/NetOpsCenter&quot;&gt;项目地址&lt;/a&gt;），发现有的代码是针对linux环境写的，在windows下会因为路径和命令不支持的原因导致批量备份时发生500错误，无法使用。&lt;/p&gt;
-&lt;p&gt;这里记录下centos7下安装miniconda3的过程。后续有条件可以试试ubuntu等环境测试，毕竟centos7快挂了。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
-    
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
-    
-    <category term="miniconda" scheme="https://bg4vrg.com/tags/miniconda/"/>
-    
-    <category term="python" scheme="https://bg4vrg.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>迁移python环境到内网离线使用</title>
-    <link href="https://bg4vrg.com/post/20240409201339.html"/>
-    <id>https://bg4vrg.com/post/20240409201339.html</id>
-    <published>2024-04-09T12:13:39.000Z</published>
-    <updated>2024-04-09T12:38:53.119Z</updated>
-    
-    <content type="html"><![CDATA[<p>python很好，miniconda3安装也很省心。但是如果是大内网无法访问互联网，就只能望洋兴叹了。</p><p>这里记录下自己如何将互联网环境下配置好的python环境迁移到大内网机器上。</p><span id="more"></span><p>我的互联网（windows2019）和内网机器（windows10）都是windows系统，如果跨操作系统可能会有问题。</p><h1 id="一、互联网端"><a href="#一、互联网端" class="headerlink" title="一、互联网端"></a>一、互联网端</h1><h2 id="1-1-安装miniconda3"><a href="#1-1-安装miniconda3" class="headerlink" title="1.1 安装miniconda3"></a>1.1 安装miniconda3</h2><p>具体操作见之前的文章</p><h2 id="1-2-创建虚拟环境"><a href="#1-2-创建虚拟环境" class="headerlink" title="1.2 创建虚拟环境"></a>1.2 创建虚拟环境</h2><p>具体什么版本要看你运行的程序要求了</p><p>创建一个虚拟环境（指定Python版本3.10）</p><p><code>conda create -n ipa_base python=3.10</code></p><p>激活虚拟环境</p><p><code>conda activate ipa_base</code></p><h2 id="1-3-安装依赖库"><a href="#1-3-安装依赖库" class="headerlink" title="1.3 安装依赖库"></a>1.3 安装依赖库</h2><p>需要安装程序说明使用pip安装一系列依赖</p><p><code>pip install -r requirements.txt</code></p><h2 id="1-4-检查已安装哪些"><a href="#1-4-检查已安装哪些" class="headerlink" title="1.4 检查已安装哪些"></a>1.4 检查已安装哪些</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda list</span><br><span class="line">pip list</span><br></pre></td></tr></table></figure><h2 id="1-5-安装打包工具conda-pack"><a href="#1-5-安装打包工具conda-pack" class="headerlink" title="1.5 安装打包工具conda-pack"></a>1.5 安装打包工具conda-pack</h2><p><code>pip install conda-pack</code></p><p>如果网络有问题就换个源</p><p><code>pip install conda-pack -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com</code></p><h2 id="1-6-打包"><a href="#1-6-打包" class="headerlink" title="1.6 打包"></a>1.6 打包</h2><p><code>conda pack -n env_name</code></p><p>env_name表示你要打包的那个虚拟环境名字，我要打包的虚拟环境是ipa_base，使用下面命令</p><p><code>conda pack -n ipa_base</code>就能在当前目录找到一个压缩文件ipa_base.tar.gz，然后把这个文件和miniconda3安装包复制到内网电脑上。</p><h1 id="二、内网端"><a href="#二、内网端" class="headerlink" title="二、内网端"></a>二、内网端</h1><h2 id="2-1-安装miniconda3"><a href="#2-1-安装miniconda3" class="headerlink" title="2.1 安装miniconda3"></a>2.1 安装miniconda3</h2><h2 id="2-2-迁移虚拟环境"><a href="#2-2-迁移虚拟环境" class="headerlink" title="2.2 迁移虚拟环境"></a>2.2 迁移虚拟环境</h2><p>找到miniconda3的安装目录下的envs文件夹，我的路径如下</p><p><code>D:\miniconda3\envs</code></p><p>将ipa_base.tar.gz解压到envs文件夹下，路径如下</p><p><code>D:\miniconda3\envs\ipa_base</code></p><h2 id="2-3-激活虚拟环境"><a href="#2-3-激活虚拟环境" class="headerlink" title="2.3 激活虚拟环境"></a>2.3 激活虚拟环境</h2><p><code>conda activate ipa_base</code></p><h2 id="2-4-检查安装依赖"><a href="#2-4-检查安装依赖" class="headerlink" title="2.4 检查安装依赖"></a>2.4 检查安装依赖</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python -V</span><br><span class="line">conda info</span><br><span class="line">conda list</span><br><span class="line">pip list</span><br></pre></td></tr></table></figure><h1 id="三、至此已完成迁移，可以直接运行程序了"><a href="#三、至此已完成迁移，可以直接运行程序了" class="headerlink" title="三、至此已完成迁移，可以直接运行程序了"></a>三、至此已完成迁移，可以直接运行程序了</h1><p>本文参考：<a href="https://www.cnblogs.com/jack-nie-23/p/16900926.html">https://www.cnblogs.com/jack-nie-23/p/16900926.html</a></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;python很好，miniconda3安装也很省心。但是如果是大内网无法访问互联网，就只能望洋兴叹了。&lt;/p&gt;
-&lt;p&gt;这里记录下自己如何将互联网环境下配置好的python环境迁移到大内网机器上。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
-    
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="python" scheme="https://bg4vrg.com/tags/python/"/>
-    
-    <category term="miniconda3" scheme="https://bg4vrg.com/tags/miniconda3/"/>
     
   </entry>
   
