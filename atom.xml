@@ -149,9 +149,9 @@
     
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
-    <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
-    
     <category term="群晖" scheme="https://bg4vrg.com/tags/%E7%BE%A4%E6%99%96/"/>
+    
+    <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
     
   </entry>
   
