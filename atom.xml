@@ -40,9 +40,9 @@
     
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
-    <category term="直通" scheme="https://bg4vrg.com/tags/%E7%9B%B4%E9%80%9A/"/>
-    
     <category term="3008" scheme="https://bg4vrg.com/tags/3008/"/>
+    
+    <category term="直通" scheme="https://bg4vrg.com/tags/%E7%9B%B4%E9%80%9A/"/>
     
   </entry>
   
@@ -94,11 +94,11 @@
     
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
-    <category term="wireguard" scheme="https://bg4vrg.com/tags/wireguard/"/>
-    
     <category term="ubnt" scheme="https://bg4vrg.com/tags/ubnt/"/>
     
     <category term="er-x" scheme="https://bg4vrg.com/tags/er-x/"/>
+    
+    <category term="wireguard" scheme="https://bg4vrg.com/tags/wireguard/"/>
     
   </entry>
   
@@ -149,9 +149,9 @@
     
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
-    <category term="群晖" scheme="https://bg4vrg.com/tags/%E7%BE%A4%E6%99%96/"/>
-    
     <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
+    
+    <category term="群晖" scheme="https://bg4vrg.com/tags/%E7%BE%A4%E6%99%96/"/>
     
   </entry>
   
@@ -554,7 +554,7 @@
     <link href="https://bg4vrg.com/post/20240421204758.html"/>
     <id>https://bg4vrg.com/post/20240421204758.html</id>
     <published>2024-04-21T12:47:58.000Z</published>
-    <updated>2024-06-04T11:44:26.569Z</updated>
+    <updated>2024-05-22T05:01:11.803Z</updated>
     
     <content type="html"><![CDATA[<p>偷懒专用。</p><p>以下介绍摘自项目github：<a href="https://github.com/kiraster/NetOpsGUI">https://github.com/kiraster/NetOpsGUI</a></p><p>一个使用nornir框架编写的跑交换机脚本工具的图形界面版本，参考上一代程序<a href="https://github.com/kiraster/netops_v2.0_beta">netops_v2.0_beta</a></p><p>UI界面使用了 <a href="https://github.com/zhiyiYo/PyQt-Fluent-Widgets">PyQt-Fluent-Widgets</a>，后台使用了<a href="https://github.com/nornir-automation/nornir">nornir</a> 和其周边。</p><blockquote><p>目前只写了一个接口的六分之一的三分之一，用处不大全是BUG，称为alpha版</p><p>原来的版本是命令菜单式，功能多了不好操作，较抽象</p><p>虽然这个界面也是一个图形界面主线程干进去，但是很多操作比较直观</p></blockquote><p>界面如下：</p><p><img src="/../pic/2024-4-21-netopsgui-1.png"></p><span id="more"></span><h1 id="一、创建虚拟环境"><a href="#一、创建虚拟环境" class="headerlink" title="一、创建虚拟环境"></a>一、创建虚拟环境</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n netopsgui python=3.8 -y</span><br></pre></td></tr></table></figure><p><img src="/../pic/2024-4-21-netopsgui-2.png"></p><h1 id="二、下载项目程序到本地"><a href="#二、下载项目程序到本地" class="headerlink" title="二、下载项目程序到本地"></a>二、下载项目程序到本地</h1><p>有git的可以直接git</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/kiraster/NetOpsGUI.git</span><br></pre></td></tr></table></figure><p>我是windows环境，直接下载比较合适</p><p>下载地址：<a href="https://github.com/kiraster/NetOpsGUI/archive/refs/heads/main.zip">https://github.com/kiraster/NetOpsGUI/archive/refs/heads/main.zip</a></p><h1 id="三、在虚拟环境中安装依赖组件"><a href="#三、在虚拟环境中安装依赖组件" class="headerlink" title="三、在虚拟环境中安装依赖组件"></a>三、在虚拟环境中安装依赖组件</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 激活虚拟环境</span></span><br><span class="line">conda activate netopsgui</span><br><span class="line"><span class="comment"># 安装库</span></span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure><h1 id="四、运行程序"><a href="#四、运行程序" class="headerlink" title="四、运行程序"></a>四、运行程序</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure><h1 id="五、报错"><a href="#五、报错" class="headerlink" title="五、报错"></a>五、报错</h1><h2 id="5-1-按照github-的readme先干掉报错"><a href="#5-1-按照github-的readme先干掉报错" class="headerlink" title="5.1 按照github 的readme先干掉报错"></a>5.1 按照github 的readme先干掉报错</h2><h2 id="5-2-运行后几秒钟后崩溃"><a href="#5-2-运行后几秒钟后崩溃" class="headerlink" title="5.2 运行后几秒钟后崩溃"></a>5.2 运行后几秒钟后崩溃</h2><p><img src="/../pic/image-20240421212354188.png" alt="5.2报错"></p><p>2024-5-22：后来测试几次都没成功，暂时搁置。目前主要折腾ipaview。</p>]]></content>
     
