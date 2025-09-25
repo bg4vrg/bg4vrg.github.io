@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2025-09-17T14:05:52.957Z</updated>
+  <updated>2025-09-25T02:35:54.088Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>emc存储硬盘无法在普通服务器上使用</title>
+    <link href="https://bg4vrg.com/post/20250925102251.html"/>
+    <id>https://bg4vrg.com/post/20250925102251.html</id>
+    <published>2025-09-25T02:22:51.000Z</published>
+    <updated>2025-09-25T02:35:54.088Z</updated>
+    
+    <content type="html"><![CDATA[<p>dell emc存储上的硬盘之所以不能在其他服务器上识别，是因为emc的硬盘初始化会被格式化成520字节扇区，而正常服务器电脑上的硬盘扇区是512字节。所以需要将硬盘低格为正常512字节才能正常识别。以下是windows下低格办法。linux下也有类似工具</p><span id="more"></span><p>2025-09-23 09:19</p><p>windows下磁盘管理无法初始化</p><p><img src="/../pic/image-20250925102503753.png" alt="image-20250925102503753"></p><h1 id="1、下载windows下工具"><a href="#1、下载windows下工具" class="headerlink" title="1、下载windows下工具"></a>1、下载windows下工具</h1><p> <a href="../pic/sg3_utils148mingw64.zip">sg3_utils148mingw64.zip</a> </p><h1 id="2、-先进cmd内使用工具扫描硬盘"><a href="#2、-先进cmd内使用工具扫描硬盘" class="headerlink" title="2、 先进cmd内使用工具扫描硬盘"></a>2、 先进cmd内使用工具扫描硬盘</h1><p><code>sg_scan</code></p><p><img src="/../pic/image-20250925102451005.png" alt="image-20250925102451005"></p><h1 id="3、使用命令修改pd1磁盘"><a href="#3、使用命令修改pd1磁盘" class="headerlink" title="3、使用命令修改pd1磁盘"></a>3、使用命令修改pd1磁盘</h1><p><code>sg_format -v --format --size=512 PD1</code></p><p><img src="/../pic/image-20250925102427473.png" alt="image-20250925102427473"></p><p>等待，会比较长时间。进度到100%之后即可在windows磁盘管理器里初始化硬盘使用。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;dell emc存储上的硬盘之所以不能在其他服务器上识别，是因为emc的硬盘初始化会被格式化成520字节扇区，而正常服务器电脑上的硬盘扇区是512字节。所以需要将硬盘低格为正常512字节才能正常识别。以下是windows下低格办法。linux下也有类似工具&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>pve ceph 删除ghost osds debug</title>
@@ -570,41 +593,6 @@
     
     
     <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CsiR大佬新作NetOpsGUI:netops2.0的图形版</title>
-    <link href="https://bg4vrg.com/post/20240421204758.html"/>
-    <id>https://bg4vrg.com/post/20240421204758.html</id>
-    <published>2024-04-21T12:47:58.000Z</published>
-    <updated>2024-05-22T05:01:11.803Z</updated>
-    
-    <content type="html"><![CDATA[<p>偷懒专用。</p><p>以下介绍摘自项目github：<a href="https://github.com/kiraster/NetOpsGUI">https://github.com/kiraster/NetOpsGUI</a></p><p>一个使用nornir框架编写的跑交换机脚本工具的图形界面版本，参考上一代程序<a href="https://github.com/kiraster/netops_v2.0_beta">netops_v2.0_beta</a></p><p>UI界面使用了 <a href="https://github.com/zhiyiYo/PyQt-Fluent-Widgets">PyQt-Fluent-Widgets</a>，后台使用了<a href="https://github.com/nornir-automation/nornir">nornir</a> 和其周边。</p><blockquote><p>目前只写了一个接口的六分之一的三分之一，用处不大全是BUG，称为alpha版</p><p>原来的版本是命令菜单式，功能多了不好操作，较抽象</p><p>虽然这个界面也是一个图形界面主线程干进去，但是很多操作比较直观</p></blockquote><p>界面如下：</p><p><img src="/../pic/2024-4-21-netopsgui-1.png"></p><span id="more"></span><h1 id="一、创建虚拟环境"><a href="#一、创建虚拟环境" class="headerlink" title="一、创建虚拟环境"></a>一、创建虚拟环境</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n netopsgui python=3.8 -y</span><br></pre></td></tr></table></figure><p><img src="/../pic/2024-4-21-netopsgui-2.png"></p><h1 id="二、下载项目程序到本地"><a href="#二、下载项目程序到本地" class="headerlink" title="二、下载项目程序到本地"></a>二、下载项目程序到本地</h1><p>有git的可以直接git</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/kiraster/NetOpsGUI.git</span><br></pre></td></tr></table></figure><p>我是windows环境，直接下载比较合适</p><p>下载地址：<a href="https://github.com/kiraster/NetOpsGUI/archive/refs/heads/main.zip">https://github.com/kiraster/NetOpsGUI/archive/refs/heads/main.zip</a></p><h1 id="三、在虚拟环境中安装依赖组件"><a href="#三、在虚拟环境中安装依赖组件" class="headerlink" title="三、在虚拟环境中安装依赖组件"></a>三、在虚拟环境中安装依赖组件</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 激活虚拟环境</span></span><br><span class="line">conda activate netopsgui</span><br><span class="line"><span class="comment"># 安装库</span></span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure><h1 id="四、运行程序"><a href="#四、运行程序" class="headerlink" title="四、运行程序"></a>四、运行程序</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure><h1 id="五、报错"><a href="#五、报错" class="headerlink" title="五、报错"></a>五、报错</h1><h2 id="5-1-按照github-的readme先干掉报错"><a href="#5-1-按照github-的readme先干掉报错" class="headerlink" title="5.1 按照github 的readme先干掉报错"></a>5.1 按照github 的readme先干掉报错</h2><h2 id="5-2-运行后几秒钟后崩溃"><a href="#5-2-运行后几秒钟后崩溃" class="headerlink" title="5.2 运行后几秒钟后崩溃"></a>5.2 运行后几秒钟后崩溃</h2><p><img src="/../pic/image-20240421212354188.png" alt="5.2报错"></p><p>2024-5-22：后来测试几次都没成功，暂时搁置。目前主要折腾ipaview。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;偷懒专用。&lt;/p&gt;
-&lt;p&gt;以下介绍摘自项目github：&lt;a href=&quot;https://github.com/kiraster/NetOpsGUI&quot;&gt;https://github.com/kiraster/NetOpsGUI&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;一个使用nornir框架编写的跑交换机脚本工具的图形界面版本，参考上一代程序&lt;a href=&quot;https://github.com/kiraster/netops_v2.0_beta&quot;&gt;netops_v2.0_beta&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;UI界面使用了 &lt;a href=&quot;https://github.com/zhiyiYo/PyQt-Fluent-Widgets&quot;&gt;PyQt-Fluent-Widgets&lt;/a&gt;，后台使用了&lt;a href=&quot;https://github.com/nornir-automation/nornir&quot;&gt;nornir&lt;/a&gt; 和其周边。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;目前只写了一个接口的六分之一的三分之一，用处不大全是BUG，称为alpha版&lt;/p&gt;
-&lt;p&gt;原来的版本是命令菜单式，功能多了不好操作，较抽象&lt;/p&gt;
-&lt;p&gt;虽然这个界面也是一个图形界面主线程干进去，但是很多操作比较直观&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;界面如下：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/../pic/2024-4-21-netopsgui-1.png&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
-    
-    
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="玩客云" scheme="https://bg4vrg.com/tags/%E7%8E%A9%E5%AE%A2%E4%BA%91/"/>
     
     <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
