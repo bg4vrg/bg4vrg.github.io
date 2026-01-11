@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2025-10-04T13:47:15.600Z</updated>
+  <updated>2026-01-10T05:30:16.421Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>pve搭建onlyoffice</title>
+    <link href="https://bg4vrg.com/post/20260110132834.html"/>
+    <id>https://bg4vrg.com/post/20260110132834.html</id>
+    <published>2026-01-10T05:28:34.000Z</published>
+    <updated>2026-01-10T05:30:16.421Z</updated>
+    
+    <content type="html"><![CDATA[<p>123</p><span id="more"></span>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;123&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ubuntu 24 美化</title>
+    <link href="https://bg4vrg.com/post/20251022165051.html"/>
+    <id>https://bg4vrg.com/post/20251022165051.html</id>
+    <published>2025-10-22T08:50:51.000Z</published>
+    <updated>2026-01-10T05:31:23.806Z</updated>
+    
+    <content type="html"><![CDATA[<p>ubuntu 24 美化界面记录</p><span id="more"></span><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gnome-shell-extensions gnome-shell-extension-prefs gnome-tweaks plank fonts-firacode</span><br><span class="line">clear</span><br><span class="line">sudo apt install aptitude</span><br><span class="line">sudo aptitude install gnome-shell-extensions gnome-shell-extension-prefs gnome-tweaks plank fonts-firacode</span><br></pre></td></tr></table></figure><p>先n，再y再y等待降级安装完毕</p><p><code>plank --preferences</code></p><p><code>[CRITICAL 16:59:33.745328] [AbstractMain:255] Only X11 environments are supported.</code></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;ubuntu 24 美化界面记录&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
+    
+    <category term="linux" scheme="https://bg4vrg.com/categories/note/linux/"/>
+    
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/note/linux/AmateurRadio/"/>
+    
+    <category term="网络" scheme="https://bg4vrg.com/categories/note/linux/AmateurRadio/network/"/>
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>3台r720搭建pve9集群并安装ceph过程记录</title>
@@ -33,13 +85,13 @@
     <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
-    <category term="pve" scheme="https://bg4vrg.com/tags/pve/"/>
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
     <category term="ceph" scheme="https://bg4vrg.com/tags/ceph/"/>
+    
+    <category term="pve" scheme="https://bg4vrg.com/tags/pve/"/>
     
   </entry>
   
@@ -60,9 +112,9 @@
     <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
   </entry>
   
@@ -84,9 +136,9 @@
     <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
     <category term="pve" scheme="https://bg4vrg.com/tags/pve/"/>
     
@@ -110,11 +162,11 @@
     <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
     <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
     <category term="raid" scheme="https://bg4vrg.com/tags/raid/"/>
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
     <category term="3008" scheme="https://bg4vrg.com/tags/3008/"/>
     
@@ -152,23 +204,25 @@
     <link href="https://bg4vrg.com/post/20250713142733.html"/>
     <id>https://bg4vrg.com/post/20250713142733.html</id>
     <published>2025-07-13T06:27:33.000Z</published>
-    <updated>2025-10-04T13:46:43.277Z</updated>
+    <updated>2025-10-07T11:25:04.851Z</updated>
     
-    <content type="html"><![CDATA[<p>记录ubnt er-x安装配置wireguard并打通到异地peer局域网</p><span id="more"></span><h1 id="1、安装wireguard软件包"><a href="#1、安装wireguard软件包" class="headerlink" title="1、安装wireguard软件包"></a>1、安装wireguard软件包</h1><p>项目地址<a href="https://github.com/WireGuard/wireguard-vyatta-ubnt">https://github.com/WireGuard/wireguard-vyatta-ubnt</a></p><p>下载<a href="https://github.com/WireGuard/wireguard-vyatta-ubnt/releases/download/1.0.20220627-1/e50-v2-v1.0.20220627-v1.0.20210914.deb">e50-v2-v1.0.20220627-v1.0.20210914.deb</a>这个包并上传到er-x的&#x2F;home&#x2F;ubnt目录</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i e50-v2-v1.0.20220627-v1.0.20210914.deb</span><br></pre></td></tr></table></figure><p><img src="/../pic/7131.jpg" alt="7131"></p><h1 id="2、配置wireguard并启动"><a href="#2、配置wireguard并启动" class="headerlink" title="2、配置wireguard并启动"></a>2、配置wireguard并启动</h1><p>查看wireguard接口信息，后面也可加创建的wireguard接口名称例如wg0</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show interfaces wireguard</span><br></pre></td></tr></table></figure><p><img src="/../pic/image-20250713144005892.png" alt="image-20250713144005892"></p><h2 id="生成秘钥"><a href="#生成秘钥" class="headerlink" title="生成秘钥"></a>生成秘钥</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wg genkey | tee privatekey | wg pubkey &gt; publickey</span><br></pre></td></tr></table></figure><p><img src="/../pic/image-20250713144331306.png" alt="image-20250713144331306"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat publickey</span><br></pre></td></tr></table></figure><p><img src="/../pic/image-20250713144512102.png" alt="image-20250713144512102"></p><h2 id="进入配置模式"><a href="#进入配置模式" class="headerlink" title="进入配置模式"></a>进入配置模式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure</span><br></pre></td></tr></table></figure><h2 id="配接口地址"><a href="#配接口地址" class="headerlink" title="配接口地址"></a>配接口地址</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set interfaces wireguard wg0 address 9.8.7.8/32</span><br></pre></td></tr></table></figure><p>注意这里不要用&#x2F;24，我们配节点地址一般都是&#x2F;32。如果错误配置&#x2F;24，用以下命令删除</p><p><code>delete interfaces wireguard wg0 address 9.8.7.8/24</code></p><h2 id="配置私钥"><a href="#配置私钥" class="headerlink" title="配置私钥"></a>配置私钥</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set interfaces wireguard wg0 private-key /config/auth/wg.key</span><br></pre></td></tr></table></figure><p>提示：</p><p>Value validation failed<br>Set failed</p><p>报错了，私钥地址不对，之前在erx上创建的私钥地址为&#x2F;home&#x2F;ubnt&#x2F;server_keys&#x2F;privatekey，此外公钥地址”&#x2F;home&#x2F;ubnt&#x2F;server_keys&#x2F;publickey”</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set interfaces wireguard wg0 private-key /home/ubnt/server_keys/privatekey</span><br></pre></td></tr></table></figure><p>以上是interface信息，下面配置peer段相关参数包括endpoint、publickey和allowedips</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set interfaces wireguard wg0 peer 6aXRbp+RgbxwNjvC7dTiXg9sOg3tkNiz6oBTq0uT/zY= endpoint 221.131.166.242:34567</span><br></pre></td></tr></table></figure><p>以上命令记得是一行的，一定要注意。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set interfaces wireguard wg0 peer 6aXRbp+RgbxwNjvC7dTiXg9sOg3tkNiz6oBTq0uT/zY= allowed-ips 9.8.7.0/24,10.139.27.0/24,10.139.22.0/24</span><br></pre></td></tr></table></figure><p>注意命令写完要commit和save保存生效。</p><p><em><strong>2025-10-4更新</strong></em> </p><p>为避免重启路由后上述不生效，最好到webui页面重新保存配置。</p><p>如果上述添加路由命令报错例如下面</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@ubnt<span class="comment"># commit</span></span><br><span class="line">[ interfaces wireguard wg0 peer 6aXRbp+RgbxwNjvC7dTiXg9sOg3tkNiz6oBTq0uT/zY= ]</span><br><span class="line">Error: Allowed IP 9.8.7.0/24 appears multiple <span class="built_in">times</span> on interface wg0 peer 6aXR×××××××××7dTiXg9sOg3tkNiz6oBTq0uT/zY=</span><br><span class="line">Error: Allowed IP 10.139.22.0/24 appears multiple <span class="built_in">times</span> on interface wg0 peer 6aXR×××××××××iXg9sOg3tkNiz6oBTq0uT/zY=</span><br><span class="line">Error: Allowed IP 9.8.7.0/24 appears multiple <span class="built_in">times</span> on interface wg0 peer 6aXR×××××××××sOg3tkNiz6oBTq0uT/zY=</span><br><span class="line"></span><br><span class="line">Commit failed</span><br></pre></td></tr></table></figure><p>那么要退出去使用show ip route查看是否有已存在的路由条目</p><p>并使用以下命令删除</p><p> <code>delete protocols static route 10.139.27.0/24</code></p><p>目前在路由器上已经可以ping通对端局域网地址了</p><p><img src="/../pic/image-20250713151036062.png" alt="image-20250713151036062"></p><h1 id="6、配置路由器转发局域网设备流量"><a href="#6、配置路由器转发局域网设备流量" class="headerlink" title="6、配置路由器转发局域网设备流量"></a>6、配置路由器转发局域网设备流量</h1><p>参考链接<a href="https://github.com/WireGuard/wireguard-vyatta-ubnt/issues/137">https://github.com/WireGuard/wireguard-vyatta-ubnt/issues/137</a></p><p>在er-x本身就能打通远端peer的基础上只需要以下命令就可以了</p><p>其中wg0是er-x上wireguard接口名称，192.168.1.0&#x2F;24是er-x局域网子网地址</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">configure</span><br><span class="line">set service nat rule 5001 description &#x27;source NAT for wireguard&#x27;</span><br><span class="line">set service nat rule 5001 outbound-interface wg0</span><br><span class="line">set service nat rule 5001 type masquerade</span><br><span class="line">set service nat rule 5001 protocol all</span><br><span class="line">set service nat rule 5001 source address 192.168.1.0/24</span><br><span class="line"></span><br><span class="line">commit</span><br><span class="line">save</span><br></pre></td></tr></table></figure><p>Tips：</p><p> 配置文件保存在路由器的&#x2F;config&#x2F;config.boot</p>]]></content>
+    <content type="html"><![CDATA[<p>记录ubnt er-x安装配置第三方wireguard软件并打通到异地peer局域网</p><p>2025-10-7update:官方发布3.0固件已经原生支持<a href="https://community.ui.com/releases/EdgeRouter-3-0-0/33ee3852-b5db-453e-ad14-430bc218c02f">wireguard</a></p><p>2025-10-4update：解决重启设备后wireguard接口丢失问题</p><span id="more"></span><h1 id="1、安装wireguard软件包"><a href="#1、安装wireguard软件包" class="headerlink" title="1、安装wireguard软件包"></a>1、安装wireguard软件包</h1><p>项目地址<a href="https://github.com/WireGuard/wireguard-vyatta-ubnt">https://github.com/WireGuard/wireguard-vyatta-ubnt</a></p><p>下载<a href="https://github.com/WireGuard/wireguard-vyatta-ubnt/releases/download/1.0.20220627-1/e50-v2-v1.0.20220627-v1.0.20210914.deb">e50-v2-v1.0.20220627-v1.0.20210914.deb</a>这个包并上传到er-x的&#x2F;home&#x2F;ubnt目录</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i e50-v2-v1.0.20220627-v1.0.20210914.deb</span><br></pre></td></tr></table></figure><p><img src="/../pic/7131.jpg" alt="7131"></p><h1 id="2、配置wireguard并启动"><a href="#2、配置wireguard并启动" class="headerlink" title="2、配置wireguard并启动"></a>2、配置wireguard并启动</h1><p>查看wireguard接口信息，后面也可加创建的wireguard接口名称例如wg0</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show interfaces wireguard</span><br></pre></td></tr></table></figure><p><img src="/../pic/image-20250713144005892.png" alt="image-20250713144005892"></p><h2 id="生成秘钥"><a href="#生成秘钥" class="headerlink" title="生成秘钥"></a>生成秘钥</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wg genkey | tee privatekey | wg pubkey &gt; publickey</span><br></pre></td></tr></table></figure><p><img src="/../pic/image-20250713144331306.png" alt="image-20250713144331306"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat publickey</span><br></pre></td></tr></table></figure><p><img src="/../pic/image-20250713144512102.png" alt="image-20250713144512102"></p><h2 id="进入配置模式"><a href="#进入配置模式" class="headerlink" title="进入配置模式"></a>进入配置模式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure</span><br></pre></td></tr></table></figure><h2 id="配接口地址"><a href="#配接口地址" class="headerlink" title="配接口地址"></a>配接口地址</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set interfaces wireguard wg0 address 9.8.7.8/32</span><br></pre></td></tr></table></figure><p>注意这里不要用&#x2F;24，我们配节点地址一般都是&#x2F;32。如果错误配置&#x2F;24，用以下命令删除</p><p><code>delete interfaces wireguard wg0 address 9.8.7.8/24</code></p><h2 id="配置私钥"><a href="#配置私钥" class="headerlink" title="配置私钥"></a>配置私钥</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set interfaces wireguard wg0 private-key /config/auth/wg.key</span><br></pre></td></tr></table></figure><p>提示：</p><p>Value validation failed<br>Set failed</p><p>报错了，私钥地址不对，之前在erx上创建的私钥地址为&#x2F;home&#x2F;ubnt&#x2F;server_keys&#x2F;privatekey，此外公钥地址”&#x2F;home&#x2F;ubnt&#x2F;server_keys&#x2F;publickey”</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set interfaces wireguard wg0 private-key /home/ubnt/server_keys/privatekey</span><br></pre></td></tr></table></figure><p>以上是interface信息，下面配置peer段相关参数包括endpoint、publickey和allowedips</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set interfaces wireguard wg0 peer 6aXRbp+RgbxwNjvC7dTiXg9sOg3tkNiz6oBTq0uT/zY= endpoint 221.131.166.242:34567</span><br></pre></td></tr></table></figure><p>以上命令记得是一行的，一定要注意。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set interfaces wireguard wg0 peer 6aXRbp+RgbxwNjvC7dTiXg9sOg3tkNiz6oBTq0uT/zY= allowed-ips 9.8.7.0/24,10.139.27.0/24,10.139.22.0/24</span><br></pre></td></tr></table></figure><p>注意命令写完要commit和save保存生效。</p><p><em><strong>2025-10-4更新</strong></em> </p><p>为避免重启路由后上述不生效，最好到webui页面重新保存配置。</p><p>如果上述添加路由命令报错例如下面</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@ubnt<span class="comment"># commit</span></span><br><span class="line">[ interfaces wireguard wg0 peer 6aXRbp+RgbxwNjvC7dTiXg9sOg3tkNiz6oBTq0uT/zY= ]</span><br><span class="line">Error: Allowed IP 9.8.7.0/24 appears multiple <span class="built_in">times</span> on interface wg0 peer 6aXR×××××××××7dTiXg9sOg3tkNiz6oBTq0uT/zY=</span><br><span class="line">Error: Allowed IP 10.139.22.0/24 appears multiple <span class="built_in">times</span> on interface wg0 peer 6aXR×××××××××iXg9sOg3tkNiz6oBTq0uT/zY=</span><br><span class="line">Error: Allowed IP 9.8.7.0/24 appears multiple <span class="built_in">times</span> on interface wg0 peer 6aXR×××××××××sOg3tkNiz6oBTq0uT/zY=</span><br><span class="line"></span><br><span class="line">Commit failed</span><br></pre></td></tr></table></figure><p>那么要退出去使用show ip route查看是否有已存在的路由条目</p><p>并使用以下命令删除</p><p> <code>delete protocols static route 10.139.27.0/24</code></p><p>目前在路由器上已经可以ping通对端局域网地址了</p><p><img src="/../pic/image-20250713151036062.png" alt="image-20250713151036062"></p><h1 id="6、配置路由器转发局域网设备流量"><a href="#6、配置路由器转发局域网设备流量" class="headerlink" title="6、配置路由器转发局域网设备流量"></a>6、配置路由器转发局域网设备流量</h1><p>参考链接<a href="https://github.com/WireGuard/wireguard-vyatta-ubnt/issues/137">https://github.com/WireGuard/wireguard-vyatta-ubnt/issues/137</a></p><p>在er-x本身就能打通远端peer的基础上只需要以下命令就可以了</p><p>其中wg0是er-x上wireguard接口名称，192.168.1.0&#x2F;24是er-x局域网子网地址</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">configure</span><br><span class="line">set service nat rule 5001 description &#x27;source NAT for wireguard&#x27;</span><br><span class="line">set service nat rule 5001 outbound-interface wg0</span><br><span class="line">set service nat rule 5001 type masquerade</span><br><span class="line">set service nat rule 5001 protocol all</span><br><span class="line">set service nat rule 5001 source address 192.168.1.0/24</span><br><span class="line"></span><br><span class="line">commit</span><br><span class="line">save</span><br></pre></td></tr></table></figure><p>Tips：</p><p> 配置文件保存在路由器的&#x2F;config&#x2F;config.boot</p>]]></content>
     
     
-    <summary type="html">&lt;p&gt;记录ubnt er-x安装配置wireguard并打通到异地peer局域网&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;记录ubnt er-x安装配置第三方wireguard软件并打通到异地peer局域网&lt;/p&gt;
+&lt;p&gt;2025-10-7update:官方发布3.0固件已经原生支持&lt;a href=&quot;https://community.ui.com/releases/EdgeRouter-3-0-0/33ee3852-b5db-453e-ad14-430bc218c02f&quot;&gt;wireguard&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2025-10-4update：解决重启设备后wireguard接口丢失问题&lt;/p&gt;</summary>
     
     
     
     <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
     
     
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
     <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
     <category term="ubnt" scheme="https://bg4vrg.com/tags/ubnt/"/>
     
@@ -196,11 +250,11 @@
     <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
     
     
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
     <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
@@ -221,9 +275,9 @@
     <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
     <category term="群晖" scheme="https://bg4vrg.com/tags/%E7%BE%A4%E6%99%96/"/>
     
@@ -248,9 +302,9 @@
     <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
     <category term="群晖" scheme="https://bg4vrg.com/tags/%E7%BE%A4%E6%99%96/"/>
     
@@ -281,9 +335,9 @@
     <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
   </entry>
   
@@ -304,11 +358,11 @@
     <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
     
     
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
     <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
     <category term="飞牛" scheme="https://bg4vrg.com/tags/%E9%A3%9E%E7%89%9B/"/>
     
@@ -331,9 +385,9 @@
     <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
     <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
     
@@ -359,9 +413,9 @@
     <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
@@ -385,11 +439,11 @@
     
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
+    <category term="ceph" scheme="https://bg4vrg.com/tags/ceph/"/>
+    
     <category term="pve" scheme="https://bg4vrg.com/tags/pve/"/>
     
     <category term="集群" scheme="https://bg4vrg.com/tags/%E9%9B%86%E7%BE%A4/"/>
-    
-    <category term="ceph" scheme="https://bg4vrg.com/tags/ceph/"/>
     
     <category term="高可用" scheme="https://bg4vrg.com/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/"/>
     
@@ -416,9 +470,9 @@
     <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
     
     
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
     <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
     <category term="wifi" scheme="https://bg4vrg.com/tags/wifi/"/>
     
@@ -447,11 +501,11 @@
     <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
     
     
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
     <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
@@ -475,11 +529,11 @@
     <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
     <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
     
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
     <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
     
@@ -537,65 +591,13 @@
     <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
     <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
-    
     <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>rsync免密码传输</title>
-    <link href="https://bg4vrg.com/post/20240602160403.html"/>
-    <id>https://bg4vrg.com/post/20240602160403.html</id>
-    <published>2024-06-02T08:04:03.000Z</published>
-    <updated>2024-06-02T13:53:16.243Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文介绍使用rsync将pt文件夹从一台unraid（远程主机，ip192.168.22.157）迁移到另一台unraid（本地）。因数据量有20多TB，无法一次命令完成。在执行一段时间约2TB左右后程序会崩溃，所以需要一段脚本能自动检测进程是否在执行，如果没有发现rsync就自动执行一次。</p><p>该脚本的前提是在本地可以免密码登录远程主机。</p><span id="more"></span><h1 id="一、rsync备份命令详解"><a href="#一、rsync备份命令详解" class="headerlink" title="一、rsync备份命令详解"></a>一、rsync备份命令详解</h1><p>假设希望将另一台主机（IP：192.168.22.157）备份到本地 <code>/mydir/backup/</code> 目录下，可以使用的命令如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avP root@192.168.22.157:/repos/src/ /mydir/backup/</span><br></pre></td></tr></table></figure><p>深度定制命令如下</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avz --timeout=600 --retry=3 -e &quot;ssh -p 2333&quot; root@192.168.22.157:/mnt/user/huaweipt/ /mnt/user/ptshare/pt157/</span><br></pre></td></tr></table></figure><p>-a 表示归档模式，它保留原有的文件属性（如时间戳、权限等）并递归复制目录。<br>-v 表示详细模式，会在执行过程中输出详细的传输信息。<br>-z 表示启用压缩，可以在传输过程中减少带宽使用。<br>-e ssh 指定使用SSH作为传输的外壳程序，这对于网络间的文件传输非常重要，因为它提供了加密的安全通道。<br>-p 2333表示ssh端口为2333</p><p>-P 表示输出时显示更多内容如当前传送文件名称、速度、进度</p><p>–timeout和–retry选项增加超时时间和重试次数，但是–retry老版本不支持。</p><p>–delete 在源服务器上的文件删除后，在目标服务器同步删除</p><p>默认每次同步备份文件的时候，是需要输入 root 密码的。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Pull: rsync [OPTION...] [USER@]HOST:SRC... [DEST]</span><br><span class="line">Push: rsync [OPTION...] SRC... [USER@]HOST:DEST</span><br></pre></td></tr></table></figure><p><code>注意</code>：rsync命令使用中，关于末尾斜线（<code>/</code>）的说明：</p><ul><li>如果源参数的末尾有斜线，就会复制指定目录下的内容，而不复制目录本身；</li><li>如果源参数的末尾没有斜线，则会复制目录本身；</li><li>目标参数末尾的斜线没有作用；</li></ul><h1 id="二、免密设置"><a href="#二、免密设置" class="headerlink" title="二、免密设置"></a>二、免密设置</h1><h2 id="2-1、生成密钥"><a href="#2-1、生成密钥" class="headerlink" title="2.1、生成密钥"></a>2.1、生成密钥</h2><p>在本地主机上生成密钥文件，命令如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure><p>输入这个命令后，一路回车即可。此时会在 <code>~/.ssh/</code> 下生成 <code>id_rsa.pub</code> 文件。</p><p><img src="/../pic/2024-6-2-rsync-1.png"></p><h2 id="2-2、拷贝公钥到远端服务器"><a href="#2-2、拷贝公钥到远端服务器" class="headerlink" title="2.2、拷贝公钥到远端服务器"></a>2.2、拷贝公钥到远端服务器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i /root/.ssh/id_rsa.pub -p 2333 root@192.168.22.157</span><br></pre></td></tr></table></figure><p>-p 2333是指定ssh端口</p><h2 id="2-3、再次同步"><a href="#2-3、再次同步" class="headerlink" title="2.3、再次同步"></a>2.3、再次同步</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avz --<span class="built_in">timeout</span>=600 --retry=3 -e <span class="string">&quot;ssh -p 2333&quot;</span> root@10.139.22.157:/mnt/user/huaweipt/ /mnt/user/ptshare/pt157/</span><br></pre></td></tr></table></figure><p>此时就无需再输入密码了。  </p><p>ps： –retry&#x3D;3这个参数在unraid中不支持，版本问题，会导致脚本报错</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">pnum=$(ps -ef | grep rsync| grep -v grep|wc -l)</span><br><span class="line">if [ $pnum -eq 0 ]</span><br><span class="line">then</span><br><span class="line">       rsync -avz --timeout=600 -e &quot;ssh -p 2333&quot; root@10.139.22.157:/mnt/user/huaweipt/ /mnt/user/ptshare/pt157/</span><br><span class="line">fi</span><br></pre></td></tr></table></figure><h1 id="三、添加计划任务"><a href="#三、添加计划任务" class="headerlink" title="三、添加计划任务"></a>三、添加计划任务</h1><p>10分钟执行一次脚本检查rsync进程是否存在，不存在重启任务</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crobtab -e</span><br><span class="line">*/10 * * * * sh /mnt/user/appdata/src/r.sh 1&gt; /dev/null</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;本文介绍使用rsync将pt文件夹从一台unraid（远程主机，ip192.168.22.157）迁移到另一台unraid（本地）。因数据量有20多TB，无法一次命令完成。在执行一段时间约2TB左右后程序会崩溃，所以需要一段脚本能自动检测进程是否在执行，如果没有发现rsync就自动执行一次。&lt;/p&gt;
-&lt;p&gt;该脚本的前提是在本地可以免密码登录远程主机。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
-    
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>unraid中部分硬盘无法休眠</title>
-    <link href="https://bg4vrg.com/post/20240530155558.html"/>
-    <id>https://bg4vrg.com/post/20240530155558.html</id>
-    <published>2024-05-30T07:55:58.000Z</published>
-    <updated>2024-06-04T11:30:12.115Z</updated>
-    
-    <content type="html"><![CDATA[<p>经检查发现部分硬盘为sas盘，unraid原生只支持sata硬盘休眠。</p><p>解决办法：安装第三方插件<strong>Spin Down SAS Drives</strong></p><p><img src="/../pic/2024-5-30-sasdrive.png" alt="image-20240604192830907"></p><p>更新：还是不习惯阵列，校验会影响写入速度，现在改用zfs池的方式了。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;经检查发现部分硬盘为sas盘，unraid原生只支持sata硬盘休眠。&lt;/p&gt;
-&lt;p&gt;解决办法：安装第三方插件&lt;strong&gt;Spin Down SAS Drives&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/../pic/2024-5-30-sasdrive.</summary>
-      
-    
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
-    
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
     
   </entry>
   
