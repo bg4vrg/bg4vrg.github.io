@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2026-01-11T06:05:15.454Z</updated>
+  <updated>2026-01-12T05:27:18.733Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>小米秤数据自动同步到佳明garmin connect</title>
+    <link href="https://bg4vrg.com/post/20260112114148.html"/>
+    <id>https://bg4vrg.com/post/20260112114148.html</id>
+    <published>2026-01-12T03:41:48.000Z</published>
+    <updated>2026-01-12T05:27:18.733Z</updated>
+    
+    <content type="html"><![CDATA[<p>​本工具可以将小米运动健康 (Mi Fitness) 中的体重数据，自动生成 Garmin 兼容的 FIT 文件并同步到佳明 Connect 账户。目前支持所有已经导入到小米运动健康中的体重数据。</p><span id="more"></span><h1 id="安装miniconda3"><a href="#安装miniconda3" class="headerlink" title="安装miniconda3"></a>安装miniconda3</h1><p>下载地址：<a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe">https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe</a></p><p>目前最新版本是3.13</p><p>需要注意miniconda3个人用没问题，但是公司用需要商业授权。</p><h1 id="创建一个虚拟环境"><a href="#创建一个虚拟环境" class="headerlink" title="创建一个虚拟环境"></a>创建一个虚拟环境</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n garmin-weight-sync python=3.12.6</span><br></pre></td></tr></table></figure><p>![image-20260112120529235](F:\Program Files\PortableGit\blog\source\pic\image-20260112120529235.png)</p><p>![image-20260112120618354](F:\Program Files\PortableGit\blog\source\pic\image-20260112120618354.png)</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate garmin-weight-sync</span><br></pre></td></tr></table></figure><p>![image-20260112120830339](F:\Program Files\PortableGit\blog\source\pic\image-20260112120830339.png)</p><h1 id="下载代码"><a href="#下载代码" class="headerlink" title="下载代码"></a>下载代码</h1><p><a href="https://github.com/XiaoSiHwang/garmin-weight-sync">https://github.com/XiaoSiHwang/garmin-weight-sync</a></p><h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure><p>![image-20260112121340914](F:\Program Files\PortableGit\blog\source\pic\image-20260112121340914.png)</p><h1 id="快速配置用户文件"><a href="#快速配置用户文件" class="headerlink" title="快速配置用户文件"></a>快速配置用户文件</h1><p>在项目文件夹中，找到 <code>users.json</code> 文件。<strong>这是程序唯一的配置文件。</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;users&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;username&quot;: &quot;你的小米账户&quot;,</span><br><span class="line">            &quot;password&quot;: &quot;你的小米密码&quot;,</span><br><span class="line">            &quot;model&quot;: &quot;你的小米设备ID 如S400填 yunmai.scales.ms103&quot;,</span><br><span class="line">            &quot;token&quot;: &#123;</span><br><span class="line">                &quot;userId&quot;: &quot;&quot;,</span><br><span class="line">                &quot;passToken&quot;: &quot;&quot;,</span><br><span class="line">                &quot;ssecurity&quot;: &quot;&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;garmin&quot;: &#123;</span><br><span class="line">                &quot;email&quot;: &quot;你的佳明账户&quot;,</span><br><span class="line">                &quot;password&quot;: &quot;你的佳明密码&quot;,</span><br><span class="line">                &quot;domain&quot;: &quot;国际区填COM 国区填写 CN&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="关键参数说明："><a href="#关键参数说明：" class="headerlink" title="关键参数说明："></a>关键参数说明：</h3><ul><li><strong>model</strong>: 设备型号。如果您使用的是 <strong>小米体脂秤 S400</strong>，请填 <code>yunmai.scales.ms103</code>。如果你不知道设备信号，保持默认即可，目前支持所有已经导入到小米运动健康中的体重数据。所以只要你的体重数据已经同步到小米运动健康，就可以忽略这个参数。</li><li><strong>domain</strong>: 佳明服务器区域。<strong>中国区</strong>填 <code>CN</code>，<strong>国际区</strong>（如台湾、香港、美国）填 <code>COM</code>。</li><li><strong>token</strong>: 初始留空即可。程序运行成功后会自动保存登录凭证，下次无需重复输入。</li></ul><h1 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h1><h2 id="第一阶段：获取小米授权-仅需执行一次"><a href="#第一阶段：获取小米授权-仅需执行一次" class="headerlink" title="第一阶段：获取小米授权 (仅需执行一次)"></a>第一阶段：获取小米授权 (仅需执行一次)</h2><p>因为小米账号需要处理图形验证码或短信验证，我们需要手动运行登录工具：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python src/xiaomi/login.py --config users.json</span><br></pre></td></tr></table></figure><ol><li><strong>图形验证码</strong>：程序会自动在您的网页浏览器中打开一张图片。看清验证码后，回到终端输入并回车。</li><li><strong>2FA 验证</strong>：如果您的账号开启了二次验证，程序会提示已发送验证码到您的手机，输入收到的 6 位数字即可。</li><li><strong>成功提示</strong>：看到 <code>✅ Login SUCCESS!</code> 后，程序会自动更新 <code>users.json</code>。</li></ol><h2 id="第二阶段：同步数据到佳明"><a href="#第二阶段：同步数据到佳明" class="headerlink" title="第二阶段：同步数据到佳明"></a>第二阶段：同步数据到佳明</h2><p>授权成功后，运行主程序开始同步：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 获取数据、生成 FIT 文件、并全自动同步到佳明</span><br><span class="line">python src/main.py --config users.json --sync</span><br></pre></td></tr></table></figure><p><strong>程序运行时会做什么：</strong></p><ol><li>自动登录您的小米账户（使用之前获取的 Token）。</li><li>从小米服务器拉取您的历史体重记录（默认显示最近 10 条）。</li><li>自动在本地 <code>weight_data_&#123;账户&#125;.json</code> 备份数据。</li><li>在 <code>garmin-fit/</code> 文件夹下生成佳明专用的数据文件。</li><li>自动登录佳明系统并将数据同步上去。</li></ol><hr><h2 id="进阶功能说明"><a href="#进阶功能说明" class="headerlink" title="进阶功能说明"></a>进阶功能说明</h2><h3 id="常用命令参数"><a href="#常用命令参数" class="headerlink" title="常用命令参数"></a>常用命令参数</h3><ul><li><code>--limit N</code>: 指定显示多少条最近的体重记录（默认 10）。</li><li><code>--fit</code>: 仅生成本地 FIT 文件，不上传。</li><li><code>--sync</code>: 同时执行生成和上传（一键同步模式）。</li></ul><h3 id="定时自动同步-长期使用"><a href="#定时自动同步-长期使用" class="headerlink" title="定时自动同步 (长期使用)"></a>定时自动同步 (长期使用)</h3><p>您可以设置定时任务（如 Linux 的 <code>cron</code> 或 Windows 的任务计划程序），每天自动运行：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 示例：每天凌晨 2 点执行同步</span><br><span class="line">0 2 * * * cd /您的项目路径 &amp;&amp; .venv/bin/python src/main.py --sync</span><br></pre></td></tr></table></figure><h2 id="数据过滤配置"><a href="#数据过滤配置" class="headerlink" title="数据过滤配置"></a>数据过滤配置</h2><p>本工具支持在同步数据前根据健康指标过滤体重数据。详细配置请查看 <a href="https://github.com/XiaoSiHwang/garmin-weight-sync/blob/main/FILTER_CONFIG.md">FILTER_CONFIG.md</a>。</p><h3 id="快速示例"><a href="#快速示例" class="headerlink" title="快速示例"></a>快速示例</h3><p>在 <code>users.json</code> 中为每个用户配置独立的过滤规则：</p><p>以下新增代码表示只上传体重60-70kg的数据</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;users&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;username&quot;: &quot;您的手机号/邮箱&quot;,</span><br><span class="line">            &quot;password&quot;: &quot;小米账号密码&quot;,</span><br><span class="line">            &quot;model&quot;: &quot;yunmai.scales.ms103&quot;,</span><br><span class="line">            &quot;token&quot;: &#123; ... &#125;,</span><br><span class="line">            &quot;garmin&quot;: &#123;</span><br><span class="line">                &quot;email&quot;: &quot;您的佳明账号&quot;,</span><br><span class="line">                &quot;password&quot;: &quot;佳明账号密码&quot;,</span><br><span class="line">                &quot;domain&quot;: &quot;CN&quot;,</span><br><span class="line">                &quot;filter&quot;: &#123;</span><br><span class="line">                    &quot;enabled&quot;: true,</span><br><span class="line">                    &quot;conditions&quot;: [</span><br><span class="line">                        &#123; &quot;field&quot;: &quot;Weight&quot;, &quot;operator&quot;: &quot;between&quot;, &quot;value&quot;: [60, 70] &#125;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;logic&quot;: &quot;and&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h3><ul><li>支持按体重、BMI、体脂率等多个指标过滤</li><li>支持多个条件组合（AND&#x2F;OR 逻辑）</li><li>每个用户可独立配置过滤规则</li><li>向后兼容，不配置则同步所有数据</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;​	本工具可以将小米运动健康 (Mi Fitness) 中的体重数据，自动生成 Garmin 兼容的 FIT 文件并同步到佳明 Connect 账户。目前支持所有已经导入到小米运动健康中的体重数据。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
+    
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="python" scheme="https://bg4vrg.com/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>pve搭建onlyoffice</title>
@@ -55,7 +78,7 @@
     <link href="https://bg4vrg.com/post/20251022165051.html"/>
     <id>https://bg4vrg.com/post/20251022165051.html</id>
     <published>2025-10-22T08:50:51.000Z</published>
-    <updated>2026-01-11T06:05:09.977Z</updated>
+    <updated>2026-01-12T05:22:56.287Z</updated>
     
     <content type="html"><![CDATA[<p>ubuntu 24 美化界面记录</p><span id="more"></span><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gnome-shell-extensions gnome-shell-extension-prefs gnome-tweaks plank fonts-firacode</span><br><span class="line">clear</span><br><span class="line">sudo apt install aptitude</span><br><span class="line">sudo aptitude install gnome-shell-extensions gnome-shell-extension-prefs gnome-tweaks plank fonts-firacode</span><br></pre></td></tr></table></figure><p>先n，再y再y等待降级安装完毕</p><p><code>plank --preferences</code></p><p><code>[CRITICAL 16:59:33.745328] [AbstractMain:255] Only X11 environments are supported.</code></p>]]></content>
     
@@ -64,13 +87,7 @@
     
     
     
-    <category term="记录" scheme="https://bg4vrg.com/categories/note/"/>
-    
-    <category term="linux" scheme="https://bg4vrg.com/categories/note/linux/"/>
-    
-    <category term="业余无线电" scheme="https://bg4vrg.com/categories/note/linux/AmateurRadio/"/>
-    
-    <category term="网络" scheme="https://bg4vrg.com/categories/note/linux/AmateurRadio/network/"/>
+    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
     
     
     <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
@@ -532,68 +549,6 @@
 &lt;p&gt;&lt;strong&gt;2025-2-24更新&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&quot;1、临时使用镜像源&quot;&gt;&lt;a href=&quot;#1、临时使用镜像源&quot; class=&quot;headerlink&quot; title=&quot;1、临时使用镜像源&quot;&gt;&lt;/a&gt;1、临时使用镜像源&lt;/h3&gt;&lt;p&gt;&lt;code&gt;docker pull docker.1ms.run/nginx:latest&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&quot;2、永久使用&quot;&gt;&lt;a href=&quot;#2、永久使用&quot; class=&quot;headerlink&quot; title=&quot;2、永久使用&quot;&gt;&lt;/a&gt;2、永久使用&lt;/h3&gt;&lt;p&gt;注意群晖7的镜像地址不是&amp;#x2F;etc&amp;#x2F;docker&amp;#x2F;daemon.js&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>迁移transmission数据到新建服务器</title>
-    <link href="https://bg4vrg.com/post/20240604174705.html"/>
-    <id>https://bg4vrg.com/post/20240604174705.html</id>
-    <published>2024-06-04T09:47:05.000Z</published>
-    <updated>2024-06-04T15:38:01.994Z</updated>
-    
-    <content type="html"><![CDATA[<p>记录下将pt数据（含文件资源及种子和软件配置）从老服务器迁移到新建的24盘存储设备过程。</p><p>相关配置如下表：</p><table><thead><tr><th></th><th>老服务器</th><th>新存储</th></tr></thead><tbody><tr><td>设备型号</td><td>华为rh2288</td><td>大华7系云存储</td></tr><tr><td>硬盘盘位</td><td>12</td><td>24</td></tr><tr><td>操作系统</td><td>unraid 6.11.1</td><td>unraid 6.12.10</td></tr><tr><td>阵列模式</td><td>1块校验盘+10块组阵列</td><td>无校验盘，23块盘组zfs，系统软件数据放在单独一块512G ssd</td></tr><tr><td>可用容量</td><td>36TB</td><td>73TB</td></tr></tbody></table><span id="more"></span><h1 id="一、文件资源转移"><a href="#一、文件资源转移" class="headerlink" title="一、文件资源转移"></a>一、文件资源转移</h1><p>通过rsync将21TB数据迁移到新服务器上，具体操作见上篇文章。</p><p>因为老服务器级联交换机是千兆上联到核心上，所以最多也就跑满千兆，最后花了三天时间才传完。</p><h1 id="二、PT软件配置备份"><a href="#二、PT软件配置备份" class="headerlink" title="二、PT软件配置备份"></a>二、PT软件配置备份</h1><h2 id="2-1-安装官方4-05版transmission"><a href="#2-1-安装官方4-05版transmission" class="headerlink" title="2.1 安装官方4.05版transmission"></a>2.1 安装官方4.05版transmission</h2><p>之前使用transmission 3的快速校验版，一直传闻会有封禁风险，不过从没听过谁被ban了。这次升级，干脆就直接使用官方4.0.5版，因为4.0之后官方就支持快速校验了。</p><p>下图是2个版本的transmission容器对比，上面的是新版4.0.5.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/config /mnt/user/appdata/transmission/</span><br><span class="line">/downloads /mnt/user/ptshare/pt157/</span><br><span class="line">/watch /mnt/user/ptshare/pt157/watch</span><br></pre></td></tr></table></figure><p><img src="/../pic/2024-6-4-transmission-1.png"></p><p>为了防止容器占用太多的内存，可以在容器-高级设置-额外参数中添加“–memory&#x3D;4g”限制仅使用4G内存。</p><p><img src="/../pic/2024-6-4-transmission-2.png" alt="内存限制"></p><h2 id="2-2-迁移种子文件"><a href="#2-2-迁移种子文件" class="headerlink" title="2.2 迁移种子文件"></a>2.2 迁移种子文件</h2><p>新设备容器跑起来后会发现，虽然下载文件夹和配置文件夹都指向了迁移后的pt资源文件夹，但是pt软件中的种子一个不见。</p><p>这是因为在创建新版本transmission时，unraid默认指定了用户id 99和组id 100，而复制过来的文件不同组（root:root）。</p><p><img src="/../pic/2024-6-4-transmission-3.png" alt="image-20240604191730007"></p><p>使用以下命令修改文件属性。</p><ol><li><p><strong>查找用户和组</strong>： 首先，你需要确认UID为99和GID为100的用户和组的名称。使用<code>id -un 99</code>和<code>getent group 100 | cut -d: -f1</code>命令来获取这些信息。</p></li><li><p><strong>使用<code>chown</code>命令</strong>： 从第一步可以看到UID为99的用户名为<code>nobody</code>，GID为100的组名为<code>users</code>，并且你想改变文件<code>myfile.txt</code>的所有者和所属组，你可以使用以下命令：</p><p>Bash</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown nobody:users myfile.txt</span><br></pre></td></tr></table></figure></li></ol><p>具体操作见下图</p><p><img src="/../pic/2024-6-4-transmission-4.png"></p><p>或者：启用特权模式</p><h2 id="2-3-重启容器"><a href="#2-3-重启容器" class="headerlink" title="2.3 重启容器"></a>2.3 重启容器</h2><p>可以发现，几千个种子回来了～</p><p><img src="/../pic/2024-6-4-transmission-5.png" alt="image-20240604192651553"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;记录下将pt数据（含文件资源及种子和软件配置）从老服务器迁移到新建的24盘存储设备过程。&lt;/p&gt;
-&lt;p&gt;相关配置如下表：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;老服务器&lt;/th&gt;
-&lt;th&gt;新存储&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;设备型号&lt;/td&gt;
-&lt;td&gt;华为rh2288&lt;/td&gt;
-&lt;td&gt;大华7系云存储&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;硬盘盘位&lt;/td&gt;
-&lt;td&gt;12&lt;/td&gt;
-&lt;td&gt;24&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;操作系统&lt;/td&gt;
-&lt;td&gt;unraid 6.11.1&lt;/td&gt;
-&lt;td&gt;unraid 6.12.10&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;阵列模式&lt;/td&gt;
-&lt;td&gt;1块校验盘+10块组阵列&lt;/td&gt;
-&lt;td&gt;无校验盘，23块盘组zfs，系统软件数据放在单独一块512G ssd&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;可用容量&lt;/td&gt;
-&lt;td&gt;36TB&lt;/td&gt;
-&lt;td&gt;73TB&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;</summary>
     
     
     
