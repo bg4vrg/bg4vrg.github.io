@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>硬核玩具：BG5ESN FMO (NFM Over Internet) 上手体验与技术浅析 - BG4VRG的无线电之旅</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="BG4VRG的无线电之旅"><meta name="msapplication-TileImage" content="/img/freebsd.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="BG4VRG的无线电之旅"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="2026年第一台玩具，又可以快乐的玩耍了。"><meta property="og:type" content="blog"><meta property="og:title" content="硬核玩具：BG5ESN FMO (NFM Over Internet) 上手体验与技术浅析"><meta property="og:url" content="https://bg4vrg.com/post/20260117142114.html"><meta property="og:site_name" content="BG4VRG的无线电之旅"><meta property="og:description" content="2026年第一台玩具，又可以快乐的玩耍了。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://bg4vrg.com/pic/70963280fb3db8a2cc4a8e781b399fd2.jpg"><meta property="og:image" content="https://bg4vrg.com/pic/8573d3a95feb38134bfb78569097cdfc.jpg"><meta property="og:image" content="https://bg4vrg.com/pic/d6ac79ab36202e6a5c0b8a0b6635481e.jpg"><meta property="article:published_time" content="2026-01-17T06:21:14.679Z"><meta property="article:modified_time" content="2026-01-17T06:54:56.206Z"><meta property="article:author" content="fei"><meta property="article:tag" content="业余无线电"><meta property="article:tag" content="折腾"><meta property="article:tag" content="物联网"><meta property="article:tag" content="fmo"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://bg4vrg.com/pic/70963280fb3db8a2cc4a8e781b399fd2.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://bg4vrg.com/post/20260117142114.html"},"headline":"硬核玩具：BG5ESN FMO (NFM Over Internet) 上手体验与技术浅析","image":["https://bg4vrg.com/pic/70963280fb3db8a2cc4a8e781b399fd2.jpg","https://bg4vrg.com/pic/8573d3a95feb38134bfb78569097cdfc.jpg","https://bg4vrg.com/pic/d6ac79ab36202e6a5c0b8a0b6635481e.jpg"],"datePublished":"2026-01-17T06:21:14.679Z","dateModified":"2026-01-17T06:54:56.206Z","author":{"@type":"Person","name":"fei"},"publisher":{"@type":"Organization","name":"BG4VRG的无线电之旅","logo":{"@type":"ImageObject","url":"https://bg4vrg.com/img/freebsd.svg"}},"description":"2026年第一台玩具，又可以快乐的玩耍了。"}</script><link rel="canonical" href="https://bg4vrg.com/post/20260117142114.html"><link rel="alternate" href="/atom.xml" title="BG4VRG的无线电之旅" type="application/atom+xml"><link rel="icon" href="/img/freebsd.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1305232905963539" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a><a class="navbar-item" href="/categories/AmateurRadio">业余无线电</a><a class="navbar-item" href="/categories/network">网络</a><a class="navbar-item" href="/categories/linux">Linux</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2026-01-17T06:21:14.679Z" title="2026/1/17 14:21:14">2026-01-17</time>发表</span><span class="level-item"><time datetime="2026-01-17T06:54:56.206Z" title="2026/1/17 14:54:56">2026-01-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/AmateurRadio/">业余无线电</a></span><span class="level-item">10 分钟读完 (大约1517个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">硬核玩具：BG5ESN FMO (NFM Over Internet) 上手体验与技术浅析</h1><div class="content"><p>2026年第一台玩具，又可以快乐的玩耍了。<img src="/../pic/70963280fb3db8a2cc4a8e781b399fd2.jpg" alt="70963280fb3db8a2cc4a8e781b399fd2"></p>
+<span id="more"></span>
+
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>作为一名网络管理员和业余无线电爱好者，我玩过不少数字热点，从 MMDVM 到各类公网对讲机。但大多数方案要么依赖中心化的商业服务器，要么就是单纯的“数字模式调制解调器”。</p>
+<p>最近上手了 <strong>BG5ESN</strong> 开发的 **FMO (NFM Over Internet)**，这东西让我眼前一亮。它不是我们传统理解的 DMR&#x2F;YSF 热点，而是一个基于 <strong>MQTT 协议</strong> 和 <strong>APRS 网络</strong> 构建的、去中心化的模拟语音网关（仅NFM）。</p>
+<p>仔细读完它的 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://bg5esn.com/docs/">技术文档</a>，这种“人人都是服务器”的架构设计，简直直击我这个网管的痛点。今天就从技术角度聊聊这个硬核玩具。</p>
+<h2 id="什么是-FMO？"><a href="#什么是-FMO？" class="headerlink" title="什么是 FMO？"></a>什么是 FMO？</h2><p>简单来说，FMO 是一个<strong>物联网模拟对讲通联器</strong>。</p>
+<ul>
+<li><strong>硬件上</strong>：它是一个带屏幕、旋钮（编码器）和 WiFi 的小盒子，尺寸约 120x40mm，通过 Type-C 供电。它通常背着一个 RF 射频背板（Shield），能发射微功率（约 10mW）的模拟信号（NFM）。</li>
+<li><strong>逻辑上</strong>：它将你在本地发出的模拟 NFM 语音，数字化后通过 MQTT 协议传输到互联网上的某个服务器（Broker），再分发给其他连接到该服务器的 FMO 设备。</li>
+</ul>
+<p>它最大的特点在于：<strong>没有官方中心语音服务器</strong>。</p>
+<h2 id="核心架构：技术玩家狂喜的去中心化"><a href="#核心架构：技术玩家狂喜的去中心化" class="headerlink" title="核心架构：技术玩家狂喜的去中心化"></a>核心架构：技术玩家狂喜的去中心化</h2><p>作为习惯了配置 Linux 服务器的人，FMO 的底层逻辑非常性感。它巧妙地结合了两个现有的技术：</p>
+<ol>
+<li><p><strong>APRS-IS 用于“服务发现”</strong>：<br>FMO 利用成熟的 APRS 网络来广播和发现语音服务器。当你搭建好一个语音节点，FMO 会将其信息作为 APRS 信标发布。这意味着全球的 FMO 设备都能通过 APRS 网络“看见”你的服务器，而不需要一个专有的中心目录服务器。</p>
+</li>
+<li><p><strong>MQTT 用于“语音传输”</strong>：<br>语音流被封装在 MQTT 协议中。这是一个轻量级的发布&#x2F;订阅（Pub&#x2F;Sub）消息协议，延迟极低，非常适合物联网环境。<br>文档中提到，我们可以用开源的 <strong>EMQX</strong> 自行搭建服务器。这意味着，只要我有公网 IP（或者云服务器），我就能掌控自己的通信网络，完全不受制于厂商。</p>
+</li>
+</ol>
+<h2 id="上手体验：极客的仪式感"><a href="#上手体验：极客的仪式感" class="headerlink" title="上手体验：极客的仪式感"></a>上手体验：极客的仪式感</h2><h3 id="1-硬件质感"><a href="#1-硬件质感" class="headerlink" title="1. 硬件质感"></a>1. 硬件质感</h3><p>FMO 的设计很有“工业风”。正面的旋钮是交互的核心，操作逻辑非常直观：<strong>旋转</strong>选择服务器，<strong>按下</strong>确认。<br>配合那个小屏幕，在切换服务器时，有一种操作精密仪器的快感。</p>
+<p><img src="/../pic/8573d3a95feb38134bfb78569097cdfc.jpg" alt="8573d3a95feb38134bfb78569097cdfc"></p>
+<h3 id="2-本地射频-RF"><a href="#2-本地射频-RF" class="headerlink" title="2. 本地射频 (RF)"></a>2. 本地射频 (RF)</h3><p>为了合规，附赠的射频背板发射功能出厂时硬件上被限制了。玩家到手需要烙铁手动断开背板触点，且功率被限制在 10mW 左右，但这对于在家玩完全够用了。<br>把手台调到对应的 UV 频点，按下 PTT，声音通过 FMO 瞬间传遍互联网。这种“模拟进，网络出”的体验，既保留了模拟机的人声还原度，又突破了距离限制。</p>
+<p><img src="/../pic/d6ac79ab36202e6a5c0b8a0b6635481e.jpg" alt="d6ac79ab36202e6a5c0b8a0b6635481e"></p>
+<h3 id="3-实名认证体系"><a href="#3-实名认证体系" class="headerlink" title="3. 实名认证体系"></a>3. 实名认证体系</h3><p>FMO 强制要求绑定呼号并进行实名认证。这在一定程度上保证了网络环境的纯净，避免了公网对讲机上常见的“炸台”和干扰。这也是 BG5ESN 即使在去中心化架构下，依然坚持的一种“秩序感”。</p>
+<h2 id="深入折腾：自建语音服务器"><a href="#深入折腾：自建语音服务器" class="headerlink" title="深入折腾：自建语音服务器"></a>深入折腾：自建语音服务器</h2><p>既然官方文档提供了 <code>Docker</code> 和 <code>EMQX</code> 的部署指南，我自然要试一下。<br>在我的服务器上部署一个 MQTT Broker 并不复杂。配置好用户名和密码，生成凭证，然后在 FMO 上输入。<br>一旦连接成功，看着自己的服务器出现在 FMO 的列表里，那种成就感是现成的商业平台给不了的。</p>
+<ul>
+<li><strong>注意：没有公网ip活自建服务器的可以到<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.emqx.com/zh/try%E7%94%B3%E8%AF%B7%E8%AF%95%E7%94%A814%E5%A4%A9%EF%BC%88%E5%AE%8C%E5%85%A8%E5%85%8D%E8%B4%B9%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8D%E6%94%AF%E6%8C%81%E9%9D%9Etls%E5%8A%A0%E5%AF%86%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%89">https://www.emqx.com/zh/try申请试用14天（完全免费的服务器不支持非tls加密不能用）</a></strong>。唯一需要解决的是试用的云服务器域名太长超过32字符了，需要找个免费域名中转下。</li>
+</ul>
+<blockquote>
+<p><strong>技术提示</strong>：如果你也想自建服务器，建议使用 EMQX，并发处理能力更强。记得在防火墙放行 1883 端口，并按照文档要求配置好安全策略，防止未授权访问。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>FMO 不是一个适合所有人的产品。如果你只是想“开箱即用”地通联，市面上有很多更傻瓜的选择。</p>
+<p>但如果你像我一样，喜欢 <strong>Linux</strong>，喜欢 <strong>开源精神</strong>，对 <strong>去中心化网络</strong> 着迷，那么 FMO 绝对是一个值得折腾的“大玩具”。它把业余无线电的探索精神延伸到了网络协议层，让 HAM 不仅能玩转电波，还能玩转数据流。</p>
+<p><strong>推荐阅读：</strong></p>
+<ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://bg5esn.com/docs/fmo-product-guide/">BG5ESN:FMO 产品指南</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://tylk.cc/archives/1040">BG6FHD:语音服务器搭建指南</a></li>
+</ul>
+<p><strong>73 de BG4VRG</strong></p>
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>硬核玩具：BG5ESN FMO (NFM Over Internet) 上手体验与技术浅析</p><p><a href="https://bg4vrg.com/post/20260117142114.html">https://bg4vrg.com/post/20260117142114.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>fei</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2026-01-17</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-01-17</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/">业余无线电</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%8A%98%E8%85%BE/">折腾</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/">物联网</a><a class="link-muted mr-2" rel="tag" href="/tags/fmo/">fmo</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/alipay.png" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/wechatpay.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/20260115185556.html"><span class="level-item">pve9中使用cloud-init</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://bg4vrg.com/post/20260117142114.html';
+            this.page.identifier = 'post/20260117142114.html';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'bg4vrg' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time datetime="2026-01-17T06:21:14.679Z">2026-01-17</time></p><p class="title"><a href="/post/20260117142114.html">硬核玩具：BG5ESN FMO (NFM Over Internet) 上手体验与技术浅析</a></p><p class="categories"><a href="/categories/AmateurRadio/">业余无线电</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-01-15T10:55:56.000Z">2026-01-15</time></p><p class="title"><a href="/post/20260115185556.html">pve9中使用cloud-init</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-01-13T01:46:29.000Z">2026-01-13</time></p><p class="title"><a href="/post/20260113094629.html">debian13 下安装配置seafile（11.0） onlyoffice</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-01-12T03:41:48.000Z">2026-01-12</time></p><p class="title"><a href="/post/20260112114148.html">小米秤数据自动同步到佳明garmin connect</a></p><p class="categories"><a href="/categories/note/">记录</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-01-10T05:28:34.000Z">2026-01-10</time></p><p class="title"><a href="/post/20260110132834.html">pve搭建onlyoffice</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/linux/"><span class="level-start"><span class="level-item">linux</span></span><span class="level-end"><span class="level-item tag">37</span></span></a></li><li><a class="level is-mobile" href="/categories/AmateurRadio/"><span class="level-start"><span class="level-item">业余无线电</span></span><span class="level-end"><span class="level-item tag">41</span></span></a></li><li><a class="level is-mobile" href="/categories/network/"><span class="level-start"><span class="level-item">网络</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/note/"><span class="level-start"><span class="level-item">记录</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#前言"><span class="level-left"><span class="level-item">前言</span></span></a></li><li><a class="level is-mobile" href="#什么是-FMO？"><span class="level-left"><span class="level-item">什么是 FMO？</span></span></a></li><li><a class="level is-mobile" href="#核心架构：技术玩家狂喜的去中心化"><span class="level-left"><span class="level-item">核心架构：技术玩家狂喜的去中心化</span></span></a></li><li><a class="level is-mobile" href="#上手体验：极客的仪式感"><span class="level-left"><span class="level-item">上手体验：极客的仪式感</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-硬件质感"><span class="level-left"><span class="level-item">1. 硬件质感</span></span></a></li><li><a class="level is-mobile" href="#2-本地射频-RF"><span class="level-left"><span class="level-item">2. 本地射频 (RF)</span></span></a></li><li><a class="level is-mobile" href="#3-实名认证体系"><span class="level-left"><span class="level-item">3. 实名认证体系</span></span></a></li></ul></li><li><a class="level is-mobile" href="#深入折腾：自建语音服务器"><span class="level-left"><span class="level-item">深入折腾：自建语音服务器</span></span></a></li><li><a class="level is-mobile" href="#总结"><span class="level-left"><span class="level-item">总结</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1305232905963539" data-ad-slot="5679527426" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a><p class="is-size-7"><span>&copy; 2026 fei</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;" rel="external nofollow noreferrer">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

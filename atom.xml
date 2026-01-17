@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2026-01-15T11:13:35.047Z</updated>
+  <updated>2026-01-17T06:54:56.206Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>硬核玩具：BG5ESN FMO (NFM Over Internet) 上手体验与技术浅析</title>
+    <link href="https://bg4vrg.com/post/20260117142114.html"/>
+    <id>https://bg4vrg.com/post/20260117142114.html</id>
+    <published>2026-01-17T06:21:14.679Z</published>
+    <updated>2026-01-17T06:54:56.206Z</updated>
+    
+    <content type="html"><![CDATA[<p>2026年第一台玩具，又可以快乐的玩耍了。<img src="/../pic/70963280fb3db8a2cc4a8e781b399fd2.jpg" alt="70963280fb3db8a2cc4a8e781b399fd2"></p><span id="more"></span><hr><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>作为一名网络管理员和业余无线电爱好者，我玩过不少数字热点，从 MMDVM 到各类公网对讲机。但大多数方案要么依赖中心化的商业服务器，要么就是单纯的“数字模式调制解调器”。</p><p>最近上手了 <strong>BG5ESN</strong> 开发的 **FMO (NFM Over Internet)**，这东西让我眼前一亮。它不是我们传统理解的 DMR&#x2F;YSF 热点，而是一个基于 <strong>MQTT 协议</strong> 和 <strong>APRS 网络</strong> 构建的、去中心化的模拟语音网关（仅NFM）。</p><p>仔细读完它的 <a href="https://bg5esn.com/docs/">技术文档</a>，这种“人人都是服务器”的架构设计，简直直击我这个网管的痛点。今天就从技术角度聊聊这个硬核玩具。</p><h2 id="什么是-FMO？"><a href="#什么是-FMO？" class="headerlink" title="什么是 FMO？"></a>什么是 FMO？</h2><p>简单来说，FMO 是一个<strong>物联网模拟对讲通联器</strong>。</p><ul><li><strong>硬件上</strong>：它是一个带屏幕、旋钮（编码器）和 WiFi 的小盒子，尺寸约 120x40mm，通过 Type-C 供电。它通常背着一个 RF 射频背板（Shield），能发射微功率（约 10mW）的模拟信号（NFM）。</li><li><strong>逻辑上</strong>：它将你在本地发出的模拟 NFM 语音，数字化后通过 MQTT 协议传输到互联网上的某个服务器（Broker），再分发给其他连接到该服务器的 FMO 设备。</li></ul><p>它最大的特点在于：<strong>没有官方中心语音服务器</strong>。</p><h2 id="核心架构：技术玩家狂喜的去中心化"><a href="#核心架构：技术玩家狂喜的去中心化" class="headerlink" title="核心架构：技术玩家狂喜的去中心化"></a>核心架构：技术玩家狂喜的去中心化</h2><p>作为习惯了配置 Linux 服务器的人，FMO 的底层逻辑非常性感。它巧妙地结合了两个现有的技术：</p><ol><li><p><strong>APRS-IS 用于“服务发现”</strong>：<br>FMO 利用成熟的 APRS 网络来广播和发现语音服务器。当你搭建好一个语音节点，FMO 会将其信息作为 APRS 信标发布。这意味着全球的 FMO 设备都能通过 APRS 网络“看见”你的服务器，而不需要一个专有的中心目录服务器。</p></li><li><p><strong>MQTT 用于“语音传输”</strong>：<br>语音流被封装在 MQTT 协议中。这是一个轻量级的发布&#x2F;订阅（Pub&#x2F;Sub）消息协议，延迟极低，非常适合物联网环境。<br>文档中提到，我们可以用开源的 <strong>EMQX</strong> 自行搭建服务器。这意味着，只要我有公网 IP（或者云服务器），我就能掌控自己的通信网络，完全不受制于厂商。</p></li></ol><h2 id="上手体验：极客的仪式感"><a href="#上手体验：极客的仪式感" class="headerlink" title="上手体验：极客的仪式感"></a>上手体验：极客的仪式感</h2><h3 id="1-硬件质感"><a href="#1-硬件质感" class="headerlink" title="1. 硬件质感"></a>1. 硬件质感</h3><p>FMO 的设计很有“工业风”。正面的旋钮是交互的核心，操作逻辑非常直观：<strong>旋转</strong>选择服务器，<strong>按下</strong>确认。<br>配合那个小屏幕，在切换服务器时，有一种操作精密仪器的快感。</p><p><img src="/../pic/8573d3a95feb38134bfb78569097cdfc.jpg" alt="8573d3a95feb38134bfb78569097cdfc"></p><h3 id="2-本地射频-RF"><a href="#2-本地射频-RF" class="headerlink" title="2. 本地射频 (RF)"></a>2. 本地射频 (RF)</h3><p>为了合规，附赠的射频背板发射功能出厂时硬件上被限制了。玩家到手需要烙铁手动断开背板触点，且功率被限制在 10mW 左右，但这对于在家玩完全够用了。<br>把手台调到对应的 UV 频点，按下 PTT，声音通过 FMO 瞬间传遍互联网。这种“模拟进，网络出”的体验，既保留了模拟机的人声还原度，又突破了距离限制。</p><p><img src="/../pic/d6ac79ab36202e6a5c0b8a0b6635481e.jpg" alt="d6ac79ab36202e6a5c0b8a0b6635481e"></p><h3 id="3-实名认证体系"><a href="#3-实名认证体系" class="headerlink" title="3. 实名认证体系"></a>3. 实名认证体系</h3><p>FMO 强制要求绑定呼号并进行实名认证。这在一定程度上保证了网络环境的纯净，避免了公网对讲机上常见的“炸台”和干扰。这也是 BG5ESN 即使在去中心化架构下，依然坚持的一种“秩序感”。</p><h2 id="深入折腾：自建语音服务器"><a href="#深入折腾：自建语音服务器" class="headerlink" title="深入折腾：自建语音服务器"></a>深入折腾：自建语音服务器</h2><p>既然官方文档提供了 <code>Docker</code> 和 <code>EMQX</code> 的部署指南，我自然要试一下。<br>在我的服务器上部署一个 MQTT Broker 并不复杂。配置好用户名和密码，生成凭证，然后在 FMO 上输入。<br>一旦连接成功，看着自己的服务器出现在 FMO 的列表里，那种成就感是现成的商业平台给不了的。</p><ul><li><strong>注意：没有公网ip活自建服务器的可以到<a href="https://www.emqx.com/zh/try%E7%94%B3%E8%AF%B7%E8%AF%95%E7%94%A814%E5%A4%A9%EF%BC%88%E5%AE%8C%E5%85%A8%E5%85%8D%E8%B4%B9%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8D%E6%94%AF%E6%8C%81%E9%9D%9Etls%E5%8A%A0%E5%AF%86%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%89">https://www.emqx.com/zh/try申请试用14天（完全免费的服务器不支持非tls加密不能用）</a></strong>。唯一需要解决的是试用的云服务器域名太长超过32字符了，需要找个免费域名中转下。</li></ul><blockquote><p><strong>技术提示</strong>：如果你也想自建服务器，建议使用 EMQX，并发处理能力更强。记得在防火墙放行 1883 端口，并按照文档要求配置好安全策略，防止未授权访问。</p></blockquote><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>FMO 不是一个适合所有人的产品。如果你只是想“开箱即用”地通联，市面上有很多更傻瓜的选择。</p><p>但如果你像我一样，喜欢 <strong>Linux</strong>，喜欢 <strong>开源精神</strong>，对 <strong>去中心化网络</strong> 着迷，那么 FMO 绝对是一个值得折腾的“大玩具”。它把业余无线电的探索精神延伸到了网络协议层，让 HAM 不仅能玩转电波，还能玩转数据流。</p><p><strong>推荐阅读：</strong></p><ul><li><a href="https://bg5esn.com/docs/fmo-product-guide/">BG5ESN:FMO 产品指南</a></li><li><a href="https://tylk.cc/archives/1040">BG6FHD:语音服务器搭建指南</a></li></ul><p><strong>73 de BG4VRG</strong></p><hr>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;2026年第一台玩具，又可以快乐的玩耍了。&lt;img src=&quot;/../pic/70963280fb3db8a2cc4a8e781b399fd2.jpg&quot; alt=&quot;70963280fb3db8a2cc4a8e781b399fd2&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="业余无线电" scheme="https://bg4vrg.com/categories/AmateurRadio/"/>
+    
+    
+    <category term="业余无线电" scheme="https://bg4vrg.com/tags/%E4%B8%9A%E4%BD%99%E6%97%A0%E7%BA%BF%E7%94%B5/"/>
+    
+    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="物联网" scheme="https://bg4vrg.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
+    
+    <category term="fmo" scheme="https://bg4vrg.com/tags/fmo/"/>
+    
+  </entry>
   
   <entry>
     <title>pve9中使用cloud-init</title>
@@ -528,41 +555,6 @@
     <category term="集群" scheme="https://bg4vrg.com/tags/%E9%9B%86%E7%BE%A4/"/>
     
     <category term="高可用" scheme="https://bg4vrg.com/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>相机扫描二维码连接隐藏wifi</title>
-    <link href="https://bg4vrg.com/post/20240813095513.html"/>
-    <id>https://bg4vrg.com/post/20240813095513.html</id>
-    <published>2024-08-13T01:55:13.000Z</published>
-    <updated>2024-08-13T02:10:38.607Z</updated>
-    
-    <content type="html"><![CDATA[<p>现在对wifi无线局域网的安全要求越来越严格，近期不少地方要求对wifi的ssid进行隐藏并设置复杂密码，这样导致连接隐藏wifi时会比较复杂。</p><p>比较简单的办法是先生成一个包含wifi ssid和密码（均明文）的二维码，然后使用原生相机扫码，手机会自动提示点击加入wifi，不需要其他输入ssid和密码的复杂操作。</p><p>但要注意：</p><p>1、部分老安卓手机可能不支持，这时可以使用支付宝扫码功能连接。</p><p>2、微信扫码是不支持直连wifi的，毕竟人家是要靠这个收费的。</p><span id="more"></span><p>生成二维码的源码在这里：<a href="https://github.com/bndw/wifi-card">https://github.com/bndw/wifi-card</a></p><p>一般不需要重新搭建，可以直接使用官方网站生成二维码</p><p><a href="https://wificard.io/">https://wificard.io/</a></p><p>可以选择将密码选择隐藏或显示出来</p><p><img src="/../pic/image-20240813100257642.png" alt="image-20240813100257642"></p><p>苹果手机扫码效果如下：直接点击黄色ssid即可</p><p><img src="/../pic/image-20240813100514611.png" alt="image-20240813100514611"></p><p>或者使用支付宝扫码如下图</p><p><img src="/../pic/580471e3438b727a73d50d19f050b7a.jpg" alt="580471e3438b727a73d50d19f050b7a"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;现在对wifi无线局域网的安全要求越来越严格，近期不少地方要求对wifi的ssid进行隐藏并设置复杂密码，这样导致连接隐藏wifi时会比较复杂。&lt;/p&gt;
-&lt;p&gt;比较简单的办法是先生成一个包含wifi ssid和密码（均明文）的二维码，然后使用原生相机扫码，手机会自动提示点击加入wifi，不需要其他输入ssid和密码的复杂操作。&lt;/p&gt;
-&lt;p&gt;但要注意：&lt;/p&gt;
-&lt;p&gt;1、部分老安卓手机可能不支持，这时可以使用支付宝扫码功能连接。&lt;/p&gt;
-&lt;p&gt;2、微信扫码是不支持直连wifi的，毕竟人家是要靠这个收费的。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
-    
-    
-    <category term="折腾" scheme="https://bg4vrg.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="wifi" scheme="https://bg4vrg.com/tags/wifi/"/>
-    
-    <category term="支付宝" scheme="https://bg4vrg.com/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/"/>
-    
-    <category term="相机" scheme="https://bg4vrg.com/tags/%E7%9B%B8%E6%9C%BA/"/>
-    
-    <category term="二维码" scheme="https://bg4vrg.com/tags/%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
     
   </entry>
   
