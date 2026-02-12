@@ -6,7 +6,7 @@
   <link href="https://bg4vrg.com/atom.xml" rel="self"/>
   
   <link href="https://bg4vrg.com/"/>
-  <updated>2026-01-19T13:03:04.060Z</updated>
+  <updated>2026-02-12T08:57:49.878Z</updated>
   <id>https://bg4vrg.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AI手搓h3c交换机运维程序</title>
+    <link href="https://bg4vrg.com/post/20260212165455.html"/>
+    <id>https://bg4vrg.com/post/20260212165455.html</id>
+    <published>2026-02-12T08:54:55.000Z</published>
+    <updated>2026-02-12T08:57:49.878Z</updated>
+    
+    <content type="html"><![CDATA[<p>基于 Python 3.11 + Flask + Netmiko 开发的企业级 H3C 交换机 Web 运维平台。<br>从早期的单一脚本工具，进化为集成了 <strong>资产管理</strong>、<strong>安全登录</strong> 和 <strong>批量自动化备份</strong> 的综合运维系统。</p><p>本程序代码全部有google gemini生成，成就感满满，目前已经更新到2.0.</p><span id="more"></span><h1 id="H3C-Switch-Admin-Tool-v2-0-0"><a href="#H3C-Switch-Admin-Tool-v2-0-0" class="headerlink" title="H3C Switch Admin Tool v2.0.0"></a>H3C Switch Admin Tool v2.0.0</h1><p><img src="https://img.shields.io/badge/Python-3.11-blue" alt="Python"><br><img src="https://img.shields.io/badge/License-GPLv3-green" alt="License"><br><img src="https://img.shields.io/badge/Version-v2.0.0-orange" alt="Version"></p><h2 id="✨-核心功能-Features"><a href="#✨-核心功能-Features" class="headerlink" title="✨ 核心功能 (Features)"></a>✨ 核心功能 (Features)</h2><h3 id="🚀-自动化运维"><a href="#🚀-自动化运维" class="headerlink" title="🚀 自动化运维"></a>🚀 自动化运维</h3><ul><li>**批量配置备份 (Batch Backup)**：一键轮询数据库中所有设备，自动抓取 <code>display current-configuration</code> 并按日期归档保存。支持错误跳过与实时日志反馈。</li><li><strong>ACL MAC 4000 管理</strong>：可视化的 MAC 白名单规则(交换机上提前创建mac 4000列表)查看、添加与删除。</li><li><strong>端口 IP+MAC 绑定</strong>：自动抓取物理端口描述 (Description) 和 Brief 信息；一键下发 <code>ip source binding ip-address</code> 绑定命令 (VLAN  + Verify + Binding)。</li><li><strong>配置备份</strong>：一键保存当前配置 (Save)。</li><li><ul><li><strong>离线可用</strong>：所有静态资源本地化，无需互联网连接。</li></ul></li></ul><h3 id="🛡️-资产与安全"><a href="#🛡️-资产与安全" class="headerlink" title="🛡️ 资产与安全"></a>🛡️ 资产与安全</h3><ul><li>**资产管理 (Asset Management)**：内置 SQLite 数据库，支持 Web 端添加、删除交换机资产（支持非 22 端口）。</li><li><strong>快捷连接</strong>：下拉菜单选择设备，自动填充 IP、端口、账号密码，告别重复输入。</li><li><strong>安全认证</strong>：基于 Flask-Login 的用户登录系统，密码采用哈希加密存储。</li><li><strong>操作审计</strong>：实时显示操作日志，明确反馈成功&#x2F;失败状态。</li></ul><h2 id="🛠️-环境依赖"><a href="#🛠️-环境依赖" class="headerlink" title="🛠️ 环境依赖"></a>🛠️ 环境依赖</h2><p>本项目基于 <strong>Python 3.11</strong> 开发，请确保你的运行环境符合要求。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure><p><strong>请确保运行环境能通过 SSH 连接到交换机。</strong></p><h2 id="🚀-启动方式"><a href="#🚀-启动方式" class="headerlink" title="🚀 启动方式"></a>🚀 启动方式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python run_server.py</span><br></pre></td></tr></table></figure><p>访问浏览器：<a href="http://127.0.0.1:8080/">http://127.0.0.1:8080</a></p><p><strong>默认账号</strong></p><ul><li>首次启动会自动初始化数据库。</li><li><strong>用户名</strong>：<code>admin</code></li><li><strong>初始密码</strong>：<code>admin888</code></li><li>建议登录后点击右上角修改密码)</li></ul><h2 id="📂-目录结构说明"><a href="#📂-目录结构说明" class="headerlink" title="📂 目录结构说明"></a>📂 目录结构说明</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">H3C-Switch-Admin-Tool/</span><br><span class="line">├── backups/             # [自动生成] 存放批量备份的配置文件，按日期归档</span><br><span class="line">├── net_assets.db        # [自动生成] SQLite 数据库，存储用户和资产信息</span><br><span class="line">├── app.py               # Flask 后端核心逻辑</span><br><span class="line">├── switch_driver.py     # H3C 设备交互驱动 (Netmiko 封装)</span><br><span class="line">├── database.py          # 数据库操作模块 (ORM)</span><br><span class="line">├── templates/           # HTML 前端页面</span><br><span class="line">│   ├── index.html       # 主控制台</span><br><span class="line">│   └── login.html       # 登录页面</span><br><span class="line">├── static/              # 静态资源 (CSS/JS)</span><br><span class="line">├── requirements.txt     # 项目依赖列表</span><br><span class="line">└── README.md            # 项目说明文档</span><br></pre></td></tr></table></figure><h2 id="⚠️-注意事项"><a href="#⚠️-注意事项" class="headerlink" title="⚠️ 注意事项"></a>⚠️ 注意事项</h2><ul><li><strong>数据安全</strong>：<code>net_assets.db</code> 包含资产信息，请勿上传至公开仓库（<code>.gitignore</code> 已默认忽略）。</li><li><strong>备份文件</strong>：<code>backups/</code> 目录包含网络配置敏感信息，请妥善保管。</li><li><strong>端口说明</strong>：程序默认运行在 <strong>8080</strong> 端口，如需修改请编辑 <code>app.py</code>。</li></ul><h2 id="📜-开源协议"><a href="#📜-开源协议" class="headerlink" title="📜 开源协议"></a>📜 开源协议</h2><p>本项目采用 <strong>GNU General Public License v3.0 (GPL-3.0)</strong> 协议。</p><ul><li>你可以自由地复制、分发和修改本软件。</li><li>如果你发布了修改后的版本，必须同样基于 GPL-3.0 协议开源。</li><li>本软件按“原样”提供，不提供任何形式的担保。</li></ul><h2 id="📸-运行截图"><a href="#📸-运行截图" class="headerlink" title="📸 运行截图"></a>📸 运行截图</h2><h3 id="1-资产管理与批量备份日志"><a href="#1-资产管理与批量备份日志" class="headerlink" title="1. 资产管理与批量备份日志"></a>1. 资产管理与批量备份日志</h3><p><em><img src="https://github.com/bg4vrg/H3C-Switch-Admin-Tool/raw/main/screenshots/v2-web0.png" alt="登录页面"></em></p><p><em><img src="https://github.com/bg4vrg/H3C-Switch-Admin-Tool/raw/main/screenshots/v2-homepage.png" alt="首页"></em></p><p><em><img src="https://github.com/bg4vrg/H3C-Switch-Admin-Tool/raw/main/screenshots/v2-web2.png" alt="资产管理"></em></p><p><em><img src="https://github.com/bg4vrg/H3C-Switch-Admin-Tool/raw/main/screenshots/v2-backuplog.png" alt="备份日志"></em></p><h3 id="2-端口安全绑定"><a href="#2-端口安全绑定" class="headerlink" title="2. 端口安全绑定"></a>2. 端口安全绑定</h3><p><em><img src="https://github.com/bg4vrg/H3C-Switch-Admin-Tool/raw/main/screenshots/web2-0.png" alt="端口配置"></em><br><em><img src="https://github.com/bg4vrg/H3C-Switch-Admin-Tool/raw/main/screenshots/web2.png" alt="获取端口信息"></em></p><h3 id="3-设备管理列表"><a href="#3-设备管理列表" class="headerlink" title="3. 设备管理列表"></a>3. 设备管理列表</h3><p><em><img src="https://github.com/bg4vrg/H3C-Switch-Admin-Tool/raw/main/screenshots/switchlist.png" alt="资产列表"></em></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;基于 Python 3.11 + Flask + Netmiko 开发的企业级 H3C 交换机 Web 运维平台。&lt;br&gt;从早期的单一脚本工具，进化为集成了 &lt;strong&gt;资产管理&lt;/strong&gt;、&lt;strong&gt;安全登录&lt;/strong&gt; 和 &lt;strong&gt;批量自动化备份&lt;/strong&gt; 的综合运维系统。&lt;/p&gt;
+&lt;p&gt;本程序代码全部有google gemini生成，成就感满满，目前已经更新到2.0.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="网络" scheme="https://bg4vrg.com/categories/network/"/>
+    
+    
+    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
+    
+    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="python" scheme="https://bg4vrg.com/tags/python/"/>
+    
+    <category term="ai" scheme="https://bg4vrg.com/tags/ai/"/>
+    
+    <category term="gemini" scheme="https://bg4vrg.com/tags/gemini/"/>
+    
+    <category term="代码" scheme="https://bg4vrg.com/tags/%E4%BB%A3%E7%A0%81/"/>
+    
+  </entry>
   
   <entry>
     <title>seafile13 onlyoffice 部署</title>
@@ -524,32 +556,6 @@
     <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
     <category term="docker" scheme="https://bg4vrg.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ssh下群晖docker套件重启</title>
-    <link href="https://bg4vrg.com/post/20250224171109.html"/>
-    <id>https://bg4vrg.com/post/20250224171109.html</id>
-    <published>2025-02-24T09:11:09.000Z</published>
-    <updated>2025-03-04T07:29:18.942Z</updated>
-    
-    <content type="html"><![CDATA[<p>先查询docker服务名称</p><p><code>systemctl list-units --type=service | grep docker</code><br>  pkg-Docker-dockerd.service                   loaded active running Docker Application Container Engine</p><p>重启</p><p><code>systemctl restart pkg-Docker-dockerd.service</code></p><span id="more"></span><p><img src="/../pic/image-20250224171155608.png" alt="image-20250224171155608"></p><p><img src="/../pic/image-20250224171227201.png" alt="image-20250224171227201"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;先查询docker服务名称&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;systemctl list-units --type=service | grep docker&lt;/code&gt;&lt;br&gt;  pkg-Docker-dockerd.service                   loaded active running Docker Application Container Engine&lt;/p&gt;
-&lt;p&gt;重启&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;systemctl restart pkg-Docker-dockerd.service&lt;/code&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/categories/linux/"/>
-    
-    
-    <category term="linux" scheme="https://bg4vrg.com/tags/linux/"/>
-    
-    <category term="网络" scheme="https://bg4vrg.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
