@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>PVE虚拟化实战排错小结 - BG4VRG的无线电之旅</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="BG4VRG的无线电之旅"><meta name="msapplication-TileImage" content="/img/freebsd.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="BG4VRG的无线电之旅"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="记录日期： 2026-04-08环境上下文： PVE 9, Proxmox Backup Server (PBS), 群晖 NAS (万兆网络环境)"><meta property="og:type" content="blog"><meta property="og:title" content="PVE虚拟化实战排错小结"><meta property="og:url" content="https://bg4vrg.com/post/20260408171359.html"><meta property="og:site_name" content="BG4VRG的无线电之旅"><meta property="og:description" content="记录日期： 2026-04-08环境上下文： PVE 9, Proxmox Backup Server (PBS), 群晖 NAS (万兆网络环境)"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://bg4vrg.com/pic/222.png"><meta property="og:image" content="https://bg4vrg.com/pic/111.png"><meta property="og:image" content="https://bg4vrg.com/pic/image-20260408172108757.png"><meta property="article:published_time" content="2026-04-08T09:13:59.000Z"><meta property="article:modified_time" content="2026-04-08T09:24:07.533Z"><meta property="article:author" content="fei"><meta property="article:tag" content="linux"><meta property="article:tag" content="折腾"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://bg4vrg.com/pic/222.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://bg4vrg.com/post/20260408171359.html"},"headline":"PVE虚拟化实战排错小结","image":["https://bg4vrg.com/pic/222.png","https://bg4vrg.com/pic/111.png","https://bg4vrg.com/pic/image-20260408172108757.png"],"datePublished":"2026-04-08T09:13:59.000Z","dateModified":"2026-04-08T09:24:07.533Z","author":{"@type":"Person","name":"fei"},"publisher":{"@type":"Organization","name":"BG4VRG的无线电之旅","logo":{"@type":"ImageObject","url":"https://bg4vrg.com/img/freebsd.svg"}},"description":"记录日期： 2026-04-08环境上下文： PVE 9, Proxmox Backup Server (PBS), 群晖 NAS (万兆网络环境)"}</script><link rel="canonical" href="https://bg4vrg.com/post/20260408171359.html"><link rel="alternate" href="/atom.xml" title="BG4VRG的无线电之旅" type="application/atom+xml"><link rel="icon" href="/img/freebsd.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1305232905963539" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a><a class="navbar-item" href="/categories/AmateurRadio">业余无线电</a><a class="navbar-item" href="/categories/network">网络</a><a class="navbar-item" href="/categories/linux">Linux</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2026-04-08T09:13:59.000Z" title="2026/4/8 17:13:59">2026-04-08</time>发表</span><span class="level-item"><time datetime="2026-04-08T09:24:07.533Z" title="2026/4/8 17:24:07">2026-04-08</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/linux/">linux</a></span><span class="level-item">11 分钟读完 (大约1711个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">PVE虚拟化实战排错小结</h1><div class="content"><p><strong>记录日期：</strong> 2026-04-08<br><strong>环境上下文：</strong> PVE 9, Proxmox Backup Server (PBS), 群晖 NAS (万兆网络环境)</p>
+<span id="more"></span>
+
+<p><strong>记录日期：</strong> 2026-04-08<br><strong>环境上下文：</strong> PVE 9, Proxmox Backup Server (PBS), 群晖 NAS (万兆网络环境)</p>
+<hr>
+<h2 id="1-存储与网络挂载问题"><a href="#1-存储与网络挂载问题" class="headerlink" title="1. 存储与网络挂载问题"></a>1. 存储与网络挂载问题</h2><h3 id="1-1-PBS-虚拟机如何挂载群晖-NFS-存储？"><a href="#1-1-PBS-虚拟机如何挂载群晖-NFS-存储？" class="headerlink" title="1.1 PBS 虚拟机如何挂载群晖 NFS 存储？"></a>1.1 PBS 虚拟机如何挂载群晖 NFS 存储？</h3><ul>
+<li><strong>问题：</strong> PVE 宿主机已挂载 NFS，PBS 能直接用吗？</li>
+<li><strong>最佳实践：</strong> 绕过 PVE 宿主机，在 PBS 虚拟机（Debian）内部直接通过 <code>/etc/fstab</code> 挂载。这样可以避免虚拟磁盘（qcow2&#x2F;raw）带来的极大小文件性能损耗。</li>
+</ul>
+<h3 id="1-2-NFS-挂载后提示权限拒绝-os-error-13-Operation-not-permitted"><a href="#1-2-NFS-挂载后提示权限拒绝-os-error-13-Operation-not-permitted" class="headerlink" title="1.2 NFS 挂载后提示权限拒绝 (os error 13 &#x2F; Operation not permitted)"></a>1.2 NFS 挂载后提示权限拒绝 (os error 13 &#x2F; Operation not permitted)</h3><ul>
+<li><strong>原因：</strong> PBS 底层运行服务使用的是 <code>backup</code> 用户（UID 34），群晖 NFS 的默认权限拦截了该用户的读写和 <code>chown</code> 操作。</li>
+<li><strong>解决办法：</strong><ol>
+<li>在群晖 NFS 设置中，将对应 IP 的 <strong>Squash（映射）</strong> 改为 <strong>“无映射 (No mapping)”</strong>。</li>
+<li>在群晖 File Station 中，给共享文件夹新增一条 <strong>Everyone 可读写</strong> 的权限规则，并应用到子文件夹。</li>
+<li>在 PBS 内重新挂载，并执行 <code>chown -R backup:backup /mnt/nfs_backup</code>。</li>
+</ol>
+</li>
+</ul>
+<h3 id="1-3-万兆网络下-NFS-挂载的-fstab-极限优化"><a href="#1-3-万兆网络下-NFS-挂载的-fstab-极限优化" class="headerlink" title="1.3 万兆网络下 NFS 挂载的 fstab 极限优化"></a>1.3 万兆网络下 NFS 挂载的 fstab 极限优化</h3><ul>
+<li><p><strong>优化目标：</strong> 榨干万兆带宽，适配 PBS 海量小文件的读写特性。</p>
+</li>
+<li><p><strong>fstab 配置参数：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10.139.27.3:/volume3/NetBackup /mnt/nfs_backup nfs nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noatime,nodiratime,_netdev,nconnect=16 0 0</span><br></pre></td></tr></table></figure>
+
+<p><em>(核心参数：<code>nconnect=16</code> 开启多线程并发，<code>noatime,nodiratime</code> 关停无用时间戳写入极大地减轻 IO)</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="2-虚拟机迁移与磁盘报错"><a href="#2-虚拟机迁移与磁盘报错" class="headerlink" title="2. 虚拟机迁移与磁盘报错"></a>2. 虚拟机迁移与磁盘报错</h2><h3 id="2-1-群晖-VMM-虚拟机导出到-PVE-速度极慢"><a href="#2-1-群晖-VMM-虚拟机导出到-PVE-速度极慢" class="headerlink" title="2.1 群晖 VMM 虚拟机导出到 PVE 速度极慢"></a>2.1 群晖 VMM 虚拟机导出到 PVE 速度极慢</h3><ul>
+<li><p><strong>原因：</strong> Web 浏览器单线程下载慢，且群晖 CPU 实时转换 vmdk 并打包 ova 极其耗时。</p>
+</li>
+<li><p><strong>解决办法：</strong> 导出时选择“导出到群晖共享文件夹”而非下载到本地。随后在 PVE 宿主机中直接进入该挂载目录，通过 <code>tar -xvf xxx.ova</code> 解压，并用 <code>qm importdisk &lt;VMID&gt; &lt;磁盘文件&gt; &lt;存储池&gt;</code> 导入。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf win2012-ipa-192.168.222.10.ova</span><br><span class="line">qm importdisk 106 win2012-ipa-192.168.222.10-disk1.vmdk data-zfs</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-2-Linux-虚拟机导入-PVE-后开机报错：找不到-root-file-system"><a href="#2-2-Linux-虚拟机导入-PVE-后开机报错：找不到-root-file-system" class="headerlink" title="2.2 Linux 虚拟机导入 PVE 后开机报错：找不到 root file system"></a>2.2 Linux 虚拟机导入 PVE 后开机报错：找不到 root file system</h3><ul>
+<li><strong>原因：</strong> 原系统内核中未预装 VirtIO SCSI 驱动，导致 PVE 下按 SCSI 挂载时无法识别引导盘。</li>
+<li><strong>解决办法：</strong><ol>
+<li>在 PVE 硬件中将磁盘“分离”，然后以 <strong>SATA</strong>（或 IDE）总线重新添加。</li>
+<li>调整引导顺序开机进系统。</li>
+<li>执行 <code>update-initramfs -u</code> (Debian&#x2F;Ubuntu) 或 <code>dracut -f</code> (CentOS) 将 VirtIO 驱动刷入内核。</li>
+<li>关机，再次将磁盘换回 <strong>SCSI (VirtIO SCSI)</strong> 以获得最高性能。</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-3-Windows-虚拟机-SATA-磁盘转-SCSI-蓝屏-INACCESSIBLE-BOOT-DEVICE"><a href="#2-3-Windows-虚拟机-SATA-磁盘转-SCSI-蓝屏-INACCESSIBLE-BOOT-DEVICE" class="headerlink" title="2.3 Windows 虚拟机 SATA 磁盘转 SCSI 蓝屏 (INACCESSIBLE_BOOT_DEVICE)"></a>2.3 Windows 虚拟机 SATA 磁盘转 SCSI 蓝屏 (INACCESSIBLE_BOOT_DEVICE)</h3><ul>
+<li><strong>原因：</strong> Windows 启动时缺乏预先注册的 VirtIO SCSI 控制器驱动。</li>
+<li><strong>“假盘诱饵”解决法：</strong><ol>
+<li>保持系统盘为 SATA 开机，在 PVE 额外添加一块 1GB 的 <strong>SCSI</strong> 假盘。</li>
+<li>开机进系统，设备管理器会识别出未知 SCSI 设备，打上 <code>vioscsi</code> 驱动。</li>
+<li>关机，删除假盘。将主 SATA 盘分离，换成 SCSI 总线重新添加，完美开机。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="3-驱动与-QEMU-Guest-Agent"><a href="#3-驱动与-QEMU-Guest-Agent" class="headerlink" title="3. 驱动与 QEMU Guest Agent"></a>3. 驱动与 QEMU Guest Agent</h2><h3 id="3-1-极老系统-Windows-2008-R2-无法安装-VirtIO-驱动"><a href="#3-1-极老系统-Windows-2008-R2-无法安装-VirtIO-驱动" class="headerlink" title="3.1 极老系统 (Windows 2008 R2) 无法安装 VirtIO 驱动"></a>3.1 极老系统 (Windows 2008 R2) 无法安装 VirtIO 驱动</h3><ul>
+<li><strong>问题：</strong> 运行新版驱动包提示系统版本不支持。</li>
+<li><strong>解决办法：</strong> 使用历史养老版本 **<code>virtio-win-0.1.137.iso</code>**。不要运行根目录的安装包，直接进入 <code>guest-agent</code> 目录安装 msi 服务，并在设备管理器中手动指定 <code>2k8r2</code> 目录更新网卡&#x2F;磁盘驱动。</li>
+</ul>
+<h3 id="3-2-PBS-Linux-虚拟机自身提示：Guest-Agent-未运行"><a href="#3-2-PBS-Linux-虚拟机自身提示：Guest-Agent-未运行" class="headerlink" title="3.2 PBS (Linux) 虚拟机自身提示：Guest Agent 未运行"></a>3.2 PBS (Linux) 虚拟机自身提示：Guest Agent 未运行</h3><ul>
+<li><p><strong>解决办法：</strong> Debian 系统需手动安装命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install qemu-guest-agent -y</span><br><span class="line">systemctl <span class="built_in">enable</span> --now qemu-guest-agent</span><br></pre></td></tr></table></figure>
+
+<p><em>(注：记得也要在 PVE 面板勾选开启此选项)</em></p>
+<h3 id="3-3-windows虚拟机的内存都提示全部用满到100"><a href="#3-3-windows虚拟机的内存都提示全部用满到100" class="headerlink" title="3.3 windows虚拟机的内存都提示全部用满到100%"></a>3.3 windows虚拟机的内存都提示全部用满到100%</h3><p><img src="/../pic/222.png" alt="222"></p>
+<p><strong>原理解释：</strong> Windows 系统有一个非常积极的内存管理机制。为了让系统变快，它会把空闲的内存全部征用过来作为“文件系统缓存（Standby Cache）”。但在 PVE 宿主机（基于 Linux）的上帝视角看来，它不知道哪些是 Windows 真正在用的内存，哪些是缓存，它只看到这 8GB 的内存块被 Windows 全部“摸”过一遍了，所以就如实汇报为 100% 使用率。</p>
+<p><strong>如果不处理：</strong> 完全没关系，这只是面板显示问题，当 Windows 内的程序真正需要内存时，缓存会自动让出空间，不会导致系统卡顿。</p>
+<p><strong>如何解决（让面板显示真实内存）：</strong> 你需要安装 VirtIO 的 <strong>内存气球驱动 (Balloon Driver) 和服务</strong>。</p>
+<ol>
+<li>将那张 <code>virtio-win.iso</code> 镜像重新挂载给这台虚拟机。</li>
+<li>进 Windows 打开 <strong>设备管理器</strong>，找到带有黄色感叹号的 <strong>PCI 设备</strong>（通常叫 PCI 数据捕获和信号处理控制器等）。</li>
+<li>右键更新驱动，指向光驱盘符，勾选包含子文件夹安装。此时会安装上 <strong>VirtIO Balloon Driver</strong>。</li>
+<li><strong>（关键一步）安装气球服务：</strong> 打开 Windows 的 CMD 命令行（以管理员身份运行），进入光驱盘符下的 <code>Balloon\2k12\amd64</code> 目录，执行命令：<code>blnsvr.exe -i</code>。</li>
+<li>回到 PVE 面板，这台虚拟机的内存占用率稍等一会儿就会从 100% 暴跌回真实的百分比（比如 20% 左右）了。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="4-PBS-维护与自动备份策略"><a href="#4-PBS-维护与自动备份策略" class="headerlink" title="4. PBS 维护与自动备份策略"></a>4. PBS 维护与自动备份策略</h2><h3 id="4-1-屏蔽-PBS-网页端“无有效订阅”弹窗"><a href="#4-1-屏蔽-PBS-网页端“无有效订阅”弹窗" class="headerlink" title="4.1 屏蔽 PBS 网页端“无有效订阅”弹窗"></a>4.1 屏蔽 PBS 网页端“无有效订阅”弹窗</h3><ol start="2">
+<li><p>终端执行替换命令修改判断逻辑：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.bak</span><br><span class="line"></span><br><span class="line">line_num=$(grep -n <span class="string">&quot;res.data.status.toLowerCase() !== &#x27;active&#x27;&quot;</span> /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js | <span class="built_in">head</span> -1 | <span class="built_in">cut</span> -d: -f1)</span><br><span class="line">sed -i <span class="string">&quot;<span class="variable">$&#123;line_num&#125;</span>s/!==/===/&quot;</span> /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">systemctl restart proxmox-backup-proxy</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="4-2-终极双保险备份策略（防死锁）"><a href="#4-2-终极双保险备份策略（防死锁）" class="headerlink" title="4.2 终极双保险备份策略（防死锁）"></a>4.2 终极双保险备份策略（防死锁）</h3><ul>
+<li><strong>核心原则：千万不要把 PBS 虚拟机备份到 PBS 自己的数据存储里！</strong></li>
+<li><strong>业务虚拟机（如软路由、Windows 等）：</strong><ul>
+<li>任务设置：PVE 计划任务（如 21:00），目标选 PBS 存储。</li>
+<li>保留策略：在 <strong>PBS 面板</strong> 的“精简 (Prune)”中设置（推荐 7-7-4-6）。</li>
+<li>垃圾回收：在 PBS 设置每天执行 <strong>GC 任务</strong>，释放实际物理空间。</li>
+</ul>
+</li>
+<li><strong>PBS 虚拟机自身：</strong><ul>
+<li>任务设置：PVE 计划任务（如 23:00），目标必须选 PVE 宿主机自带的 <strong>local</strong> 存储。</li>
+<li>保留策略：直接在 PVE 备份任务的高级设置中指定（如保留最近 3 份），防止撑爆本地系统盘。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../pic/111.png" alt="111"></p>
+<p><img src="/../pic/image-20260408172108757.png" alt="image-20260408172108757"></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>PVE虚拟化实战排错小结</p><p><a href="https://bg4vrg.com/post/20260408171359.html">https://bg4vrg.com/post/20260408171359.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>fei</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2026-04-08</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-04-08</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/linux/">linux</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%8A%98%E8%85%BE/">折腾</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/alipay.png" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/wechatpay.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/20260222214148.html"><span class="level-item">群晖dsm7下部署zabbix和grafana</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://bg4vrg.com/post/20260408171359.html';
+            this.page.identifier = 'post/20260408171359.html';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'bg4vrg' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time datetime="2026-04-08T09:13:59.000Z">2026-04-08</time></p><p class="title"><a href="/post/20260408171359.html">PVE虚拟化实战排错小结</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-02-22T13:41:48.000Z">2026-02-22</time></p><p class="title"><a href="/post/20260222214148.html">群晖dsm7下部署zabbix和grafana</a></p><p class="categories"><a href="/categories/network/">网络</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-02-12T08:54:55.000Z">2026-02-12</time></p><p class="title"><a href="/post/20260212165455.html">AI手搓h3c交换机运维程序</a></p><p class="categories"><a href="/categories/network/">网络</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-01-18T08:25:49.000Z">2026-01-18</time></p><p class="title"><a href="/post/20260118162549.html">seafile13 onlyoffice 部署</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-01-17T06:21:14.679Z">2026-01-17</time></p><p class="title"><a href="/post/20260117142114.html">硬核玩具：BG5ESN FMO (NFM Over Internet) 上手体验与技术浅析</a></p><p class="categories"><a href="/categories/AmateurRadio/">业余无线电</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/linux/"><span class="level-start"><span class="level-item">linux</span></span><span class="level-end"><span class="level-item tag">39</span></span></a></li><li><a class="level is-mobile" href="/categories/AmateurRadio/"><span class="level-start"><span class="level-item">业余无线电</span></span><span class="level-end"><span class="level-item tag">41</span></span></a></li><li><a class="level is-mobile" href="/categories/network/"><span class="level-start"><span class="level-item">网络</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li><li><a class="level is-mobile" href="/categories/note/"><span class="level-start"><span class="level-item">记录</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#1-存储与网络挂载问题"><span class="level-left"><span class="level-item">1. 存储与网络挂载问题</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-1-PBS-虚拟机如何挂载群晖-NFS-存储？"><span class="level-left"><span class="level-item">1.1 PBS 虚拟机如何挂载群晖 NFS 存储？</span></span></a></li><li><a class="level is-mobile" href="#1-2-NFS-挂载后提示权限拒绝-os-error-13-Operation-not-permitted"><span class="level-left"><span class="level-item">1.2 NFS 挂载后提示权限拒绝 (os error 13 / Operation not permitted)</span></span></a></li><li><a class="level is-mobile" href="#1-3-万兆网络下-NFS-挂载的-fstab-极限优化"><span class="level-left"><span class="level-item">1.3 万兆网络下 NFS 挂载的 fstab 极限优化</span></span></a></li></ul></li><li><a class="level is-mobile" href="#2-虚拟机迁移与磁盘报错"><span class="level-left"><span class="level-item">2. 虚拟机迁移与磁盘报错</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#2-1-群晖-VMM-虚拟机导出到-PVE-速度极慢"><span class="level-left"><span class="level-item">2.1 群晖 VMM 虚拟机导出到 PVE 速度极慢</span></span></a></li><li><a class="level is-mobile" href="#2-2-Linux-虚拟机导入-PVE-后开机报错：找不到-root-file-system"><span class="level-left"><span class="level-item">2.2 Linux 虚拟机导入 PVE 后开机报错：找不到 root file system</span></span></a></li><li><a class="level is-mobile" href="#2-3-Windows-虚拟机-SATA-磁盘转-SCSI-蓝屏-INACCESSIBLE-BOOT-DEVICE"><span class="level-left"><span class="level-item">2.3 Windows 虚拟机 SATA 磁盘转 SCSI 蓝屏 (INACCESSIBLE_BOOT_DEVICE)</span></span></a></li></ul></li><li><a class="level is-mobile" href="#3-驱动与-QEMU-Guest-Agent"><span class="level-left"><span class="level-item">3. 驱动与 QEMU Guest Agent</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#3-1-极老系统-Windows-2008-R2-无法安装-VirtIO-驱动"><span class="level-left"><span class="level-item">3.1 极老系统 (Windows 2008 R2) 无法安装 VirtIO 驱动</span></span></a></li><li><a class="level is-mobile" href="#3-2-PBS-Linux-虚拟机自身提示：Guest-Agent-未运行"><span class="level-left"><span class="level-item">3.2 PBS (Linux) 虚拟机自身提示：Guest Agent 未运行</span></span></a></li><li><a class="level is-mobile" href="#3-3-windows虚拟机的内存都提示全部用满到100"><span class="level-left"><span class="level-item">3.3 windows虚拟机的内存都提示全部用满到100%</span></span></a></li></ul></li><li><a class="level is-mobile" href="#4-PBS-维护与自动备份策略"><span class="level-left"><span class="level-item">4. PBS 维护与自动备份策略</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#4-1-屏蔽-PBS-网页端“无有效订阅”弹窗"><span class="level-left"><span class="level-item">4.1 屏蔽 PBS 网页端“无有效订阅”弹窗</span></span></a></li><li><a class="level is-mobile" href="#4-2-终极双保险备份策略（防死锁）"><span class="level-left"><span class="level-item">4.2 终极双保险备份策略（防死锁）</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1305232905963539" data-ad-slot="5679527426" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a><p class="is-size-7"><span>&copy; 2026 fei</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;" rel="external nofollow noreferrer">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
