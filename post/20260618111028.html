@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Panalog虚拟机硬盘从320G扩容到1T经验总结 - BG4VRG的无线电之旅</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="BG4VRG的无线电之旅"><meta name="msapplication-TileImage" content="/img/freebsd.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="BG4VRG的无线电之旅"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="适用场景：Proxmox VE 中运行的 Panalog&amp;#x2F;Panabit 日志审计系统虚拟机，系统盘原容量约 320G，扩容到约 1T。本次环境为：PVE 9.1.1、VMID 104、磁盘 sata0、ZFS 存储 data-zfs、Panalog Linux From Scratch 9.1 定制系统。"><meta property="og:type" content="blog"><meta property="og:title" content="Panalog虚拟机硬盘从320G扩容到1T经验总结"><meta property="og:url" content="https://bg4vrg.com/post/20260618111028.html"><meta property="og:site_name" content="BG4VRG的无线电之旅"><meta property="og:description" content="适用场景：Proxmox VE 中运行的 Panalog&amp;#x2F;Panabit 日志审计系统虚拟机，系统盘原容量约 320G，扩容到约 1T。本次环境为：PVE 9.1.1、VMID 104、磁盘 sata0、ZFS 存储 data-zfs、Panalog Linux From Scratch 9.1 定制系统。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://bg4vrg.com/img/og_image.png"><meta property="article:published_time" content="2026-06-18T03:10:28.000Z"><meta property="article:modified_time" content="2026-06-19T01:27:16.441Z"><meta property="article:author" content="fei"><meta property="article:tag" content="linux"><meta property="article:tag" content="折腾"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://bg4vrg.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://bg4vrg.com/post/20260618111028.html"},"headline":"Panalog虚拟机硬盘从320G扩容到1T经验总结","image":["https://bg4vrg.com/img/og_image.png"],"datePublished":"2026-06-18T03:10:28.000Z","dateModified":"2026-06-19T01:27:16.441Z","author":{"@type":"Person","name":"fei"},"publisher":{"@type":"Organization","name":"BG4VRG的无线电之旅","logo":{"@type":"ImageObject","url":"https://bg4vrg.com/img/freebsd.svg"}},"description":"适用场景：Proxmox VE 中运行的 Panalog&#x2F;Panabit 日志审计系统虚拟机，系统盘原容量约 320G，扩容到约 1T。本次环境为：PVE 9.1.1、VMID 104、磁盘 sata0、ZFS 存储 data-zfs、Panalog Linux From Scratch 9.1 定制系统。"}</script><link rel="canonical" href="https://bg4vrg.com/post/20260618111028.html"><link rel="alternate" href="/atom.xml" title="BG4VRG的无线电之旅" type="application/atom+xml"><link rel="icon" href="/img/freebsd.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1305232905963539" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a><a class="navbar-item" href="/categories/AmateurRadio">业余无线电</a><a class="navbar-item" href="/categories/network">网络</a><a class="navbar-item" href="/categories/linux">Linux</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2026-06-18T03:10:28.000Z" title="2026/6/18 11:10:28">2026-06-18</time>发表</span><span class="level-item"><time datetime="2026-06-19T01:27:16.441Z" title="2026/6/19 09:27:16">2026-06-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/linux/">linux</a></span><span class="level-item">12 分钟读完 (大约1843个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">Panalog虚拟机硬盘从320G扩容到1T经验总结</h1><div class="content"><blockquote>
+<p>适用场景：Proxmox VE 中运行的 Panalog&#x2F;Panabit 日志审计系统虚拟机，系统盘原容量约 320G，扩容到约 1T。<br>本次环境为：PVE 9.1.1、VMID 104、磁盘 <code>sata0</code>、ZFS 存储 <code>data-zfs</code>、Panalog Linux From Scratch 9.1 定制系统。</p>
+</blockquote>
+<span id="more"></span>
+
+
+
+<hr>
+<h2 id="一、环境信息"><a href="#一、环境信息" class="headerlink" title="一、环境信息"></a>一、环境信息</h2><h3 id="1-PVE-虚拟机信息"><a href="#1-PVE-虚拟机信息" class="headerlink" title="1. PVE 虚拟机信息"></a>1. PVE 虚拟机信息</h3><p>PVE 中看到的原始磁盘信息：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">VMID：104</span><br><span class="line">虚拟机名称：panalog</span><br><span class="line">磁盘：sata0</span><br><span class="line">存储：data-zfs</span><br><span class="line">原始大小：320G</span><br><span class="line">目标大小：约 1T</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Panalog-系统信息"><a href="#2-Panalog-系统信息" class="headerlink" title="2. Panalog 系统信息"></a>2. Panalog 系统信息</h3><p>在 Panalog 控制台中查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/os-release</span><br><span class="line"><span class="built_in">uname</span> -a</span><br></pre></td></tr></table></figure>
+
+<p>结果显示：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NAME=&quot;Linux From Scratch&quot;</span><br><span class="line">VERSION=&quot;9.1&quot;</span><br><span class="line">ID=lfs</span><br><span class="line">PRETTY_NAME=&quot;Linux From Scratch 9.1&quot;</span><br><span class="line">VERSION_CODENAME=&quot;Panabit&quot;</span><br></pre></td></tr></table></figure>
+
+<p>内核类似：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linux PanaLog 5.4.119 ...</span><br></pre></td></tr></table></figure>
+
+<p>说明该系统不是常规 CentOS&#x2F;Ubuntu，而是 Panabit&#x2F;Panalog 定制的 Linux From Scratch 精简系统。</p>
+<hr>
+<h2 id="二、原始分区和文件系统情况"><a href="#二、原始分区和文件系统情况" class="headerlink" title="二、原始分区和文件系统情况"></a>二、原始分区和文件系统情况</h2><p>使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -Th</span><br></pre></td></tr></table></figure>
+
+<p>看到：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Filesystem  Type  Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/sda1   xfs   5.0G  590M  4.5G  12% /</span><br><span class="line">/dev/sda2   xfs   3.0G  214M  2.8G   7% /usr/logd</span><br><span class="line">/dev/sda3   xfs   312G  245G   68G  79% /usr/logdata</span><br></pre></td></tr></table></figure>
+
+<p>关键点：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda3</span><br><span class="line">文件系统：xfs</span><br><span class="line">挂载点：/usr/logdata</span><br><span class="line">用途：Panalog 日志数据分区</span><br></pre></td></tr></table></figure>
+
+<p>因此扩容重点是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">扩 /dev/sda3 分区</span><br><span class="line">扩 /usr/logdata 上的 XFS 文件系统</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、PVE-层扩容虚拟磁盘"><a href="#三、PVE-层扩容虚拟磁盘" class="headerlink" title="三、PVE 层扩容虚拟磁盘"></a>三、PVE 层扩容虚拟磁盘</h2><h3 id="方法一：PVE-Web-界面"><a href="#方法一：PVE-Web-界面" class="headerlink" title="方法一：PVE Web 界面"></a>方法一：PVE Web 界面</h3><p>路径：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">虚拟机 104</span><br><span class="line">  → 硬件</span><br><span class="line">  → 选中 sata0 硬盘</span><br><span class="line">  → 磁盘操作</span><br><span class="line">  → 调整大小 / Resize</span><br></pre></td></tr></table></figure>
+
+<p>注意：PVE Web 界面里填写的是“增加多少”，不是最终容量。</p>
+<p>从 320G 扩到 1024G：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1024G - 320G = 704G</span><br></pre></td></tr></table></figure>
+
+<p>所以应填写：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">704G</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法二：PVE-Shell-命令"><a href="#方法二：PVE-Shell-命令" class="headerlink" title="方法二：PVE Shell 命令"></a>方法二：PVE Shell 命令</h3><p>在 PVE 节点 Shell 执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qm config 104 | grep sata0</span><br></pre></td></tr></table></figure>
+
+<p>确认磁盘：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sata0: data-zfs:vm-104-disk-0,size=320G</span><br></pre></td></tr></table></figure>
+
+<p>扩容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qm resize 104 sata0 +704G</span><br></pre></td></tr></table></figure>
+
+<p>再次确认：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qm config 104 | grep sata0</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、Panalog-内确认磁盘已经变大"><a href="#四、Panalog-内确认磁盘已经变大" class="headerlink" title="四、Panalog 内确认磁盘已经变大"></a>四、Panalog 内确认磁盘已经变大</h2><p>PVE 扩容后，重启 Panalog。</p>
+<p>由于 Panalog 系统很精简，没有 <code>lsblk</code>，可以用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/partitions</span><br><span class="line">fdisk -l /dev/sda</span><br></pre></td></tr></table></figure>
+
+<p>本次扩容后看到：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Disk /dev/sda: 1020 GiB, 1095216660480 bytes, 2139095040 sectors</span><br></pre></td></tr></table></figure>
+
+<p>说明虚拟磁盘已经从 320G 扩到约 1T。</p>
+<p>但 <code>df -Th</code> 仍然显示：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda3 xfs 312G ... /usr/logdata</span><br></pre></td></tr></table></figure>
+
+<p>这是正常现象，因为此时只是“磁盘变大”，分区和文件系统还没有变大。</p>
+<hr>
+<h2 id="五、扩展-dev-sda3-分区"><a href="#五、扩展-dev-sda3-分区" class="headerlink" title="五、扩展 &#x2F;dev&#x2F;sda3 分区"></a>五、扩展 &#x2F;dev&#x2F;sda3 分区</h2><p>查看原始分区表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l /dev/sda</span><br></pre></td></tr></table></figure>
+
+<p>关键数据：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Device      Start       End     Size</span><br><span class="line">/dev/sda1    2048  10487807       5G</span><br><span class="line">/dev/sda2 10487808  16779263      3G</span><br><span class="line">/dev/sda3 16779264 671088639    312G</span><br></pre></td></tr></table></figure>
+
+<p>其中最关键的是 <code>/dev/sda3</code> 的起始扇区：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda3 Start = 16779264</span><br></pre></td></tr></table></figure>
+
+<h3 id="操作思路"><a href="#操作思路" class="headerlink" title="操作思路"></a>操作思路</h3><p>由于 <code>/dev/sda3</code> 后面是连续空闲空间，可以通过重新定义第 3 分区的结束位置来扩容。</p>
+<p>注意：<code>fdisk</code> 的 <code>d</code> &#x2F; <code>n</code> 操作是删除并重建分区表项。只要起始扇区不变，数据仍在，但操作前必须做好备份或快照，避免误操作。</p>
+<h3 id="fdisk-操作过程"><a href="#fdisk-操作过程" class="headerlink" title="fdisk 操作过程"></a>fdisk 操作过程</h3><p>进入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sda</span><br></pre></td></tr></table></figure>
+
+<p>依次输入：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">d</span><br><span class="line">3</span><br><span class="line">n</span><br><span class="line">p</span><br><span class="line">3</span><br><span class="line">16779264</span><br><span class="line">回车</span><br><span class="line">N</span><br><span class="line">p</span><br><span class="line">w</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ul>
+<li><code>p</code>：打印分区表。</li>
+<li><code>d</code> → <code>3</code>：删除第 3 个分区表项。</li>
+<li><code>n</code> → <code>p</code> → <code>3</code>：新建第 3 个主分区。</li>
+<li>起始扇区必须输入原来的 <code>16779264</code>。</li>
+<li>结束扇区直接回车，使用默认值，也就是到磁盘末尾。</li>
+<li>如果提示是否删除 XFS signature，必须选 <code>N</code>。</li>
+<li><code>w</code>：写入分区表。</li>
+</ul>
+<p>操作后重启：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、确认分区已扩到-1T"><a href="#六、确认分区已扩到-1T" class="headerlink" title="六、确认分区已扩到 1T"></a>六、确认分区已扩到 1T</h2><p>重启后执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/partitions</span><br><span class="line">fdisk -l /dev/sda</span><br></pre></td></tr></table></figure>
+
+<p>可以看到 <code>/dev/sda3</code> 已经变大：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda3  Start 16779264  End 2139095039  Size 1012G</span><br></pre></td></tr></table></figure>
+
+<p>此时 <code>df -Th</code> 仍然可能显示 312G：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda3 xfs 312G ... /usr/logdata</span><br></pre></td></tr></table></figure>
+
+<p>原因是：分区已经变大，但 XFS 文件系统还没扩容。</p>
+<hr>
+<h2 id="七、Panalog-系统缺少-xfs-growfs"><a href="#七、Panalog-系统缺少-xfs-growfs" class="headerlink" title="七、Panalog 系统缺少 xfs_growfs"></a>七、Panalog 系统缺少 xfs_growfs</h2><p>在 Panalog 中执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfs_growfs</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-bash: xfs_growfs: command not found</span><br></pre></td></tr></table></figure>
+
+<p>说明 Panalog 的 LFS 精简系统没有内置 <code>xfs_growfs</code>。</p>
+<p>也可以尝试查找：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name xfs_growfs 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<p>如果没有结果，就需要用救援系统处理。</p>
+<hr>
+<h2 id="八、使用-SystemRescue-扩展-XFS-文件系统"><a href="#八、使用-SystemRescue-扩展-XFS-文件系统" class="headerlink" title="八、使用 SystemRescue 扩展 XFS 文件系统"></a>八、使用 SystemRescue 扩展 XFS 文件系统</h2><h3 id="1-下载并挂载-ISO"><a href="#1-下载并挂载-ISO" class="headerlink" title="1. 下载并挂载 ISO"></a>1. 下载并挂载 ISO</h3><p>使用：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemrescue-13.01-amd64.iso</span><br></pre></td></tr></table></figure>
+
+<p>在 PVE 中挂载：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">VM 104</span><br><span class="line">  → 硬件</span><br><span class="line">  → CD/DVD</span><br><span class="line">  → 选择 systemrescue-13.01-amd64.iso</span><br><span class="line">  → 选项</span><br><span class="line">  → 启动顺序</span><br><span class="line">  → CD/DVD 放第一</span><br></pre></td></tr></table></figure>
+
+<p>启动虚拟机后，在 SystemRescue 菜单选择：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Boot SystemRescue using default options</span><br></pre></td></tr></table></figure>
+
+<p>不要选择 checksum 校验项。</p>
+<hr>
+<h3 id="2-进入-SystemRescue-后执行"><a href="#2-进入-SystemRescue-后执行" class="headerlink" title="2. 进入 SystemRescue 后执行"></a>2. 进入 SystemRescue 后执行</h3><p>下载：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.system-rescue.org/Download">https://www.system-rescue.org/Download</a></p>
+<p>进入命令行 root shell 后，先确认磁盘：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l /dev/sda</span><br></pre></td></tr></table></figure>
+
+<p>确认 <code>/dev/sda3</code> 是约 1012G：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda3  16779264  2139095039  1012G  83 Linux</span><br></pre></td></tr></table></figure>
+
+<p>创建挂载点并挂载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /mnt/logdata</span><br><span class="line">mount -t xfs /dev/sda3 /mnt/logdata</span><br></pre></td></tr></table></figure>
+
+<p>查看扩容前文件系统大小：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -Th /mnt/logdata</span><br></pre></td></tr></table></figure>
+
+<p>执行 XFS 在线扩容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfs_growfs /mnt/logdata</span><br></pre></td></tr></table></figure>
+
+<p>再次确认：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -Th /mnt/logdata</span><br></pre></td></tr></table></figure>
+
+<p>完成后卸载并关机：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">umount /mnt/logdata</span><br><span class="line">poweroff</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="九、恢复-Panalog-正常启动"><a href="#九、恢复-Panalog-正常启动" class="headerlink" title="九、恢复 Panalog 正常启动"></a>九、恢复 Panalog 正常启动</h2><p>在 PVE 中：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">VM 104</span><br><span class="line">  → 选项</span><br><span class="line">  → 启动顺序</span><br><span class="line">  → 硬盘放第一</span><br></pre></td></tr></table></figure>
+
+<p>或移除&#x2F;取消 CD&#x2F;DVD ISO 启动。</p>
+<p>启动 Panalog 后执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -Th</span><br></pre></td></tr></table></figure>
+
+<p>确认：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda3  xfs  接近 1T  ...  /usr/logdata</span><br></pre></td></tr></table></figure>
+
+<p>至此扩容完成。</p>
+<hr>
+<h2 id="十、关键经验总结"><a href="#十、关键经验总结" class="headerlink" title="十、关键经验总结"></a>十、关键经验总结</h2><h3 id="1-PVE-扩容不等于系统内分区自动变大"><a href="#1-PVE-扩容不等于系统内分区自动变大" class="headerlink" title="1. PVE 扩容不等于系统内分区自动变大"></a>1. PVE 扩容不等于系统内分区自动变大</h3><p>PVE 中将虚拟磁盘从 320G 扩到 1T 后，Panalog 内部还需要继续处理：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">虚拟磁盘变大</span><br><span class="line">  → 分区变大</span><br><span class="line">  → 文件系统变大</span><br></pre></td></tr></table></figure>
+
+<p>三步缺一不可。</p>
+<h3 id="2-Panalog-是精简-LFS-系统，常用工具可能没有"><a href="#2-Panalog-是精简-LFS-系统，常用工具可能没有" class="headerlink" title="2. Panalog 是精简 LFS 系统，常用工具可能没有"></a>2. Panalog 是精简 LFS 系统，常用工具可能没有</h3><p>本次遇到缺失工具：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsblk 不可用</span><br><span class="line">xfs_growfs 不可用</span><br></pre></td></tr></table></figure>
+
+<p>替代命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/partitions</span><br><span class="line">fdisk -l /dev/sda</span><br><span class="line"><span class="built_in">df</span> -Th</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-usr-logdata-是-XFS，不能用-resize2fs"><a href="#3-usr-logdata-是-XFS，不能用-resize2fs" class="headerlink" title="3. &#x2F;usr&#x2F;logdata 是 XFS，不能用 resize2fs"></a>3. &#x2F;usr&#x2F;logdata 是 XFS，不能用 resize2fs</h3><p><code>resize2fs</code> 用于 ext 系列文件系统。<br>本次 <code>/usr/logdata</code> 是 XFS，必须使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfs_growfs 挂载点</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfs_growfs /mnt/logdata</span><br></pre></td></tr></table></figure>
+
+<p>或在原系统中如果有该命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfs_growfs /usr/logdata</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-XFS-扩容命令针对挂载点，不是设备名"><a href="#4-XFS-扩容命令针对挂载点，不是设备名" class="headerlink" title="4. XFS 扩容命令针对挂载点，不是设备名"></a>4. XFS 扩容命令针对挂载点，不是设备名</h3><p>正确：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfs_growfs /mnt/logdata</span><br></pre></td></tr></table></figure>
+
+<p>错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfs_growfs /dev/sda3</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-不要执行格式化命令"><a href="#5-不要执行格式化命令" class="headerlink" title="5. 不要执行格式化命令"></a>5. 不要执行格式化命令</h3><p>以下命令会导致数据风险，不能执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkfs.xfs /dev/sda3</span><br><span class="line">mkfs.ext4 /dev/sda3</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-fdisk-重建分区时，起始扇区必须不变"><a href="#6-fdisk-重建分区时，起始扇区必须不变" class="headerlink" title="6. fdisk 重建分区时，起始扇区必须不变"></a>6. fdisk 重建分区时，起始扇区必须不变</h3><p>本次关键起始扇区：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda3 Start = 16779264</span><br></pre></td></tr></table></figure>
+
+<p>如果起始扇区填错，原数据会有较大风险。</p>
+<h3 id="7-SystemRescue-比-Debian-安装器更适合救援维护"><a href="#7-SystemRescue-比-Debian-安装器更适合救援维护" class="headerlink" title="7. SystemRescue 比 Debian 安装器更适合救援维护"></a>7. SystemRescue 比 Debian 安装器更适合救援维护</h3><p>Debian 12 安装器 Shell 是 BusyBox 环境，缺少 <code>xfs_growfs</code>。<br>SystemRescue 默认工具更全，更适合磁盘扩容、文件系统维护、救援操作。</p>
+<hr>
+<h2 id="十一、完整命令速查"><a href="#十一、完整命令速查" class="headerlink" title="十一、完整命令速查"></a>十一、完整命令速查</h2><h3 id="PVE-Shell"><a href="#PVE-Shell" class="headerlink" title="PVE Shell"></a>PVE Shell</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qm config 104 | grep sata0</span><br><span class="line">qm resize 104 sata0 +704G</span><br><span class="line">qm config 104 | grep sata0</span><br></pre></td></tr></table></figure>
+
+<h3 id="Panalog-内查看"><a href="#Panalog-内查看" class="headerlink" title="Panalog 内查看"></a>Panalog 内查看</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/os-release</span><br><span class="line"><span class="built_in">uname</span> -a</span><br><span class="line"><span class="built_in">df</span> -Th</span><br><span class="line"><span class="built_in">cat</span> /proc/partitions</span><br><span class="line">fdisk -l /dev/sda</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩展分区后的确认"><a href="#扩展分区后的确认" class="headerlink" title="扩展分区后的确认"></a>扩展分区后的确认</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/partitions</span><br><span class="line">fdisk -l /dev/sda</span><br></pre></td></tr></table></figure>
+
+<h3 id="SystemRescue-中扩-XFS"><a href="#SystemRescue-中扩-XFS" class="headerlink" title="SystemRescue 中扩 XFS"></a>SystemRescue 中扩 XFS</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l /dev/sda</span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/logdata</span><br><span class="line">mount -t xfs /dev/sda3 /mnt/logdata</span><br><span class="line"><span class="built_in">df</span> -Th /mnt/logdata</span><br><span class="line">xfs_growfs /mnt/logdata</span><br><span class="line"><span class="built_in">df</span> -Th /mnt/logdata</span><br><span class="line">umount /mnt/logdata</span><br><span class="line">poweroff</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十二、最终结论"><a href="#十二、最终结论" class="headerlink" title="十二、最终结论"></a>十二、最终结论</h2><p>本次 Panalog 扩容成功路径为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PVE 扩 sata0：320G → 约 1T</span><br><span class="line">Panalog 识别 /dev/sda 为 1020GiB</span><br><span class="line">fdisk 扩 /dev/sda3 分区：312G → 1012G</span><br><span class="line">SystemRescue 挂载 /dev/sda3</span><br><span class="line">执行 xfs_growfs /mnt/logdata</span><br><span class="line">恢复 Panalog 正常启动</span><br><span class="line">df -Th 确认 /usr/logdata 接近 1T</span><br></pre></td></tr></table></figure>
+
+<p>最终完成了 Panalog 日志数据分区 <code>/usr/logdata</code> 的无格式化扩容。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Panalog虚拟机硬盘从320G扩容到1T经验总结</p><p><a href="https://bg4vrg.com/post/20260618111028.html">https://bg4vrg.com/post/20260618111028.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>fei</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2026-06-18</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-06-19</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/linux/">linux</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%8A%98%E8%85%BE/">折腾</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/alipay.png" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/wechatpay.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/20260522091357.html"><span class="level-item">家用NAS安装配置unraid7.3及服务搭建小结</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card" id="comments"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://bg4vrg.com/post/20260618111028.html';
+            this.page.identifier = 'post/20260618111028.html';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'bg4vrg' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time datetime="2026-06-18T03:10:28.000Z">2026-06-18</time></p><p class="title"><a href="/post/20260618111028.html">Panalog虚拟机硬盘从320G扩容到1T经验总结</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-05-22T01:13:57.000Z">2026-05-22</time></p><p class="title"><a href="/post/20260522091357.html">家用NAS安装配置unraid7.3及服务搭建小结</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-04-09T00:43:14.000Z">2026-04-09</time></p><p class="title"><a href="/post/20260409084314.html">openEuler 24.03 LTS SP3 安装 ITACC 平台完整记录</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-04-08T09:13:59.000Z">2026-04-08</time></p><p class="title"><a href="/post/20260408171359.html">PVE虚拟化实战排错小结</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-02-22T13:41:48.000Z">2026-02-22</time></p><p class="title"><a href="/post/20260222214148.html">群晖dsm7下部署zabbix和grafana</a></p><p class="categories"><a href="/categories/network/">网络</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/linux/"><span class="level-start"><span class="level-item">linux</span></span><span class="level-end"><span class="level-item tag">42</span></span></a></li><li><a class="level is-mobile" href="/categories/AmateurRadio/"><span class="level-start"><span class="level-item">业余无线电</span></span><span class="level-end"><span class="level-item tag">41</span></span></a></li><li><a class="level is-mobile" href="/categories/network/"><span class="level-start"><span class="level-item">网络</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li><li><a class="level is-mobile" href="/categories/note/"><span class="level-start"><span class="level-item">记录</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#一、环境信息"><span class="level-left"><span class="level-item">一、环境信息</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-PVE-虚拟机信息"><span class="level-left"><span class="level-item">1. PVE 虚拟机信息</span></span></a></li><li><a class="level is-mobile" href="#2-Panalog-系统信息"><span class="level-left"><span class="level-item">2. Panalog 系统信息</span></span></a></li></ul></li><li><a class="level is-mobile" href="#二、原始分区和文件系统情况"><span class="level-left"><span class="level-item">二、原始分区和文件系统情况</span></span></a></li><li><a class="level is-mobile" href="#三、PVE-层扩容虚拟磁盘"><span class="level-left"><span class="level-item">三、PVE 层扩容虚拟磁盘</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#方法一：PVE-Web-界面"><span class="level-left"><span class="level-item">方法一：PVE Web 界面</span></span></a></li><li><a class="level is-mobile" href="#方法二：PVE-Shell-命令"><span class="level-left"><span class="level-item">方法二：PVE Shell 命令</span></span></a></li></ul></li><li><a class="level is-mobile" href="#四、Panalog-内确认磁盘已经变大"><span class="level-left"><span class="level-item">四、Panalog 内确认磁盘已经变大</span></span></a></li><li><a class="level is-mobile" href="#五、扩展-dev-sda3-分区"><span class="level-left"><span class="level-item">五、扩展 /dev/sda3 分区</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#操作思路"><span class="level-left"><span class="level-item">操作思路</span></span></a></li><li><a class="level is-mobile" href="#fdisk-操作过程"><span class="level-left"><span class="level-item">fdisk 操作过程</span></span></a></li></ul></li><li><a class="level is-mobile" href="#六、确认分区已扩到-1T"><span class="level-left"><span class="level-item">六、确认分区已扩到 1T</span></span></a></li><li><a class="level is-mobile" href="#七、Panalog-系统缺少-xfs-growfs"><span class="level-left"><span class="level-item">七、Panalog 系统缺少 xfs_growfs</span></span></a></li><li><a class="level is-mobile" href="#八、使用-SystemRescue-扩展-XFS-文件系统"><span class="level-left"><span class="level-item">八、使用 SystemRescue 扩展 XFS 文件系统</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-下载并挂载-ISO"><span class="level-left"><span class="level-item">1. 下载并挂载 ISO</span></span></a></li><li><a class="level is-mobile" href="#2-进入-SystemRescue-后执行"><span class="level-left"><span class="level-item">2. 进入 SystemRescue 后执行</span></span></a></li></ul></li><li><a class="level is-mobile" href="#九、恢复-Panalog-正常启动"><span class="level-left"><span class="level-item">九、恢复 Panalog 正常启动</span></span></a></li><li><a class="level is-mobile" href="#十、关键经验总结"><span class="level-left"><span class="level-item">十、关键经验总结</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-PVE-扩容不等于系统内分区自动变大"><span class="level-left"><span class="level-item">1. PVE 扩容不等于系统内分区自动变大</span></span></a></li><li><a class="level is-mobile" href="#2-Panalog-是精简-LFS-系统，常用工具可能没有"><span class="level-left"><span class="level-item">2. Panalog 是精简 LFS 系统，常用工具可能没有</span></span></a></li><li><a class="level is-mobile" href="#3-usr-logdata-是-XFS，不能用-resize2fs"><span class="level-left"><span class="level-item">3. /usr/logdata 是 XFS，不能用 resize2fs</span></span></a></li><li><a class="level is-mobile" href="#4-XFS-扩容命令针对挂载点，不是设备名"><span class="level-left"><span class="level-item">4. XFS 扩容命令针对挂载点，不是设备名</span></span></a></li><li><a class="level is-mobile" href="#5-不要执行格式化命令"><span class="level-left"><span class="level-item">5. 不要执行格式化命令</span></span></a></li><li><a class="level is-mobile" href="#6-fdisk-重建分区时，起始扇区必须不变"><span class="level-left"><span class="level-item">6. fdisk 重建分区时，起始扇区必须不变</span></span></a></li><li><a class="level is-mobile" href="#7-SystemRescue-比-Debian-安装器更适合救援维护"><span class="level-left"><span class="level-item">7. SystemRescue 比 Debian 安装器更适合救援维护</span></span></a></li></ul></li><li><a class="level is-mobile" href="#十一、完整命令速查"><span class="level-left"><span class="level-item">十一、完整命令速查</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#PVE-Shell"><span class="level-left"><span class="level-item">PVE Shell</span></span></a></li><li><a class="level is-mobile" href="#Panalog-内查看"><span class="level-left"><span class="level-item">Panalog 内查看</span></span></a></li><li><a class="level is-mobile" href="#扩展分区后的确认"><span class="level-left"><span class="level-item">扩展分区后的确认</span></span></a></li><li><a class="level is-mobile" href="#SystemRescue-中扩-XFS"><span class="level-left"><span class="level-item">SystemRescue 中扩 XFS</span></span></a></li></ul></li><li><a class="level is-mobile" href="#十二、最终结论"><span class="level-left"><span class="level-item">十二、最终结论</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1305232905963539" data-ad-slot="5679527426" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a><p class="is-size-7"><span>&copy; 2026 fei</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;" rel="external nofollow noreferrer">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
