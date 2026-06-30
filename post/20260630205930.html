@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>群晖 DSM7 使用 Docker Compose 部署 NetBox 教程 - BG4VRG的无线电之旅</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="BG4VRG的无线电之旅"><meta name="msapplication-TileImage" content="/img/freebsd.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="BG4VRG的无线电之旅"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="群晖 DSM7 使用 Docker Compose 部署 NetBox 教程  适用场景：在群晖 DSM7 上通过 Docker Compose 部署 NetBox，参考本次 10.139.27.3 群晖 SSH 操作记录整理。目标访问地址示例：http:&amp;#x2F;&amp;#x2F;10.139.27.3:9999本文已对原 SSH 记录中的密码、SECRET_KEY、数据库密码、Redis 密码、API Token 等"><meta property="og:type" content="blog"><meta property="og:title" content="群晖 DSM7 使用 Docker Compose 部署 NetBox 教程"><meta property="og:url" content="https://bg4vrg.com/post/20260630205930.html"><meta property="og:site_name" content="BG4VRG的无线电之旅"><meta property="og:description" content="群晖 DSM7 使用 Docker Compose 部署 NetBox 教程  适用场景：在群晖 DSM7 上通过 Docker Compose 部署 NetBox，参考本次 10.139.27.3 群晖 SSH 操作记录整理。目标访问地址示例：http:&amp;#x2F;&amp;#x2F;10.139.27.3:9999本文已对原 SSH 记录中的密码、SECRET_KEY、数据库密码、Redis 密码、API Token 等"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://bg4vrg.com/img/og_image.png"><meta property="article:published_time" content="2026-06-30T12:59:30.000Z"><meta property="article:modified_time" content="2026-06-30T13:00:34.894Z"><meta property="article:author" content="fei"><meta property="article:tag" content="linux"><meta property="article:tag" content="网络"><meta property="article:tag" content="docker"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://bg4vrg.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://bg4vrg.com/post/20260630205930.html"},"headline":"群晖 DSM7 使用 Docker Compose 部署 NetBox 教程","image":["https://bg4vrg.com/img/og_image.png"],"datePublished":"2026-06-30T12:59:30.000Z","dateModified":"2026-06-30T13:00:34.894Z","author":{"@type":"Person","name":"fei"},"publisher":{"@type":"Organization","name":"BG4VRG的无线电之旅","logo":{"@type":"ImageObject","url":"https://bg4vrg.com/img/freebsd.svg"}},"description":"群晖 DSM7 使用 Docker Compose 部署 NetBox 教程  适用场景：在群晖 DSM7 上通过 Docker Compose 部署 NetBox，参考本次 10.139.27.3 群晖 SSH 操作记录整理。目标访问地址示例：http:&#x2F;&#x2F;10.139.27.3:9999本文已对原 SSH 记录中的密码、SECRET_KEY、数据库密码、Redis 密码、API Token 等"}</script><link rel="canonical" href="https://bg4vrg.com/post/20260630205930.html"><link rel="alternate" href="/atom.xml" title="BG4VRG的无线电之旅" type="application/atom+xml"><link rel="icon" href="/img/freebsd.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1305232905963539" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a><a class="navbar-item" href="/categories/AmateurRadio">业余无线电</a><a class="navbar-item" href="/categories/network">网络</a><a class="navbar-item" href="/categories/linux">Linux</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2026-06-30T12:59:30.000Z" title="2026/6/30 20:59:30">2026-06-30</time>发表</span><span class="level-item"><time datetime="2026-06-30T13:00:34.894Z" title="2026/6/30 21:00:34">2026-06-30</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/network/">网络</a></span><span class="level-item">16 分钟读完 (大约2420个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">群晖 DSM7 使用 Docker Compose 部署 NetBox 教程</h1><div class="content"><p>群晖 DSM7 使用 Docker Compose 部署 NetBox 教程</p>
+<blockquote>
+<p>适用场景：在群晖 DSM7 上通过 Docker Compose 部署 NetBox，参考本次 <code>10.139.27.3</code> 群晖 SSH 操作记录整理。<br>目标访问地址示例：<code>http://10.139.27.3:9999</code><br>本文已对原 SSH 记录中的密码、SECRET_KEY、数据库密码、Redis 密码、API Token 等敏感信息做脱敏处理。</p>
+</blockquote>
+<span id="more"></span>
+
+<hr>
+<h2 id="0-本次成功部署的关键信息"><a href="#0-本次成功部署的关键信息" class="headerlink" title="0. 本次成功部署的关键信息"></a>0. 本次成功部署的关键信息</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>本次记录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>群晖地址</td>
+<td><code>10.139.27.3</code></td>
+</tr>
+<tr>
+<td>SSH 用户</td>
+<td><code>bg4vrg</code></td>
+</tr>
+<tr>
+<td>部署目录</td>
+<td><code>/volume3/dockerconf/netbox</code></td>
+</tr>
+<tr>
+<td>NetBox Web 外部端口</td>
+<td><code>9999</code></td>
+</tr>
+<tr>
+<td>容器内部端口</td>
+<td><code>8080</code></td>
+</tr>
+<tr>
+<td>访问地址</td>
+<td><code>http://10.139.27.3:9999</code></td>
+</tr>
+<tr>
+<td>NetBox 镜像</td>
+<td><code>docker.io/netboxcommunity/netbox:v4.6-5.0.1</code></td>
+</tr>
+<tr>
+<td>PostgreSQL 镜像</td>
+<td><code>docker.io/postgres:18-alpine</code></td>
+</tr>
+<tr>
+<td>Redis&#x2F;Cache 镜像</td>
+<td><code>docker.io/valkey/valkey:9.0-alpine</code></td>
+</tr>
+<tr>
+<td>管理员用户名</td>
+<td><code>suyu</code></td>
+</tr>
+<tr>
+<td>管理员密码</td>
+<td>不写入文档，建议用 <code>changepassword</code> 重置</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>说明：原 SSH 日志里出现过明文密码和各种密钥。搭建教程里不要长期保存这些内容，生产环境也建议重新生成并妥善保存。</p>
+</blockquote>
+<hr>
+<h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h2><h3 id="1-1-群晖套件"><a href="#1-1-群晖套件" class="headerlink" title="1.1 群晖套件"></a>1.1 群晖套件</h3><p>确认群晖已经安装并启用：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Container Manager / Docker</span><br><span class="line">SSH 服务</span><br></pre></td></tr></table></figure>
+
+<p>DSM 里开启 SSH：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">控制面板 -&gt; 终端机和 SNMP -&gt; 启用 SSH 功能</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-SSH-登录群晖"><a href="#1-2-SSH-登录群晖" class="headerlink" title="1.2 SSH 登录群晖"></a>1.2 SSH 登录群晖</h3><p>从电脑使用 MobaXterm &#x2F; Windows Terminal &#x2F; Xshell 登录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh bg4vrg@10.139.27.3</span><br></pre></td></tr></table></figure>
+
+<p>切换 root：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-创建部署目录"><a href="#2-创建部署目录" class="headerlink" title="2. 创建部署目录"></a>2. 创建部署目录</h2><p>本次成功部署目录是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/volume3/dockerconf/netbox</span><br></pre></td></tr></table></figure>
+
+<p>创建目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /volume3/dockerconf/netbox</span><br><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：不要放在 <code>/root</code> 或非共享卷路径里。群晖升级或重启时，非共享目录里的数据存在不可控风险。</p>
+</blockquote>
+<hr>
+<h2 id="3-获取-netbox-docker-项目文件"><a href="#3-获取-netbox-docker-项目文件" class="headerlink" title="3. 获取 netbox-docker 项目文件"></a>3. 获取 netbox-docker 项目文件</h2><h3 id="方案-A：群晖有-git"><a href="#方案-A：群晖有-git" class="headerlink" title="方案 A：群晖有 git"></a>方案 A：群晖有 git</h3><p>如果群晖已经有 <code>git</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br><span class="line">git <span class="built_in">clone</span> -b release https://github.com/netbox-community/netbox-docker.git .</span><br></pre></td></tr></table></figure>
+
+<p>这里最后的 <code>.</code> 表示直接把项目文件放到当前目录，也就是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/volume3/dockerconf/netbox</span><br></pre></td></tr></table></figure>
+
+<p>这样后面直接在这个目录执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="方案-B：群晖没有-git"><a href="#方案-B：群晖没有-git" class="headerlink" title="方案 B：群晖没有 git"></a>方案 B：群晖没有 git</h3><p>本次记录里曾出现过：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-ash: git: command not found</span><br></pre></td></tr></table></figure>
+
+<p>如果你的群晖也没有 git，可以在电脑上下载 netbox-docker 的 release 分支 ZIP，然后上传到：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/volume3/dockerconf/netbox</span><br></pre></td></tr></table></figure>
+
+<p>解压后确保目录里能看到这些文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -lah /volume3/dockerconf/netbox</span><br></pre></td></tr></table></figure>
+
+<p>正常应看到类似：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker-compose.yml</span><br><span class="line">docker-compose.override.yml.example</span><br><span class="line">configuration/</span><br><span class="line">env/</span><br><span class="line">Dockerfile</span><br><span class="line">README.md</span><br></pre></td></tr></table></figure>
+
+<p>如果解压后变成：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/volume3/dockerconf/netbox/netbox-docker/docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<p>可以进入子目录执行，也可以把里面内容移动到 <code>/volume3/dockerconf/netbox</code> 根目录。为了后续命令统一，推荐最终结构是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/volume3/dockerconf/netbox/docker-compose.yml</span><br><span class="line">/volume3/dockerconf/netbox/configuration/</span><br><span class="line">/volume3/dockerconf/netbox/env/</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-创建-docker-compose-override-yml"><a href="#4-创建-docker-compose-override-yml" class="headerlink" title="4. 创建 docker-compose.override.yml"></a>4. 创建 docker-compose.override.yml</h2><p>这是最关键的一步。不要手工在 vim 里一点点改，容易把 YAML 缩进弄坏。建议直接用 <code>cat &gt; 文件 &lt;&lt;&#39;EOF&#39;</code> 的方式一次性写入。</p>
+<p>进入目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br></pre></td></tr></table></figure>
+
+<p>写入 override 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; docker-compose.override.yml &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  netbox:</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;9999:8080&quot;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      start_period: 300s</span><br><span class="line">    environment:</span><br><span class="line">      SKIP_SUPERUSER: <span class="string">&quot;false&quot;</span></span><br><span class="line">      SUPERUSER_NAME: <span class="string">&quot;suyu&quot;</span></span><br><span class="line">      SUPERUSER_EMAIL: <span class="string">&quot;suyu@example.local&quot;</span></span><br><span class="line">      SUPERUSER_PASSWORD: <span class="string">&quot;请改成你自己的强密码&quot;</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-1-这段-YAML-的含义"><a href="#4-1-这段-YAML-的含义" class="headerlink" title="4.1 这段 YAML 的含义"></a>4.1 这段 YAML 的含义</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">netbox:</span></span><br></pre></td></tr></table></figure>
+
+<p>表示只覆盖 <code>netbox</code> 这个服务。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&quot;9999:8080&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>表示群晖 <code>9999</code> 端口映射到容器里的 <code>8080</code>。所以浏览器访问：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://10.139.27.3:9999</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">healthcheck:</span></span><br><span class="line">  <span class="attr">start_period:</span> <span class="string">300s</span></span><br></pre></td></tr></table></figure>
+
+<p>表示启动后给 NetBox 300 秒初始化时间。首次启动时数据库迁移较慢，默认时间可能不够。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">environment:</span></span><br><span class="line">  <span class="attr">SKIP_SUPERUSER:</span> <span class="string">&quot;false&quot;</span></span><br><span class="line">  <span class="attr">SUPERUSER_NAME:</span> <span class="string">&quot;suyu&quot;</span></span><br><span class="line">  <span class="attr">SUPERUSER_EMAIL:</span> <span class="string">&quot;suyu@example.local&quot;</span></span><br><span class="line">  <span class="attr">SUPERUSER_PASSWORD:</span> <span class="string">&quot;请改成你自己的强密码&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>表示首次启动时尝试创建超级管理员。</p>
+<blockquote>
+<p>注意：如果数据库已经存在，<code>SUPERUSER_PASSWORD</code> 不一定会修改已有用户密码。忘记密码时，优先用 <code>changepassword</code>，不要靠反复改 YAML。</p>
+</blockquote>
+<hr>
+<h2 id="5-检查-YAML-是否正确"><a href="#5-检查-YAML-是否正确" class="headerlink" title="5. 检查 YAML 是否正确"></a>5. 检查 YAML 是否正确</h2><p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br><span class="line">docker compose config</span><br></pre></td></tr></table></figure>
+
+<p>如果没有报错，说明 YAML 基本没问题。</p>
+<p>之前踩过的典型错误有：</p>
+<h3 id="错误-1：ports-写成一行"><a href="#错误-1：ports-写成一行" class="headerlink" title="错误 1：ports 写成一行"></a>错误 1：ports 写成一行</h3><p>错误写法：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">netbox:</span>    <span class="string">ports:-</span> <span class="string">&quot;9999:8080&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>正确写法：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">netbox:</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;9999:8080&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="错误-2：environment-放到根层级"><a href="#错误-2：environment-放到根层级" class="headerlink" title="错误 2：environment 放到根层级"></a>错误 2：environment 放到根层级</h3><p>错误写法：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">netbox:</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;9999:8080&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">environment:</span></span><br><span class="line">  <span class="attr">SUPERUSER_NAME:</span> <span class="string">&quot;suyu&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>会报类似：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Additional property environment is not allowed</span><br></pre></td></tr></table></figure>
+
+<p>正确写法：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">netbox:</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">SUPERUSER_NAME:</span> <span class="string">&quot;suyu&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="错误-3：中文引号或隐藏字符"><a href="#错误-3：中文引号或隐藏字符" class="headerlink" title="错误 3：中文引号或隐藏字符"></a>错误 3：中文引号或隐藏字符</h3><p>不要用：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">SUPERUSER_PASSWORD:</span> <span class="string">“password”</span></span><br></pre></td></tr></table></figure>
+
+<p>要用英文半角引号：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">SUPERUSER_PASSWORD:</span> <span class="string">&quot;password&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-修复群晖-ACL-权限问题"><a href="#6-修复群晖-ACL-权限问题" class="headerlink" title="6. 修复群晖 ACL &#x2F; 权限问题"></a>6. 修复群晖 ACL &#x2F; 权限问题</h2><p>本次部署时，NetBox 容器曾经因为读不到配置目录而报错：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermissionError: [Errno 13] Permission denied: &#x27;/etc/netbox/config/&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>建议启动前直接修复权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br><span class="line"></span><br><span class="line"><span class="built_in">chmod</span> 755 /volume3/dockerconf</span><br><span class="line"><span class="built_in">chmod</span> 755 /volume3/dockerconf/netbox</span><br><span class="line"></span><br><span class="line">find configuration -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; \;</span><br><span class="line">find configuration -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">chmod</span> 644 &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<p>检查：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -ld configuration</span><br><span class="line"><span class="built_in">ls</span> -l configuration</span><br></pre></td></tr></table></figure>
+
+<p>正常应类似：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x  configuration</span><br><span class="line">-rw-r--r--  configuration.py</span><br><span class="line">-rw-r--r--  extra.py</span><br><span class="line">-rw-r--r--  logging.py</span><br><span class="line">-rw-r--r--  plugins.py</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="7-拉取镜像并启动"><a href="#7-拉取镜像并启动" class="headerlink" title="7. 拉取镜像并启动"></a>7. 拉取镜像并启动</h2><p>拉取镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br><span class="line">docker compose pull</span><br></pre></td></tr></table></figure>
+
+<p>启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>首次启动需要等待数据库初始化和迁移，可能需要几分钟。</p>
+<p>查看状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose ps</span><br></pre></td></tr></table></figure>
+
+<p>查看日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose logs -f netbox</span><br></pre></td></tr></table></figure>
+
+<p>如果看到大量：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Applying xxx. OK</span><br></pre></td></tr></table></figure>
+
+<p>说明数据库迁移正在进行，不要急着重启。</p>
+<hr>
+<h2 id="8-判断是否启动成功"><a href="#8-判断是否启动成功" class="headerlink" title="8. 判断是否启动成功"></a>8. 判断是否启动成功</h2><p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose ps</span><br></pre></td></tr></table></figure>
+
+<p>理想状态：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">netbox-postgres-1       running</span><br><span class="line">netbox-redis-1          running</span><br><span class="line">netbox-redis-cache-1    running</span><br><span class="line">netbox-netbox-1         healthy</span><br><span class="line">netbox-netbox-worker-1  running</span><br></pre></td></tr></table></figure>
+
+<p>本次记录里最终出现过：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Container netbox-netbox-1         Healthy</span><br><span class="line">Container netbox-netbox-worker-1  Started</span><br></pre></td></tr></table></figure>
+
+<p>这就是成功标志。</p>
+<p>浏览器访问：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://10.139.27.3:9999</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="9-创建或重置管理员账号"><a href="#9-创建或重置管理员账号" class="headerlink" title="9. 创建或重置管理员账号"></a>9. 创建或重置管理员账号</h2><h3 id="9-1-首次创建管理员"><a href="#9-1-首次创建管理员" class="headerlink" title="9.1 首次创建管理员"></a>9.1 首次创建管理员</h3><p>如果环境变量没有自动创建用户，执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br><span class="line">docker compose <span class="built_in">exec</span> netbox /opt/netbox/netbox/manage.py createsuperuser</span><br></pre></td></tr></table></figure>
+
+<p>按提示输入用户名、邮箱、密码。</p>
+<p>建议用户名：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">suyu</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-2-忘记密码时重置"><a href="#9-2-忘记密码时重置" class="headerlink" title="9.2 忘记密码时重置"></a>9.2 忘记密码时重置</h3><p>如果已经有 <code>suyu</code> 用户，但忘记密码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br><span class="line">docker compose <span class="built_in">exec</span> netbox /opt/netbox/netbox/manage.py changepassword suyu</span><br></pre></td></tr></table></figure>
+
+<p>如果不确定有哪些用户：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose <span class="built_in">exec</span> netbox /opt/netbox/netbox/manage.py shell -c <span class="string">&quot;from django.contrib.auth import get_user_model; U=get_user_model(); print(list(U.objects.values_list(&#x27;username&#x27;,&#x27;is_superuser&#x27;,&#x27;is_active&#x27;)))&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="10-常用运维命令"><a href="#10-常用运维命令" class="headerlink" title="10. 常用运维命令"></a>10. 常用运维命令</h2><h3 id="查看容器状态"><a href="#查看容器状态" class="headerlink" title="查看容器状态"></a>查看容器状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br><span class="line">docker compose ps</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看-NetBox-日志"><a href="#查看-NetBox-日志" class="headerlink" title="查看 NetBox 日志"></a>查看 NetBox 日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose logs --<span class="built_in">tail</span>=200 netbox</span><br></pre></td></tr></table></figure>
+
+<p>实时跟踪：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose logs -f netbox</span><br></pre></td></tr></table></figure>
+
+<h3 id="重启-NetBox-Web"><a href="#重启-NetBox-Web" class="headerlink" title="重启 NetBox Web"></a>重启 NetBox Web</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose restart netbox</span><br></pre></td></tr></table></figure>
+
+<h3 id="重启全部服务"><a href="#重启全部服务" class="headerlink" title="重启全部服务"></a>重启全部服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose restart</span><br></pre></td></tr></table></figure>
+
+<h3 id="停止服务"><a href="#停止服务" class="headerlink" title="停止服务"></a>停止服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose stop</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="11-备份与恢复"><a href="#11-备份与恢复" class="headerlink" title="11. 备份与恢复"></a>11. 备份与恢复</h2><h3 id="11-1-备份数据库"><a href="#11-1-备份数据库" class="headerlink" title="11.1 备份数据库"></a>11.1 备份数据库</h3><p>创建备份目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /volume3/dockerconf/netbox/backup</span><br></pre></td></tr></table></figure>
+
+<p>导出 PostgreSQL：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br><span class="line">docker compose <span class="built_in">exec</span> -T postgres pg_dump -U netbox netbox &gt; /volume3/dockerconf/netbox/backup/netbox_$(<span class="built_in">date</span> +%F).sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-2-备份配置文件"><a href="#11-2-备份配置文件" class="headerlink" title="11.2 备份配置文件"></a>11.2 备份配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf</span><br><span class="line">tar czf /volume3/dockerconf/netbox/backup/netbox_config_$(<span class="built_in">date</span> +%F).tar.gz netbox/docker-compose.yml netbox/docker-compose.override.yml netbox/configuration netbox/env</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-3-千万不要随便执行"><a href="#11-3-千万不要随便执行" class="headerlink" title="11.3 千万不要随便执行"></a>11.3 千万不要随便执行</h3><p>不要执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose down -v</span><br></pre></td></tr></table></figure>
+
+<p><code>-v</code> 会删除 volume，可能导致 PostgreSQL 数据库、媒体文件等被删除。</p>
+<p>如果只是停止容器，用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose down</span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose stop</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="12-后续升级建议"><a href="#12-后续升级建议" class="headerlink" title="12. 后续升级建议"></a>12. 后续升级建议</h2><p>升级前先备份：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br><span class="line"><span class="built_in">mkdir</span> -p backup</span><br><span class="line">docker compose <span class="built_in">exec</span> -T postgres pg_dump -U netbox netbox &gt; backup/netbox_before_upgrade_$(<span class="built_in">date</span> +%F).sql</span><br><span class="line">tar czf backup/netbox_files_before_upgrade_$(<span class="built_in">date</span> +%F).tar.gz docker-compose.yml docker-compose.override.yml configuration <span class="built_in">env</span></span><br></pre></td></tr></table></figure>
+
+<p>再拉取新镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker compose pull</span><br><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>观察日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose logs -f netbox</span><br></pre></td></tr></table></figure>
+
+<p>等 <code>netbox-netbox-1</code> 变成 <code>healthy</code> 再访问页面。</p>
+<hr>
+<h2 id="13-本次踩坑复盘"><a href="#13-本次踩坑复盘" class="headerlink" title="13. 本次踩坑复盘"></a>13. 本次踩坑复盘</h2><h3 id="13-1-目录写错"><a href="#13-1-目录写错" class="headerlink" title="13.1 目录写错"></a>13.1 目录写错</h3><p>曾经尝试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /dockerconf/netbox</span><br></pre></td></tr></table></figure>
+
+<p>但实际目录是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-2-群晖没有-nano"><a href="#13-2-群晖没有-nano" class="headerlink" title="13.2 群晖没有 nano"></a>13.2 群晖没有 nano</h3><p>日志里出现过：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-ash: nano: command not found</span><br></pre></td></tr></table></figure>
+
+<p>所以建议使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; docker-compose.override.yml &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">...</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>这样比 vim 手改更稳。</p>
+<h3 id="13-3-YAML-缩进错误"><a href="#13-3-YAML-缩进错误" class="headerlink" title="13.3 YAML 缩进错误"></a>13.3 YAML 缩进错误</h3><p>错误写法：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">netbox:</span>    <span class="string">ports:-</span> <span class="string">&quot;9999:8080&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>正确写法：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">netbox:</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;9999:8080&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="13-4-environment-层级错误"><a href="#13-4-environment-层级错误" class="headerlink" title="13.4 environment 层级错误"></a>13.4 environment 层级错误</h3><p>错误写法会导致：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Additional property environment is not allowed</span><br></pre></td></tr></table></figure>
+
+<p><code>environment</code> 必须放在：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">netbox:</span></span><br><span class="line">    <span class="attr">environment:</span></span><br></pre></td></tr></table></figure>
+
+<p>下面。</p>
+<h3 id="13-5-群晖-ACL-权限导致容器读不到配置"><a href="#13-5-群晖-ACL-权限导致容器读不到配置" class="headerlink" title="13.5 群晖 ACL 权限导致容器读不到配置"></a>13.5 群晖 ACL 权限导致容器读不到配置</h3><p>错误：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermissionError: [Errno 13] Permission denied: &#x27;/etc/netbox/config/&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>解决：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br><span class="line"><span class="built_in">chmod</span> 755 /volume3/dockerconf</span><br><span class="line"><span class="built_in">chmod</span> 755 /volume3/dockerconf/netbox</span><br><span class="line">find configuration -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; \;</span><br><span class="line">find configuration -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">chmod</span> 644 &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-6-首次启动时间不够"><a href="#13-6-首次启动时间不够" class="headerlink" title="13.6 首次启动时间不够"></a>13.6 首次启动时间不够</h3><p>首次数据库迁移比较慢，如果 healthcheck 太早判定失败，会出现 unhealthy。建议：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">healthcheck:</span></span><br><span class="line">  <span class="attr">start_period:</span> <span class="string">300s</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="14-最终推荐-docker-compose-override-yml"><a href="#14-最终推荐-docker-compose-override-yml" class="headerlink" title="14. 最终推荐 docker-compose.override.yml"></a>14. 最终推荐 docker-compose.override.yml</h2><p>下面是推荐保留版，敏感信息请自行替换：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">netbox:</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;9999:8080&quot;</span></span><br><span class="line">    <span class="attr">healthcheck:</span></span><br><span class="line">      <span class="attr">start_period:</span> <span class="string">300s</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">SKIP_SUPERUSER:</span> <span class="string">&quot;false&quot;</span></span><br><span class="line">      <span class="attr">SUPERUSER_NAME:</span> <span class="string">&quot;suyu&quot;</span></span><br><span class="line">      <span class="attr">SUPERUSER_EMAIL:</span> <span class="string">&quot;suyu@example.local&quot;</span></span><br><span class="line">      <span class="attr">SUPERUSER_PASSWORD:</span> <span class="string">&quot;请改成你自己的强密码&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="15-部署完成后的-NetBox-资产导入注意事项"><a href="#15-部署完成后的-NetBox-资产导入注意事项" class="headerlink" title="15. 部署完成后的 NetBox 资产导入注意事项"></a>15. 部署完成后的 NetBox 资产导入注意事项</h2><p>你后续资产导入已经约定：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CSV 必须 UTF-8 with BOM</span><br><span class="line">Region 表示宿豫区下的乡镇街道</span><br><span class="line">Site 表示独立物理地点</span><br><span class="line">Location 表示站点内部楼层/房间/弱电间/户籍窗口/电梯厅</span><br><span class="line">Rack 表示具体机柜或弱电箱</span><br></pre></td></tr></table></figure>
+
+<p>推荐资产基础数据导入顺序：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. Region / 地区</span><br><span class="line">2. Site Group / 站点组</span><br><span class="line">3. Site / 站点</span><br><span class="line">4. Location / 位置</span><br><span class="line">5. Rack / 机柜</span><br><span class="line">6. Device Role / 设备角色</span><br><span class="line">7. Manufacturer / 厂商</span><br><span class="line">8. Device Type / 设备型号</span><br><span class="line">9. Device / 设备上架</span><br><span class="line">10. Interface / 接口</span><br><span class="line">11. IP / Prefix / VLAN</span><br><span class="line">12. Cable / Circuit / Power</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="16-一句话版流程"><a href="#16-一句话版流程" class="headerlink" title="16. 一句话版流程"></a>16. 一句话版流程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">ssh bg4vrg@10.139.27.3</span><br><span class="line">sudo -i</span><br><span class="line"><span class="built_in">mkdir</span> -p /volume3/dockerconf/netbox</span><br><span class="line"><span class="built_in">cd</span> /volume3/dockerconf/netbox</span><br><span class="line"><span class="comment"># 准备 netbox-docker 项目文件</span></span><br><span class="line"><span class="built_in">cat</span> &gt; docker-compose.override.yml &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  netbox:</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;9999:8080&quot;</span></span><br><span class="line">    healthcheck:</span><br><span class="line">      start_period: 300s</span><br><span class="line">    environment:</span><br><span class="line">      SKIP_SUPERUSER: <span class="string">&quot;false&quot;</span></span><br><span class="line">      SUPERUSER_NAME: <span class="string">&quot;suyu&quot;</span></span><br><span class="line">      SUPERUSER_EMAIL: <span class="string">&quot;suyu@example.local&quot;</span></span><br><span class="line">      SUPERUSER_PASSWORD: <span class="string">&quot;请改成你自己的强密码&quot;</span></span><br><span class="line">EOF</span><br><span class="line"><span class="built_in">chmod</span> 755 /volume3/dockerconf /volume3/dockerconf/netbox</span><br><span class="line">find configuration -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; \;</span><br><span class="line">find configuration -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">chmod</span> 644 &#123;&#125; \;</span><br><span class="line">docker compose config</span><br><span class="line">docker compose pull</span><br><span class="line">docker compose up -d</span><br><span class="line">docker compose logs -f netbox</span><br></pre></td></tr></table></figure>
+
+<p>访问：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://10.139.27.3:9999</span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>群晖 DSM7 使用 Docker Compose 部署 NetBox 教程</p><p><a href="https://bg4vrg.com/post/20260630205930.html">https://bg4vrg.com/post/20260630205930.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>fei</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2026-06-30</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-06-30</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/linux/">linux</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a><a class="link-muted mr-2" rel="tag" href="/tags/docker/">docker</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/alipay.png" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/wechatpay.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/20260618111028.html"><span class="level-item">Panalog虚拟机硬盘从320G扩容到1T经验总结</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card" id="comments"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://bg4vrg.com/post/20260630205930.html';
+            this.page.identifier = 'post/20260630205930.html';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'bg4vrg' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time datetime="2026-06-30T12:59:30.000Z">2026-06-30</time></p><p class="title"><a href="/post/20260630205930.html">群晖 DSM7 使用 Docker Compose 部署 NetBox 教程</a></p><p class="categories"><a href="/categories/network/">网络</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-06-18T03:10:28.000Z">2026-06-18</time></p><p class="title"><a href="/post/20260618111028.html">Panalog虚拟机硬盘从320G扩容到1T经验总结</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-05-22T01:13:57.000Z">2026-05-22</time></p><p class="title"><a href="/post/20260522091357.html">家用NAS安装配置unraid7.3及服务搭建小结</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-04-09T00:43:14.000Z">2026-04-09</time></p><p class="title"><a href="/post/20260409084314.html">openEuler 24.03 LTS SP3 安装 ITACC 平台完整记录</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-04-08T09:13:59.000Z">2026-04-08</time></p><p class="title"><a href="/post/20260408171359.html">PVE虚拟化实战排错小结</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/linux/"><span class="level-start"><span class="level-item">linux</span></span><span class="level-end"><span class="level-item tag">42</span></span></a></li><li><a class="level is-mobile" href="/categories/AmateurRadio/"><span class="level-start"><span class="level-item">业余无线电</span></span><span class="level-end"><span class="level-item tag">41</span></span></a></li><li><a class="level is-mobile" href="/categories/network/"><span class="level-start"><span class="level-item">网络</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/note/"><span class="level-start"><span class="level-item">记录</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#0-本次成功部署的关键信息"><span class="level-left"><span class="level-item">0. 本次成功部署的关键信息</span></span></a></li><li><a class="level is-mobile" href="#1-准备工作"><span class="level-left"><span class="level-item">1. 准备工作</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-1-群晖套件"><span class="level-left"><span class="level-item">1.1 群晖套件</span></span></a></li><li><a class="level is-mobile" href="#1-2-SSH-登录群晖"><span class="level-left"><span class="level-item">1.2 SSH 登录群晖</span></span></a></li></ul></li><li><a class="level is-mobile" href="#2-创建部署目录"><span class="level-left"><span class="level-item">2. 创建部署目录</span></span></a></li><li><a class="level is-mobile" href="#3-获取-netbox-docker-项目文件"><span class="level-left"><span class="level-item">3. 获取 netbox-docker 项目文件</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#方案-A：群晖有-git"><span class="level-left"><span class="level-item">方案 A：群晖有 git</span></span></a></li><li><a class="level is-mobile" href="#方案-B：群晖没有-git"><span class="level-left"><span class="level-item">方案 B：群晖没有 git</span></span></a></li></ul></li><li><a class="level is-mobile" href="#4-创建-docker-compose-override-yml"><span class="level-left"><span class="level-item">4. 创建 docker-compose.override.yml</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#4-1-这段-YAML-的含义"><span class="level-left"><span class="level-item">4.1 这段 YAML 的含义</span></span></a></li></ul></li><li><a class="level is-mobile" href="#5-检查-YAML-是否正确"><span class="level-left"><span class="level-item">5. 检查 YAML 是否正确</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#错误-1：ports-写成一行"><span class="level-left"><span class="level-item">错误 1：ports 写成一行</span></span></a></li><li><a class="level is-mobile" href="#错误-2：environment-放到根层级"><span class="level-left"><span class="level-item">错误 2：environment 放到根层级</span></span></a></li><li><a class="level is-mobile" href="#错误-3：中文引号或隐藏字符"><span class="level-left"><span class="level-item">错误 3：中文引号或隐藏字符</span></span></a></li></ul></li><li><a class="level is-mobile" href="#6-修复群晖-ACL-权限问题"><span class="level-left"><span class="level-item">6. 修复群晖 ACL / 权限问题</span></span></a></li><li><a class="level is-mobile" href="#7-拉取镜像并启动"><span class="level-left"><span class="level-item">7. 拉取镜像并启动</span></span></a></li><li><a class="level is-mobile" href="#8-判断是否启动成功"><span class="level-left"><span class="level-item">8. 判断是否启动成功</span></span></a></li><li><a class="level is-mobile" href="#9-创建或重置管理员账号"><span class="level-left"><span class="level-item">9. 创建或重置管理员账号</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#9-1-首次创建管理员"><span class="level-left"><span class="level-item">9.1 首次创建管理员</span></span></a></li><li><a class="level is-mobile" href="#9-2-忘记密码时重置"><span class="level-left"><span class="level-item">9.2 忘记密码时重置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#10-常用运维命令"><span class="level-left"><span class="level-item">10. 常用运维命令</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#查看容器状态"><span class="level-left"><span class="level-item">查看容器状态</span></span></a></li><li><a class="level is-mobile" href="#查看-NetBox-日志"><span class="level-left"><span class="level-item">查看 NetBox 日志</span></span></a></li><li><a class="level is-mobile" href="#重启-NetBox-Web"><span class="level-left"><span class="level-item">重启 NetBox Web</span></span></a></li><li><a class="level is-mobile" href="#重启全部服务"><span class="level-left"><span class="level-item">重启全部服务</span></span></a></li><li><a class="level is-mobile" href="#停止服务"><span class="level-left"><span class="level-item">停止服务</span></span></a></li><li><a class="level is-mobile" href="#启动服务"><span class="level-left"><span class="level-item">启动服务</span></span></a></li></ul></li><li><a class="level is-mobile" href="#11-备份与恢复"><span class="level-left"><span class="level-item">11. 备份与恢复</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#11-1-备份数据库"><span class="level-left"><span class="level-item">11.1 备份数据库</span></span></a></li><li><a class="level is-mobile" href="#11-2-备份配置文件"><span class="level-left"><span class="level-item">11.2 备份配置文件</span></span></a></li><li><a class="level is-mobile" href="#11-3-千万不要随便执行"><span class="level-left"><span class="level-item">11.3 千万不要随便执行</span></span></a></li></ul></li><li><a class="level is-mobile" href="#12-后续升级建议"><span class="level-left"><span class="level-item">12. 后续升级建议</span></span></a></li><li><a class="level is-mobile" href="#13-本次踩坑复盘"><span class="level-left"><span class="level-item">13. 本次踩坑复盘</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#13-1-目录写错"><span class="level-left"><span class="level-item">13.1 目录写错</span></span></a></li><li><a class="level is-mobile" href="#13-2-群晖没有-nano"><span class="level-left"><span class="level-item">13.2 群晖没有 nano</span></span></a></li><li><a class="level is-mobile" href="#13-3-YAML-缩进错误"><span class="level-left"><span class="level-item">13.3 YAML 缩进错误</span></span></a></li><li><a class="level is-mobile" href="#13-4-environment-层级错误"><span class="level-left"><span class="level-item">13.4 environment 层级错误</span></span></a></li><li><a class="level is-mobile" href="#13-5-群晖-ACL-权限导致容器读不到配置"><span class="level-left"><span class="level-item">13.5 群晖 ACL 权限导致容器读不到配置</span></span></a></li><li><a class="level is-mobile" href="#13-6-首次启动时间不够"><span class="level-left"><span class="level-item">13.6 首次启动时间不够</span></span></a></li></ul></li><li><a class="level is-mobile" href="#14-最终推荐-docker-compose-override-yml"><span class="level-left"><span class="level-item">14. 最终推荐 docker-compose.override.yml</span></span></a></li><li><a class="level is-mobile" href="#15-部署完成后的-NetBox-资产导入注意事项"><span class="level-left"><span class="level-item">15. 部署完成后的 NetBox 资产导入注意事项</span></span></a></li><li><a class="level is-mobile" href="#16-一句话版流程"><span class="level-left"><span class="level-item">16. 一句话版流程</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1305232905963539" data-ad-slot="5679527426" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a><p class="is-size-7"><span>&copy; 2026 fei</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;" rel="external nofollow noreferrer">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
