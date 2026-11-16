@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>群晖电子表格公式-自动序号、动态标题与固定更新日期 - BG4VRG的无线电之旅</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="BG4VRG的无线电之旅"><meta name="msapplication-TileImage" content="/img/freebsd.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="BG4VRG的无线电之旅"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="群晖 Synology Spreadsheet 实用技巧：自动序号、动态标题与固定更新日期"><meta property="og:type" content="blog"><meta property="og:title" content="群晖电子表格公式-自动序号、动态标题与固定更新日期"><meta property="og:url" content="https://bg4vrg.com/post/20260825190043.html"><meta property="og:site_name" content="BG4VRG的无线电之旅"><meta property="og:description" content="群晖 Synology Spreadsheet 实用技巧：自动序号、动态标题与固定更新日期"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://bg4vrg.com/img/og_image.png"><meta property="article:published_time" content="2026-08-25T11:00:43.000Z"><meta property="article:modified_time" content="2026-08-25T11:02:01.436Z"><meta property="article:author" content="fei"><meta property="article:tag" content="折腾"><meta property="article:tag" content="群晖"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://bg4vrg.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://bg4vrg.com/post/20260825190043.html"},"headline":"群晖电子表格公式-自动序号、动态标题与固定更新日期","image":["https://bg4vrg.com/img/og_image.png"],"datePublished":"2026-08-25T11:00:43.000Z","dateModified":"2026-08-25T11:02:01.436Z","author":{"@type":"Person","name":"fei"},"publisher":{"@type":"Organization","name":"BG4VRG的无线电之旅","logo":{"@type":"ImageObject","url":"https://bg4vrg.com/img/freebsd.svg"}},"description":"群晖 Synology Spreadsheet 实用技巧：自动序号、动态标题与固定更新日期"}</script><link rel="canonical" href="https://bg4vrg.com/post/20260825190043.html"><link rel="alternate" href="/atom.xml" title="BG4VRG的无线电之旅" type="application/atom+xml"><link rel="icon" href="/img/freebsd.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1305232905963539" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a><a class="navbar-item" href="/categories/AmateurRadio">业余无线电</a><a class="navbar-item" href="/categories/network">网络</a><a class="navbar-item" href="/categories/linux">Linux</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2026-08-25T11:00:43.000Z" title="2026/8/25 19:00:43">2026-08-25</time>发表</span><span class="level-item"><time datetime="2026-08-25T11:02:01.436Z" title="2026/8/25 19:02:01">2026-08-25</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/note/">记录</a></span><span class="level-item">12 分钟读完 (大约1815个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">群晖电子表格公式-自动序号、动态标题与固定更新日期</h1><div class="content"><p>群晖 Synology Spreadsheet 实用技巧：自动序号、动态标题与固定更新日期</p>
+<span id="more"></span>
+
+<p>在群晖 Synology Spreadsheet 里做生产记录、台账、设备清单或项目统计时，经常会遇到几个很实际的问题：</p>
+<ul>
+<li>第一列序号怎么自动生成？</li>
+<li>中间删除或增加一行后，序号怎么自动重新排列？</li>
+<li>标题里怎么自动显示当前数据总数？</li>
+<li>怎么在标题里显示一个“固定的更新时间”，而不是每天自动变化？</li>
+<li>为什么明明最后一行没有正式数据，却多出来一个序号？</li>
+</ul>
+<p>下面整理一套比较实用、容易维护的做法。</p>
+<hr>
+<h2 id="1-表格结构示例"><a href="#1-表格结构示例" class="headerlink" title="1. 表格结构示例"></a>1. 表格结构示例</h2><p>假设工作表结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>行号</th>
+<th>A列</th>
+<th>B列</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>表格名称</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>序号</td>
+<td>产品名称</td>
+</tr>
+<tr>
+<td>3</td>
+<td>第一条数据</td>
+<td>产品A</td>
+</tr>
+<tr>
+<td>4</td>
+<td>第二条数据</td>
+<td>产品B</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody></table>
+<p>其中：</p>
+<ul>
+<li><code>A1</code>：标题</li>
+<li><code>A2</code>：表头“序号”</li>
+<li><code>A3</code>：真实数据的第一行</li>
+<li><code>B列</code>：每条正式数据都会填写的关键字段，例如产品名称、编号等</li>
+</ul>
+<hr>
+<h2 id="2-A列自动生成-1-到-n-的序号"><a href="#2-A列自动生成-1-到-n-的序号" class="headerlink" title="2. A列自动生成 1 到 n 的序号"></a>2. A列自动生成 1 到 n 的序号</h2><p>在 <code>A3</code> 输入：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=SEQUENCE(<span class="built_in">COUNTA</span>(<span class="symbol">B3</span>:<span class="symbol">B10000</span>),<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后不要再手动填写 A4、A5、A6……</p>
+<h3 id="公式含义"><a href="#公式含义" class="headerlink" title="公式含义"></a>公式含义</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SEQUENCE(行数, 列数, 起始值, 步长)</span><br></pre></td></tr></table></figure>
+
+<p>这里：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">COUNTA</span>(<span class="symbol">B3</span>:<span class="symbol">B10000</span>)</span><br></pre></td></tr></table></figure>
+
+<p>负责统计 B3 到 B10000 中有多少个非空单元格。</p>
+<p>假设 B 列目前有 126 条数据，那么：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=SEQUENCE(<span class="number">126</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>就会自动生成：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">...</span><br><span class="line">126</span><br></pre></td></tr></table></figure>
+
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>以后如果：</p>
+<ul>
+<li>删除中间某一整行</li>
+<li>插入一条新数据</li>
+<li>在末尾增加数据</li>
+</ul>
+<p>A列的序号都会自动重新排列为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1, 2, 3, 4 ... n</span><br></pre></td></tr></table></figure>
+
+<p>不需要重新拖动公式。</p>
+<hr>
+<h2 id="3-为什么最后会莫名多一个序号？"><a href="#3-为什么最后会莫名多一个序号？" class="headerlink" title="3. 为什么最后会莫名多一个序号？"></a>3. 为什么最后会莫名多一个序号？</h2><p>如果正式数据明明只有 100 条，但 A 列却生成了：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 ~ 101</span><br></pre></td></tr></table></figure>
+
+<p>通常不是 <code>SEQUENCE</code> 出错，而是：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">COUNTA</span>(<span class="symbol">B3</span>:<span class="symbol">B10000</span>)</span><br></pre></td></tr></table></figure>
+
+<p>统计到了额外的非空单元格。</p>
+<h3 id="一个很常见的情况"><a href="#一个很常见的情况" class="headerlink" title="一个很常见的情况"></a>一个很常见的情况</h3><p>例如生产数据结束后，在 B 列底部又写了一行：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">备注：以上数据仅供内部使用</span><br></pre></td></tr></table></figure>
+
+<p>那么 <code>COUNTA</code> 会把这条备注也算成一条数据。</p>
+<p>于是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">100 条生产数据</span><br><span class="line">+ 1 条备注</span><br><span class="line">= 101</span><br></pre></td></tr></table></figure>
+
+<p>A列自然就会多生成一个序号。</p>
+<h3 id="推荐做法"><a href="#推荐做法" class="headerlink" title="推荐做法"></a>推荐做法</h3><p>作为统计依据的 B 列，最好只放“正式数据”。</p>
+<p>下面这些内容尽量移到其他列：</p>
+<ul>
+<li>备注</li>
+<li>汇总</li>
+<li>说明</li>
+<li>签字栏</li>
+<li>附加文字</li>
+</ul>
+<p>这样公式会更稳定。</p>
+<hr>
+<h2 id="4-标题自动显示当前数据总数"><a href="#4-标题自动显示当前数据总数" class="headerlink" title="4. 标题自动显示当前数据总数"></a>4. 标题自动显示当前数据总数</h2><p>既然 A 列已经自动生成了连续序号，那么标题中可以直接读取最大序号。</p>
+<p>例如：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=<span class="string">&quot;生产数据表（共&quot;</span>&amp;<span class="built_in">MAX</span>(<span class="symbol">A3</span>:<span class="symbol">A10000</span>)&amp;<span class="string">&quot;条）&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果当前有 328 条数据，标题会自动显示：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">生产数据表（共328条）</span><br></pre></td></tr></table></figure>
+
+<p>以后增加或删除数据，数字会自动更新。</p>
+<hr>
+<h2 id="5-更推荐：直接从-B-列读取数据总数"><a href="#5-更推荐：直接从-B-列读取数据总数" class="headerlink" title="5. 更推荐：直接从 B 列读取数据总数"></a>5. 更推荐：直接从 B 列读取数据总数</h2><p>实际上，A列序号本身就是由 B 列的数据数量决定的。</p>
+<p>所以标题也可以直接写：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=<span class="string">&quot;生产数据表（共&quot;</span>&amp;<span class="built_in">COUNTA</span>(<span class="symbol">B3</span>:<span class="symbol">B10000</span>)&amp;<span class="string">&quot;条）&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样逻辑更加直接：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">B列有多少条正式数据</span><br><span class="line">        ↓</span><br><span class="line">生成多少个序号</span><br><span class="line">        ↓</span><br><span class="line">标题显示多少条</span><br></pre></td></tr></table></figure>
+
+<h3 id="推荐组合"><a href="#推荐组合" class="headerlink" title="推荐组合"></a>推荐组合</h3><p>A3：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=SEQUENCE(<span class="built_in">COUNTA</span>(<span class="symbol">B3</span>:<span class="symbol">B10000</span>),<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>标题：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=<span class="string">&quot;生产数据表（共&quot;</span>&amp;<span class="built_in">COUNTA</span>(<span class="symbol">B3</span>:<span class="symbol">B10000</span>)&amp;<span class="string">&quot;条）&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-如何插入一个不会自己变化的日期？"><a href="#6-如何插入一个不会自己变化的日期？" class="headerlink" title="6. 如何插入一个不会自己变化的日期？"></a>6. 如何插入一个不会自己变化的日期？</h2><p>如果标题需要显示：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最后更新：2026-08-25</span><br></pre></td></tr></table></figure>
+
+<p>很多人第一反应会使用：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=<span class="built_in">TODAY</span>()</span><br></pre></td></tr></table></figure>
+
+<p>但这通常不是最好的选择。</p>
+<h3 id="为什么不建议用-TODAY"><a href="#为什么不建议用-TODAY" class="headerlink" title="为什么不建议用 TODAY()"></a>为什么不建议用 TODAY()</h3><p><code>TODAY()</code> 显示的是“今天”。</p>
+<p>例如你 8 月 25 日修改完表格，标题显示：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最后更新：2026-08-25</span><br></pre></td></tr></table></figure>
+
+<p>到了 8 月 26 日，即使你根本没有修改数据，它仍然可能变成：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最后更新：2026-08-26</span><br></pre></td></tr></table></figure>
+
+<p>这就不是真正意义上的“最后更新时间”。</p>
+<hr>
+<h2 id="7-用-Ctrl-插入固定日期"><a href="#7-用-Ctrl-插入固定日期" class="headerlink" title="7. 用 Ctrl + ; 插入固定日期"></a>7. 用 Ctrl + ; 插入固定日期</h2><p>更实用的方法是预留一个辅助单元格，例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Z1</span><br></pre></td></tr></table></figure>
+
+<p>每次更新完数据后：</p>
+<ol>
+<li>选中 <code>Z1</code></li>
+<li>按：</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + ;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>当前日期会作为固定值写入 Z1</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2026/8/25</span><br></pre></td></tr></table></figure>
+
+<p>这个日期不会因为第二天打开表格而自动改变。</p>
+<blockquote>
+<p>注：快捷键是否生效会受到浏览器、系统和 Synology Spreadsheet 版本影响；如果你的环境中 <code>Ctrl + ;</code> 已可以正常插入日期，就可以直接采用这种方法。</p>
+</blockquote>
+<hr>
+<h2 id="8-把固定更新日期放进标题"><a href="#8-把固定更新日期放进标题" class="headerlink" title="8. 把固定更新日期放进标题"></a>8. 把固定更新日期放进标题</h2><p>假设：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Z1 = 2026/8/25</span><br></pre></td></tr></table></figure>
+
+<p>标题可以写成：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=<span class="string">&quot;生产数据表（更新日期：&quot;</span>&amp;<span class="built_in">TEXT</span>(<span class="symbol">Z1</span>,<span class="string">&quot;yyyy-mm-dd&quot;</span>)&amp;<span class="string">&quot;）&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>显示效果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">生产数据表（更新日期：2026-08-25）</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="9-同时显示数据总数和更新时间"><a href="#9-同时显示数据总数和更新时间" class="headerlink" title="9. 同时显示数据总数和更新时间"></a>9. 同时显示数据总数和更新时间</h2><p>这是我比较推荐的一种标题格式：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=<span class="string">&quot;生产数据表（共&quot;</span>&amp;<span class="built_in">COUNTA</span>(<span class="symbol">B3</span>:<span class="symbol">B10000</span>)&amp;<span class="string">&quot;条，更新日期：&quot;</span>&amp;<span class="built_in">TEXT</span>(<span class="symbol">Z1</span>,<span class="string">&quot;yyyy-mm-dd&quot;</span>)&amp;<span class="string">&quot;）&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>最终效果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">生产数据表（共328条，更新日期：2026-08-25）</span><br></pre></td></tr></table></figure>
+
+<p>以后：</p>
+<ul>
+<li>增删数据：总数自动变化</li>
+<li>更新日期：由自己手动按 <code>Ctrl + ;</code> 刷新</li>
+<li>没有修改表格：日期保持不变</li>
+</ul>
+<p>这样比 <code>TODAY()</code> 更符合“最后更新”的实际含义。</p>
+<hr>
+<h2 id="10-推荐的最终配置"><a href="#10-推荐的最终配置" class="headerlink" title="10. 推荐的最终配置"></a>10. 推荐的最终配置</h2><p>如果是生产数据、资产台账、库存清单等表格，可以直接使用下面这一套。</p>
+<h3 id="A3：自动序号"><a href="#A3：自动序号" class="headerlink" title="A3：自动序号"></a>A3：自动序号</h3><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=SEQUENCE(<span class="built_in">COUNTA</span>(<span class="symbol">B3</span>:<span class="symbol">B10000</span>),<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Z1：最后更新日期"><a href="#Z1：最后更新日期" class="headerlink" title="Z1：最后更新日期"></a>Z1：最后更新日期</h3><p>每次数据维护结束后，选中 Z1：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="A1：动态标题"><a href="#A1：动态标题" class="headerlink" title="A1：动态标题"></a>A1：动态标题</h3><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=<span class="string">&quot;生产数据表（共&quot;</span>&amp;<span class="built_in">COUNTA</span>(<span class="symbol">B3</span>:<span class="symbol">B10000</span>)&amp;<span class="string">&quot;条，更新日期：&quot;</span>&amp;<span class="built_in">TEXT</span>(<span class="symbol">Z1</span>,<span class="string">&quot;yyyy-mm-dd&quot;</span>)&amp;<span class="string">&quot;）&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>最终就能得到：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">生产数据表（共328条，更新日期：2026-08-25）</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="11-一个需要特别注意的原则"><a href="#11-一个需要特别注意的原则" class="headerlink" title="11. 一个需要特别注意的原则"></a>11. 一个需要特别注意的原则</h2><p><code>COUNTA(B3:B10000)</code> 的前提是：</p>
+<blockquote>
+<p><strong>B列必须是每条正式数据都一定会填写的一列。</strong></p>
+</blockquote>
+<p>例如比较适合用作统计依据的字段：</p>
+<ul>
+<li>产品名称</li>
+<li>产品编号</li>
+<li>订单编号</li>
+<li>设备名称</li>
+<li>姓名</li>
+<li>唯一ID</li>
+</ul>
+<p>不太适合的字段：</p>
+<ul>
+<li>备注</li>
+<li>可选说明</li>
+<li>检查结果</li>
+<li>临时记录</li>
+<li>经常为空的字段</li>
+</ul>
+<p>否则会出现“实际有 100 行，但只统计出 97 行”或“实际 100 行，却统计出 101 行”的情况。</p>
+<hr>
+<h2 id="12-最后总结"><a href="#12-最后总结" class="headerlink" title="12. 最后总结"></a>12. 最后总结</h2><p>整套逻辑其实很简单：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">B列正式数据</span><br><span class="line">    │</span><br><span class="line">    ├── COUNTA → 统计总数量</span><br><span class="line">    │</span><br><span class="line">    ├── SEQUENCE → 自动生成 1~n 序号</span><br><span class="line">    │</span><br><span class="line">    └── 标题 → 自动显示总数据量</span><br><span class="line"></span><br><span class="line">Z1</span><br><span class="line">    │</span><br><span class="line">    └── Ctrl + ; → 手动记录固定更新日期</span><br></pre></td></tr></table></figure>
+
+<p>对于需要经常增删数据的工作表，这种方式最大的优点是：</p>
+<ul>
+<li>不用拖公式</li>
+<li>不用手动重新编号</li>
+<li>删除中间行后序号自动重排</li>
+<li>标题中的总数自动变化</li>
+<li>更新日期不会每天乱跳</li>
+<li>维护成本很低</li>
+</ul>
+<p>如果工作表结构固定，这套方式基本可以长期直接使用。</p>
+<pre><code>
+</code></pre>
+</div><div class="article-licensing box"><div class="licensing-title"><p>群晖电子表格公式-自动序号、动态标题与固定更新日期</p><p><a href="https://bg4vrg.com/post/20260825190043.html">https://bg4vrg.com/post/20260825190043.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>fei</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2026-08-25</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-08-25</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%8A%98%E8%85%BE/">折腾</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%BE%A4%E6%99%96/">群晖</a></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><div class="social-share"></div><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/alipay.png" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/wechatpay.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/20261116133521.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">变废为宝：利用玩客云（Armbian 6.12）与 RTL-SDR 打造全天候 APRS IGate 接收网关</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/20260630205930.html"><span class="level-item">群晖 DSM7 使用 Docker Compose 部署 NetBox 教程</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card" id="comments"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://bg4vrg.com/post/20260825190043.html';
+            this.page.identifier = 'post/20260825190043.html';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'bg4vrg' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time datetime="2026-11-16T05:35:21.000Z">2026-11-16</time></p><p class="title"><a href="/post/20261116133521.html">变废为宝：利用玩客云（Armbian 6.12）与 RTL-SDR 打造全天候 APRS IGate 接收网关</a></p><p class="categories"><a href="/categories/AmateurRadio/">业余无线电</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-08-25T11:00:43.000Z">2026-08-25</time></p><p class="title"><a href="/post/20260825190043.html">群晖电子表格公式-自动序号、动态标题与固定更新日期</a></p><p class="categories"><a href="/categories/note/">记录</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-06-30T12:59:30.000Z">2026-06-30</time></p><p class="title"><a href="/post/20260630205930.html">群晖 DSM7 使用 Docker Compose 部署 NetBox 教程</a></p><p class="categories"><a href="/categories/network/">网络</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-06-18T03:10:28.000Z">2026-06-18</time></p><p class="title"><a href="/post/20260618111028.html">Panalog虚拟机硬盘从320G扩容到1T经验总结</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time datetime="2026-05-22T01:13:57.000Z">2026-05-22</time></p><p class="title"><a href="/post/20260522091357.html">家用NAS安装配置unraid7.3及服务搭建小结</a></p><p class="categories"><a href="/categories/linux/">linux</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/linux/"><span class="level-start"><span class="level-item">linux</span></span><span class="level-end"><span class="level-item tag">42</span></span></a></li><li><a class="level is-mobile" href="/categories/AmateurRadio/"><span class="level-start"><span class="level-item">业余无线电</span></span><span class="level-end"><span class="level-item tag">42</span></span></a></li><li><a class="level is-mobile" href="/categories/network/"><span class="level-start"><span class="level-item">网络</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/note/"><span class="level-start"><span class="level-item">记录</span></span><span class="level-end"><span class="level-item tag">25</span></span></a></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#1-表格结构示例"><span class="level-left"><span class="level-item">1. 表格结构示例</span></span></a></li><li><a class="level is-mobile" href="#2-A列自动生成-1-到-n-的序号"><span class="level-left"><span class="level-item">2. A列自动生成 1 到 n 的序号</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#公式含义"><span class="level-left"><span class="level-item">公式含义</span></span></a></li><li><a class="level is-mobile" href="#优点"><span class="level-left"><span class="level-item">优点</span></span></a></li></ul></li><li><a class="level is-mobile" href="#3-为什么最后会莫名多一个序号？"><span class="level-left"><span class="level-item">3. 为什么最后会莫名多一个序号？</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#一个很常见的情况"><span class="level-left"><span class="level-item">一个很常见的情况</span></span></a></li><li><a class="level is-mobile" href="#推荐做法"><span class="level-left"><span class="level-item">推荐做法</span></span></a></li></ul></li><li><a class="level is-mobile" href="#4-标题自动显示当前数据总数"><span class="level-left"><span class="level-item">4. 标题自动显示当前数据总数</span></span></a></li><li><a class="level is-mobile" href="#5-更推荐：直接从-B-列读取数据总数"><span class="level-left"><span class="level-item">5. 更推荐：直接从 B 列读取数据总数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#推荐组合"><span class="level-left"><span class="level-item">推荐组合</span></span></a></li></ul></li><li><a class="level is-mobile" href="#6-如何插入一个不会自己变化的日期？"><span class="level-left"><span class="level-item">6. 如何插入一个不会自己变化的日期？</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#为什么不建议用-TODAY"><span class="level-left"><span class="level-item">为什么不建议用 TODAY()</span></span></a></li></ul></li><li><a class="level is-mobile" href="#7-用-Ctrl-插入固定日期"><span class="level-left"><span class="level-item">7. 用 Ctrl + ; 插入固定日期</span></span></a></li><li><a class="level is-mobile" href="#8-把固定更新日期放进标题"><span class="level-left"><span class="level-item">8. 把固定更新日期放进标题</span></span></a></li><li><a class="level is-mobile" href="#9-同时显示数据总数和更新时间"><span class="level-left"><span class="level-item">9. 同时显示数据总数和更新时间</span></span></a></li><li><a class="level is-mobile" href="#10-推荐的最终配置"><span class="level-left"><span class="level-item">10. 推荐的最终配置</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#A3：自动序号"><span class="level-left"><span class="level-item">A3：自动序号</span></span></a></li><li><a class="level is-mobile" href="#Z1：最后更新日期"><span class="level-left"><span class="level-item">Z1：最后更新日期</span></span></a></li><li><a class="level is-mobile" href="#A1：动态标题"><span class="level-left"><span class="level-item">A1：动态标题</span></span></a></li></ul></li><li><a class="level is-mobile" href="#11-一个需要特别注意的原则"><span class="level-left"><span class="level-item">11. 一个需要特别注意的原则</span></span></a></li><li><a class="level is-mobile" href="#12-最后总结"><span class="level-left"><span class="level-item">12. 最后总结</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1305232905963539" data-ad-slot="5679527426" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/freebsd.svg" alt="BG4VRG的无线电之旅" height="28"></a><p class="is-size-7"><span>&copy; 2026 fei</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;" rel="external nofollow noreferrer"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;" rel="external nofollow noreferrer">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
